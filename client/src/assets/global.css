@@ -1,0 +1,164 @@
+.container {
+    padding-top: 5%;
+}
+#title {
+    color: orangered;
+    padding-bottom: 1em;
+}
+#subtitle {
+    color: white;
+    padding-bottom: 1em;
+}
+#center {
+    text-align: center;
+}
+#area-link {
+    margin-bottom: 2em;
+}
+#link {
+    color: orangered;
+    padding-right: 2em;
+    font-size: 1.2em;
+    
+}
+#months {
+    border: 0.1em solid white;
+    border-radius: 0.4em;
+    color: white;
+}
+label {
+    color: white;
+}
+#input {
+    background-color: rgb(59, 59, 59);
+    border-color: rgb(60, 60, 60);
+    margin: 0.5em 0em 1em 0em;
+    color: white;
+  }
+
+/* CONFIGURAÇÕES DE BOTOES */
+
+#button-success {
+    font-size: 1em;
+    padding: 0.4em 2em;
+    border-radius: 0.4em;
+    border: 0;
+    background-color: rgb(44, 154, 44);
+    color: white;
+    margin: 0.5em;
+}
+#button-danger {
+    font-size: 1em;
+    padding: 0.4em 2em;
+    border-radius: 0.4em;
+    border: 0;
+    background-color: rgb(133, 26, 26);
+    color: white;
+    margin: 0.5em;
+}
+
+
+/* CONFIGURAÇÕES MENSAGENS DE SUCESSO E DE ERRO */
+#area-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+#success {
+    padding: 0.4em 10em 0.4em 10em;
+    border-radius: 0.5em;
+    background-color: rgb(68, 160, 68)
+}
+#error {
+    padding: 0.4em 10em 0.4em 10em;
+    border-radius: 0.5em;
+    background-color: rgb(207, 63, 63);
+
+}
+
+#thead {
+    font-size: 1em;
+    border: 1px solid orangered;
+    border-radius: 0.4em;
+    padding: 0 2em 0 2em;
+    text-align: center;
+    margin-bottom: 1em;
+}
+#tbody {
+    font-size: 1.2em;
+
+    padding: 0.4em;
+    text-align: center;
+}
+#tfoot {
+    font-size: 1em;
+    border: 1px solid white;
+    border-radius: 0.4em;
+    padding: 0 2em 0 2em;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+#tfootValue {
+    font-size: 1.2em;
+    text-align: center;
+    
+}
+.column {
+    color: white;
+}
+
+.toggle {
+  color: rgb(58, 58, 210);
+  
+}
+
+#table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  #area-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+  
+  #area-table th {
+    font-size: 1.1em;
+ 
+    border: 1px solid #181818;
+    padding: 0.5em;
+    text-align: center;
+  }
+  
+  
+  #area-table td {
+    font-size: 1em;
+    color: white;
+    vertical-align: middle;
+    border: 1px solid #434343;
+    padding: 0.6em;
+    text-align: center;
+  }
+  
+  #thead {
+    background-color: #1a1a1a;
+    color: #fff;
+  }
+
+  #yearSelect {
+    color: white;
+    background-color: #585858;
+    padding: 0.4em 1em;
+  }
+
+  #valueRed {
+    color: red;
+    font-size: 1.2em;
+  }
+
+

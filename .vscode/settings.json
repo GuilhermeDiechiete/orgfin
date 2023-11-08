@@ -1,0 +1,10 @@
+{
+    "material-icon-theme.folders.associations": {
+        "src": "App",
+        "handlings": "Context",
+        "database": "Aws",
+        "access": "Include",
+        "migrations": "Include",
+        "fragments": "Plugin"
+    } 
+}
