@@ -1,38 +1,43 @@
-<template>
+id="input"<template>
     <div class="container">
-      <h1 class="title is-1">Registro</h1>
-  
-      <div v-if="messageSuccess" class="success">{{ messageSuccess }}</div>
-    <div v-if="messageError" class="error">{{ messageError }}</div>
+      <div id="center">
+        <h1 id="title" class="title is-1">Registro</h1>
+      </div>
+      <div id="area-message">
+        <div v-if="messageSuccess" class="success">{{ messageSuccess }}</div>
+        <div v-if="messageError" class="error">{{ messageError }}</div>
+      </div>
+      
       <form class="form">
         <label>Nome</label>
-        <input v-model="name" type="text" class="input" />
+        <input v-model="name" type="text" class="input" id="input"/>
   
         <label>E-mail</label>
-        <input v-model="email" type="email" class="input" />
+        <input v-model="email" type="email" class="input" id="input"/>
   
         <label>Telefone</label>
-        <input v-model="phone" type="phone" class="input" />
+        <input v-model="phone" type="phone" class="input" id="input"/>
   
         <label>Data de Nascimento</label>
-        <input v-model="birth" type="date" class="input" />
+        <input v-model="birth" type="date" class="input" id="input"/>
   
         <label>Cidade</label>
-        <input v-model="city" type="text" class="input" />
+        <input v-model="city" type="text" class="input" id="input"/>
   
         <label>Estado - UF</label>
-        <input v-model="state" type="text" class="input" />
+        <input v-model="state" type="text" class="input" id="input"/>
   
         <label>Senha</label>
-        <input v-model="password" type="password" class="input" />
+        <input v-model="password" type="password" class="input" id="input"/>
   
         <label>Confirmação de Senha</label>
-        <input v-model="confirmpassword" type="password" class="input" />
+        <input v-model="confirmpassword" type="password" class="input" id="input"/>
       </form>
-      <div class="button-area">
-        <button @click="register" class="button is-success">Registrar</button>
+      
+      <div id="center">
+        <div >
+        <button @click="register" id="button-success">Registrar</button>
       </div>
-      <div class="link-area">
         <router-link to="/login" class="link"
           >Já tem uma conta? <strong style="color: orangered;"> Faça login!</strong
         ></router-link>

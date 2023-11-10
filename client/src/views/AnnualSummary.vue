@@ -9,7 +9,7 @@
             <option id="optionSelect" disabled selected>Selecione o ano</option>
             <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
         </select>
-      </div>
+      </div> <br>
       <div id="table-cont">
         <table id="area-table">
           <thead>
@@ -17,7 +17,7 @@
               <th>Mês</th>
               <th>Valor</th>
             </tr>
-          </thead>
+          </thead> <br>
           <tbody>
             <tr v-for="(item, index) in monthlySummary" :key="index">
               <td>{{ item.month }}</td>

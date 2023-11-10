@@ -1,44 +1,35 @@
 <template>
-    <div class="container">
-        <div>
-            <router-link to="/painel" id="link"><i class="fas fa-arrow-left"></i></router-link>
-            <div id="center">
-              <h1 id="title" class="title is-1">Categorias</h1>
-            </div>
-            
-    
-            <div v-if="messageSuccess" class="success">{{ messageSuccess }}</div>
-            <div v-if="messageError" class="error">{{ messageError }}</div>
-
-            <form class="form">
-                <label >Digite o nome da categoria:</label>
-                <input v-model="name" type="text" id="input" class="input" />
-            </form>
-
-            <div id="center">
-                <button @click="createCategory" id="button-success">Criar Categoria</button>
-            </div><br>
-
-            <div id="table-container">
-              <table id="area-table">
-                <thead>
-                  <tr id="thead">
-                    <th>Nome das Categorias</th>
-                    <th>Opções</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(category, index) in categories" :key="index">   
-                      <td class="title is-4 is-size-3-desktop">{{ category.category_name }}</td>
-                      <td><button id="button-danger"><i class="fas fa-trash"></i></button></td>   
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-        </div>
-        
+  <div class="container">
+    <router-link to="/painel" id="link"><i class="fas fa-arrow-left"></i></router-link>
+    <div id="center">
+      <h1 id="title" class="title is-1">Categorias</h1>
     </div>
+    <div id="area-message">
+      <div v-if="messageSuccess" class="success">{{ messageSuccess }}</div>
+      <div v-if="messageError" class="error">{{ messageError }}</div>
+    </div>
+    <form class="form">
+      <label >Digite o nome da categoria:</label>
+      <input v-model="name" type="text" id="input" class="input" />
+    </form>
+    <div id="center">
+      <button @click="createCategory" id="button-success">Criar Categoria</button>
+    </div><br>   
+    <table>
+      <thead>
+        <tr>
+          <th>Nome das Categorias</th>
+          <th>Opções</th>
+        </tr>
+      </thead> <br>
+      <tbody>
+        <tr v-for="(category, index) in categories" :key="index">   
+          <td>{{ category.category_name }}</td>
+          <td><button id="button-danger"><i class="fas fa-trash"></i></button></td>   
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>

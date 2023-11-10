@@ -4,10 +4,12 @@
 #title {
     color: orangered;
     padding-bottom: 1em;
+    cursor: pointer;
 }
 #subtitle {
     color: white;
     padding-bottom: 1em;
+    cursor: pointer;
 }
 #center {
     text-align: center;
@@ -19,7 +21,7 @@
     color: orangered;
     padding-right: 2em;
     font-size: 1.2em;
-    
+    cursor: pointer;
 }
 #months {
     border: 0.1em solid white;
@@ -34,6 +36,7 @@ label {
     border-color: rgb(60, 60, 60);
     margin: 0.5em 0em 1em 0em;
     color: white;
+    box-shadow: 5px 5px 10px rgb(30, 29, 28);
   }
 
 /* CONFIGURAÇÕES DE BOTOES */
@@ -79,34 +82,8 @@ label {
 
 }
 
-#thead {
-    font-size: 1em;
-    border: 1px solid orangered;
-    border-radius: 0.4em;
-    padding: 0 2em 0 2em;
-    text-align: center;
-    margin-bottom: 1em;
-}
-#tbody {
-    font-size: 1.2em;
 
-    padding: 0.4em;
-    text-align: center;
-}
-#tfoot {
-    font-size: 1em;
-    border: 1px solid white;
-    border-radius: 0.4em;
-    padding: 0 2em 0 2em;
-    text-align: center;
-    margin-top: 2em;
-    margin-bottom: 1em;
-}
-#tfootValue {
-    font-size: 1.2em;
-    text-align: center;
-    
-}
+
 .column {
     color: white;
 }
@@ -116,39 +93,42 @@ label {
   
 }
 
-#table-container {
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  #area-table {
+table {
     width: 100%;
     border-collapse: collapse;
-    
-  }
-  
-  #area-table th {
-    font-size: 1.1em;
- 
-    border: 1px solid #181818;
-    padding: 0.5em;
+
+}
+
+table thead tr{
+    border: 1px solid orangered;
+    background-color: #080808;
+    box-shadow: 5px 5px 10px rgb(39, 28, 23);
     text-align: center;
-  }
-  
-  
-  #area-table td {
-    font-size: 1em;
+}  
+table thead tr th {
     color: white;
+    padding: 0.4em 0em;
     vertical-align: middle;
-    border: 1px solid #434343;
-    padding: 0.6em;
+}
+table tbody tr {
     text-align: center;
-  }
+}
+table tbody tr td {
+    padding: 0.4em 1em;
+    border: 1px solid rgb(53, 52, 52);
+    vertical-align: middle;
+    color: white;
+}
+table tfoot tr {
+    text-align: center;
+}
+table tfoot tr th {
+    border: 1px solid rgb(53, 52, 52);
+    color: red;
+}
+
   
-  #thead {
-    background-color: #1a1a1a;
-    color: #fff;
-  }
+
 
   #yearSelect {
     color: white;
@@ -158,7 +138,7 @@ label {
 
   #valueRed {
     color: red;
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
 

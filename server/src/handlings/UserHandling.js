@@ -3,6 +3,7 @@ const { check , exists, notExists, equalValue, equalFull } = require('../fragmen
 const encrypt = require('../fragments/security/encrypt')
 const Access = require('../database/access/UserAccess')
 const token = require('../fragments/security/token')
+//const emails = require('../fragments/email')
 
 module.exports = class UserHandling {
 

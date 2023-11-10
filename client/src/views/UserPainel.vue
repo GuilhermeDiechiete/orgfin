@@ -8,8 +8,9 @@
         <router-link id="link" to="/edit"><i class="fas fa-user"></i></router-link>
         <router-link id="link" to="/categories">Categorias</router-link>
         <router-link id="link" to="/payments">Formas de Pagamentos</router-link>  
-        <router-link id="link" to="/summary">Resumo de despesas anual</router-link> 
-        <router-link id="link" to="/summary">Resumo de Investimentos</router-link>  
+        <router-link id="link" to="/summary">Despesas anual</router-link> 
+        <router-link id="link" to="#">Investimentos</router-link> 
+        <router-link id="link" to="#">Controle</router-link>   
         <router-link id="link" @click="logout" to="/login">sair</router-link> 
       </nav>
       <nav id="area-menu">
@@ -31,7 +32,7 @@
     </div>
 
     <div class="container">
-      <h2 class="toggle" @click="toggleForm"> <i class="fas fa-plus"></i> ADICIONAR NOVA DESPESA</h2>
+      <h2 id="title" class="toggle" @click="toggleForm"><i class="fas fa-arrow-down"> </i>  ADICIONAR NOVA DESPESA </h2>
 
         <div v-show="showForm">
           <label>Descrição</label>
@@ -68,21 +69,20 @@
           <h2 id="subtitle" class="title is-3">DESPESAS</h2>
         </div>
         
-        <table id="area-table">
-            
+        <table>
           <thead>
-            <tr id="thead" class="columns is-mobile">
-              <th id="th-white" class="column">Data</th>
-              <th id="th-white" class="column">Descrição</th>
-              <th id="th-white" class="column">Valor</th>
-              <th id="th-white" class="column">Forma de Pagamento</th>
-              <th id="th-white" class="column"> Categoria </th>
-              <th id="th-white" class="column">Numero de Parcelas</th>
-              <th id="th-white" class="column">Valor das parcelas</th>
+            <tr class="columns is-mobile">
+              <th class="column">Data</th>
+              <th class="column">Descrição</th>
+              <th class="column">Valor</th>
+              <th class="column">Forma de Pagamento</th>
+              <th class="column"> Categoria </th>
+              <th class="column">Numero de Parcelas</th>
+              <th class="column">Valor das parcelas</th>
             </tr>
-          </thead>
+          </thead> <br>
           <tbody>
-            <tr id="tbody" class="columns is-miobile" v-for="(expense, index) in expenses" :key="index">
+            <tr class="columns is-miobile" v-for="(expense, index) in expenses" :key="index">
               <td class="column">{{ expense.day }}/{{ expense.month }}/{{ expense.year }}</td>
               <td class="column">{{ expense.description }}</td>
               <td class="column">{{ expense.amount }}</td>
@@ -91,28 +91,29 @@
               <td class="column">{{ expense.installment_number }}</td>
               <td class="column">{{ expense.installment_amount }}</td>
             </tr>
-          </tbody>
+          </tbody> <br>
           <thead >
-            <tr id="tfoot" class="columns is-mobile">
-              <th id="th-white" class="column">Data</th>
-              <th id="th-white" class="column">Descrição</th>
-              <th id="th-white" class="column">TOTAL</th>
-              <th id="th-white" class="column">Pagamento</th>
-              <th id="th-white" class="column">Categoria</th>
-              <th id="th-white" class="column">Parcelas</th>
-              <th id="th-white" class="column">TOTAL</th>
+            <tr class="columns is-mobile">
+              <th class="column">Data</th>
+              <th class="column">Descrição</th>
+              <th class="column">TOTAL</th>
+              <th class="column">Pagamento</th>
+              <th class="column">Categoria</th>
+              <th class="column">Parcelas</th>
+              <th class="column">TOTAL</th>
             </tr>
-          </thead>
-          <tfoot id="tfootValue" class="columns is-mobile">
-            <th class="column">--</th>
-            <th class="column">--</th>
-            <th class="column">{{ totalAmount }}</th>
-            <th class="column">--</th>
-            <th class="column">--</th>
-            <th class="column">--</th>
-            <th class="column">--</th>
+          </thead> <br>
+          <tfoot>
+            <tr class="columns is-mobile">
+              <th class="column">--</th>
+              <th class="column">--</th>
+              <th class="column"><strong id="valueRed">{{ totalAmount }}</strong></th>
+              <th class="column">--</th>
+              <th class="column">--</th>
+              <th class="column">--</th>
+              <th class="column">--</th>
+            </tr>
           </tfoot>
-          <h1></h1>
         </table>
       </div>
     </div>
