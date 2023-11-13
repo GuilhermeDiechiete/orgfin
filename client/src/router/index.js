@@ -6,7 +6,7 @@ import UserRegister from '../views/UserRegister.vue';
 import UserUpdate from '../views/UserUpdate.vue';
 import CategoriesHome from '../views/CategoriesHome.vue'
 import PaymentsMethods from '../views/PaymentsMethods.vue'
-import AnnualSummary from '../views/AnnualSummary.vue'
+import AnnualControl from '../views/AnnualControl.vue'
 import UserPainel from '../views/UserPainel.vue';
 import axios from 'axios';
 
@@ -47,9 +47,9 @@ const routes = [
     beforeEnter: AuthUser,
   },
   {
-    path: '/summary',
-    name: 'Summary',
-    component: AnnualSummary,
+    path: '/control',
+    name: 'Control',
+    component: AnnualControl,
     beforeEnter: AuthUser,
   },
   {

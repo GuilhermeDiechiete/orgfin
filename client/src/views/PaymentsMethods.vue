@@ -94,6 +94,7 @@ export default {
                 this.messageSuccess = res.data.message
                     setTimeout(() => {
                         this.messageSuccess = '';
+                        window.location.reload()
                     }, 2000);
             })
             .catch(error => {

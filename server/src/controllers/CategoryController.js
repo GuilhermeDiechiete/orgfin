@@ -10,6 +10,14 @@ module.exports = class CategoryController {
             res.status(500).json({ response : 'Erro interno do servidor.'})
         }
     }
+    static async category(req, res) {
+        try {
+            const result = await Handling.getCategory(req) 
+            res.status(result.status).json({ message: result.message})
+        } catch (error) {
+            res.status(500).json({ response : 'Erro interno do servidor.'})
+        }
+    }
     static async list(req, res) {
         try {
             const result = await Handling.categoryList(req) 

@@ -1,33 +1,32 @@
-const { check ,  } = require('../fragments/validators/validators')
+const V = require('../fragments/validators')
 const Access = require('../database/access/ExpensesAccess')
 
 module.exports = class CategoryHandling {
     static async expensesCreate(req) {
-        console.log(req)
         const id = req.params.id 
         const expenses = { ...req.body }
 
         try {
-            check(expenses.amount, 'Informe o valor da despesa.') // preciso validar apenas numeros
-            check(expenses.day, 'Informe o dia de pagamento.')
-            check(expenses.month, 'Inform o mes da despesa.')
-            check(expenses.year, 'Informe o ano da despesa.')
-            check(expenses.description, 'Informe uma descrição.')
-            check(expenses.payment, 'Informe a forma de pagamento.')
-            check(expenses.category, 'Informe uma categoria.')
-            check(expenses.installment_number, 'Informe o numero de parcelas.')
-            check(expenses.installment_amount, 'Informe o valor da parcela')
+            V.check(expenses.description, 'descrição').notNull()
+            V.check(expenses.amount, 'valor').notNull()
+            V.check(expenses.day, 'dia').notNull()
+            V.check(expenses.month, 'mês').notNullMsg('Selecione o mês da despesa na barra de meses a cima')
+            V.check(expenses.year, 'ano').notNullMsg('Selecione o ano na opção a cima')
+            V.check(expenses.payment, 'forma de pagamento').notNull()
+            V.check(expenses.category, 'categoria').notNull()
+            V.check(expenses.installment_number, 'numero de parcelas').notNull()
+            V.check(expenses.installment_amount, 'valor das parcelas').notNull()
             
             expenses.status = false
             expenses.user_id = id
 
             const pay = await Access.getPaymentByName(id, expenses.payment)
-            check(pay, 'Forma de pagamento não existe')
+            V.check(pay, 'forma de pagamento').invalidMsg('Selecione uma forma de pagamento.')
+            expenses.payment = pay.payment_name
 
-            expenses.payment = pay.id
             const category = await Access.getCategoryByName(id, expenses.category)
-            check(category, 'Categoria não existe.')
-            expenses.category = category.id
+            V.check(category, 'categoria').invalidMsg('Selecione uma categoria.')
+            expenses.category = category.category_name
     
             await Access.save(id, expenses)
             
@@ -42,11 +41,26 @@ module.exports = class CategoryHandling {
         const expenses = { ...req.query }
 
         try {
-            check(expenses.year, 'Selecione o ano das despesas')
-            check(expenses.month, 'Selecione o mês das despesas.')
+            V.check(expenses.year, 'ano').notNull()
+            V.check(expenses.month, 'mes').notNull()
             const getExpenses = await Access.getExpenses(id, expenses)
             return { status: 200, response: getExpenses}
         } catch (error) {
+            return { status: 400, response: error.message }
+        }
+        
+    }
+    static async expensesTotalMonth(req) {
+        const id = req.params.id
+        const getYear = { ...req.query }
+       
+
+        try {
+            V.check(getYear.year, 'ano').notNull()
+            const getExpenses = await Access.getExpensesTotalMonth(id, getYear.year)
+            return { status: 200, response: getExpenses}
+        } catch (error) {
+            console.log(error)
             return { status: 400, response: error.message }
         }
         

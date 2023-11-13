@@ -1,16 +1,16 @@
-const { check , exists, notExists, equalValue, equalFull } = require('../fragments/validators/validators')
+const V = require('../fragments/validators')
 const Access = require('../database/access/CategoryAccess')
 
 module.exports = class CategoryHandling {
     static async categoryCreate(req) {
-        const id = req.params.id 
-        const name = req.body.name
+        const id = req.params.id
+        const name = req.body.nameCategory
         try {
-            check(name, 'O nome da categoria é obrigatório.')
-            const checkName = await Access.getByName(name)
-            exists(checkName, 'Já existe está categoria.')
-            await Access.save(id, name)
+            V.check(name, 'nome da categoria').notNull()
+            const checkName = await Access.getCategoryByName(id, name)
+            V.check(checkName, 'Categoria').existsMsg(`A categoria "${name}" já existe em sua lista.`)
 
+            await Access.save(id, name)
             return { status: 200, response: 'Categoria cadastrada com sucesso.'}
         } catch (error) {
             return { status: 400, response: error.message }
@@ -26,7 +26,7 @@ module.exports = class CategoryHandling {
         }
     }
     static async listCategoryWithExpenses(req) {
-        const id = 2 
+        const id = req.params.id
         
         const year = req.query.selectYear
         const month = req.query.currentMonth
@@ -39,10 +39,11 @@ module.exports = class CategoryHandling {
         }
     }
     static async categoryDelete(req) {
-        const name = req.body.name
+        const userId = req.params.id
+        const id = req.params.categoryId
         try {
-            check(name, 'Digite o nome da categoria.')
-            const category = await Access.getByName(name)
+            V.check(id, 'categoria').exists()
+            const category = await Access.getByName(id)
             check(category, 'Categoria não existe.')
 
             await Access.deleteByName(name)

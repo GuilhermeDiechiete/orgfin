@@ -6,11 +6,11 @@
     
   </div>
         <router-link id="link" to="/edit"><i class="fas fa-user"></i></router-link>
-        <router-link id="link" to="/categories">Categorias</router-link>
-        <router-link id="link" to="/payments">Formas de Pagamentos</router-link>  
-        <router-link id="link" to="/summary">Despesas anual</router-link> 
-        <router-link id="link" to="#">Investimentos</router-link> 
-        <router-link id="link" to="#">Controle</router-link>   
+        <router-link id="link" to="/categories">MINHAS CATEGORIAS</router-link>
+        <router-link id="link" to="/payments">FORMAS DE PAGAMENTO</router-link>  
+        <router-link id="link" to="/summary">MINHAS RENDAS</router-link> 
+        <router-link id="link" to="#">INVESTIMENTOS</router-link> 
+        <router-link id="link" to="control">CONTROLE</router-link>   
         <router-link id="link" @click="logout" to="/login">sair</router-link> 
       </nav>
       <nav id="area-menu">
@@ -50,7 +50,7 @@
           <label>Categoria</label>
           <select v-model="selectedCategory" id="input" class="input">
             <option v-for="(category, index) in categories" :key="index" :value="category.category_name">
-              {{ category.category_name }}
+             {{ category.category_name }}
             </option>
           </select> 
           <label>Numero de parcelas</label>
@@ -86,8 +86,8 @@
               <td class="column">{{ expense.day }}/{{ expense.month }}/{{ expense.year }}</td>
               <td class="column">{{ expense.description }}</td>
               <td class="column">{{ expense.amount }}</td>
-              <td class="column">{{ expense.payment_id }}</td>
-              <td class="column">{{ expense.category_id }}</td>
+              <td class="column">{{ expense.payment_name }}</td>
+              <td class="column">{{ expense.category_name }}</td>
               <td class="column">{{ expense.installment_number }}</td>
               <td class="column">{{ expense.installment_amount }}</td>
             </tr>
@@ -269,6 +269,7 @@ export default {
           this.userId = res.data.user.id;
           axios.get(`http://localhost:4000/categories/${this.userId}`, req)
             .then(res => {
+              console.log(res.data.message)
               this.categories = res.data.message;
             })
             .catch(err => {

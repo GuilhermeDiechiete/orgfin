@@ -1,9 +1,9 @@
 const knex = require('../connection')
 
 module.exports = class CategoryAccess {
-    static async getByName(name) {
+    static async getCategoryByName(userId, name) {
         try {
-            const result = await knex.select('id', 'category_name', 'user_id').from('categories').where({ category_name: name }).first();
+            const result = await knex.select('id', 'category_name', 'user_id').from('categories').where({ user_id: userId, category_name: name }).first();
             return result;
         } catch (error) {
             console.log('Erro ao selecionar categoria pelo nome', error);

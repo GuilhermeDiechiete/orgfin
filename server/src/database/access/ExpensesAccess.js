@@ -31,8 +31,8 @@ module.exports = class CategoryAccess {
                 year: expenses.year,
                 description: expenses.description,
                 user_id: id,
-                payment_id: expenses.payment,
-                category_id: expenses.category,
+                payment_name: expenses.payment,
+                category_name: expenses.category,
                 installment_number: expenses.installment_number,
                 installment_amount: expenses.installment_amount,
                 status: expenses.status
@@ -49,8 +49,31 @@ module.exports = class CategoryAccess {
             month: expenses.month,
             year: expenses.year
         })
-            return result;
+        return result;
     }
+    static async getExpensesTotalMonth(userId, year) {
+        const result = [];
+        let totalSumAnnual = 0
+
+        for (let month = 1; month <= 12; month++) {
+        const expensesMonth = await knex.select( "*" ).from('expenses').where({ user_id: userId, month: month,year: year })
+    
+        const totalSum = expensesMonth.reduce((acc, expensesMonth) => {
+            return acc + parseFloat(expensesMonth.amount);
+          }, 0);
+        
+        totalSumAnnual += totalSum
+      
+          result.push({ month: month, expenses: expensesMonth, sum: totalSum });
+        }
+        let totalAnnual = totalSumAnnual
+
+        console.log('Resultado', result);
+        
+        return { result, totalAnnual };
+      }
+      
+      
     static async delete(userId, expense_id) {
         try {
             const result = await knex('expenses').where({ user_id: userId, id: expense_id }).del();

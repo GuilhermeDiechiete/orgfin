@@ -1,4 +1,4 @@
-const { check , exists, notExists, equalValue, equalFull } = require('../fragments/validators/validators')
+const V = require('../fragments/validators')
 const Access = require('../database/access/PaymentAccess')
 
 module.exports = class PaymentHandling {
@@ -6,12 +6,12 @@ module.exports = class PaymentHandling {
         const id = req.params.id 
         const payment = { ...req.body }
         try {
-            check(payment.name, 'O nome do pagamento é obrigatório.')
-            check(payment.description, 'Descreva para que você ira usar.')
-            check(payment.limit, 'Informe o limite maximo de uso em Real (R$).')
+            V.check(payment.name, 'nome').notNull()
+            V.check(payment.description, 'descrição').notNull()
+            V.check(payment.limit, 'limite').notNull()
 
             const checkName = await Access.getByName(id, payment.name)
-            exists(checkName, 'Já existe essa forma de pagamento.')
+            V.check(checkName, 'forma de pagamento').existsMsg('Já existe está forma de pagamento.')
             
             await Access.save(id, payment)
 
@@ -33,9 +33,9 @@ module.exports = class PaymentHandling {
         const id = req.params.id
         const name = req.body.name
         try {
-            check(name, 'Digite o nome da categoria.')
+            V.check(name, 'nome').notNull()
             const payment = await Access.getByName(id, name)
-            check(payment, 'Forma de pagamento não existe.')
+            V.check(payment, 'forma de pagamento').notNull()
 
             await Access.deleteByName(id, name)
 

@@ -24,11 +24,13 @@ router.post('/validate', verifyToken, AuthController.validate)
 router.get('/categories/categorywithexpenses', CategoryController.getFull)
 router.post('/categories/:id', CategoryController.create)
 router.get('/categories/:id', CategoryController.list)
+router.get('category/:id', CategoryController.category)
 router.delete('/categories/:id', CategoryController.delete)
 
 // routes expenses
 router.post('/expenses/:id', ExpensesController.create)
 router.get('/expenses/:id', ExpensesController.list)
+router.get('/expenses/totalmonth/:id', ExpensesController.totalMonth)
 router.delete('/expenses/:id', ExpensesController.delete)
 
 // routes payments

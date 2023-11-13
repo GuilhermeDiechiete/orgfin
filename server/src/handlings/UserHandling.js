@@ -1,9 +1,8 @@
 
-const { check , exists, notExists, equalValue, equalFull } = require('../fragments/validators/validators')
+const V = require('../fragments/validators')
 const encrypt = require('../fragments/security/encrypt')
 const Access = require('../database/access/UserAccess')
 const token = require('../fragments/security/token')
-//const emails = require('../fragments/email')
 
 module.exports = class UserHandling {
 
@@ -11,18 +10,16 @@ module.exports = class UserHandling {
         const user = { ...req.body }
 
         try {
-            // validation
-            check(user.name, "O nome é obrigatório.")
-            check(user.email, "O e-mail é obrigatório.")
-            check(user.phone, "O telefone é obrigatório.")
-            check(user.birth, "A data de nascimento é obrigatória.")
-            check(user.city, "A cidade é obrigatória.")
-            check(user.state, "O estado é obrigatório.")
-            check(user.password, "A senha é obrigatória.")
-            check(user.confirmpassword, "A confirmação de senha é obrigatória.")
-            equalFull(user.password, user.confirmpassword, 'As senhas não conferem.')
+            V.check(user.name, "nome").notNull()
+            V.check(user.email, "e-mail").notNull()
+            V.check(user.phone, "telefone").notNull()
+            V.check(user.birth, "data de nascimento").notNull()
+            V.check(user.city, "cidade").notNull()
+            V.check(user.state, "estado").notNull()
+            V.check(user.password, "senha").notNull()
+            V.check(user.confirmpassword, "confirmação de senha").notNull()
+            V.check(user.password, 'senha').eguals(user.confirmpassword, 'confirmação de senha')
 
-            // changes
             const hashpassword = await encrypt.hashPassword(user.password)
             
             user.password = hashpassword
@@ -30,7 +27,7 @@ module.exports = class UserHandling {
 
             // access database
             const checkEmail = await Access.findByEmail(user.email)
-            exists(checkEmail, 'Por favor, utilize outro e-mail.')
+            V.check(checkEmail, 'e-mail').existsMsg('O e-mail já existe, por favor utilize outro.')
 
             await Access.save(user)
 
@@ -44,17 +41,17 @@ module.exports = class UserHandling {
 
         try {
             // validations
-            check(user.email, 'E-mail obrigatório.')
-            check(user.password, 'Senha obrigatória.')
+            V.check(user.email, 'e-mail')
+            V.check(user.password, 'senha')
 
             // access database
             const checkEmail = await Access.findByEmail(user.email)
-            notExists(checkEmail, 'E-mail invalido.')
+            V.check(checkEmail,'e-mail').notExists()
             
             // validation password
             const getPassword = await Access.getPassword(user.email)
             const checkPassword = await encrypt.comparePasswords(user.password, getPassword.password)
-            check(checkPassword, 'Senha Invalida.')
+            V.check(checkPassword, 'senha').invalidMsg('Senha invalida')
 
             // create token
             const getUserByEmail = await Access.getUserByEmail(user.email)
@@ -70,7 +67,8 @@ module.exports = class UserHandling {
         const id = req.params.id 
         try {
             const user = await Access.getUserById(id)
-            notExists(user, 'Usuário não existe no sistema.')
+            V.check(user,'usuário').notExists()
+
             return { status: 200, response: user }
         } catch (error) {
             return { status: 400, response: error.message }
@@ -83,16 +81,13 @@ module.exports = class UserHandling {
         try {
             // validation
             user.id = id
-            check(user.name, "O nome é obrigatório.")
-            check(user.email, "O e-mail é obrigatório.")
-            check(user.phone, "O telefone é obrigatório.")
-            check(user.birth, "A data de nascimento é obrigatória.")
-            check(user.city, "A cidade é obrigatória.")
-            check(user.state, "O estado é obrigatório.")
+            V.check(user.name, "nome").notNull()
+            V.check(user.email, "e-mail").notNull()
+            V.check(user.phone, "telefone").notNull()
+            V.check(user.birth, "data de nascimento").notNull()
+            V.check(user.city, "cidade").notNull()
+            V.check(user.state, "estado").notNull()
 
-            // PRECISO CHECAR SE ELE ESTA COM O MESMO EMAIL DELE
-            // access database
-            
             const getUser = await Access.getUserById(id)
 
             if(getUser && user.email !== getUser.email) {
@@ -116,25 +111,7 @@ module.exports = class UserHandling {
     static async userEditPass(req) {
         const user = { ...req.body }
         try {
-            if(req.params.id) user.id = req.params.id
-            check(user.email, 'Confirme o e-mail do usuário.')
-            check(user.password, 'Digite a senha atual.')
-            check(user.newpassword, 'Digite a nova senha.')
-            check(user.newconfirmpassword, 'Confirme a nova senha')
-            equalFull(user.newpassword, user.newconfirmpassword, 'Senhas não conferem.')
-
-            const checkEmail = await Access.findByEmail(user.email)
-            notExists(checkEmail, 'Não existe usuário com esse e-mail.')
-
-            const getPassword = await Access.getPassword(user.email)
-            const checkPassword = await encrypt.comparePasswords(user.password, getPassword.password)
-            check(checkPassword, 'Senha invalida.')
-
-            const hashPassword = await encrypt.hashPassword(user.newpassword)
-            const update = await Access.updatePassword(user.id, hashPassword)
-
-            check(update, 'Não foi possivel atualizar o usuário.')
-
+            // falta 
             return { status: 200,response: 'Senha alterada com sucesso.' }
         } catch (error) {
             return { status: 400, response: error.message }
@@ -146,7 +123,7 @@ module.exports = class UserHandling {
         const id = req.params.id
         try {
             const user = await Access.getUserById(id)
-            notExists(user, 'Usuário não existe no sistema.')
+            V.check(user, 'usuário').notNullMsg('Usuário não existe')
             await Access.delete(id)
             return { status: 200, response: 'Usuário deletado com sucesso.' }
         } catch (error) {
