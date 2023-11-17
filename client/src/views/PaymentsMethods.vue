@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <div>
-
-      <router-link to="/painel" id="link"><i class="fas fa-arrow-left"></i></router-link>
       <div id="center">
         <h1 id="title" class="title is-1">Formas de Pagamento</h1>
       </div>

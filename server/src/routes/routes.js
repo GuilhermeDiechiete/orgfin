@@ -6,7 +6,7 @@ const ExpensesController = require('../controllers/ExpensesController')
 const PaymentController = require('../controllers/PaymentController')
 const AuthController = require('../controllers/AuthController')
 
-const { verifyToken } = require('../fragments/security/token')
+const { verifyToken } = require('../fragments/token')
 
 
 

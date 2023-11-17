@@ -1,9 +1,9 @@
 .container {
-    padding-top: 5%;
+    padding-top: 3%;
 }
 #title {
     color: orangered;
-    padding-bottom: 1em;
+    padding-bottom: 0.5em;
     cursor: pointer;
 }
 #subtitle {
@@ -14,27 +14,26 @@
 #center {
     text-align: center;
 }
-#area-link {
-    margin-bottom: 2em;
-}
+
 #link {
     color: orangered;
-    padding-right: 2em;
+    padding-right: 1em;
     font-size: 1.2em;
     cursor: pointer;
 }
 #months {
     border: 0.1em solid white;
-    border-radius: 0.4em;
+    border-radius: 0.2em;
     color: white;
 }
 label {
+    font-size: 1.2em;
     color: white;
 }
 #input {
     background-color: rgb(59, 59, 59);
     border-color: rgb(60, 60, 60);
-    margin: 0.5em 0em 1em 0em;
+    margin: 0.2em 0em 1em 0em;
     color: white;
     box-shadow: 5px 5px 10px rgb(30, 29, 28);
   }
@@ -42,18 +41,27 @@ label {
 /* CONFIGURAÇÕES DE BOTOES */
 
 #button-success {
-    font-size: 1em;
-    padding: 0.4em 2em;
-    border-radius: 0.4em;
+    font-size: 1.2em;
+    padding: 0.2em 2em;
+    border-radius: 0.2em;
     border: 0;
     background-color: rgb(44, 154, 44);
     color: white;
     margin: 0.5em;
 }
+#button-search {
+    font-size: 1.2em;
+    padding: 0.2em 2em;
+    border-radius: 0.2em;
+    border: 0;
+    background-color: rgb(54, 54, 220);
+    color: white;
+    margin: 0.5em;
+}
 #button-danger {
     font-size: 1em;
-    padding: 0.4em 2em;
-    border-radius: 0.4em;
+    padding: 0.2em 1em;
+    border-radius: 0.2em;
     border: 0;
     background-color: rgb(133, 26, 26);
     color: white;
@@ -86,6 +94,7 @@ label {
 
 .column {
     color: white;
+    text-align: center;
 }
 
 .toggle {
@@ -114,10 +123,11 @@ table tbody tr {
     text-align: center;
 }
 table tbody tr td {
-    padding: 0.4em 1em;
+    padding: 1px 0.5em;
     border: 1px solid rgb(53, 52, 52);
     vertical-align: middle;
     color: white;
+    font-size: 1.2em;
 }
 table tfoot tr {
     text-align: center;
@@ -126,6 +136,7 @@ table tfoot tr th {
     border: 1px solid rgb(53, 52, 52);
     color: rgb(255, 255, 255);
     vertical-align: middle;
+    font-size: 1.2em;
 }
 
   
@@ -139,9 +150,12 @@ table tfoot tr th {
 
   #valueRed {
     color: red;
-    font-size: 1em;
     font-size: 1.2em;
     vertical-align: middle;
   }
 
+  .selected-month {
+    background-color: orangered;
+    font-weight: 900;
+  }
 

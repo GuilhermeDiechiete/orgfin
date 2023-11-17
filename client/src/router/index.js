@@ -7,6 +7,7 @@ import UserUpdate from '../views/UserUpdate.vue';
 import CategoriesHome from '../views/CategoriesHome.vue'
 import PaymentsMethods from '../views/PaymentsMethods.vue'
 import AnnualControl from '../views/AnnualControl.vue'
+import UserIncome from '../views/UserIncome.vue'
 import UserPainel from '../views/UserPainel.vue';
 import axios from 'axios';
 
@@ -56,6 +57,12 @@ const routes = [
     path: '/painel',
     name: 'Painel',
     component: UserPainel,
+    beforeEnter: AuthUser
+  },
+  {
+    path: '/income',
+    name: 'Income',
+    component: UserIncome,
     beforeEnter: AuthUser
   },
 ];

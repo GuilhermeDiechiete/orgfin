@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-      <router-link to="/painel" id="link"><i class="fas fa-arrow-left"></i></router-link>
         <div id="center">
           <h1 id="title" class="title is-1">Perfil</h1>
         </div>
@@ -30,7 +29,7 @@
   
       </form>
       <div id="center">
-        <button @click="update" id="button-success">Salvar</button>
+        <button @click="update" id="button-success">SALVAR</button>
       </div>
     </div>
 </template>

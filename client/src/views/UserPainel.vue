@@ -1,25 +1,13 @@
 <template>
   <div class="container">
     <div id="area-nav">
-      <nav id="area-link">
-        <div>
-    
-  </div>
-        <router-link id="link" to="/edit"><i class="fas fa-user"></i></router-link>
-        <router-link id="link" to="/categories">MINHAS CATEGORIAS</router-link>
-        <router-link id="link" to="/payments">FORMAS DE PAGAMENTO</router-link>  
-        <router-link id="link" to="/summary">MINHAS RENDAS</router-link> 
-        <router-link id="link" to="#">INVESTIMENTOS</router-link> 
-        <router-link id="link" to="control">CONTROLE</router-link>   
-        <router-link id="link" @click="logout" to="/login">sair</router-link> 
-      </nav>
       <nav id="area-menu">
         <div id="months" class="columns is-mobile">
           <select v-model="selectedYear" id="yearSelect" class="input-year">
             <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
           </select>
           
-          <div v-for="(month, index) in months" @click="selectExpenses(index)" :key="index" class="column">
+          <div v-for="(month, index) in months" @click="selectExpenses(index)" :class="{ 'selected-month': index + 1 === selectedMonth }" :key="index" class="column">
             {{ month }}
           </div>
         </div>
@@ -138,7 +126,6 @@ export default {
         category: '',
         installment_number: '',
         installment_amount: '',
-
         categories: [],
         payments: [],
 

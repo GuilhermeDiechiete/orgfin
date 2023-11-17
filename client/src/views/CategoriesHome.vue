@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <router-link to="/painel" id="link"><i class="fas fa-arrow-left"></i></router-link>
     <div id="center">
       <h1 id="title" class="title is-1">Categorias</h1>
     </div>
@@ -9,7 +8,7 @@
       <div v-if="messageError" id="error">{{ messageError }}</div>
     </div>
     <form class="form">
-      <label >Digite o nome da categoria:</label>
+      <label >Adicione uma nova categoria:</label>
       <input v-model="name" type="text" id="input" class="input" />
     </form>
     <div id="center">

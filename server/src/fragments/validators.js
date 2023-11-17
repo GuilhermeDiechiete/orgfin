@@ -22,6 +22,12 @@ class Validator {
     return this;
   }
 
+  notExistsMsg(msg) {
+    if (!this.value || null || undefined) {
+      throw new Error(msg);
+    }
+    return this;
+  }
   invalidMsg(msg) {
     if (!this.value) {
       throw new Error(msg);

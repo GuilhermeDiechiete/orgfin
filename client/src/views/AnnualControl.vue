@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <router-link to="/painel" id="link"><i class="fas fa-arrow-left"></i></router-link>
     <div id="center">
-      <h1 id="title" class="title is-2">Resumo Controle Financeiro</h1>
+      <h1 id="title" class="title is-2">Relatório financeiro anual</h1>
       
       <p id="title">Selecione o ano</p>
       <select v-model="selectedYear" id="yearSelect" class="input-year" @change="selectExpenses">

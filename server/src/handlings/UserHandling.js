@@ -1,15 +1,18 @@
 
+// management tools
 const V = require('../fragments/validators')
-const encrypt = require('../fragments/security/encrypt')
+const encrypt = require('../fragments/encrypt')
+const token = require('../fragments/token')
+
+// database access
 const Access = require('../database/access/UserAccess')
-const token = require('../fragments/security/token')
 
+// class for user management
 module.exports = class UserHandling {
-
     static async userRegister(req) {
         const user = { ...req.body }
 
-        try {
+        try { // validations
             V.check(user.name, "nome").notNull()
             V.check(user.email, "e-mail").notNull()
             V.check(user.phone, "telefone").notNull()
@@ -20,6 +23,7 @@ module.exports = class UserHandling {
             V.check(user.confirmpassword, "confirmação de senha").notNull()
             V.check(user.password, 'senha').eguals(user.confirmpassword, 'confirmação de senha')
 
+            // password encryption
             const hashpassword = await encrypt.hashPassword(user.password)
             
             user.password = hashpassword
@@ -41,12 +45,12 @@ module.exports = class UserHandling {
 
         try {
             // validations
-            V.check(user.email, 'e-mail')
-            V.check(user.password, 'senha')
+            V.check(user.email, 'e-mail').notNull().email()
+            V.check(user.password, 'senha').notNull().minLength()
 
             // access database
             const checkEmail = await Access.findByEmail(user.email)
-            V.check(checkEmail,'e-mail').notExists()
+            V.check(checkEmail,'e-mail').notExistsMsg('E-mail invalido.')
             
             // validation password
             const getPassword = await Access.getPassword(user.email)
@@ -67,7 +71,7 @@ module.exports = class UserHandling {
         const id = req.params.id 
         try {
             const user = await Access.getUserById(id)
-            V.check(user,'usuário').notExists()
+            V.check(user,'usuário').notExistsMsg('Usuário não existe.')
 
             return { status: 200, response: user }
         } catch (error) {
@@ -78,16 +82,16 @@ module.exports = class UserHandling {
         const id = req.params.id
         const user = { ...req.body }
         
-        try {
-            // validation
+        try { // validation
             user.id = id
             V.check(user.name, "nome").notNull()
-            V.check(user.email, "e-mail").notNull()
-            V.check(user.phone, "telefone").notNull()
+            V.check(user.email, "e-mail").notNull().email()
+            V.check(user.phone, "telefone").notNull().phone()
             V.check(user.birth, "data de nascimento").notNull()
             V.check(user.city, "cidade").notNull()
             V.check(user.state, "estado").notNull()
 
+            // validation email
             const getUser = await Access.getUserById(id)
 
             if(getUser && user.email !== getUser.email) {
@@ -101,7 +105,7 @@ module.exports = class UserHandling {
                 return { status: 400, response: 'Não foi possivel atualizar usuário.' }
             }
             
-            const update = await Access.update(id, user)
+            await Access.update(id, user)
 
             return { status: 200, response: 'Usuário atualizado com sucesso.' }
         } catch (error) {
