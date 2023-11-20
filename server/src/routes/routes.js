@@ -4,6 +4,7 @@ const UserController = require('../controllers/UserController')
 const CategoryController = require('../controllers/CategoryController')
 const ExpensesController = require('../controllers/ExpensesController')
 const PaymentController = require('../controllers/PaymentController')
+const IncomeController = require('../controllers/IncomeController')
 const AuthController = require('../controllers/AuthController')
 
 const { verifyToken } = require('../fragments/token')
@@ -24,7 +25,7 @@ router.post('/validate', verifyToken, AuthController.validate)
 router.get('/categories/categorywithexpenses', CategoryController.getFull)
 router.post('/categories/:id', CategoryController.create)
 router.get('/categories/:id', CategoryController.list)
-router.get('category/:id', CategoryController.category)
+router.get('/category/:id', CategoryController.category)
 router.delete('/categories/:id', CategoryController.delete)
 
 // routes expenses
@@ -37,6 +38,12 @@ router.delete('/expenses/:id', ExpensesController.delete)
 router.post('/payments/:id', PaymentController.create)
 router.get('/payments/:id', PaymentController.list)
 router.delete('/payments/:id', PaymentController.delete)
+
+// routes income
+router.post('/income/:id', IncomeController.create)
+router.get('/income/list/:id', IncomeController.list)
+router.get('/income/:id', IncomeController.getIncome)
+router.delete('/income/:id', IncomeController.delete)
 
 module.exports = router
 
