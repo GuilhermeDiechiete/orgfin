@@ -1,0 +1,225 @@
+#container {
+    padding-top: 3%;
+}
+#center {
+    text-align: center;
+}
+#form-area {
+    padding: 1em;
+}
+#success {
+    padding: 0.4em 10em 0.4em 10em;
+    border-radius: 0.5em;
+    background-color: rgb(68, 160, 68);
+    color: white;
+    text-align: center;
+    font-size: 1.4;
+}
+#error {
+    text-align: center;
+    padding: 0.4em 10em 0.4em 10em;
+    border-radius: 0.5em;
+    background-color: rgb(207, 63, 63);
+    color: white;
+    font-size: 1.4;
+}
+
+#container table thead th {
+    border: 1px solid rgb(85, 85, 85);
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    vertical-align: middle;
+}
+label {
+    color: white;
+    padding-top: 1em;
+}
+#input {
+    background-color: rgb(59, 59, 59);
+    border-color: rgb(33, 33, 33);
+    color: white;
+    box-shadow: 5px 5px 10px rgb(30, 29, 28);
+}
+#button {
+    font-size: 1em;
+    padding: 0.8em 2em;
+    border-radius: 0.2em;
+    border: 0;
+    background-color: rgb(19, 19, 164);
+    color: white;
+    margin: 0.5em;
+}
+#button-success {
+    font-size: 1.2em;
+    padding: 0.2em 2em;
+    border-radius: 0.2em;
+    border: 0;
+    background-color: rgb(44, 154, 44);
+    color: white;
+    margin: 0.5em;
+}
+
+/* .container {
+    padding-top: 3%;
+}
+#title {
+    color: orangered;
+    padding-bottom: 0.5em;
+    cursor: pointer;
+}
+#subtitle {
+    color: white;
+    padding-bottom: 1em;
+    cursor: pointer;
+}
+#center {
+    text-align: center;
+}
+
+#link {
+    color: orangered;
+    padding-right: 1em;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+#months {
+    border: 0.1em solid white;
+    border-radius: 0.2em;
+    color: white;
+}
+label {
+    font-size: 1.2em;
+    color: white;
+}
+#input {
+    background-color: rgb(59, 59, 59);
+    border-color: rgb(60, 60, 60);
+    margin: 0.2em 0em 1em 0em;
+    color: white;
+    box-shadow: 5px 5px 10px rgb(30, 29, 28);
+  }
+
+/* CONFIGURAÇÕES DE BOTOES */
+
+/* #button-success {
+    font-size: 1.2em;
+    padding: 0.2em 2em;
+    border-radius: 0.2em;
+    border: 0;
+    background-color: rgb(44, 154, 44);
+    color: white;
+    margin: 0.5em;
+}
+#button-search {
+    font-size: 1.2em;
+    padding: 0.2em 2em;
+    border-radius: 0.2em;
+    border: 0;
+    background-color: rgb(54, 54, 220);
+    color: white;
+    margin: 0.5em;
+}
+#button-danger {
+    font-size: 1em;
+    padding: 0.2em 1em;
+    border-radius: 0.2em;
+    border: 0;
+    background-color: rgb(133, 26, 26);
+    color: white;
+    margin: 0.5em;
+}
+
+
+/* CONFIGURAÇÕES MENSAGENS DE SUCESSO E DE ERRO 
+#area-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+#success {
+    padding: 0.4em 10em 0.4em 10em;
+    border-radius: 0.5em;
+    background-color: rgb(68, 160, 68)
+}
+#error {
+    padding: 0.4em 10em 0.4em 10em;
+    border-radius: 0.5em;
+    background-color: rgb(207, 63, 63);
+
+}
+
+
+
+.column {
+    color: white;
+    text-align: center;
+}
+
+.toggle {
+  color: rgb(58, 58, 210);
+  
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+table thead tr{
+    border: 1px solid orangered;
+    background-color: #080808;
+    box-shadow: 5px 5px 10px rgb(39, 28, 23);
+    text-align: center;
+}  
+th {
+    color: white;
+    padding: 0.4em 0em;
+    
+    vertical-align: middle;
+}
+table tbody tr {
+    text-align: center;
+}
+table tbody tr td {
+    padding: 1px 0.5em;
+    border: 1px solid rgb(53, 52, 52);
+    vertical-align: middle;
+    color: white;
+    font-size: 1.2em;
+}
+table tfoot tr {
+    text-align: center;
+}
+table tfoot tr th {
+    border: 1px solid rgb(53, 52, 52);
+    color: rgb(255, 255, 255);
+    vertical-align: middle;
+    font-size: 1.2em;
+}
+
+  
+
+
+  #yearSelect {
+    color: white;
+    background-color: #585858;
+    padding: 0.4em 1em;
+  }
+
+  #valueRed {
+    color: red;
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+
+  .selected-month {
+    background-color: orangered;
+    font-weight: 900;
+  }  
+
+*/
