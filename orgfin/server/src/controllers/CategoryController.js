@@ -31,18 +31,6 @@ module.exports = class CategoryController {
             res.status(500).json({ response : 'Erro interno do servidor.'})
         }
     }
-    static async showCategories(req, res) {
-        try {
-            const userId = req.params.id 
-            const year = req.query.year
-            const result = await Handling.listCategoryWithExpenses(userId, year) 
-     
-            res.status(result.status).json({ message: result.response})
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ response : 'Erro interno do servidor.'})
-        }
-    }
     static async getFull(req, res) {
         try {
             const result = await Handling.listCategoryWithExpenses(req) 

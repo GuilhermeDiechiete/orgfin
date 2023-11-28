@@ -23,15 +23,6 @@ module.exports = class CategoryHandling {
             return { status: 400, response: error.message }
         }
     }
-    static async listCategoryWithExpenses(userId, year) {
-        try {
-            const categories = await Access.getCategoryWithExpenses( userId, year)
-            console.log('resultado', categories)
-            return { status: 200, response: categories}
-        } catch (error) {
-            return { status: 400, response: error.message }
-        }
-    }
     static async categoryDelete(userId, nameCategory) {
         try {
             // ainda falta

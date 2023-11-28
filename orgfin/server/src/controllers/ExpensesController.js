@@ -28,6 +28,18 @@ module.exports = class ExpensesController {
             res.status(500).json({ response : 'Erro interno do servidor.'})
         }
     }
+    static async showExpenses(req, res) {
+        try {
+            const userId = req.params.id 
+            const year = req.query.year
+            const result = await Handling.showTotalExpenses(userId, year) 
+     
+            res.status(result.status).json({ message: result.response})
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ response : 'Erro interno do servidor.'})
+        }
+    }
     static async delete(req, res) {
         try {
             const result = await Handling.expensesDelete(req) 

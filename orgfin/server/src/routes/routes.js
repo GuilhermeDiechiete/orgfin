@@ -22,7 +22,7 @@ router.post('/categories/:id', verifyToken, CategoryController.create) // em uso
 router.get('/categories/:id', CategoryController.showCategory) // mostrar uma categoria
 router.get('/categories/list/:id', CategoryController.listCategories) // mostra todas as categorias
 router.delete('/categories/:id', CategoryController.deleteCategory) // deletar uma categoria pelo nome
-router.get('/showCategories/:id', CategoryController.showCategories) // mostra a categoria e as despesas cadastradas
+
 
 // routes payments
 router.post('/payments/:id', PaymentController.create)
@@ -33,6 +33,7 @@ router.delete('/payments/:id', PaymentController.delete)
 router.post('/expenses/:id', ExpensesController.create) // em uso
 router.get('/expenses/:id', ExpensesController.list)
 router.get('/expenses/totalmonth/:id', ExpensesController.totalMonth)
+router.get('/expenses/show/:id', ExpensesController.showExpenses) // mostra a categoria e as despesas cadastradas
 router.delete('/expenses/:id', ExpensesController.delete)
 
 module.exports = router

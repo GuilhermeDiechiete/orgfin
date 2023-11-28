@@ -45,6 +45,27 @@ module.exports = class CategoryAccess {
             throw error;
        }
     }
+    static async getTotalExpenses(userId, year) {
+        try {
+            const categories = await knex.select("*").from('categories').where({ user_id: userId });
+    
+            const categoriesWithExpenses = [];
+    
+            for (const category of categories) {
+                const expenses = await knex.select("*")
+                    .from('expenses')
+                    .where({ user_id: userId, year: year, category_name: category.category_name });
+    
+                categoriesWithExpenses.push({ category, expenses });
+            }
+    
+            return categoriesWithExpenses;
+        } catch (error) {
+            console.error(error);
+            throw new Error('Ocorreu um erro ao buscar categorias e despesas.');
+        }
+    }
+    
     static async getExpenses(userId, expenses) {
         const result = await knex.select( "*" ).from('expenses').where({ 
             user_id: userId,

@@ -28,31 +28,6 @@ module.exports = class CategoryAccess {
             
         }
     }
-    static async getCategoryWithExpenses(userId, year) {
-
-        try {
-          const categories = await knex
-            .select("*").from('categories').where({ user_id: userId });
-      
-          const categoriesWithExpenses = [];
-      
-          for (const category of categories) {
-            const expenses = await knex
-              .select("*").from('expenses').where({
-                user_id: userId,
-                year: year,
-                category_name: category.category_name
-              });
-      
-            category.expenses = expenses;
-            categoriesWithExpenses.push(category);
-          }
-          return categoriesWithExpenses;
-        } catch (error) {
-          console.error(error); 
-          throw new Error('Ocorreu um erro ao buscar categorias e despesas.');
-        }
-      }
     static async deleteByName(name) {
         try {
             const result = await knex('categories').where({ category_name: name }).del();

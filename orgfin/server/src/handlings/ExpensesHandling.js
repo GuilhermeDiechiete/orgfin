@@ -62,6 +62,15 @@ module.exports = class CategoryHandling {
         }
         
     }
+    static async showTotalExpenses(userId, year) {
+        try {
+            const expenses = await Access.getTotalExpenses( userId, year)
+            console.log('resultado', expenses)
+            return { status: 200, response: expenses}
+        } catch (error) {
+            return { status: 400, response: error.message }
+        }
+    }
     static async expensesDelete(req) {
         const id = req.params.id 
         const expense = { ...req.body }

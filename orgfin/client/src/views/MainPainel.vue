@@ -2,32 +2,35 @@
     <div id="container">
         <table> 
             <!-- area de informações -->
-            <thead class="columns">
-                <th class="column"><h1>Planilha de Controle Financeiro</h1></th>
-                <th class="column">Usuário: GUILHERME DIECHIETE DA SILVA</th>
+            <thead>
+                <tr class="columns">
+                    <th class="column"><h1>Planilha de Controle Financeiro</h1></th>
+                    <th class="column">Usuário: GUILHERME DIECHIETE DA SILVA</th>
+                </tr>
+                <tr class="columns">
+                   <th class="column">
+                        <label for="">Selecione o ano: </label>
+                        <select v-model="selectedYear" id="input" class="input" @change="showCategories()">
+                            <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
+                        </select>
+                    </th> 
+                </tr>
+                <tr class="columns">
+                    <th class="column">
+                        <button id="button" @click="showCreateCategory">Adicionar Categoria</button>
+                        <button id="button" @click="showCreatePayment">Adicionar Forma de Pagamento</button>
+                        <button id="button" @click="showCreateExpense">Adicionar despesa</button> 
+                    </th> 
+                </tr>
             </thead>
-            <!-- area de seleção-->
-            <thead class="columns">
-                <th class="column">
-                    <label for="">Selecione o ano: </label>
-                    <select v-model="selectedYear" id="input" class="input" @change="showCategories()">
-                        <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
-                    </select>
-                </th>
-            </thead>
-            <!--area de botoes de formularios-->
-            <thead class="columns">
-                <th class="column">
-                    <button id="button" @click="showCreateCategory">Adicionar Categoria</button>
-                    <button id="button" @click="showCreatePayment">Adicionar Forma de Pagamento</button>
-                    <button id="button" @click="showCreateExpense">Adicionar despesa</button> 
-                </th> 
-            </thead>
+
             <!--area de mensagens para o usuario-->
             <div id="area-message">
                 <div v-if="messageSuccess" id="success">{{ messageSuccess }}</div>
                 <div v-if="messageError" id="error">{{ messageError }}</div>
             </div>
+
+            <br>
             <!--formulario para criação de categoria-->
             <thead class="columns">
                 <div v-show="statusCreateCategory" id="form-area">
@@ -88,48 +91,37 @@
                         <button id="button-success" @click="createExpense()">Adicionar</button>
                     </div>
                 </div>  
-            </thead>
-        </table> <br>
-            <table>
-                <thead class="columns">
-                    <th class="column">Categorias</th> 
-                    <th class="column">Descrição</th>
-                    <th class="column">Pagamento</th>
-                    <th class="column">Janeiro</th>
-                    <th class="column">Janeiro</th>
-                    <th class="column">Fevereiro</th>
-                    <th class="column">Março</th>
-                    <th class="column">Abril</th>
-                    <th class="column">Maio</th>
-                    <th class="column">Junho</th>
-                    <th class="column">Julho</th>
-                    <th class="column">Agosto</th>
-                    <th class="column">Setembro</th>
-                    <th class="column">Outubro</th>
-                    <th class="column">Novembro</th>
-                    <th class="column">Dezembro</th>
-                </thead>
+            </thead> <br>
 
-                <tbody>
-                    <div v-for="(category, index) in categories" :key="index">
-                        <td>{{ category.category_name }}</td>
-                        <td v-for="(expense, expenseIndex) in category.expenses" :key="expenseIndex">
-                        {{ expense.description }} 
-                        {{ expense.payment_name }}
-                        {{ expense.amount }}  
-      
-                    </td>
-                    </div>
-                    
+            <tbody>
 
+                <div v-for="(getCategory, categoryIndex) in infoExpenses" :key="categoryIndex">
                     
-                    
-                </tbody>
-            </table>
-            
-        </div>
-        
-    
+                    <tr class="columns is-mobile">
+                        
+                        <!--primeira coluna ( categoria )-->
+                        <td class="column is-2" :rowspan="getCategory.expenses.length + 1">
+                            {{ getCategory.category.category_name }}
+                        </td>
+                        
+                        <!--segunda coluna ( dados da tabela )-->
+                        <td class="column">
+                            <div class="columns is-mobile" v-for="(expense, expenseIndex) in getCategory.expenses" :key="expenseIndex">
+
+                                <td class="column is-1" >{{ expense.description }}</td>
+                                <td class="column is-1">{{ expense.payment_name }}</td>
+                                
+                                <td class="column is-1" v-for="monthIndex in 12" :key="monthIndex" >
+                                    <span v-if="expense.month === monthIndex && expense.amount > 0">R$ {{ expense.amount }}</span>
+                                    <span v-else>-</span>
+                                </td>  
+                            </div> 
+                        </td> 
+                    </tr> <br>
+                </div>
+            </tbody>
+        </table> 
+    </div>
 </template>
 <script>
 import axios from 'axios'
@@ -150,6 +142,7 @@ export default {
             categories: [],
             payments: [],
             expenses: [],
+            infoExpenses: [],
 
             // valores para enviar nas requisições
             selectedYear: new Date().getFullYear(),
@@ -180,7 +173,7 @@ export default {
     created() {
         this.listCategories()
         this.listPayments()
-        this.showCategories()
+        this.showTotalExpenses()
     },
     methods: {
         showCreateCategory() {
@@ -302,7 +295,7 @@ export default {
                 console.log(err);
                 });
             },
-        showCategories() {
+        showTotalExpenses() {
             var req = {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('token')
@@ -315,10 +308,10 @@ export default {
             axios.post('http://localhost:4000/validate', {}, req)
             .then(res => {
             this.userId = res.data.user.id;
-            axios.get(`http://localhost:4000/showCategories/${this.userId}`, req)
+            axios.get(`http://localhost:4000/expenses/show/${this.userId}`, req)
                 .then(res => {
-                    this.categories = res.data.message
-                    console.log(this.categories)
+                    this.infoExpenses = res.data.message
+                    console.log(this.infoExpenses)
                 })
                 .catch(error => {
                 this.messageError = error.response.data.message;
