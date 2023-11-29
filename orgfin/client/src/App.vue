@@ -9,9 +9,9 @@
 
 <style scoped>
 #app {
-  background-color: rgb(33, 33, 33);
+  background-color: rgb(37, 37, 37);
   min-height: 100vh;
-  padding: 1em;
+  
 }
 </style>
 

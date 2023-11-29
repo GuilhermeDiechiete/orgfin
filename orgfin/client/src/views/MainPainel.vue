@@ -1,12 +1,13 @@
 <template>
     <div id="container">
         <table> 
-            <!-- area de informações -->
             <thead>
                 <tr class="columns">
-                    <th class="column"><h1>Planilha de Controle Financeiro</h1></th>
+                    <th class="column">Planilha de Controle Financeiro</th>
                     <th class="column">Usuário: GUILHERME DIECHIETE DA SILVA</th>
                 </tr>
+           
+            
                 <tr class="columns">
                    <th class="column">
                         <label for="">Selecione o ano: </label>
@@ -15,12 +16,23 @@
                         </select>
                     </th> 
                 </tr>
+          
+            <!-- area de informações -->
+           
+                
+                
                 <tr class="columns">
                     <th class="column">
                         <button id="button" @click="showCreateCategory">Adicionar Categoria</button>
-                        <button id="button" @click="showCreatePayment">Adicionar Forma de Pagamento</button>
-                        <button id="button" @click="showCreateExpense">Adicionar despesa</button> 
                     </th> 
+                    <th class="column">
+                        <button id="button" @click="showCreatePayment">Adicionar Forma de Pagamento</button>
+                    </th>
+                    <th class="column">
+                        <button id="button" @click="showCreateExpense">Adicionar despesa</button> 
+                    </th>
+                        
+                    
                 </tr>
             </thead>
 
@@ -32,7 +44,7 @@
 
             <br>
             <!--formulario para criação de categoria-->
-            <thead class="columns">
+            <thead class="columns  is-mobile">
                 <div v-show="statusCreateCategory" id="form-area">
                     <label for="">Nome: # Adicione nomes curtos, como: Essenciais, não essenciais, Casa...</label>
                     <input type="text" id="input" class="input" v-model="nameCategory">
@@ -93,34 +105,54 @@
                 </div>  
             </thead> <br>
 
+            
+        </table> 
+        <table>
             <tbody>
 
-                <div v-for="(getCategory, categoryIndex) in infoExpenses" :key="categoryIndex">
-                    
-                    <tr class="columns is-mobile">
-                        
-                        <!--primeira coluna ( categoria )-->
-                        <td class="column is-2" :rowspan="getCategory.expenses.length + 1">
-                            {{ getCategory.category.category_name }}
-                        </td>
-                        
-                        <!--segunda coluna ( dados da tabela )-->
-                        <td class="column">
-                            <div class="columns is-mobile" v-for="(expense, expenseIndex) in getCategory.expenses" :key="expenseIndex">
+<div v-for="(getCategory, categoryIndex) in infoExpenses" :key="categoryIndex">
+    <tr class="columns is-mobile">
+        <td class="column">Categorias</td>
+        <td class="column ">Descrição</td>
+        <td class="column ">Pagamento</td>
+        <td class="column ">Janeiro</td>
+        <td class="column ">Fevereiro</td>
+        <td class="column">Março</td>
+        <td class="column">Abril</td>
+        <td class="column">Maio</td>
+        <td class="column">Junho</td>
+        <td class="column">Julho</td>
+        <td class="column">Agosto</td>
+        <td class="column">Setembro</td>
+        <td class="column">Outubro</td>
+        <td class="column">Novembro</td>
+        <td class="column">Dezembro</td>
+    </tr>
+    
+    <tr class="columns is-mobile">
+        
+        <!--primeira coluna ( categoria )-->
+        <td class="column is-2" :rowspan="getCategory.expenses.length + 1">
+            {{ getCategory.category.category_name }}
+        </td>
+        
+        <!--segunda coluna ( dados da tabela )-->
+        <td class="column">
+            <div class="columns is-mobile" v-for="(expense, expenseIndex) in getCategory.expenses" :key="expenseIndex">
 
-                                <td class="column is-1" >{{ expense.description }}</td>
-                                <td class="column is-1">{{ expense.payment_name }}</td>
-                                
-                                <td class="column is-1" v-for="monthIndex in 12" :key="monthIndex" >
-                                    <span v-if="expense.month === monthIndex && expense.amount > 0">R$ {{ expense.amount }}</span>
-                                    <span v-else>-</span>
-                                </td>  
-                            </div> 
-                        </td> 
-                    </tr> <br>
-                </div>
-            </tbody>
-        </table> 
+                <td class="column is-2" >{{ expense.description }}</td>
+                <td class="column is-2">{{ expense.payment_name }}</td>
+                
+                <td class="column is-2" v-for="monthIndex in 12" :key="monthIndex" >
+                    <span v-if="expense.month === monthIndex && expense.amount > 0">R$ {{ expense.amount }}</span>
+                    <span v-else>-</span>
+                </td>  
+            </div> 
+        </td> 
+    </tr> <br>
+</div>
+</tbody>
+        </table>
     </div>
 </template>
 <script>
