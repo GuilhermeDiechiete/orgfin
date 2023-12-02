@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div id="container">
       <router-view/>
     </div>
     
   </div>
 </template>
 
-<style scoped>
-#app {
-  background-color: rgb(37, 37, 37);
-  min-height: 100vh;
-  
-}
+<style>
+@import '../src//assets/global.css';
 </style>
 
 <script>
@@ -28,8 +24,5 @@ export default {
     },
   }
 }
-
-  
-
 </script>
 

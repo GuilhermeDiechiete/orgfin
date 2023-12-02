@@ -1,52 +1,48 @@
 <template>
     <div id="container">
-        <table> 
-            <thead>
-                <tr class="columns">
-                    <th class="column">Planilha de Controle Financeiro</th>
-                    <th class="column">Usuário: GUILHERME DIECHIETE DA SILVA</th>
-                </tr>
-           
-            
-                <tr class="columns">
-                   <th class="column">
-                        <label for="">Selecione o ano: </label>
-                        <select v-model="selectedYear" id="input" class="input" @change="showCategories()">
-                            <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
-                        </select>
-                    </th> 
-                </tr>
-          
-            <!-- area de informações -->
-           
-                
-                
-                <tr class="columns">
-                    <th class="column">
-                        <button id="button" @click="showCreateCategory">Adicionar Categoria</button>
-                    </th> 
-                    <th class="column">
-                        <button id="button" @click="showCreatePayment">Adicionar Forma de Pagamento</button>
-                    </th>
-                    <th class="column">
-                        <button id="button" @click="showCreateExpense">Adicionar despesa</button> 
-                    </th>
+        <div id="table-container">
+            <table> 
+                <thead>
+                    <tr class="columns">
+                        <th class="column">Planilha de Controle Financeiro</th>
+                    </tr>
+                    <tr class="columns">
                         
-                    
-                </tr>
-            </thead>
+                        <th class="column">Usuário: GUILHERME DIECHIETE DA SILVA</th>
+                    </tr>
+                    <tr class="columns">
+                    <th class="column">
+                            <label for="">Selecione o ano: </label><br>
+                            <select v-model="selectedYear" id="input" class="input" @change="showCategories()">
+                                <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
+                            </select>
+                        </th> 
+                    </tr>
 
-            <!--area de mensagens para o usuario-->
-            <div id="area-message">
+                    <tr class="columns" id="center">
+                        <th class="column">
+                            <button id="button" @click="showCreateCategory">Adicionar Categoria</button>
+                            <button id="button" @click="showCreateExpense">Adicionar despesa</button> 
+                            <button id="button" @click="showCreatePayment">Adicionar Forma de Pagamento</button>
+                            
+                        </th>
+                    </tr>
+
+
+                </thead>
+                <br>
+
+           
+            <thead>
+
+                <div id="area-message">
                 <div v-if="messageSuccess" id="success">{{ messageSuccess }}</div>
                 <div v-if="messageError" id="error">{{ messageError }}</div>
             </div>
 
             <br>
-            <!--formulario para criação de categoria-->
-            <thead class="columns  is-mobile">
                 <div v-show="statusCreateCategory" id="form-area">
-                    <label for="">Nome: # Adicione nomes curtos, como: Essenciais, não essenciais, Casa...</label>
+                    <label for="">Nome: # Adicione nomes curtos, como: Essenciais, não essenciais, Casa...</label><br>
                     <input type="text" id="input" class="input" v-model="nameCategory">
                     <div id="center">
                         <button id="button-success" @click="createCategory">Criar</button>
@@ -54,11 +50,11 @@
                 </div>
                 <!--area de criação de forma de pagamento-->
                 <div v-show="statusCreatePayment" id="form-area">
-                    <label for="">Nome</label>
-                    <input id="input" v-model="namePayment" type="text" class="input" />
-                    <label for="">Descrição</label>
-                    <input id="input" v-model="descriptionPayment" type="text" class="input" />
-                    <label for="">Limite</label>
+                    <label for="">Nome</label><br>
+                    <input id="input" v-model="namePayment" type="text" class="input" /><br>
+                    <label for="">Descrição</label><br>
+                    <input id="input" v-model="descriptionPayment" type="text" class="input" /><br>
+                    <label for="">Limite</label><br>
                     <input id="input" v-model="limitPayment" type="text" class="input" />
                     <div id="center">
                         <button id="button-success" @click="createPayments">Criar</button>
@@ -66,94 +62,98 @@
                 </div>
                 <div v-show="statusCreateExpense" id="form-area">
 
-                    <label>Descrição</label>
-                    <input id="input" class="input" type="text" v-model="descriptionExpense">
+                    <label>Descrição</label><br>
+                    <input id="input" class="input" type="text" v-model="descriptionExpense"><br>
 
-                    <label>Valor - R$</label>
-                    <input id="input" class="input" type="text" v-model="amountExpense">
+                    <label>Valor - R$</label><br>
+                    <input id="input" class="input" type="text" v-model="amountExpense"><br>
 
-                    <label>Dia para pagamento</label>
-                    <input id="input" class="input" type="number" v-model="dayExpense">
+                    <label>Dia para pagamento</label><br>
+                    <input id="input" class="input" type="number" v-model="dayExpense"><br>
 
-                    <label for="">Mês da despesa | primeira parcela em...</label>
+                    <label for="">Mês da despesa | primeira parcela em...</label><br>
                     <select id="input" class="input" v-model="selectedMonth">
                         <option v-for="(month, index) in months" :class="{ 'selected-month': index + 1 === selectedMonth }" :key="index" :value="index + 1">
                             {{ month }}
                         </option>
-                    </select>
+                    </select><br>
 
-
-                    <label for="">Forma de pagamento</label>
+                    <label for="">Forma de pagamento</label><br>
                     <select v-model="selectedPayment" id="input" class="input">
                         <option v-for="(payment, index) in payments" :key="index" :value="payment.payment_name">
                         {{ payment.payment_name }}
                         </option>
-                    </select>
-                    <label>Categoria</label>
+                    </select><br>
+
+                    <label>Categoria</label><br>
                     <select v-model="selectedCategory" id="input" class="input">
                         <option v-for="(category, index) in categories" :key="index" :value="category.category_name">
                         {{ category.category_name }}
                         </option>
-                    </select> 
-                    <label>Numero de parcelas</label>
+                    </select><br>
+
+                    <label>Numero de parcelas</label><br>
                     <input v-model="installment_numberExpense" id="input" class="input" type="text">
-                    <label>Valor da parcelas</label>
+                    <br>
+                    <label>Valor da parcelas</label><br>
                     <input id="input" class="input" type="text" v-model="installment_amountExpense">   
+                    <br>
                     <div id="center">
                         <button id="button-success" @click="createExpense()">Adicionar</button>
                     </div>
                 </div>  
             </thead> <br>
-
-            
         </table> 
-        <table>
-            <tbody>
+        <div id="table-container">
+            
+            <table id="table-tbody">
+                <tbody id="tbody">
 
-<div v-for="(getCategory, categoryIndex) in infoExpenses" :key="categoryIndex">
-    <tr class="columns is-mobile">
-        <td class="column">Categorias</td>
-        <td class="column ">Descrição</td>
-        <td class="column ">Pagamento</td>
-        <td class="column ">Janeiro</td>
-        <td class="column ">Fevereiro</td>
-        <td class="column">Março</td>
-        <td class="column">Abril</td>
-        <td class="column">Maio</td>
-        <td class="column">Junho</td>
-        <td class="column">Julho</td>
-        <td class="column">Agosto</td>
-        <td class="column">Setembro</td>
-        <td class="column">Outubro</td>
-        <td class="column">Novembro</td>
-        <td class="column">Dezembro</td>
-    </tr>
+                    <div id="category-table" v-for="(getCategory, categoryIndex) in infoExpenses" :key="categoryIndex">
+                        <tr class="columns is-mobile" id="row1">
+                            <td class="column" id="cell_category" :rowspan="getCategory.expenses.length + 1">
+                                {{ getCategory.category.category_name }}
+                            </td>
+                        </tr><br>
+                        <tr class="columns is-mobile">
+                            <td class="column" id="cell_head">Descrição</td>
+                            <td class="column" id="cell_head">Pagamento</td>
+                            <td class="column" id="cell_head">Janeiro</td>
+                            <td class="column" id="cell_head">Fevereiro</td>
+                            <td class="column" id="cell_head">Março</td>
+                            <td class="column" id="cell_head">Abril</td>
+                            <td class="column" id="cell_head">Maio</td>
+                            <td class="column" id="cell_head">Junho</td>
+                            <td class="column" id="cell_head">Julho</td>
+                            <td class="column" id="cell_head">Agosto</td>
+                            <td class="column" id="cell_head">Setembro</td>
+                            <td class="column" id="cell_head">Outubro</td>
+                            <td class="column" id="cell_head">Novembro</td>
+                            <td class="column" id="cell_head">Dezembro</td>
+                        </tr>
     
-    <tr class="columns is-mobile">
-        
-        <!--primeira coluna ( categoria )-->
-        <td class="column is-2" :rowspan="getCategory.expenses.length + 1">
-            {{ getCategory.category.category_name }}
-        </td>
-        
-        <!--segunda coluna ( dados da tabela )-->
-        <td class="column">
-            <div class="columns is-mobile" v-for="(expense, expenseIndex) in getCategory.expenses" :key="expenseIndex">
+                        <tr class="columns is-mobile">
+                            <td class="column">
+                                <div class="columns is-mobile" v-for="(expense, expenseIndex) in getCategory.expenses" :key="expenseIndex">
 
-                <td class="column is-2" >{{ expense.description }}</td>
-                <td class="column is-2">{{ expense.payment_name }}</td>
-                
-                <td class="column is-2" v-for="monthIndex in 12" :key="monthIndex" >
-                    <span v-if="expense.month === monthIndex && expense.amount > 0">R$ {{ expense.amount }}</span>
-                    <span v-else>-</span>
-                </td>  
-            </div> 
-        </td> 
-    </tr> <br>
-</div>
-</tbody>
+                                    <td class="column" id="cell_body_esp">{{ expense.description }}</td>
+                                    <td class="column" id="cell_body_esp">{{ expense.payment_name }}</td>
+                                    <td class="column" id="cell_body" v-for="monthIndex in 12" :key="monthIndex" >
+                                        <span v-if="expense.month === monthIndex && expense.amount > 0">R$ {{ expense.amount }}</span>
+                                        <span v-else>-</span>
+                                    </td> 
+                                    
+                                </div> 
+                            </td> 
+                        </tr> <br>
+                    </div>
+                </tbody>
+           
         </table>
-    </div>
+        </div>
+        
+    </div> 
+</div>
 </template>
 <script>
 import axios from 'axios'

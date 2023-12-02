@@ -58,7 +58,7 @@ module.exports = class CategoryAccess {
     
                 categoriesWithExpenses.push({ category, expenses });
             }
-    
+            console.log('aqui', categoriesWithExpenses)
             return categoriesWithExpenses;
         } catch (error) {
             console.error(error);
@@ -91,8 +91,6 @@ module.exports = class CategoryAccess {
         }
         let totalAnnual = totalSumAnnual
 
-        console.log('Resultado', result);
-        
         return { result, totalAnnual };
       }
       
