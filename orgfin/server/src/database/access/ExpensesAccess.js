@@ -45,12 +45,12 @@ module.exports = class CategoryAccess {
             throw error;
        }
     }
-    static async getTotalExpenses(userId, year) {
+    // pegar todas as categorias com despesas do ano selecionado
+    static async getAllCategoriesWithExpensesByYear(userId, year) {
         try {
             const categories = await knex.select("*").from('categories').where({ user_id: userId });
-    
+
             const categoriesWithExpenses = [];
-    
             for (const category of categories) {
                 const expenses = await knex.select("*")
                     .from('expenses')
@@ -58,7 +58,6 @@ module.exports = class CategoryAccess {
     
                 categoriesWithExpenses.push({ category, expenses });
             }
-            console.log('aqui', categoriesWithExpenses)
             return categoriesWithExpenses;
         } catch (error) {
             console.error(error);
@@ -74,25 +73,41 @@ module.exports = class CategoryAccess {
         })
         return result;
     }
-    static async getExpensesTotalMonth(userId, year) {
-        const result = [];
-        let totalSumAnnual = 0
-
-        for (let month = 1; month <= 12; month++) {
-        const expensesMonth = await knex.select( "*" ).from('expenses').where({ user_id: userId, month: month,year: year })
+    static async getFullAmountOfExpensesByCategory(userId, year) {
+        try {
+            const categories = await knex.select("*").from('categories').where({ user_id: userId });
     
-        const totalSum = expensesMonth.reduce((acc, expensesMonth) => {
-            return acc + parseFloat(expensesMonth.amount);
-          }, 0);
-        
-        totalSumAnnual += totalSum
-      
-          result.push({ month: month, expenses: expensesMonth, sum: totalSum });
+            const categoriesWithExpenses = [];
+    
+            for (const category of categories) {
+                const monthlyTotal = [];
+    
+                for (let month = 1; month <= 12; month++) {
+                    const expenses = await knex('expenses')
+                        .where({ user_id: userId, month: month, year: year, category_name: category.category_name })
+                        .sum('amount as totalAmount')
+                        .first();
+    
+                    monthlyTotal.push({
+                        month: month,
+                        totalAmount: expenses.amount || 0
+                    });
+                }
+    
+                categoriesWithExpenses.push({
+                    category: category,
+                    monthlyTotal: monthlyTotal
+                });
+            }
+    
+            return { categoriesWithExpenses };
+        } catch (error) {
+            console.error(error);
+            throw new Error('Ocorreu um erro ao buscar categorias e despesas.');
         }
-        let totalAnnual = totalSumAnnual
-
-        return { result, totalAnnual };
-      }
+    }
+    
+    
       
       
     static async delete(userId, expense_id) {

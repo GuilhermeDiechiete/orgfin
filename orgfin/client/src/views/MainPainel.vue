@@ -142,14 +142,29 @@
                                         <span v-if="expense.month === monthIndex && expense.amount > 0">R$ {{ expense.amount }}</span>
                                         <span v-else>-</span>
                                     </td> 
+
                                     
                                 </div> 
+                                
                             </td> 
                         </tr> <br>
+                     
+   
+  
                     </div>
                 </tbody>
            
         </table>
+        <table>
+  <tr>
+    <th>Categorias</th>
+    <th v-for="month in 12" :key="month">{{ month }}</th>
+  </tr>
+  <tr v-for="(item, index1) in valueMonthCategory" :key="index1">
+    <td>{{ item.category.category_name }}</td>
+    <td v-for="total in item.monthlyTotal" :key="total">{{ total.totalAmount }}</td>
+  </tr>
+</table>
         </div>
         
     </div> 
@@ -187,7 +202,7 @@ export default {
             namePayment:'',
             descriptionPayment:'',
             limitPayment:'',
-
+            valueMonthCategory: [],
             // create expense
             descriptionExpense: '',
             amountExpense: '',
@@ -342,8 +357,9 @@ export default {
             this.userId = res.data.user.id;
             axios.get(`http://localhost:4000/expenses/show/${this.userId}`, req)
                 .then(res => {
-                    this.infoExpenses = res.data.message
-                    console.log(this.infoExpenses)
+                    this.infoExpenses = res.data.message.expenses
+                    this.valueMonthCategory = res.data.message.valueMonth.categoriesWithExpenses
+                    console.log(res.data.message.valueMonth.categoriesWithExpenses)
                 })
                 .catch(error => {
                 this.messageError = error.response.data.message;

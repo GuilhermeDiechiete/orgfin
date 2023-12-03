@@ -64,9 +64,11 @@ module.exports = class CategoryHandling {
     }
     static async showTotalExpenses(userId, year) {
         try {
-            const expenses = await Access.getTotalExpenses( userId, year)
+            const expenses = await Access.getAllCategoriesWithExpensesByYear( userId, year)
+            const valueMonth = await Access.getFullAmountOfExpensesByCategory(userId, year)
             console.log('resultado', expenses)
-            return { status: 200, response: expenses}
+            console.log('valores por mes', valueMonth)
+            return { status: 200, response: {expenses:expenses, valueMonth:valueMonth}}
         } catch (error) {
             return { status: 400, response: error.message }
         }
