@@ -3,6 +3,7 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Key from 'App/Models/Key'
 import Category from './Category'
+import Expense from './Expense'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -40,6 +41,9 @@ export default class User extends BaseModel {
   }
   @hasMany(() => Category, { foreignKey: 'user_id' })
   public categories: HasMany<typeof Category>;
+
+  @hasMany(() => Expense)
+  public expenses: HasMany<typeof Expense>;
 
   @hasMany(() => Key)
   public keys: HasMany<typeof Key>
