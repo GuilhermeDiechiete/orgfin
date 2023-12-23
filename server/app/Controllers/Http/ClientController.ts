@@ -1,30 +1,23 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Profile from 'App/Models/Profile'
+import Client from 'App/Models/Client'
 
-export default class UsersController {
+export default class ClientController {
   
-  public async store({ request }: HttpContextContract) {
-
-    const data = request.only([
-      'full_name', 
-      'photo_url', 
-      'date_of_birth', 
-      'description', 
-      'profession', 
-      'gender', 
-      'address_id'])
-    
-    return { message: 'store'}
-  }
-
-  public async show({ params }: HttpContextContract) {
-
-    const user = await Profile.findOrFail(params.id)
-    return { data: user, message: 'show'}
+  public async index({ auth }: HttpContextContract) {
+    try {
+      const user = auth.user!
+      return { data: user, message: 'Informações do usuário'}
+    } catch (error) {
+      
+    }
   }
 
   public async update({}: HttpContextContract) {
     return { message: 'update'}
   }
+
+
+
+ 
 
 }
