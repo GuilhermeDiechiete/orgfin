@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
+
 import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Key from 'App/Models/Key'
 import Category from './Category'
@@ -10,19 +11,13 @@ export default class User extends BaseModel {
   public id: number
 
   @column()
-  public name: string
-
-  @column()
   public username: string
-  
+
   @column()
   public email: string
 
   @column({ serializeAs: null })
   public password: string
-
-  @column()
-  public role: 'admin' | 'normal'
 
   @column()
   public rememberMeToken: string | null
@@ -41,6 +36,8 @@ export default class User extends BaseModel {
   }
   @hasMany(() => Category, { foreignKey: 'user_id' })
   public categories: HasMany<typeof Category>;
+  
+  
 
   @hasMany(() => Expense)
   public expenses: HasMany<typeof Expense>;

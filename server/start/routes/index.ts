@@ -1,6 +1,6 @@
 import Route from '@ioc:Adonis/Core/Route'
 import './Auth'
-import './client'
+import './user_infos'
 import './user'
 import './category'
 import './Expenses'
