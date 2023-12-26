@@ -13,8 +13,6 @@ export default class UsersController {
 
       // user create
       const user = await User.create(userData)
-
-
       const user_info = await UserInfo.create({ user_id: user.id })
       
       if(!user_info) {

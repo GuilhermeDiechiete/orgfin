@@ -8,16 +8,15 @@ export default class CategoriesController {
         return response.status(401).json({ message: 'Usuário não autenticado.' });
       }
       const user = auth.user;
-
       const categories = await user?.related('categories').query();
 
       return response.status(200).json({ data: categories, message: 'Lista de categorias' });
 
     } catch (error) {
-      console.error('Erro ao obter lista de categorias:', error);
-      return response.status(500).json({ message: 'Erro interno do servidor.' });
+      return response.status(500).json({ message: error });
     }
   }
+
 
   public async store({ request, auth, response }: HttpContextContract) {
     try {

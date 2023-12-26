@@ -54,4 +54,5 @@ export default class UserInfo extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
 }

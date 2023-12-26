@@ -1,44 +1,53 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UserInfo from 'App/Models/UserInfo';
 
 export default class UserInfosController {
 
   public async show({ params, auth, response }: HttpContextContract) {
     try {
-      if (!auth.user) {
-        return response.status(401).json({ message: 'Usuário não autenticado.' });
+      const user = auth.user;
+
+      if (!user || user.id !== Number(params.id)) {
+      return response.status(401).json({ message: 'Sem permissão.' });
       }
-      const userId = params.id
-      const userInfo = await UserInfo.findOrFail(userId)
-      return response.status(201).json({ data: userInfo, message: 'Informações do'})
+
+      const info = await user.related('userInfo').query().first();
+      if (!info) {
+        return response.status(404).json({ message: 'Informações do usuário não encontradas.' });
+      }
+
+      return response.status(200).json({ data: info, message: 'Informações do usuário.' });
+
     } catch (error) {
-      return response.status(400).json({ message: 'Não foi possivel buscar as informações.'})
+      return response.status(500).json({ message: 'Erro interno do servidor.' });
     }
   }
 
+
   public async update({ params, auth, request, response }: HttpContextContract) {
     try {
-
-      if (!auth.user) {
-        return response.status(401).json({ message: 'Usuário não autenticado.' });
-      }
-      const userId = Number(params.id); 
-    
-      if (auth.user.id !== userId) {
-        return response.status(403).json({ message: 'Não autorizado a atualizar informações deste usuário.' });
-      }
-
-      const userInfo = await UserInfo.findByOrFail('user_id', userId);
+      const user = auth.user;
   
-      userInfo.merge(request.only(['photo_url', 'full_name', 'description', 'profession', 'phone', 'date_of_birth', 'gender', 'role']));
-      await userInfo.save();
+      if (!user || user.id !== Number(params.id)) {
+        return response.status(401).json({ message: 'Sem permissão.' });
+      }
+  
+      const info = await user.related('userInfo').query().first();
+  
+      if (!info) {
+        return response.status(404).json({ message: 'Informações do usuário não encontradas.' });
+      }
+  
+      info.merge(request.only(['photo_url', 'full_name', 'description', 'profession', 'phone', 'date_of_birth', 'gender', 'role']));
+  
+      await info.save();
   
       return response.status(200).json({ message: 'Informações do usuário atualizadas com sucesso.' });
-      
+  
     } catch (error) {
-      console.error(error);
-      return response.status(500).json({ message: 'Erro ao atualizar informações do usuário.' });
+      console.error('Erro ao atualizar informações do usuário:', error);
+      return response.status(500).json({ message: 'Erro interno do servidor.' });
     }
-  } 
+  }
+  
 
 }
