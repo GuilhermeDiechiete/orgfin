@@ -10,7 +10,7 @@ export default class Expense extends BaseModel {
   public year: string;
 
   @column()
-  public month: string;
+  public month: number;
 
   @column()
   public name: string;
@@ -31,6 +31,9 @@ export default class Expense extends BaseModel {
   public value_installment: number;
 
   @column()
+  public status: boolean
+
+  @column()
   public userId: number;
 
   @belongsTo(() => User, { foreignKey: 'user_id' })
@@ -43,4 +46,3 @@ export default class Expense extends BaseModel {
   public updatedAt: DateTime;
 
 }
-

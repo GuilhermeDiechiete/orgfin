@@ -2,7 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
 
-    Route.resource('/', 'UserAddressController').apiOnly().middleware({
+    Route.resource('/', 'UserAddressesController').apiOnly().middleware({
         show: ['auth'],
         update: ['auth'],
     })
