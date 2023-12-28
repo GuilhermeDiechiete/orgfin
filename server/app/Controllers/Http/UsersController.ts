@@ -28,7 +28,7 @@ export default class UsersController {
       return response.status(201).json({ data: user, message: 'Usuário criado com sucesso.' })
     } catch (error) {
       console.log(error)
-      return response.status(400).json({ message: error.messages })
+      return response.status(400).json({ message: error })
     }
   }
 

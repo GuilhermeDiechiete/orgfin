@@ -29,7 +29,9 @@ export default class ExpensesController {
       const data = await request.validate(ExpenseValidator)
       const value_installment = data.value / data.installments
       const fullData = {  ...data, value_installment }
-      const expense = await user.related('expenses').create(fullData)
+
+      const expense = await user?.related('expenses').create(fullData)
+      
       return response.status(201).json({ data: expense, message: 'Despesa criada com sucesso' })
 
     } catch (error) {

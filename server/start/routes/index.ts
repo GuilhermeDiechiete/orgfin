@@ -5,6 +5,7 @@ import './user'
 import './category'
 import './Expenses'
 import './user_address'
+import './panel'
 
 Route.get('/', async () => {
   return { hello: 'world' }
