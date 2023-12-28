@@ -32,23 +32,18 @@ export default class UsersController {
     }
   }
 
-  public async update({}: HttpContextContract) {}
+  // missing email and password update
 
   public async destroy({ params, auth , response }: HttpContextContract) {
     try {
-      if (!auth.user) {
+      const user = auth.user 
+      if (!user || user.id !== Number(params.id)) {
         return response.status(401).json({ message: 'Usuário não autenticado.' });
       }
-      const userId = params.id
-      const user = await User.findOrFail(userId)
-      
-      if (auth.user?.id !== user.id) {
-        return response.status(403).json({ error: 'Não autorizado a excluir este usuário.' })
-      }
-
-      await user.delete()
-
+      const getUser = await User.findOrFail(user)
+      await getUser.delete()
       return response.status(204).json({ message: 'Usuário excluido'})
+
     } catch (error) {
       return response.status(500).json({ error: 'Erro ao excluir usuário.' })
     }

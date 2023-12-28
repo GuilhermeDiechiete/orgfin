@@ -1,7 +1,9 @@
 {
   "extends": "adonis-preset-ts/tsconfig.json",
   "include": [
-    "**/*"
+    "**/*",
+    "app/**/*.ts",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules",
