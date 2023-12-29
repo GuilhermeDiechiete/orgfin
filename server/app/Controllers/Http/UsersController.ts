@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-import UserCreationValidator from 'App/Validators/user/UserCreationValidator'
+import UserCreationValidator from 'App/Validators/UserValidator'
 import UserInfo from 'App/Models/UserInfo'
 import UserAddress from 'App/Models/UserAddress'
 
@@ -27,7 +27,6 @@ export default class UsersController {
 
       return response.status(201).json({ data: user, message: 'Usuário criado com sucesso.' })
     } catch (error) {
-      console.log(error)
       return response.status(400).json({ message: error })
     }
   }

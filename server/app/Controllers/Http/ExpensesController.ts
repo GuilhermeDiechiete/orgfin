@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ExpenseValidator from 'App/Validators/expense/ExpenseValidator'
+import ExpenseValidator from 'App/Validators/ExpenseValidator'
 
 export default class ExpensesController {
 

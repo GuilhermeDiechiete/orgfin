@@ -41,8 +41,8 @@ export default class UserCreationValidator {
     'email.email': 'Por favor, insira um endereço de e-mail válido.',
     'email.unique': 'Este e-mail já está em uso.',
     'password.required': 'A senha é obrigatória.',
-    'password.minLength': 'A senha deve ter pelo menos 8 caracteres.',
-    'password.maxLength': 'A senha deve ter no maximo 8 caracteres.',
+    'password.minLength': 'A senha deve ter pelo menos 6 caracteres.',
+    'password.maxLength': 'A senha deve ter no maximo 6 caracteres.',
     'confirmPassword.confirmed': 'A confirmação da senha não coincide com a senha.',
   }
 }

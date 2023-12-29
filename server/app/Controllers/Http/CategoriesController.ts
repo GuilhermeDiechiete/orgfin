@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import CategoryValidator from 'App/Validators/category/categoryValidator.'
+import CategoryValidator from 'App/Validators/CategoryValidator.'
 
 export default class CategoriesController {
 
@@ -25,14 +25,15 @@ export default class CategoriesController {
         return response.status(401).json({ message: 'Usuário não autenticado.' })
       }
       const data = await request.validate(CategoryValidator)
-      const exists = await user?.related('categories').query().where('name', data.name).first()
+
+      const exists = await user?.related('categories').query().where('name', data.name).where('user_id', user.id).first()
 
       if(exists) {
         return response.status(400).json({ message: 'Categoria já existe'})
       }
       const category = await user.related('categories').create(data)
 
-      return response.status(201).json({ data: category, message: 'Categoria Criada.'})
+      return response.status(201).json({ data: category, message: 'Categoria Criada com sucesso.'})
 
     } catch (error) {
       return response.status(500).json({ message: 'Erro ao criar categoria.' })

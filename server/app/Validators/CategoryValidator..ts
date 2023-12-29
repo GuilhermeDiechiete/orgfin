@@ -12,6 +12,7 @@ export default class UserCreationValidator {
       rules.maxLength(20),
 
     ]),
+    
   })
 
 
@@ -19,7 +20,7 @@ export default class UserCreationValidator {
     'name.required': 'O nome é obrigatório.',
     'name.minLength': 'O nome de deve ter pelo menos 2 caracteres.',
     'name.maxLength': 'O nome de não pode ter mais de 15 caracteres.',
-  
+    'name.unique': 'Está categoria já existe.'
 
   }
 }

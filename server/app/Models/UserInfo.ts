@@ -23,7 +23,7 @@ export default class UserInfo extends BaseModel {
   public phone: string;
 
   @column()
-  public date_of_birth: Date;
+  public date_of_birth: DateTime;
 
   @column()
   public gender: 'Male' | 'Female' | 'Other';
