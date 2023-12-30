@@ -1,6 +1,5 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import { SnakeCaseNamingStrategy } from '@ioc:Adonis/Lucid/Orm';
 
 export default class UserCreationValidator {
   constructor(protected ctx: HttpContextContract) {}
