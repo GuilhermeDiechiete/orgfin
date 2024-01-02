@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1>OrgFin</h1>
-    <p>Organização Financeira</p>
+    <div class="box has-text-centered">
+      <h1 class="title is-1">OrgFin</h1>
+      <p class="subtitle is-5">Organização Financeira</p>
 
-    <ul>
-      <NuxtLink to="/login">Login</NuxtLink>
-      <NuxtLink to="/user/register">Registre-se</NuxtLink>
-    </ul>
+      <NuxtLink class="button is-fullwidth is-success" to="/auth/login">Iniciar</NuxtLink>
+    </div>
+
+    
+  
   </div>
   
 </template>

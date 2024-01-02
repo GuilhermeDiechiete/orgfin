@@ -4,9 +4,10 @@ import type { CorsConfig } from '@ioc:Adonis/Core/Cors'
 
 const corsConfig: CorsConfig = {
  
-  enabled: (request) => request.url().startsWith('/orgfin'),
+  enabled: true, // (request) => request.url().startsWith('/orgfin'),
 
-  origin: true,
+  origin: ['http://localhost:3000'],
+  
   methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
   headers: true,
   exposeHeaders: [

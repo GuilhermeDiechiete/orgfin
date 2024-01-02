@@ -13,21 +13,22 @@ export default class UserCreationValidator {
       rules.regex(/^[a-zA-Z0-9_]+$/),
       rules.unique({ table: 'users', column: 'username'})
     ]),
-
+  
     email: schema.string({ trim: true }, [
       rules.required(),
       rules.email(),
       rules.unique({ table: 'users', column: 'email' }),
     ]),
-
+  
     password: schema.string({ trim: true }, [
       rules.required(),
       rules.minLength(6),
       rules.maxLength(6),
     ]),
-
-    confirmPassword: schema.string({}, [rules.confirmed('password')]),
-
+  
+    confirmPassword: schema.string({ trim: true}, [
+      rules.required(),
+      rules.confirmed('password')]),
   })
 
 
@@ -43,6 +44,7 @@ export default class UserCreationValidator {
     'password.required': 'A senha é obrigatória.',
     'password.minLength': 'A senha deve ter pelo menos 6 caracteres.',
     'password.maxLength': 'A senha deve ter no maximo 6 caracteres.',
+    'confirmPassword.required': 'A confirmação da senha é obrigatória.',
     'confirmPassword.confirmed': 'A confirmação da senha não coincide com a senha.',
   }
 }

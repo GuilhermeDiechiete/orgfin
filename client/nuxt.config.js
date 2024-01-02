@@ -15,7 +15,10 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    'bulma/css/bulma.css', // Caminho correto para o arquivo CSS do Bulma
+    '@/assets/css/main.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -33,5 +36,12 @@ export default {
   modules: [],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    loaders: {
+      scss: {
+        implementation: require('sass'),
+      },
+    },
+    
+  },
 }

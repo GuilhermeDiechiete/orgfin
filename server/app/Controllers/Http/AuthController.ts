@@ -16,12 +16,12 @@ export default class AuthController {
     } catch (error) {
 
       if (error.code === 'E_INVALID_AUTH_PASSWORD') {
-        return response.status(400).json({ message: 'Senha incorreta. Por favor, tente novamente.' })
+        return response.status(400).json({ message: 'Senha incorreta.' })
       }
       if (error.code === 'E_INVALID_AUTH_UID') {
-        return response.status(400).json({ message: 'E-mail não cadastrado. Por favor, verifique suas credenciais.' })
+        return response.status(400).json({ message: 'E-mail não cadastrado.' })
       }
-      return response.status(400).json({ message: 'Credenciais inválidas. Por favor, verifique suas informações.' })
+      return response.status(400).json({ message: 'Credenciais inválidas.' })
     }
   }
 

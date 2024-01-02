@@ -54,6 +54,8 @@ export default class PanelsController {
 
   public async showByMonth({ params, auth, response }: HttpContextContract) {
     try {
+      await auth.authenticate()
+
       const user = auth.user
       if (!user) {
         return response.status(401).json({ message: 'Não autenticado, faça login!' })
@@ -91,7 +93,6 @@ export default class PanelsController {
         valueTotalByMonth[month] += Number(expense.value);
       });
     }
-      
       return response.status(200).json({ 
         data: {organizedExpenses, valueTotalByMonth },
         message: `Despesas para o ano ${year} organizadas por mês`,
