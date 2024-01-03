@@ -10,6 +10,11 @@ export default class PanelsController {
       }
 
       const year = params.year
+      const month = params.month 
+
+      if(!year || !month) {
+        return response.status(400).json({ message: 'Para fazer uma busca, selecione o ano e mês desejado.'})
+      }
 
       const expenses = await user?.related('expenses').query()
       .select([
@@ -63,6 +68,11 @@ export default class PanelsController {
 
       const year = params.year
       const month = params.month 
+
+      console.log(year,month)
+      if(!year || !month) {
+        return response.status(400).json({ message: 'Para buscar, selecione o ano e mês desejado.'})
+      }
       
       const expenses = await user?.related('expenses').query()
       .select([

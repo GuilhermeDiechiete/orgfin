@@ -1,16 +1,18 @@
 <template>
-    <div class="box my-4 has-text-centered">
+    <div class="box m-6 has-text-centered">
         <h1 class="title is-2">Login</h1>
 
-        <div v-if="messageError.length > 0">
+        <div class="box" v-if="messageError.length > 0">
             <div class="notification is-danger">
                 {{ messageError }}
             </div>
+        </div>
+        <div class="box" v-if="messageSuccess.length > 0">
             <div class="notification is-success">
                 {{ messageSuccess }}
             </div>
-    
         </div>
+
         <form class="box has-text-centered" action="post" @submit.prevent="submitForm">
 
             <label class="label" for="">E-mail:</label>
@@ -21,6 +23,7 @@
 
             <button class="button is-success my-4" type="submit">Login</button>
         </form>
+
         <NuxtLink to="/user/register">Não tem uma conta? Registre-se!</NuxtLink>
     </div>
 </template>

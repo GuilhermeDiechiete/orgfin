@@ -20,7 +20,7 @@ export default class ExpensesController {
 
   // create expense
   public async store({ request, auth, response }: HttpContextContract) {
-
+    console.log(request)
     try {
       const user = auth.user 
       if (!user) {
@@ -35,7 +35,12 @@ export default class ExpensesController {
       return response.status(201).json({ data: expense, message: 'Despesa criada com sucesso' })
 
     } catch (error) {
-      return response.status(500).json({ message: error })
+      if (error.messages) {
+
+        return response.status(422).json({ message: error.messages.errors });
+    }
+
+    return response.status(500).json({ message: error.message || 'Erro interno do servidor' });
     }
     
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="box has-text-centered">
+    <div class="box has-text-centered m-6">
       <h1 class="title is-1">OrgFin</h1>
       <p class="subtitle is-5">Organização Financeira</p>
 
