@@ -1,10 +1,12 @@
 <template>
   <div>
     <div class="box has-text-centered m-6">
-      <h1 class="title is-1">OrgFin</h1>
-      <p class="subtitle is-5">Organização Financeira</p>
 
-      <NuxtLink class="button is-fullwidth is-success" to="/auth/login">Iniciar</NuxtLink>
+      <h1 class="title is-1 orange mt-6">OrgFin</h1>
+
+      <p class="subtitle is-5 mb-6">Organização Financeira</p>
+
+      <NuxtLink class="button is-fullwidth bg-orange" to="/auth/login">Iniciar</NuxtLink>
     </div>
 
     
@@ -20,3 +22,8 @@ export default Vue.extend({
   name: 'IndexPage',
 })
 </script>
+
+<style>
+
+
+</style>

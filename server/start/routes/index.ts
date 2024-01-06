@@ -5,8 +5,8 @@ import './user'
 import './category'
 import './Expenses'
 import './user_address'
-import './panel'
 import './user_incomes'
+import './dashboard/financialDashboard'
 
 Route.get('/', async () => {
   return { hello: 'world' }

@@ -9,7 +9,7 @@ export default class UserInfosController {
       if (!user || user.id !== Number(params.id)) {
       return response.status(401).json({ message: 'Sem permissão.' })
       }
-      const info = await user.related('userInfo').query().first()
+      const info = await user.related('userInfo').query().select('full_name', 'phone', 'profession').first()
       if (!info) {
         return response.status(404).json({ message: 'Informações do usuário não encontradas.' })
       }

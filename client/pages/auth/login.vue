@@ -1,27 +1,28 @@
 <template>
-    <div class="box m-6 has-text-centered">
-        <h1 class="title is-2">Login</h1>
+    <div class="box m-4 has-text-centered">
 
-        <div class="box" v-if="messageError.length > 0">
-            <div class="notification is-danger">
+        <h1 class="title is-2 orange">Login</h1>
+
+        <div v-if="messageError.length > 0">
+            <div class="notification is-danger my-6">
                 {{ messageError }}
             </div>
         </div>
-        <div class="box" v-if="messageSuccess.length > 0">
-            <div class="notification is-success">
+        <div v-if="messageSuccess.length > 0">
+            <div class="notification is-success my-6">
                 {{ messageSuccess }}
             </div>
         </div>
 
-        <form class="box has-text-centered" action="post" @submit.prevent="submitForm">
+        <form class="has-text-centered" action="post" @submit.prevent="submitForm">
 
             <label class="label" for="">E-mail:</label>
-            <input class="input" type="text" name="email" id="email" v-model="email">
+            <input id="email" v-model="email"  class="input" type="text" name="email"  >
 
             <label class="label" for="">Senha:</label>
-            <input class="input" type="text" name="password" id="password" v-model="password">
+            <input id="password" v-model="password" class="input" type="text" name="password">
 
-            <button class="button is-success my-4" type="submit">Login</button>
+            <button class="button is-fullwidth bg-orange my-5" type="submit">Login</button>
         </form>
 
         <NuxtLink to="/user/register">Não tem uma conta? Registre-se!</NuxtLink>
@@ -61,7 +62,7 @@ export default Vue.extend({
                 this.messageSuccess = response.data.message;
 
                 setTimeout(() => {
-                this.$router.push('/panel/one');
+                this.$router.push('/panel/financial');
                 }, 3000);
                 
             } catch (error: any) {
