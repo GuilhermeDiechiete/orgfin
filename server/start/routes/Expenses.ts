@@ -3,11 +3,10 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.group(() => {
 
     Route.resource('/', 'ExpensesController').apiOnly().middleware({
-        index: ['auth'],
+      
         store: ['auth'],
-        show: ['auth'],
-        update: ['auth'],
         destroy: ['auth']
     })
+    Route.put('/:id', 'ExpensesController.update').middleware('auth');
     
-}).as('expenses').prefix('/expenses')
+}).prefix('/expenses')

@@ -17,14 +17,14 @@
         <div class="columns" >
 
         
-        <div v-if="pageSelect === 'feed' || screen_mobile === false" class="box column m-3">
+        <div v-if="pageSelect === 'feed' || screen_mobile === false" class="box column m-3 container">
 
 
             <div class="box">
                 <button class="button is-fullwidth bg-orange">Atualizar noticias</button>
             </div>
 
-            <section id="scroll" class="box">
+            <section id="scroll" class="box container" >
                 
                     <div class="card box">
                         <div class="card-image">
@@ -85,7 +85,7 @@
         </div>
 
         <!-- section controle financeiro -->
-        <section v-if="pageSelect === 'control' || screen_mobile === false" class="box column is-half m-3">
+        <section v-if="pageSelect === 'control' || screen_mobile === false" class="box column is-half m-3" >
 
             <nav class="box tabs is-toggle is-fullwidth">
                 <ul>
@@ -158,44 +158,54 @@
                         <button class="button is-success m-1" @click="createExpense">Criar</button>
                     </div>
 
-                    <table id="scroll" class="table is-fullwidth box">
+                    <div class="table-container" id="table-container">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                         <thead>
                             <tr>
-                            <th class="is-2">Nome</th>
-                            <th class="is-2">Valor</th>
-                            <th class="is-2">Pagamento</th>
-                            <th class="is-2">Categoria</th>
-                            <th class="is-1">N Parcelas</th>
-                            <th class="is-2">Parcelas</th>
-                            <th class="is-1">Status</th>
-                            <th class="is-1">Operações</th>
+                            <th class="is-2 is-vcentered">Nome</th>
+                            
+                            <th class="is-2 is-vcentered">Pagamento</th>
+                            <th class="is-2 is-vcentered">Categoria</th>
+                            <th class="is-1 is-vcentered">Parcelas</th>
+                            <th class="is-2 is-vcentered">( R$ )</th>
+                            <th class="is-1 is-vcentered">Status</th>
+                            <th class="is-1 is-vcentered">Operações</th> 
                             </tr>
                         </thead>
                         <tbody v-for="expenses in expensesArray" :key="expenses.id">
                             <tr v-for="expense in expenses" :key="expense.id">
-                            <td class="is-2">{{ expense.name }}</td>
-                            <td class="is-2">R$ {{ expense.value }}</td>
-                            <td class="is-2">{{ expense.payment }}</td>
-                            <td class="is-2">{{ expense.category }}</td>
-                            <td class="is-1">{{ expense.installments }}</td>
-                            <td class="is-2">R$ {{ expense.value_installment }}</td>
-                            <td class="is-1">{{ expense.status }}</td>
+                            <td class="is-2 is-vcentered">{{ expense.name }}</td>
+                            
+                            <td class="is-2 is-vcentered">{{ expense.payment }}</td>
+                            <td class="is-2 is-vcentered">{{ expense.category }}</td>
+                            <td class="is-1 is-vcentered">{{ expense.installments }}</td>
+                            <td class="is-2 is-vcentered">{{ expense.value_installment }}</td>
+
+
                             <td class="is-1">
-                                <button class="delete bg-orange">Excluir</button>
+                                <button 
+                                    :class="{'button': true, 'is-success': expense.status, 'is-danger': !expense.status}" 
+                                    @click="alterStatusExpense(expense.id)">
+                                    {{ expense.status ? 'Pago' : 'Pendente' }}
+                                </button>
                             </td>
+                            <td class="is-1 is-vcentered">
+                                <button class="delete is-medium bg-orange">Excluir</button>
+                            </td>
+
                             </tr>
                             <tr v-for="value in valueTotalByMonth" :key="value">
                                 <td class="is-2">TOTAL:</td>
                                 <td class="is-2">{{ value }}</td>
-                                <td class="is-2"></td>
-                                <td class="is-2"></td>
-                                <td class="is-1"></td>
-                                <td class="is-2"></td>
-                                <td class="is-1"></td>
-                                <td class="is-1"></td>
+
+                                <span v-for="valueStatusTrue in installmentsStatusTrue" :key="valueStatusTrue">
+                                    <td class="is-2"> {{ valueStatusTrue }}</td>
+                                </span>
                             </tr>
                         </tbody>
                         </table>
+                    </div>
+                    
    
             </div>   
 
@@ -218,12 +228,12 @@
         <div v-if="pageSelect === 'panel' || screen_mobile === false" id="section" class="box column m-1">
             <section class="box userProfile">
 
-                <div v-if="userProfile" class="box card-content">
+                <!-- <div v-if="userProfile" class="box card-content">
                     <div v-for="(value, key) in userProfile" :key="key">
                         <p>{{ translatedKey(key) }}: {{ value }}</p>
                         <p></p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="box">
                     <h1 class="title is-4">Chat in development...</h1>
@@ -260,7 +270,7 @@ export default Vue.extend({
             
 
             status_formExpense: false, // or true - show form creation expense
-
+            statusExpense: false,
             // inputs
             year_expense: '',
             month_expense: '',
@@ -287,7 +297,8 @@ export default Vue.extend({
 
             // database
             expensesArray: [] ,
-            valueTotalByMonth: {},   
+            valueTotalByMonth: {}, 
+            installmentsStatusTrue: {},  
             userProfile: {}   
 
         }
@@ -320,6 +331,7 @@ export default Vue.extend({
             }
             
         },
+
         selectContentControl(content: any) {
              this.contentSelectControl = content
         
@@ -330,10 +342,6 @@ export default Vue.extend({
 
         show_formExpense() {
             this.status_formExpense = !this.status_formExpense
-        },
-
-        translatedKey(key) {
-            return this.translationMap[key] || key;
         },
 
         async createExpense() {
@@ -357,6 +365,26 @@ export default Vue.extend({
                 setTimeout(() => {
                 this.messageSuccess = '';
                 }, 2000);
+            } catch (error: any) {
+                this.messageError = error.response.data.message;
+                setTimeout(() => {
+                this.messageError = '';
+                }, 2000);
+            }
+        },
+
+        async alterStatusExpense(id: any) {
+            try {
+                const token = localStorage.getItem('userToken')
+    
+                const response = await axios.put(`http://127.0.0.1:4000/expenses/${id}`, {}, {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                })
+                
+                this.statusExpense = await response.data.data
+                
             } catch (error: any) {
                 this.messageError = error.response.data.message;
                 setTimeout(() => {

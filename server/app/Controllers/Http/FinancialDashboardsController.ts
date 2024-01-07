@@ -2,6 +2,8 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class FinancialDashboardsController {
 
+
+  // informations expenses by month panel
   public async getExpenseByMonth({ params, auth, response }: HttpContextContract) {
     try {
       const user = auth.user
@@ -17,6 +19,7 @@ export default class FinancialDashboardsController {
       }
 
       const getExpenses = await user?.related('expenses').query().select([
+        'id',
         'month',
         'name', 
         'value', 
@@ -26,10 +29,11 @@ export default class FinancialDashboardsController {
         'value_installment', 
         'status'
 
-      ]).where('year', year)
+      ]).where('year', year).where('month', month)
 
       const expenses: Record<string, any> = {}
       const totalInstallments: Record<string, number> = {};
+      const totalInstallments_statusTrue: Record<string, number> = {}
 
       if (getExpenses) {
       getExpenses.forEach((expense) => {
@@ -42,11 +46,15 @@ export default class FinancialDashboardsController {
 
         expenses[month].push(expense.toJSON());
         totalInstallments[month] += Number(expense.value_installment);
+
+        if(expense.status) {
+          totalInstallments_statusTrue[month] += Number(expense.value_installment)
+        }
       });
     }
-      
+      console.log(totalInstallments_statusTrue)
       return response.status(200).json({ 
-        data: {expenses, totalInstallments },
+        data: {expenses, totalInstallments, totalInstallments_statusTrue },
         message: `Despesas para o ano ${year} organizadas por mês`,
       })
 

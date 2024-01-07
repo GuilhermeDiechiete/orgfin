@@ -46,7 +46,7 @@ export default class ExpensesController {
   }
 
   // update expense status
-  public async update({ request, params, auth, response }: HttpContextContract) {
+  public async update({ params, auth, response }: HttpContextContract) {
     try {
       const user = auth.user
       
@@ -59,9 +59,10 @@ export default class ExpensesController {
         return response.status(404).json({ message: 'Despesa não encontrada.' })
       }
       
-      expense.merge(request.only(['status']));
+      expense.status = !expense.status;
       await expense.save();
-      return response.status(200).json({ message: 'Status da despesa atualizado com sucesso.' })
+      
+      return response.status(200).json({ data: expense.status ,message: 'Status da despesa atualizado com sucesso.' })
 
     } catch (error) {
       return response.status(500).json({ message: 'Erro ao atualizar o status da despesa.' })
