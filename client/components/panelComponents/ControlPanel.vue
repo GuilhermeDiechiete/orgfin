@@ -130,12 +130,22 @@
         </section >
 
         <section v-if="contentSelectControl === 'incomes'" class="box">
-            <h1>Painel de rendas</h1>
+            <div class=" tabs is-toggle is-fullwidth">
+                <ul>
+                    <li :class="{'is-active': tableSelectIncome === 'monthly'}" @click="selectTableIncome('monthly')"><a>Mensal</a></li>
+                    <li :class="{'is-active': tableSelectIncome === 'yearly'}" @click="selectTableIncome('yearly')"><a>Anual</a></li>
+                </ul>
+            </div>
 
         </section>
 
         <section v-if="contentSelectControl === 'investments'" class="box">
-            <h1>Painel de investimentos</h1>
+            <div class=" tabs is-toggle is-fullwidth">
+                <ul>
+                    <li :class="{'is-active': tableSelectInvestments === 'monthly'}" @click="selectTableInvestments('monthly')"><a>Mensal</a></li>
+                    <li :class="{'is-active': tableSelectInvestments === 'yearly'}" @click="selectTableInvestments('yearly')"><a>Anual</a></li>
+                </ul>
+            </div>
 
         </section>
 
@@ -153,7 +163,8 @@ export default Vue.extend({
 
             contentSelectControl: '',
             tableSelect: '', 
-            
+            tableSelectIncome: '',
+            tableSelectInvestments: '',
 
             status_formExpense: false, 
             statusExpense: false,
@@ -198,6 +209,12 @@ export default Vue.extend({
         },
         selectTableExpenses(table: any) {
             this.tableSelect = table
+        },
+        selectTableIncome(table: any) {
+            this.tableSelectIncome = table
+        },
+        selectTableInvestments(table: any) {
+            this.tableSelectInvestments = table
         },
 
         show_formExpense() {
