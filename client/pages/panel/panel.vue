@@ -16,7 +16,7 @@
             </div>
 
             <div v-if="pageSelect === 'control' || screen_mobile === false" class="box column m-3 container">
-                <Control/>
+                <FinancialControl/>
             </div>
         
             <div v-if="pageSelect === 'panel' || screen_mobile === false" id="section" class="box column m-1">
@@ -29,16 +29,12 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import Feed from '@/components/Feed.vue'
-import Control from '@/components/FinancialControl.vue'
-import Panel from '@/components/Panel.vue'
+
 
 
 export default Vue.extend({
    
-    components: {
-        Feed, Control, Panel
-    },
+    
     data() {
         return {
 
@@ -67,7 +63,7 @@ export default Vue.extend({
             
         },
     
-        selectPage(page: any) {
+        selectPage(page: string) {
 
             if(this.screen_mobile) {
                 this.pageSelect = page
@@ -83,5 +79,3 @@ export default Vue.extend({
 
 
 </script>
-
-

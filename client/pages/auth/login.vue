@@ -62,7 +62,7 @@ export default Vue.extend({
                 this.messageSuccess = response.data.message;
 
                 setTimeout(() => {
-                this.$router.push('/panel/financial');
+                this.$router.push('/panel/panel');
                 }, 3000);
                 
             } catch (error: any) {

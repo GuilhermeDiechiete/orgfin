@@ -206,80 +206,80 @@ export default Vue.extend({
 
         
 
-        // async createExpense() {
-        //     try {
-        //         const token = localStorage.getItem('userToken');
+        async createExpense() {
+            try {
+                const token = localStorage.getItem('userToken');
 
-        //         const response = await this.$axios.post(`/expenses`,{
-        //             year: this.year_expense,
-        //             month: this.month_expense,
-        //             name: this.name_expense,
-        //             value: this.value_expense,
-        //             payment: this.payment_expense,
-        //             category: this.category_expense,
-        //             installments: this.installments_expense
-        //         }, {
-        //             headers: {
-        //                 'Authorization': `${token}`,
-        //             },
-        //         })
-        //         this.messageSuccess = await response.data.message
-        //         setTimeout(() => {
-        //         this.messageSuccess = '';
-        //         }, 2000);
-        //     } catch (error: any) {
-        //         this.messageError = error.response.data.message;
-        //         setTimeout(() => {
-        //         this.messageError = '';
-        //         }, 2000);
-        //     }
-        // },
+                const response = await this.$axios.post(`/expenses`,{
+                    year: this.year_expense,
+                    month: this.month_expense,
+                    name: this.name_expense,
+                    value: this.value_expense,
+                    payment: this.payment_expense,
+                    category: this.category_expense,
+                    installments: this.installments_expense
+                }, {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                })
+                this.messageSuccess = await response.data.message
+                setTimeout(() => {
+                this.messageSuccess = '';
+                }, 2000);
+            } catch (error: any) {
+                this.messageError = error.response.data.message;
+                setTimeout(() => {
+                this.messageError = '';
+                }, 2000);
+            }
+        },
 
-        // async alterStatusExpense(id: any) {
-        //     try {
-        //         const token = localStorage.getItem('userToken')
+        async alterStatusExpense(id: any) {
+            try {
+                const token = localStorage.getItem('userToken')
     
-        //         const response = await axios.put(`http://127.0.0.1:4000/expenses/${id}`, {}, {
-        //             headers: {
-        //                 'Authorization': `${token}`,
-        //             },
-        //         })
+                const response = await this.$axios.put(`/expenses/${id}`, {}, {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                })
                 
-        //         this.statusExpense = await response.data.data
+                this.statusExpense = await response.data.data
                 
-        //     } catch (error: any) {
-        //         this.messageError = error.response.data.message;
-        //         setTimeout(() => {
-        //         this.messageError = '';
-        //         }, 2000);
-        //     }
-        // },
-        // async showExpensesByMonth() {
+            } catch (error: any) {
+                this.messageError = error.response.data.message;
+                setTimeout(() => {
+                this.messageError = '';
+                }, 2000);
+            }
+        },
+        async showExpensesByMonth() {
             
-        //     try {
-        //         const token = localStorage.getItem('userToken');
+            try {
+                const token = localStorage.getItem('userToken');
                
-        //         const response = await axios.get(`http://127.0.0.1:4000/panel/financial/${this.year}/${this.month}`, {
-        //             headers: {
-        //                 'Authorization': `${token}`,
-        //             },
-        //         });
+                const response = await this.$axios.get(`http://127.0.0.1:4000/panel/financial/${this.year}/${this.month}`, {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                });
 
-        //         this.expensesArray = await response.data.data.expenses
-        //         this.valueTotalByMonth = await response.data.data.totalInstallments
+                this.expensesArray = await response.data.data.expenses
+                this.valueTotalByMonth = await response.data.data.totalInstallments
 
-        //         this.messageSuccess = await response.data.message
-        //         setTimeout(() => {
-        //         this.messageSuccess = '';
-        //         }, 2000);
+                this.messageSuccess = await response.data.message
+                setTimeout(() => {
+                this.messageSuccess = '';
+                }, 2000);
             
-        //     } catch (error: any) {
-        //         this.messageError = error.response.data.message;
-        //         setTimeout(() => {
-        //         this.messageError = '';
-        //         }, 2000);
-        //     }
-        // },
+            } catch (error: any) {
+                this.messageError = error.response.data.message;
+                setTimeout(() => {
+                this.messageError = '';
+                }, 2000);
+            }
+        },
 
         
     }
