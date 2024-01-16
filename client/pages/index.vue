@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <section class="box has-text-centered m-6 start">
+  <section class="section">
+    <div class=" box has-text-centered is-vcentered">
+      <i class="fa-solid fa-coins"></i>
+      <h1 class="title is-2 text-orangered">OrgFin</h1>
+      <h3 class="subtitle is-5">Organização Financeira</h3>
+      <NuxtLink to="auth/login" class="button is-fullwidth bg-orangered text-white"><i class="fa-solid fa-arrow-right"></i> </NuxtLink>
 
-      <h1 class="title is-1 orange mt-6">OrgFin</h1>
-      <p class="subtitle is-5 mb-6">Organização Financeira</p>
-
-      <NuxtLink class="button is-fullwidth bg-orange" to="/auth/login">Iniciar</NuxtLink>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

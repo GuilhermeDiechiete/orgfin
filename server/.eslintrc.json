@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:adonis/typescriptApp",
+        "prettier"
+    ],
+
+    "parserOptions": {
+        "project": ["./tsconfig.json"],
+        "tsconfigRootDir": "."
+    },
+
+    "plugins": ["prettier"],
+
+    "rules": {
+        "semi": ["error", "always"],
+        "prettier/prettier": [
+            "error"
+          ]
+    },
+    "globals": {
+        "use": true
+    },
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "extends": ["plugin:@typescript-eslint/recommended", "plugin:@typescript-eslint/recommended-type-checked"]
+          }
+      ],
+    "root": true
+}
+

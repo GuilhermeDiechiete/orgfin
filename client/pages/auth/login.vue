@@ -1,38 +1,29 @@
 <template>
-    <div class="box m-4 has-text-centered">
+    <section class="section">
+        <div class="box has-text-centered is-vcentered">
 
-        <h1 class="title is-2 orange">Login</h1>
+            <h1 class="title is-2 text-orangered"><i class="fa-solid fa-right-to-bracket"></i> Login</h1>
 
-        <div v-if="messageError.length > 0">
-            <div class="notification is-danger my-6">
-                {{ messageError }}
-            </div>
+            <MessageSuccess :message="messageSuccess"/>
+            <MessageError :message="messageError"/>
+           
+
+            <form action="" method="post" @submit.prevent="submitForm">
+
+                <input v-model="email" type="text" class="input mb-4" placeholder="orgfin@gmail.com">
+                <input v-model="password" type="password" class="input mb-4" placeholder="******">
+
+                <button type="submit" class="button is-fullwidth bg-orangered text-white">Entrar</button>
+            </form>
+
+
         </div>
-        <div v-if="messageSuccess.length > 0">
-            <div class="notification is-success my-6">
-                {{ messageSuccess }}
-            </div>
-        </div>
-
-        <form class="has-text-centered" action="post" @submit.prevent="submitForm">
-
-            <label class="label" for="">E-mail:</label>
-            <input id="email" v-model="email"  class="input" type="text" name="email"  >
-
-            <label class="label" for="">Senha:</label>
-            <input id="password" v-model="password" class="input" type="text" name="password">
-
-            <button class="button is-fullwidth bg-orange my-5" type="submit">Login</button>
-        </form>
-
-        <NuxtLink to="/user/register">Não tem uma conta? Registre-se!</NuxtLink>
-    </div>
+    </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-
 
 export default Vue.extend({
 
@@ -40,10 +31,8 @@ export default Vue.extend({
         return {
             email: '',
             password: '',
-
             messageSuccess: '',
             messageError: ''
-
         }
     },
     
@@ -52,29 +41,30 @@ export default Vue.extend({
             try {
                 const response = await axios.post('http://127.0.0.1:4000/auth', {
 
-                email: this.email,
-                password: this.password,
+                    email: this.email, 
+                    password: this.password,
                 });
-                
-                const token = response.data.token.token
-                localStorage.setItem('userToken', 'Bearer ' + token)
-                
-                this.messageSuccess = response.data.message;
 
+                const token = response.data.token.token;
+                localStorage.setItem('userToken', 'Bearer ' + token);
+
+                this.messageSuccess = response.data.message 
                 setTimeout(() => {
-                this.$router.push('/panel/panel');
-                }, 3000);
-                
+                    this.$router.push('/home')
+                }, 1000)
+
             } catch (error: any) {
-                this.messageError = error.response.data.message;
+                this.messageError = error.response.data.message 
                 setTimeout(() => {
-                this.messageError = '';
+                    this.messageError = '';
                 }, 2000);
-            }
-            }
+
+            }  
+        },
     }
 })
 
 
 
 </script>
+

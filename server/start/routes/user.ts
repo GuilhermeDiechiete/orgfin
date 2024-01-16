@@ -1,11 +1,23 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-
-    Route.resource('/', 'UsersController').apiOnly().middleware({
-        show: ['auth'],
-        update: ['auth'],
-        destroy: ['auth']
+  Route.get('/:id', 'UsersController.show')
+    .middleware('auth')
+    .where('id', {
+      match: /^[1-9][0-9]*$/,
     })
-    
-}).as('user').prefix('/user')
+
+  Route.post('/', 'UsersController.store')
+
+  Route.put('/:id', 'UsersController.update')
+    .middleware('auth')
+    .where('id', {
+      match: /^[1-9][0-9]*$/,
+    })
+
+  Route.delete('/:id', 'UsersController.destroy')
+    .middleware('auth')
+    .where('id', {
+      match: /^[1-9][0-9]*$/,
+    })
+}).prefix('user/')
