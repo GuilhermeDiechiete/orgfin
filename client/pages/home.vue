@@ -3,9 +3,12 @@
 
         <div class="box">
             <div class="columns">
-                <div class="column">
-                    <h1 class="mb-1 title is-6"><i class="fa-solid fa-user text-orangered"></i> Guilherme Diechiete da Silva</h1>
-                    <h2><i class="fa-solid fa-user-tie text-orangered"></i> Desenvolvedor de Software</h2>
+                <div class="column has-text-centered is-vcentered">
+                    <div>
+                        <h1 class="mb-1 title is-6"><i class="fa-solid fa-user text-orangered"></i> Guilherme Diechiete da Silva</h1>
+                        <h2><i class="fa-solid fa-user-tie text-orangered"></i> Desenvolvedor de Software</h2>
+                    </div>
+                    
                 </div>
                 <div class="column">
 
@@ -19,20 +22,29 @@
 
             <div class="columns">
                 
-                <div class="box m-3 column">
-                    <h1>Despesas</h1>
-                    <p>R$ {{ valueTotalExpenseAPI }}</p>
-                    <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration : 3s;" ></i>
+                <div class="box m-3 column has-text-centered is-vcentered">
+                    <h1 class="title is-5 text-orangered">Total de Despesas</h1>
+                    <h2 class="title is-4">
+                        <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration : 3s;"></i>
+                        {{ valueTotalExpenseAPI }}
+                    </h2>
+                    
+                    
                 </div>
-                <div class=" box m-3 column">
-                    <h1>Renda</h1>
-                    <p>R$ 7.000</p>
-                    <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration: 3s;" ></i>
+                <div class=" box m-3 column has-text-centered is-vcentered">
+                    <h1 class="title is-5 text-orangered">Total de renda</h1>
+                    <h2 class="title is-4">
+                        <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration: 3s;" ></i>
+                        {{ valueTotalIncomesAPI }}
+                    </h2>
+                    
                 </div>
-                <div class=" box m-3 column">
-                    <h1>Investimentos</h1>
-                    <p>R$ 3.000</p>
-                    <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration: 3s;" ></i>
+                <div class=" box m-3 column has-text-centered is-vcentered">
+                    <h1 class="title is-5 text-orangered">Total de Investimentos</h1>
+                    <h2 class="title is-4">
+                        <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration: 3s;" ></i>
+                        {{ valueTotalInvestmentsAPI }}
+                    </h2>  
                 </div>
             </div>     
         </div>
@@ -57,10 +69,10 @@
 
                         <input v-model="month" type="text" class="input mb-2" placeholder="Mês da transação.">
                         <input v-model="year" type="text" class="input mb-2" placeholder="Ano da transação.">
-                        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição.">
-                        <input v-model="amount" type="text" class="input mb-2" placeholder="R$: Valor.">
-                        <input v-model="category" type="text" class="input mb-2" placeholder="Categoria">
-                        <input v-model="destiny" type="text" class="input mb-2" placeholder="Destino do valor">
+                        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
+                        <input v-model="amount" type="text" class="input mb-2">
+                        <input v-model="category" type="text" class="input mb-2" placeholder="Categoria: Comida - Salário - Renda Fixa">
+                        <input v-model="destiny" type="text" class="input mb-2" placeholder="Destino do valor: ">
 
                         <button type="submit" class="button is-fullwidth is-success">Criar</button>
                     </form> 
@@ -71,17 +83,14 @@
         <!-- SELECT TABLE MONTH OR YEAR-->
         <div class="tabs is-toggle is-fullwidth">
             <ul>
-                <li :class="{'is-active': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Mensal</a></li>
-                <li :class="{'is-active': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Anual</a></li>
+                <li :class="{'is-active': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
+                <li :class="{'is-active': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
             </ul>
         </div>
 
         <div v-if="activeTable === 'monthly'" class="box has-text-centered is-vcentered">
 
         <div class="box">
-
-            <h1 class="title is-4">Controle Mensal</h1>
-            
             <div class="select">
                 <select v-model="selectedMonth">
                     <option value="1">Janeiro</option>
@@ -116,11 +125,13 @@
         </div>
 
         <div v-if="activeTableType === 'expenses'" class="box">
-            <h1 class="title is-4">Despesas do mes de {{ selectedMonth }}</h1>
 
-            <div class="table-container">
-            <br>
+            <div class="box">
+                <h1 class="title is-5">Resumo de Despesas</h1>
+            </div>
             
+            <div class="table-container">
+       
             <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                     <tr class="columns m-1">
@@ -154,7 +165,9 @@
     </div>
 
     <div v-if="activeTableType === 'incomes'" class="box">
-        <h1 class="title is-4">Rendas do mês de {{ selectedMonth }}</h1>
+        <div class="box">
+            <h1 class="title is-5">Resumo de Rendas</h1>
+        </div>
 
         <div class="table-container"><br>
             
@@ -191,7 +204,9 @@
     </div>
 
     <div v-if="activeTableType === 'investments'" class="box">
-        <h1 class="title is-4">Investimentos do mês de {{ selectedMonth }}</h1>
+        <div class="box">
+                <h1 class="title is-5">Resumo dos Investimentos</h1>
+            </div>
 
         <div class="table-container"><br>
             
@@ -230,8 +245,6 @@
 
 
         <div v-if="activeTable === 'yearly'" class="box has-text-centered is-vcentered">
-            <h1 class="title is-4">Controle Anual</h1>
-
             <div class="box">
                 <div class="select">
                     <select>
@@ -276,6 +289,8 @@ export default Vue.extend({
             incomesAPI: [],
             investmentsAPI: [],
             valueTotalExpenseAPI: '',
+            valueTotalIncomesAPI: '',
+            valueTotalInvestmentsAPI: '',
 
             // mensageria
             messageSuccess: '',
@@ -285,7 +300,7 @@ export default Vue.extend({
         }
     },
     mounted() {
-        this.searchTotalTransactionsByMonth();
+        
     },
     
     methods: {
@@ -354,6 +369,9 @@ export default Vue.extend({
                 this.incomesAPI = response.data.incomes 
                 this.investmentsAPI = response.data.investments
 
+                this.activeFormTransaction = false
+                this.searchTotalTransactionsByMonth();
+
             } catch (error: any) {
                 this.messageError = error.response.data.message 
                 setTimeout(() => {
@@ -372,7 +390,9 @@ export default Vue.extend({
                         'Authorization': `${token}`,
                     }
                 })
-                this.valueTotalExpenseAPI = response.data.totalExpenses 
+                this.valueTotalExpenseAPI = response.data.totalExpenses
+                this.valueTotalIncomesAPI = response.data.totalIncomes 
+                this.valueTotalInvestmentsAPI = response.data.totalInvestments 
                 
             } catch (error) {
                 
