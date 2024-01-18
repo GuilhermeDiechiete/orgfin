@@ -4,6 +4,7 @@ import './user'
 import './auth-user'
 import './transaction'
 import './search'
+import './category'
 
 Route.get('/', async () => {
   return { hello: 'world' }

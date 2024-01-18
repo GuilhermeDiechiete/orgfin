@@ -2,63 +2,53 @@
     <section class="container box">
 
         <div class="box">
-            <div class="columns">
-                <div class="column has-text-centered is-vcentered">
-                    <div>
-                        <h1 class="mb-1 title is-6"><i class="fa-solid fa-user text-orangered"></i> Guilherme Diechiete da Silva</h1>
-                        <h2><i class="fa-solid fa-user-tie text-orangered"></i> Desenvolvedor de Software</h2>
-                    </div>
-                    
+            <div>
+                <div>
+                    <h1 class="title is-6"><i class="fa-solid fa-user text-orangered mr-4"></i>  {{ userEmail }}  
+                        <span class="ml-4"><i class="fa-solid fa-circle-info fa-flip" style="--fa-animation-duration: 3s;"></i></span></h1>
                 </div>
-                <div class="column">
-
-                </div>
-                <div class="column">
-                    <i class="fa-solid fa-gear"></i>
-                    <i class="fa-solid fa-circle-info"></i>
-                </div>
+                
             </div>
             
 
-            <div class="columns">
-                
-                <div class="box m-3 column has-text-centered is-vcentered">
-                    <h1 class="title is-5 text-orangered">Total de Despesas</h1>
-                    <h2 class="title is-4">
-                        <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration : 3s;"></i>
-                        {{ valueTotalExpenseAPI }}
-                    </h2>
-                    
-                    
-                </div>
-                <div class=" box m-3 column has-text-centered is-vcentered">
-                    <h1 class="title is-5 text-orangered">Total de renda</h1>
-                    <h2 class="title is-4">
-                        <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration: 3s;" ></i>
-                        {{ valueTotalIncomesAPI }}
-                    </h2>
-                    
-                </div>
-                <div class=" box m-3 column has-text-centered is-vcentered">
-                    <h1 class="title is-5 text-orangered">Total de Investimentos</h1>
-                    <h2 class="title is-4">
-                        <i class="fa-solid fa-money-check-dollar fa-flip text-orangered" style="--fa-animation-duration: 3s;" ></i>
-                        {{ valueTotalInvestmentsAPI }}
-                    </h2>  
-                </div>
-            </div>     
+            
         </div>
+
+        <MessageSuccess :message="messageSuccess"/>
+        <MessageError :message="messageError"/>
+
             <!-- BOX RESPONSIBLE FOR CREATING TRANSACTIONS-->
         <div>
 
             <button class="button my-4 is-fullwidth bg-orangered text-white" @click="showFormTransaction()">
-                <i class="fa-solid fa-share-from-square fa-flip" style="--fa-animation-duration: 3s;"></i> Nova Transação
+                <i class="fa-solid fa-share-from-square fa-flip mr-4" style="--fa-animation-duration: 3s;"></i> Nova Transação
             </button>
 
-            <div v-if="activeFormTransaction">
+            <div v-if="statusFormTransaction">
 
                 <div class="box mb-3">
                     <form action="" method="post" @submit.prevent="createdTransaction">
+
+                        <select v-model="month" class="input mb-2">
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+
+                        <input v-model="year" type="text" class="input mb-2" placeholder="Ano da transação.">
+                        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
+                        <input v-model="amount" type="text" class="input mb-2">
+                        <input v-model="category" type="text" class="input mb-2" placeholder="Categoria: Comida - Salário - Renda Fixa">
+                        <input v-model="destiny" type="text" class="input mb-2" placeholder="Destino do valor: ">
 
                         <select v-model="type" class="input mb-2">
                             <option value="expense">Selecione o tipo de transação</option>
@@ -67,13 +57,6 @@
                             <option value="investment">Investimento</option>
                         </select>
 
-                        <input v-model="month" type="text" class="input mb-2" placeholder="Mês da transação.">
-                        <input v-model="year" type="text" class="input mb-2" placeholder="Ano da transação.">
-                        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
-                        <input v-model="amount" type="text" class="input mb-2">
-                        <input v-model="category" type="text" class="input mb-2" placeholder="Categoria: Comida - Salário - Renda Fixa">
-                        <input v-model="destiny" type="text" class="input mb-2" placeholder="Destino do valor: ">
-
                         <button type="submit" class="button is-fullwidth is-success">Criar</button>
                     </form> 
                 </div>   
@@ -81,16 +64,17 @@
         </div>
 
         <!-- SELECT TABLE MONTH OR YEAR-->
-        <div class="tabs is-toggle is-fullwidth">
+        <div class="tabs is-centered is-boxed is-normal is-fullwidth">
             <ul>
                 <li :class="{'is-active': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
                 <li :class="{'is-active': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
             </ul>
         </div>
 
-        <div v-if="activeTable === 'monthly'" class="box has-text-centered is-vcentered">
+        <div v-if="activeTable === 'monthly'" class="has-text-centered is-vcentered">
 
-        <div class="box">
+        <div class="box mb-5">
+            <button class="button is-info" @click="showFormCategory">+ Categoria</button>
             <div class="select">
                 <select v-model="selectedMonth">
                     <option value="1">Janeiro</option>
@@ -106,23 +90,44 @@
                 <i class="fa-solid fa-magnifying-glass fa-flip" style="--fa-animation-duration : 3s;"></i>
             </button>
         </div>
-                
-                
 
-        <div class="tabs is-toggle is-fullwidth">
-            <ul>
-                <li :class="{'is-active': activeTableType === 'expenses'}" @click="selectedTableType('expenses')">
-                    <a><strong><i class="fa-solid fa-arrow-down-long"></i></strong>Despesas</a>
-                </li>
-
-                <li :class="{'is-active': activeTableType === 'incomes' }" @click="selectedTableType('incomes')">
-                    <a><strong><i class="fa-solid fa-arrow-up-long"></i></strong> Rendas</a>
-                </li>
-                <li :class="{'is-active': activeTableType === 'investments' }" @click="selectedTableType('investments')">
-                    <a><strong><i class="fa-solid fa-arrow-up-right-dots"></i></strong>Investimentos</a>
-                </li>
-            </ul>
+        <div v-if="statusFormCategory" class="box">
+            <form action="" method="post" @submit.prevent="createdCategory">
+                <h1 class="title is-6">Criar nova categoria.</h1>
+                <input v-model="nameCategory" type="text" class="input" placeholder="Digite o nome da categoria.">
+                <button type="submit" class="button is-success m-2">Criar</button>
+            </form>
         </div>
+
+        <div class="box columns">
+                
+                <div class="box m-1 column has-text-centered is-vcentered has-background-danger" @click="selectedTableType('expenses')">
+                    <h1 class="title is-5 text-white">Despesas</h1>
+                    <h2 class="title is-4">
+                        <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration : 3s;"></i>
+                        {{ valueTotalExpenseAPI }}
+                    </h2>
+                    
+                    
+                </div>
+                <div class=" box m-1 column has-text-centered is-vcentered has-background-success" @click="selectedTableType('incomes')">
+                    <h1 class="title is-5 text-white">Renda</h1>
+                    <h2 class="title is-4">
+                        <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
+                        {{ valueTotalIncomesAPI }}
+                    </h2>
+                    
+                </div>
+                <div class=" box m-1 column has-text-centered is-vcentered has-background-warning	" @click="selectedTableType('investments')">
+                    <h1 class="title is-5 text-white">Investimentos</h1>
+                    <h2 class="title is-4">
+                        <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
+                        {{ valueTotalInvestmentsAPI }}
+                    </h2>  
+                </div>
+            </div>     
+                
+                
 
         <div v-if="activeTableType === 'expenses'" class="box">
 
@@ -266,9 +271,12 @@ export default Vue.extend({
 
     data() {
         return {
+            // status de visualização de formularios
+            statusFormTransaction: false,
+            statusFormCategory: false,
+
             // controladores de navegação
-            activeFormTransaction: false,
-            activeTable: '',
+            activeTable: 'monthly',
             activeTableType: 'expenses',
 
             // formulario de criação de transação
@@ -276,10 +284,12 @@ export default Vue.extend({
             year: new Date().getFullYear(),
             type: 'expense' || 'income' || 'investment',
             description: '',
-            amount: 0,
+            amount: 99.99,
             category: '',
             destiny: '',
             status: false,
+
+            nameCategory: '',
 
             // parametros de busca
             selectedYear: new Date().getFullYear(),
@@ -288,6 +298,12 @@ export default Vue.extend({
             expensesAPI: {},
             incomesAPI: [],
             investmentsAPI: [],
+
+            // informações do usuário
+            userEmail: '-----',
+            userId: -1,
+
+
             valueTotalExpenseAPI: '',
             valueTotalIncomesAPI: '',
             valueTotalInvestmentsAPI: '',
@@ -300,7 +316,7 @@ export default Vue.extend({
         }
     },
     mounted() {
-        
+        this.getUser()
     },
     
     methods: {
@@ -314,7 +330,31 @@ export default Vue.extend({
 
         // metodos do formulario de criação de transação
         showFormTransaction() {
-            this.activeFormTransaction = !this.activeFormTransaction
+            this.statusFormTransaction = !this.statusFormTransaction
+        },
+        showFormCategory() {
+            this.statusFormCategory = !this.statusFormCategory
+        },
+
+        // busca apenas o email e id do usuario
+        async getUser() {
+            try {
+                const token = localStorage.getItem('userToken');
+                const response = await axios.get(`http://127.0.0.1:4000/user`,
+                {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                }); 
+                this.userEmail = response.data.data.email
+                this.userId = response.data.data.id
+                
+            } catch (error:any) {
+                this.messageError = error.response.data.message 
+                setTimeout(() => {
+                    this.messageError = '';
+                }, 2000);
+            }
         },
         async createdTransaction() {
             try {
@@ -340,24 +380,23 @@ export default Vue.extend({
 
                 this.messageSuccess = response.data.message 
                 setTimeout(() => {
-                    this.activeFormTransaction = false
+                    this.messageSuccess = ''
+                    this.statusFormTransaction = false
                 }, 1000)
 
             } catch (error: any) {
                 this.messageError = error.response.data.message 
                 setTimeout(() => {
                     this.messageError = '';
-                    this.activeFormTransaction = false
+                    this.statusFormTransaction = false
                 }, 2000);
 
             }  
         },
 
         async searchTransactionsByMonth() {
-
             try {
                 const token = localStorage.getItem('userToken');
-
                 const response = await axios.get(`http://127.0.0.1:4000/gettransactions/${this.selectedYear}/${this.selectedMonth}`,
 
                 {
@@ -365,12 +404,20 @@ export default Vue.extend({
                         'Authorization': `${token}`,
                     }
                 })
+
+                // result 
                 this.expensesAPI = response.data.expenses
                 this.incomesAPI = response.data.incomes 
                 this.investmentsAPI = response.data.investments
+                
+                this.messageSuccess = response.data.message
+                this.statusFormTransaction = false
+                this.searchTotalTransactionsByMonth() // faz uma nova requisição do total dos valores
 
-                this.activeFormTransaction = false
-                this.searchTotalTransactionsByMonth();
+                
+                setTimeout(() => {
+                    this.messageSuccess = ''
+                }, 2000)
 
             } catch (error: any) {
                 this.messageError = error.response.data.message 
@@ -393,9 +440,47 @@ export default Vue.extend({
                 this.valueTotalExpenseAPI = response.data.totalExpenses
                 this.valueTotalIncomesAPI = response.data.totalIncomes 
                 this.valueTotalInvestmentsAPI = response.data.totalInvestments 
+
+                this.messageSuccess = response.data.message
+                setTimeout(() => {
+                    this.messageSuccess = ''
+                }, 2000)
                 
-            } catch (error) {
-                
+            } catch (error: any) {
+                this.messageError = error.response.data.message 
+                setTimeout(() => {
+                    this.messageError = '';
+                }, 2000);
+            }
+        },
+        async createdCategory() {
+            try {
+                const token = localStorage.getItem('userToken');
+
+                const response = await axios.post(`http://127.0.0.1:4000/categories`,
+                {
+                    name: this.nameCategory
+                },
+
+                {
+                    headers: {
+                        'Authorization': `${token}`,
+                    }
+                })
+                this.messageSuccess = response.data.message
+                setTimeout(() => {
+                    this.messageSuccess = ''
+                    this.statusFormCategory = false
+                }, 2000)
+            } catch (error:any) {
+                const errorMessage = Array.isArray(error.response?.data?.message) ?
+                error.response?.data?.message[0]?.message :
+                    "Erro desconhecido";
+
+                this.messageError = errorMessage;
+                setTimeout(() => {
+                    this.messageError = '';
+                }, 2000);
             }
         }
 
