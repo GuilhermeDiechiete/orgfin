@@ -4,16 +4,21 @@ import TransactionValidator from 'App/Validators/TransactionValidator'
 export default class TransactionsController {
   // create transaction
   public async store({ request, auth, response }: HttpContextContract) {
-    const user = auth.user
-    if (!user) {
-      return response.status(401).json({ message: 'Sem permissão.' })
-    }
+    try {
+      const user = auth.user
+      if (!user) {
+        return response.status(401).json({ message: 'Sem permissão.' })
+      }
 
-    const data = await request.validate(TransactionValidator)
-    const transaction = await user?.related('transactions').create(data)
-    return response
-      .status(201)
-      .json({ data: transaction, message: 'Transação criada com sucesso.' })
+      const data = await request.validate(TransactionValidator)
+      const transaction = await user?.related('transactions').create(data)
+      return response
+        .status(201)
+        .json({ data: transaction, message: 'Transação criada com sucesso.' })
+    } catch (error) {
+      return response.status(400).json({ error: error })
+    }
+    
   }
 
   public async destroy({ params, auth, response }: HttpContextContract) {

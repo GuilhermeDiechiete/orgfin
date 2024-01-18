@@ -1,32 +1,28 @@
 <template>
-    <section class="container box">
+    <section class="container box" >
 
-        <div class="box">
-            <div>
-                <div>
-                    <h1 class="title is-6"><i class="fa-solid fa-user text-orangered mr-4"></i>  {{ userEmail }}  
-                        <span class="ml-4"><i class="fa-solid fa-circle-info fa-flip" style="--fa-animation-duration: 3s;"></i></span></h1>
-                </div>
-                
+        <div v-if="validatedUser">
+
+            <!-- INFORMAÇÕES DO USUÁRIO-->
+            <div class="box">  
+                <h1 class="title is-6"><i class="fa-solid fa-user text-orangered mr-4"></i>  {{ userEmail }}  
+                    <i class="fa-solid fa-circle-info fa-flip ml-4" style="--fa-animation-duration: 3s;"></i>
+                </h1>
             </div>
-            
 
-            
-        </div>
+            <!-- MENSAGENS DE SUCESSO E ERRO -->
+            <MessageSuccess :message="messageSuccess"/>
+            <MessageError :message="messageError"/>
 
-        <MessageSuccess :message="messageSuccess"/>
-        <MessageError :message="messageError"/>
-
-            <!-- BOX RESPONSIBLE FOR CREATING TRANSACTIONS-->
-        <div>
-
+            <!-- MOSTRAR E OCULTAR FORMULARIO DE NOVA TRANSAÇÃO -->
             <button class="button my-4 is-fullwidth bg-orangered text-white" @click="showFormTransaction()">
                 <i class="fa-solid fa-share-from-square fa-flip mr-4" style="--fa-animation-duration: 3s;"></i> Nova Transação
             </button>
 
+           <!-- FORMULARIO DE NOVA TRANSAÇÃO-->
             <div v-if="statusFormTransaction">
-
                 <div class="box mb-3">
+                    
                     <form action="" method="post" @submit.prevent="createdTransaction">
 
                         <select v-model="month" class="input mb-2">
@@ -61,205 +57,223 @@
                     </form> 
                 </div>   
             </div>
-        </div>
+        
 
-        <!-- SELECT TABLE MONTH OR YEAR-->
-        <div class="tabs is-centered is-boxed is-normal is-fullwidth">
-            <ul>
-                <li :class="{'is-active': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
-                <li :class="{'is-active': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
-            </ul>
-        </div>
-
-        <div v-if="activeTable === 'monthly'" class="has-text-centered is-vcentered">
-
-        <div class="box mb-5">
-            <button class="button is-info" @click="showFormCategory">+ Categoria</button>
-            <div class="select">
-                <select v-model="selectedMonth">
-                    <option value="1">Janeiro</option>
-                    <option value="2">Fevereiro</option>
-                </select>
+            <!-- CONTROLE ENTRE O CONTROLE MENSAL E ANUAL -->
+            <div class="tabs is-centered is-boxed is-normal is-fullwidth">
+                <ul>
+                    <li :class="{'is-active': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
+                    <li :class="{'is-active': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
+                </ul>
             </div>
-            <div class="select">
-                <select v-model="selectedYear">
-                    <option value="2024">2024</option>
-                </select>
-            </div>
-            <button class="button is-success" @click="searchTransactionsByMonth">
-                <i class="fa-solid fa-magnifying-glass fa-flip" style="--fa-animation-duration : 3s;"></i>
-            </button>
-        </div>
 
-        <div v-if="statusFormCategory" class="box">
-            <form action="" method="post" @submit.prevent="createdCategory">
-                <h1 class="title is-6">Criar nova categoria.</h1>
-                <input v-model="nameCategory" type="text" class="input" placeholder="Digite o nome da categoria.">
-                <button type="submit" class="button is-success m-2">Criar</button>
-            </form>
-        </div>
+            <!--CONTROLE MENSAL-->
+            <div v-if="activeTable === 'monthly'" class="has-text-centered is-vcentered">
 
-        <div class="box columns">
-                
-                <div class="box m-1 column has-text-centered is-vcentered has-background-danger" @click="selectedTableType('expenses')">
-                    <h1 class="title is-5 text-white">Despesas</h1>
-                    <h2 class="title is-4">
-                        <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration : 3s;"></i>
-                        {{ valueTotalExpenseAPI }}
-                    </h2>
-                    
-                    
+                <!-- CAMPOS DE BUSCAS PARA O CONTROLE MENSAL-->
+                <div class="box mb-5">
+
+                    <button class="button is-info" @click="showFormCategory">+ Categoria</button>
+
+                    <div class="select">
+                        <select v-model="selectedMonth">
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+
+                    <div class="select">
+                        <select v-model="selectedYear">
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+
+                    <button class="button is-success" @click="searchTransactionsByMonth">
+                        <i class="fa-solid fa-magnifying-glass fa-flip" style="--fa-animation-duration : 3s;"></i>
+                    </button>
                 </div>
-                <div class=" box m-1 column has-text-centered is-vcentered has-background-success" @click="selectedTableType('incomes')">
-                    <h1 class="title is-5 text-white">Renda</h1>
-                    <h2 class="title is-4">
-                        <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
-                        {{ valueTotalIncomesAPI }}
-                    </h2>
-                    
+
+                <!--FORMULARIO DE NOVA CATEGORIA -->
+                <div v-if="statusFormCategory" class="box">
+                    <form action="" method="post" @submit.prevent="createdCategory">
+                        <h1 class="title is-6">Criar nova categoria.</h1>
+                        <input v-model="nameCategory" type="text" class="input" placeholder="Digite o nome da categoria.">
+                        <button type="submit" class="button is-success m-2">Criar</button>
+                    </form>
                 </div>
-                <div class=" box m-1 column has-text-centered is-vcentered has-background-warning	" @click="selectedTableType('investments')">
-                    <h1 class="title is-5 text-white">Investimentos</h1>
-                    <h2 class="title is-4">
-                        <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
-                        {{ valueTotalInvestmentsAPI }}
-                    </h2>  
-                </div>
-            </div>     
+
+
+                <!-- BOTOES DE BUSCA ENTRE DESPESAS, RENDA E INVESTIMENTOS -->
+                <div class="box columns">
+                    <div class="box m-1 column has-text-centered is-vcentered has-background-danger" @click="selectedTableType('expenses')">
+                        <h1 class="title is-5 text-white">Despesas</h1>
+                        <h2 class="title is-4">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration : 3s;"></i>
+                            {{ valueTotalExpenseAPI }}
+                        </h2>
+                    </div>
+                    <div class=" box m-1 column has-text-centered is-vcentered has-background-success" @click="selectedTableType('incomes')">
+                        <h1 class="title is-5 text-white">Renda</h1>
+                        <h2 class="title is-4">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
+                            {{ valueTotalIncomesAPI }}
+                        </h2>
+                    </div>
+                        <div class=" box m-1 column has-text-centered is-vcentered has-background-warning	" @click="selectedTableType('investments')">
+                        <h1 class="title is-5 text-white">Investimentos</h1>
+                        <h2 class="title is-4">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
+                            {{ valueTotalInvestmentsAPI }}
+                        </h2>  
+                    </div>
+                </div>     
                 
                 
+            <!-- TABELA DE DESPESAS-->
+            <div v-if="activeTableType === 'expenses'" class="box">
 
-        <div v-if="activeTableType === 'expenses'" class="box">
-
-            <div class="box">
-                <h1 class="title is-5">Resumo de Despesas</h1>
-            </div>
+                <div class="box">
+                    <h1 class="title is-5">Resumo de Despesas</h1>
+                </div>
             
-            <div class="table-container">
+                <div class="table-container">
        
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                    <tr class="columns m-1">
-                        <th class="column"><i class="fa-solid fa-calendar-days"></i> Data</th>
-                        <th class="column"><i class="fa-solid fa-pen"></i> Descrição</th>
-                        <th class="column"><i class="fa-solid fa-brazilian-real-sign"></i> Valor</th>
-                        <th class="column"><i class="fa-solid fa-boxes-stacked"></i> Categoria</th>
-                        <th class="column"><i class="fa-solid fa-paper-plane"></i> Destino</th>
-                        <th class="column"><i class="fa-solid fa-signal"></i> Status</th>
-                    </tr> 
-                </thead> 
-                <tbody v-for="expense in expensesAPI" :key="expense.id">
-                    <tr class="columns m-1">
-                        <td class="column">{{ expense.month }} / {{ expense.year }}</td>
-                        <td class="column">{{ expense.description }}</td>
-                        <td class="column">{{ expense.amount }}</td>
-                        <td class="column">{{ expense.category }}</td>
-                        <td class="column">{{ expense.destiny }}</td>
-                        <td class="column is-danger">
-                            <span v-if="expense.status === false">
-                                Pendente
-                            </span>
-                            <span v-else-if="expense.status === true" class="is-success">
-                                Pago
-                            </span>
-                        </td>
-                    </tr> 
-                </tbody> 
-            </table>
-        </div>  
-    </div>
-
-    <div v-if="activeTableType === 'incomes'" class="box">
-        <div class="box">
-            <h1 class="title is-5">Resumo de Rendas</h1>
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr class="columns m-1">
+                            <th class="column"><i class="fa-solid fa-calendar-days"></i> Data</th>
+                            <th class="column"><i class="fa-solid fa-pen"></i> Descrição</th>
+                            <th class="column"><i class="fa-solid fa-brazilian-real-sign"></i> Valor</th>
+                            <th class="column"><i class="fa-solid fa-boxes-stacked"></i> Categoria</th>
+                            <th class="column"><i class="fa-solid fa-paper-plane"></i> Destino</th>
+                            <th class="column"><i class="fa-solid fa-signal"></i> Status</th>
+                        </tr> 
+                    </thead> 
+                    <tbody v-for="expense in expensesAPI" :key="expense.id">
+                        <tr class="columns m-1">
+                            <td class="column">{{ expense.month }} / {{ expense.year }}</td>
+                            <td class="column">{{ expense.description }}</td>
+                            <td class="column">{{ expense.amount }}</td>
+                            <td class="column">{{ expense.category }}</td>
+                            <td class="column">{{ expense.destiny }}</td>
+                            <td class="column is-danger">
+                                <span v-if="expense.status === false">
+                                    Pendente
+                                </span>
+                                <span v-else-if="expense.status === true" class="is-success">
+                                    Pago
+                                </span>
+                            </td>
+                        </tr> 
+                    </tbody> 
+                </table>
+            </div>  
         </div>
 
-        <div class="table-container"><br>
-            
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                    <tr class="columns m-1">
-                        <th class="column">Data</th>
-                        <th class="column">Descrição</th>
-                        <th class="column">Valor</th>
-                        <th class="column">Categoria</th>
-                        <th class="column">Destino</th>
-                        <th class="column">Status</th>
-                    </tr> 
-                </thead> 
-                <tbody v-for="income in incomesAPI" :key="income.id">
-                    <tr class="columns m-1">
-                        <td class="column">{{ income.month }} / {{ income.year }}</td>
-                        <td class="column">{{ income.description }}</td>
-                        <td class="column">{{ income.amount }}</td>
-                        <td class="column">{{ income.category }}</td>
-                        <td class="column">{{ income.destiny }}</td>
-                        <td class="column is-danger">
-                            <span v-if="income.status === false">
-                                Pendente
-                            </span>
-                            <span v-else-if="income.status === true" class="is-success">
-                                Pago
-                            </span>
-                        </td>
-                    </tr> 
-                </tbody> 
-            </table>
-        </div>  
-    </div>
-
-    <div v-if="activeTableType === 'investments'" class="box">
-        <div class="box">
-                <h1 class="title is-5">Resumo dos Investimentos</h1>
-            </div>
-
-        <div class="table-container"><br>
-            
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                    <tr class="columns m-1">
-                        <th class="column">Data</th>
-                        <th class="column">Descrição</th>
-                        <th class="column">Valor</th>
-                        <th class="column">Categoria</th>
-                        <th class="column">Destino</th>
-                        <th class="column">Status</th>
-                    </tr> 
-                </thead> 
-                <tbody v-for="investment in investmentsAPI" :key="investment.id">
-                    <tr class="columns m-1">
-                        <td class="column">{{ investment.month }} / {{ investment.year }}</td>
-                        <td class="column">{{ investment.description }}</td>
-                        <td class="column">{{ investment.amount }}</td>
-                        <td class="column">{{ investment.category }}</td>
-                        <td class="column">{{ investment.destiny }}</td>
-                        <td class="column is-danger">
-                            <span v-if="investment.status === false">
-                                Negativo
-                            </span>
-                            <span v-else-if="investment.status === true" class="is-success">
-                                Positivo
-                            </span>
-                        </td>
-                    </tr> 
-                </tbody> 
-            </table>
-        </div> 
-    </div>
-</div>
-
-
-        <div v-if="activeTable === 'yearly'" class="box has-text-centered is-vcentered">
+        <div v-if="activeTableType === 'incomes'" class="box">
             <div class="box">
-                <div class="select">
-                    <select>
-                        <option value="2024">2024</option>
-                    </select>
-                </div>
-                <button class="button is-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <h1 class="title is-5">Resumo de Rendas</h1>
             </div>
+
+            <div class="table-container"><br>
+                
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr class="columns m-1">
+                            <th class="column">Data</th>
+                            <th class="column">Descrição</th>
+                            <th class="column">Valor</th>
+                            <th class="column">Categoria</th>
+                            <th class="column">Destino</th>
+                            <th class="column">Status</th>
+                        </tr> 
+                    </thead> 
+                    <tbody v-for="income in incomesAPI" :key="income.id">
+                        <tr class="columns m-1">
+                            <td class="column">{{ income.month }} / {{ income.year }}</td>
+                            <td class="column">{{ income.description }}</td>
+                            <td class="column">{{ income.amount }}</td>
+                            <td class="column">{{ income.category }}</td>
+                            <td class="column">{{ income.destiny }}</td>
+                            <td class="column is-danger">
+                                <span v-if="income.status === false">
+                                    Pendente
+                                </span>
+                                <span v-else-if="income.status === true" class="is-success">
+                                    Pago
+                                </span>
+                            </td>
+                        </tr> 
+                    </tbody> 
+                </table>
+            </div>  
         </div>
 
+        <div v-if="activeTableType === 'investments'" class="box">
+            <div class="box">
+                    <h1 class="title is-5">Resumo dos Investimentos</h1>
+                </div>
+
+            <div class="table-container"><br>
+                
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr class="columns m-1">
+                            <th class="column">Data</th>
+                            <th class="column">Descrição</th>
+                            <th class="column">Valor</th>
+                            <th class="column">Categoria</th>
+                            <th class="column">Destino</th>
+                            <th class="column">Status</th>
+                        </tr> 
+                    </thead> 
+                    <tbody v-for="investment in investmentsAPI" :key="investment.id">
+                        <tr class="columns m-1">
+                            <td class="column">{{ investment.month }} / {{ investment.year }}</td>
+                            <td class="column">{{ investment.description }}</td>
+                            <td class="column">{{ investment.amount }}</td>
+                            <td class="column">{{ investment.category }}</td>
+                            <td class="column">{{ investment.destiny }}</td>
+                            <td class="column is-danger">
+                                <span v-if="investment.status === false">
+                                    Negativo
+                                </span>
+                                <span v-else-if="investment.status === true" class="is-success">
+                                    Positivo
+                                </span>
+                            </td>
+                        </tr> 
+                    </tbody> 
+                </table>
+            </div> 
+        </div>
+    </div>
+
+
+            <div v-if="activeTable === 'yearly'" class="box has-text-centered is-vcentered">
+                <div class="box">
+                    <div class="select">
+                        <select>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    <button class="button is-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>  
+        </div>
+        <div v-else>
+            <div class="box"><h1>Não foi possivel entrar no aplicativo, tente novamente mais tarde.</h1></div>
+        </div>
     </section>
 </template>
 
@@ -271,15 +285,19 @@ export default Vue.extend({
 
     data() {
         return {
+            validatedUser: false, // no metodo getUser precisa vir o email e id do usuário
+
             // status de visualização de formularios
             statusFormTransaction: false,
             statusFormCategory: false,
 
-            // controladores de navegação
+            // controladores de navegação entre o painel mensal e anual
             activeTable: 'monthly',
+
+            // controlador de navegação entre despesa, renda e investimentos
             activeTableType: 'expenses',
 
-            // formulario de criação de transação
+            // dados do formulario de criação de transações
             month: new Date().getMonth() + 1,
             year: new Date().getFullYear(),
             type: 'expense' || 'income' || 'investment',
@@ -289,28 +307,33 @@ export default Vue.extend({
             destiny: '',
             status: false,
 
+            // dados do formulario de criação de categoria
             nameCategory: '',
 
             // parametros de busca
             selectedYear: new Date().getFullYear(),
             selectedMonth: new Date().getMonth() + 1,
 
-            expensesAPI: {},
-            incomesAPI: [],
-            investmentsAPI: [],
+            // armazenamento de mensagens de sucesso e erro
+            messageSuccess: '',
+            messageError: '',
+
+            // Informações das APIs
+            expensesAPI: {}, // despesas do mes e ano selecionado
+            incomesAPI: [], // rendas do mes e ano selecionado
+            investmentsAPI: [], // investimentos do mes e ano selecionado
 
             // informações do usuário
             userEmail: '-----',
             userId: -1,
 
 
+            // soma dos valores de despesas, renda e investimentos, do mes e ano selecionado
             valueTotalExpenseAPI: '',
             valueTotalIncomesAPI: '',
             valueTotalInvestmentsAPI: '',
 
-            // mensageria
-            messageSuccess: '',
-            messageError: '',
+            
 
 
         }
@@ -320,6 +343,31 @@ export default Vue.extend({
     },
     
     methods: {
+        
+        async getUser() {
+            try {
+                const token = localStorage.getItem('userToken');
+                const response = await axios.get(`http://127.0.0.1:4000/user`,
+                {
+                    headers: {
+                        'Authorization': `${token}`,
+                    },
+                }); 
+                this.userEmail = response.data.data.email
+                this.userId = response.data.data.id
+
+                if(this.userEmail && this.userId) {
+                   this.validatedUser = true 
+                }
+                
+                
+            } catch (error:any) {
+                this.messageError = error.response.data.message 
+                setTimeout(() => {
+                    this.messageError = '';
+                }, 2000);
+            }
+        },
         // metodos dos controladores de navegação
         selectedTable(table: string) {
             this.activeTable = table
@@ -337,25 +385,7 @@ export default Vue.extend({
         },
 
         // busca apenas o email e id do usuario
-        async getUser() {
-            try {
-                const token = localStorage.getItem('userToken');
-                const response = await axios.get(`http://127.0.0.1:4000/user`,
-                {
-                    headers: {
-                        'Authorization': `${token}`,
-                    },
-                }); 
-                this.userEmail = response.data.data.email
-                this.userId = response.data.data.id
-                
-            } catch (error:any) {
-                this.messageError = error.response.data.message 
-                setTimeout(() => {
-                    this.messageError = '';
-                }, 2000);
-            }
-        },
+        
         async createdTransaction() {
             try {
                 const token = localStorage.getItem('userToken');

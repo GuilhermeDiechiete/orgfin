@@ -2,7 +2,7 @@
     <section class="section">
         <div class="box has-text-centered is-vcentered">
 
-            <h1 class="title is-2 text-orangered"><i class="fa-solid fa-right-to-bracket"></i> Login</h1>
+            <h1 class="title is-3 text-orangered">Login</h1>
 
             <MessageSuccess :message="messageSuccess"/>
             <MessageError :message="messageError"/>
@@ -15,6 +15,11 @@
 
                 <button type="submit" class="button is-fullwidth bg-orangered text-white">Entrar</button>
             </form>
+
+            <div class="mt-3">
+                <NuxtLink to="/user/register">Não tem uma conta? Registre-se!</NuxtLink>
+            </div>
+            
 
 
         </div>

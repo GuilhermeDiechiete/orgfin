@@ -16,7 +16,7 @@ export default class UsersController {
     } catch (error) {
 
       console.log('ERRO ( UserController -> store', error.messages.errors)
-      return response.status(400).json({ message: error.messages.errors })
+      return response.status(400).json({ message: error.messages.errors });
     }
   }
 
