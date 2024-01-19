@@ -1,11 +1,11 @@
 <template>
-    <section class="container box" >
+    <section class="container box has-background-black-bis" >
 
-        <div v-if="validatedUser">
+        <div v-if="validatedUser" class="m-4">
 
             <!-- INFORMAÇÕES DO USUÁRIO-->
-            <div class="box">  
-                <h1 class="title is-6"><i class="fa-solid fa-user text-orangered mr-4"></i>  {{ userEmail }}  
+            <div class="box has-background-black-ter">  
+                <h1 class="title is-6 text-white"><i class="fa-solid fa-user text-orangered mr-4"></i>  {{ userEmail }}  
                     <i class="fa-solid fa-circle-info fa-flip ml-4" style="--fa-animation-duration: 3s;"></i>
                 </h1>
             </div>
@@ -21,11 +21,11 @@
 
            <!-- FORMULARIO DE NOVA TRANSAÇÃO-->
             <div v-if="statusFormTransaction">
-                <div class="box mb-3">
+                <div class="box mb-3 has-background-black-ter">
                     
                     <form action="" method="post" @submit.prevent="createdTransaction">
 
-                        <select v-model="month" class="input mb-2">
+                        <select v-model="month" class="input mb-2 has-background-grey-darker text-white">
                             <option value="1">Janeiro</option>
                             <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
@@ -40,13 +40,13 @@
                             <option value="12">Dezembro</option>
                         </select>
 
-                        <input v-model="year" type="text" class="input mb-2" placeholder="Ano da transação.">
-                        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
-                        <input v-model="amount" type="text" class="input mb-2">
-                        <input v-model="category" type="text" class="input mb-2" placeholder="Categoria: Comida - Salário - Renda Fixa">
-                        <input v-model="destiny" type="text" class="input mb-2" placeholder="Destino do valor: ">
+                        <input v-model="year" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Ano da transação.">
+                        <input v-model="description" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
+                        <input v-model="amount" type="text" class="input mb-2 has-background-grey-darker text-white">
+                        <input v-model="category" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Categoria: Comida - Salário - Renda Fixa">
+                        <input v-model="destiny" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Destino do valor: ">
 
-                        <select v-model="type" class="input mb-2">
+                        <select v-model="type" class="input mb-2 has-background-grey-darker text-white">
                             <option value="expense">Selecione o tipo de transação</option>
                             <option value="expense">Despesa</option>
                             <option value="income">Renda</option>
@@ -60,10 +60,10 @@
         
 
             <!-- CONTROLE ENTRE O CONTROLE MENSAL E ANUAL -->
-            <div class="tabs is-centered is-boxed is-normal is-fullwidth">
+            <div class="tabs is-toggle is-fullwidth">
                 <ul>
-                    <li :class="{'is-active': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
-                    <li :class="{'is-active': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
+                    <li :class="{'has-background-black-ter': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
+                    <li :class="{'has-background-black-ter': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
                 </ul>
             </div>
 
@@ -71,12 +71,12 @@
             <div v-if="activeTable === 'monthly'" class="has-text-centered is-vcentered">
 
                 <!-- CAMPOS DE BUSCAS PARA O CONTROLE MENSAL-->
-                <div class="box mb-5">
+                <div class="mb-5">
 
-                    <button class="button is-info" @click="showFormCategory">+ Categoria</button>
+                    <button class="button has-background-black-ter text-orangered" @click="showFormCategory">+ Categoria</button>
 
-                    <div class="select">
-                        <select v-model="selectedMonth">
+                    <div class="select ">
+                        <select v-model="selectedMonth" class="has-background-black-ter text-orangered">
                             <option value="1">Janeiro</option>
                             <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="select">
-                        <select v-model="selectedYear">
+                        <select v-model="selectedYear" class="has-background-black-ter text-orangered">
                             <option value="2024">2024</option>
                         </select>
                     </div>
@@ -114,56 +114,61 @@
 
 
                 <!-- BOTOES DE BUSCA ENTRE DESPESAS, RENDA E INVESTIMENTOS -->
-                <div class="box columns">
-                    <div class="box m-1 column has-text-centered is-vcentered has-background-danger" @click="selectedTableType('expenses')">
-                        <h1 class="title is-5 text-white">Despesas</h1>
-                        <h2 class="title is-4">
-                            <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration : 3s;"></i>
+                <div class="columns ">
+                    <div class="box m-1 column has-text-centered is-vcentered has-background-black-ter" @click="selectedTableType('expenses')">
+                        <h1 class="title is-5 text-orangered">DESPESAS</h1>
+                        <h2 class="title is-4 text-white">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-4" style="--fa-animation-duration : 3s;"></i>
                             {{ valueTotalExpenseAPI }}
                         </h2>
                     </div>
-                    <div class=" box m-1 column has-text-centered is-vcentered has-background-success" @click="selectedTableType('incomes')">
-                        <h1 class="title is-5 text-white">Renda</h1>
-                        <h2 class="title is-4">
-                            <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
+                    <div class=" box m-1 column has-text-centered is-vcentered has-background-black-ter" @click="selectedTableType('incomes')">
+                        <h1 class="title is-5 text-orangered">RENDA</h1>
+                        <h2 class="title is-4 text-white">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-4" style="--fa-animation-duration: 3s;" ></i>
                             {{ valueTotalIncomesAPI }}
                         </h2>
                     </div>
-                        <div class=" box m-1 column has-text-centered is-vcentered has-background-warning	" @click="selectedTableType('investments')">
-                        <h1 class="title is-5 text-white">Investimentos</h1>
-                        <h2 class="title is-4">
-                            <i class="fa-solid fa-money-check-dollar fa-flip text-white mr-4" style="--fa-animation-duration: 3s;" ></i>
-                            {{ valueTotalInvestmentsAPI }}
+                        <div class=" box m-1 column has-text-centered is-vcentered has-background-black-ter	" @click="selectedTableType('investments')">
+                        <h1 class="title is-5 text-orangered">INVESTIMENTOS</h1>
+                        <h2 class="title is-4 text-white">
+                            <p>
+                                <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-4" style="--fa-animation-duration: 3s;" ></i>
+                                {{ valueTotalInvestmentsAPI }}
+                            </p>
+                          
+                            
+                            
                         </h2>  
                     </div>
                 </div>     
                 
                 
             <!-- TABELA DE DESPESAS-->
-            <div v-if="activeTableType === 'expenses'" class="box">
+            <div v-if="activeTableType === 'expenses'" class="box has-background-black-ter">
 
-                <div class="box">
-                    <h1 class="title is-5">Resumo de Despesas</h1>
+                <div class="box has-background-black-bis">
+                    <h1 class="title is-5 text-orangered">Resumo de Despesas</h1>
                 </div>
             
                 <div class="table-container">
        
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth has-background-black-ter ">
                     <thead>
                         <tr class="columns m-1">
-                            <th class="column"><i class="fa-solid fa-calendar-days"></i> Data</th>
-                            <th class="column"><i class="fa-solid fa-pen"></i> Descrição</th>
-                            <th class="column"><i class="fa-solid fa-brazilian-real-sign"></i> Valor</th>
-                            <th class="column"><i class="fa-solid fa-boxes-stacked"></i> Categoria</th>
-                            <th class="column"><i class="fa-solid fa-paper-plane"></i> Destino</th>
-                            <th class="column"><i class="fa-solid fa-signal"></i> Status</th>
+                            <th class="column">  <p class="text-orangered"><i class="fa-solid fa-calendar-days mr-3"></i>Data</p></th>
+                            <th class="column"> <p class="text-orangered"><i class="fa-solid fa-pen mr-3"></i> Descrição</p></th>
+                            <th class="column"><i class="fa-solid fa-brazilian-real-sign text-orangered"></i> Valor</th>
+                            <th class="column"><i class="fa-solid fa-boxes-stacked text-orangered"></i> Categoria</th>
+                            <th class="column"><i class="fa-solid fa-paper-plane text-orangered"></i> Destino</th>
+                            <th class="column"><i class="fa-solid fa-signal text-orangered"></i> Status</th>
                         </tr> 
                     </thead> 
                     <tbody v-for="expense in expensesAPI" :key="expense.id">
                         <tr class="columns m-1">
                             <td class="column">{{ expense.month }} / {{ expense.year }}</td>
                             <td class="column">{{ expense.description }}</td>
-                            <td class="column">{{ expense.amount }}</td>
+                            <td class="column"><p class="has-text-danger">{{ expense.amount }}</p></td>
                             <td class="column">{{ expense.category }}</td>
                             <td class="column">{{ expense.destiny }}</td>
                             <td class="column is-danger">
@@ -180,9 +185,9 @@
             </div>  
         </div>
 
-        <div v-if="activeTableType === 'incomes'" class="box">
-            <div class="box">
-                <h1 class="title is-5">Resumo de Rendas</h1>
+        <div v-if="activeTableType === 'incomes'" class="box has-background-black-bis">
+            <div class="box has-background-black-bis">
+                <h1 class="title is-5 text-orangered">Resumo de Rendas</h1>
             </div>
 
             <div class="table-container"><br>
@@ -219,9 +224,9 @@
             </div>  
         </div>
 
-        <div v-if="activeTableType === 'investments'" class="box">
-            <div class="box">
-                    <h1 class="title is-5">Resumo dos Investimentos</h1>
+        <div v-if="activeTableType === 'investments'" class="box has-background-black-bis">
+            <div class="box has-background-black-bis">
+                    <h1 class="title is-5 text-orangered">Resumo dos Investimentos</h1>
                 </div>
 
             <div class="table-container"><br>

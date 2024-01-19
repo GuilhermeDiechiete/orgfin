@@ -16,6 +16,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    
     'bulma/css/bulma.css',
     '@/assets/css/main.css',
     '@fortawesome/fontawesome-free/css/all.css',

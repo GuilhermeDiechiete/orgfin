@@ -1,16 +1,39 @@
 
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+/* colors black */
+
+:root {
+    --black1: rgb(0, 0, 0);
+    --black2: rgb(17, 17, 17);
+    --black3: rgb(21, 21, 21);
+    --black4: rgb(32, 32, 32);
+}
+
+.black1 {
+    color: var(--black1);
+}
+.black2 {
+    color: var(--black2);
+}
+.black3 {
+    color: var(--black3);
+}
+.black4 {
+    color: var(--black4);
+}
+
+
 .bg-blue {
     background-color: rgb(81, 81, 253);
 }
 .bg-orangered {
     background-color: orangered;
 }
-.bg-bottom {
-    background-color: rgb(31, 30, 30);
-}
-.bg-box {
-    background-color: rgb(28, 28, 28);
-}
+
 .text-blue {
     color: rgb(63, 63, 249);
 }
