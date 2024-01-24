@@ -1,12 +1,12 @@
 <template>
-    <section class="container box has-background-black-bis" >
+    <section class="container is-max-desktop p-5">
 
-        <div v-if="validatedUser" class="m-4">
+        <div v-if="validatedUser">
 
             <!-- INFORMAÇÕES DO USUÁRIO-->
-            <div class="box has-background-black-ter">  
-                <h1 class="title is-6 text-white"><i class="fa-solid fa-user text-orangered mr-4"></i>  {{ userEmail }}  
-                    <i class="fa-solid fa-circle-info fa-flip ml-4" style="--fa-animation-duration: 3s;"></i>
+            <div class="box p-2 has-background-black-ter">  
+                <h1 class="text-white"><i class="fa-solid fa-user text-orangered mx-2"></i>  {{ userEmail }}  
+                    <i class="fa-solid fa-circle-info fa-flip ml-5 text-orangered" style="--fa-animation-duration: 3s;"></i>
                 </h1>
             </div>
 
@@ -15,17 +15,17 @@
             <MessageError :message="messageError"/>
 
             <!-- MOSTRAR E OCULTAR FORMULARIO DE NOVA TRANSAÇÃO -->
-            <button class="button my-4 is-fullwidth bg-orangered text-white" @click="showFormTransaction()">
-                <i class="fa-solid fa-share-from-square fa-flip mr-4" style="--fa-animation-duration: 3s;"></i> Nova Transação
+            <button class="button is-fullwidth bg-orangered text-white my-4" @click="showFormTransaction()">
+                <i class="fa-solid fa-share-from-square fa-flip " style="--fa-animation-duration: 3s;"></i> Nova Transação
             </button>
 
            <!-- FORMULARIO DE NOVA TRANSAÇÃO-->
             <div v-if="statusFormTransaction">
-                <div class="box mb-3 has-background-black-ter">
+                <div>
                     
                     <form action="" method="post" @submit.prevent="createdTransaction">
 
-                        <select v-model="month" class="input mb-2 has-background-grey-darker text-white">
+                        <select v-model="month">
                             <option value="1">Janeiro</option>
                             <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
@@ -40,13 +40,13 @@
                             <option value="12">Dezembro</option>
                         </select>
 
-                        <input v-model="year" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Ano da transação.">
-                        <input v-model="description" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
-                        <input v-model="amount" type="text" class="input mb-2 has-background-grey-darker text-white">
-                        <input v-model="category" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Categoria: Comida - Salário - Renda Fixa">
-                        <input v-model="destiny" type="text" class="input mb-2 has-background-grey-darker text-white" placeholder="Destino do valor: ">
+                        <input v-model="year" type="text"  placeholder="Ano da transação.">
+                        <input v-model="description" type="text"  placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
+                        <input v-model="amount" type="text" >
+                        <input v-model="category" type="text"  placeholder="Categoria: Comida - Salário - Renda Fixa">
+                        <input v-model="destiny" type="text" placeholder="Destino do valor: ">
 
-                        <select v-model="type" class="input mb-2 has-background-grey-darker text-white">
+                        <select v-model="type" >
                             <option value="expense">Selecione o tipo de transação</option>
                             <option value="expense">Despesa</option>
                             <option value="income">Renda</option>
@@ -60,23 +60,23 @@
         
 
             <!-- CONTROLE ENTRE O CONTROLE MENSAL E ANUAL -->
-            <div class="tabs is-toggle is-fullwidth">
+            <div class="tabs is-toggle is-fullwidth my-4">
                 <ul>
-                    <li :class="{'has-background-black-ter': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
-                    <li :class="{'has-background-black-ter': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
+                    <li :class="{'is-active-orangered': activeTable === 'monthly'}" @click="selectedTable('monthly')"><a>Resumo Mensal</a></li>
+                    <li :class="{'is-active-orangered': activeTable === 'yearly' }" @click="selectedTable('yearly')"><a>Resumo Anual</a></li>
                 </ul>
             </div>
 
             <!--CONTROLE MENSAL-->
-            <div v-if="activeTable === 'monthly'" class="has-text-centered is-vcentered">
+            <div v-if="activeTable === 'monthly'" >
 
                 <!-- CAMPOS DE BUSCAS PARA O CONTROLE MENSAL-->
-                <div class="mb-5">
+                <div class=" box has-background-black-ter mb-5 has-text-centered p-2">
 
-                    <button class="button has-background-black-ter text-orangered" @click="showFormCategory">+ Categoria</button>
+                    <button class="button bg-orangered text-white m-1"  @click="showFormCategory">+ Categoria</button>
 
-                    <div class="select ">
-                        <select v-model="selectedMonth" class="has-background-black-ter text-orangered">
+                    <div class="select m-1">
+                        <select v-model="selectedMonth" >
                             <option value="1">Janeiro</option>
                             <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
@@ -92,13 +92,13 @@
                         </select>
                     </div>
 
-                    <div class="select">
-                        <select v-model="selectedYear" class="has-background-black-ter text-orangered">
+                    <div class="select m-1">
+                        <select v-model="selectedYear">
                             <option value="2024">2024</option>
                         </select>
                     </div>
 
-                    <button class="button is-success" @click="searchTransactionsByMonth">
+                    <button class="button bg-orangered text-blue m-1" @click="searchTransactionsByMonth">
                         <i class="fa-solid fa-magnifying-glass fa-flip" style="--fa-animation-duration : 3s;"></i>
                     </button>
                 </div>
@@ -114,28 +114,36 @@
 
 
                 <!-- BOTOES DE BUSCA ENTRE DESPESAS, RENDA E INVESTIMENTOS -->
-                <div class="columns ">
-                    <div class="box m-1 column has-text-centered is-vcentered has-background-black-ter" @click="selectedTableType('expenses')">
-                        <h1 class="title is-5 text-orangered">DESPESAS</h1>
-                        <h2 class="title is-4 text-white">
-                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-4" style="--fa-animation-duration : 3s;"></i>
-                            {{ valueTotalExpenseAPI }}
+                <div class="columns is-desktop">
+
+                    <div class="box column has-background-black-ter m-3" @click="selectedTableType('expenses')">
+                        <h1 class="title is-5 text-orangered">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration : 3s;"></i>
+                            Despesas
+                        </h1>
+                        <h2 class="title is-4 text-white has-text-centered is-vcentered">
+                            
+                            R$ {{ valueTotalExpenseAPI }}
                         </h2>
                     </div>
-                    <div class=" box m-1 column has-text-centered is-vcentered has-background-black-ter" @click="selectedTableType('incomes')">
-                        <h1 class="title is-5 text-orangered">RENDA</h1>
-                        <h2 class="title is-4 text-white">
-                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-4" style="--fa-animation-duration: 3s;" ></i>
-                            {{ valueTotalIncomesAPI }}
+                    <div class=" box column is-vcentered has-background-black-ter m-3" @click="selectedTableType('incomes')">
+                        <h1 class="title is-5 text-orangered">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;" ></i>
+                            Renda</h1>
+                        <h2 class="title is-4 text-white has-text-centered">
+                            
+                            R$ {{ valueTotalIncomesAPI }}
                         </h2>
                     </div>
-                        <div class=" box m-1 column has-text-centered is-vcentered has-background-black-ter	" @click="selectedTableType('investments')">
-                        <h1 class="title is-5 text-orangered">INVESTIMENTOS</h1>
-                        <h2 class="title is-4 text-white">
-                            <p>
-                                <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-4" style="--fa-animation-duration: 3s;" ></i>
-                                {{ valueTotalInvestmentsAPI }}
-                            </p>
+                        <div class=" box column is-vcentered has-background-black-ter m-3	" @click="selectedTableType('investments')">
+                        <h1 class="title is-5 text-orangered">
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;" ></i>
+                            Investimentos</h1>
+                        <h2 class="title is-4 text-white has-text-centered">
+                       
+                                
+                                R$ {{ valueTotalInvestmentsAPI }}
+                         
                           
                             
                             

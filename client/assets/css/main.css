@@ -6,6 +6,10 @@
 }
 /* colors black */
 
+body {
+    background-color: var(--black3);
+    min-height: 100vh;
+}
 :root {
     --black1: rgb(0, 0, 0);
     --black2: rgb(17, 17, 17);
@@ -13,6 +17,11 @@
     --black4: rgb(32, 32, 32);
 }
 
+.is-active-orangered {
+    background-color: orangered;
+    color: white;
+
+}
 .black1 {
     color: var(--black1);
 }
@@ -42,4 +51,5 @@
 }
 .text-orangered {
     color: orangered;
+    border: none;
 }

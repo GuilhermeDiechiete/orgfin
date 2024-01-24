@@ -1,6 +1,6 @@
 <template>
-    <section class="section">
-        <div class="box has-text-centered is-vcentered">
+    <section class="container is-max-desktop p-5">
+        <div class="box has-text-centered is-vcentered has-background-black-ter">
 
             <h1 class="title is-3 text-orangered">Login</h1>
 
@@ -10,7 +10,7 @@
 
             <form action="" method="post" @submit.prevent="submitForm">
 
-                <input v-model="email" type="text" class="input mb-4" placeholder="orgfin@gmail.com">
+                <input v-model="email" type="text" class="input mb-4 " placeholder="orgfin@gmail.com">
                 <input v-model="password" type="password" class="input mb-4" placeholder="******">
 
                 <button type="submit" class="button is-fullwidth bg-orangered text-white">Entrar</button>

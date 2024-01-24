@@ -19,3 +19,6 @@ https://fontawesome.com/search
 npx create-nuxt-app <project-name> [ CRIAR PROJETO ]
 
 
+
+
+
