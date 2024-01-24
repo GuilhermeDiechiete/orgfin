@@ -3,14 +3,8 @@
 
         <div v-if="validatedUser">
 
-            <!-- INFORMAÇÕES DO USUÁRIO-->
-            <div class="box p-2 has-background-black-ter">  
-                <h1 class="text-white"><i class="fa-solid fa-user text-orangered mx-2"></i>  {{ userEmail }}  
-                    <i class="fa-solid fa-circle-info fa-flip ml-5 text-orangered" style="--fa-animation-duration: 3s;"></i>
-                </h1>
-            </div>
+            <user-info-box :email="userEmail"></user-info-box>
 
-            <!-- MENSAGENS DE SUCESSO E ERRO -->
             <MessageSuccess :message="messageSuccess"/>
             <MessageError :message="messageError"/>
 
@@ -21,41 +15,7 @@
 
            <!-- FORMULARIO DE NOVA TRANSAÇÃO-->
             <div v-if="statusFormTransaction">
-                <div class="box has-background-black-ter">
-                    
-                    <form action="" method="post" @submit.prevent="createdTransaction">
-
-                        <select v-model="month" class="input mb-2 has-background-dark text-white">
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
-
-                        <input v-model="year" type="text" class="input mb-2 has-background-dark text-white" placeholder="Ano da transação.">
-                        <input v-model="description" type="text" class="input mb-2 has-background-dark text-white" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
-                        <input v-model="amount" type="text" class="input mb-2 has-background-dark text-white">
-                        <input v-model="category" type="text" class="input mb-2 has-background-dark text-white" placeholder="Categoria: Comida - Salário - Renda Fixa">
-                        <input v-model="destiny" type="text" class="input mb-2 has-background-dark text-white" placeholder="Destino do valor: ">
-
-                        <select v-model="type" class="input mb-2 has-background-dark text-white">
-                            <option value="expense">Selecione o tipo de transação</option>
-                            <option value="expense">Despesa</option>
-                            <option value="income">Renda</option>
-                            <option value="investment">Investimento</option>
-                        </select>
-
-                        <button type="submit" class="button is-fullwidth is-success">Criar</button>
-                    </form> 
-                </div>   
+                <transaction-form/>
             </div>
         
 
@@ -105,13 +65,7 @@
 
                 <!--FORMULARIO DE NOVA CATEGORIA -->
                 <div v-if="statusFormCategory" class="box has-background-black-ter has-text-centered">
-                    <form action="" method="post" @submit.prevent="createdCategory">
-                        <h1 class="title is-6 text-orangered">Criar nova categoria.</h1>
-                        <input v-model="nameCategory" type="text" class="input has-background-dark" placeholder="Digite o nome da categoria.">
-                        <button type="submit" class="button is-success mt-2 is-fullwidth">Criar</button>
-                    </form>
-
-                    <button class="button is-fullwidth text-white bg-orangered mt-5">Visualizar Categorias</button>
+                    <category-form/>
                 </div>
 
 
@@ -150,48 +104,21 @@
                 </div>     
                 
                 
-            <!-- TABELA DE DESPESAS-->
+            <!-- TABELA -->
             <div class="box has-background-black-ter">
-
-                <div class="box has-background-black-bis">
-                    <h1 class="title is-5 text-orangered has-text-centered">Resumo de {{ titleTable }}</h1>
-                </div>
-            
                 <div class="table-container">
-       
-                <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 800px;">
-                    <thead>
-                        <tr>
-                            <th class="has-text-info has-text-centered">Data</th>
-                            <th class="has-text-info has-text-centered"> Descrição</th>
-                            <th class="has-text-info has-text-centered">Valor</th>
-                            <th class="has-text-info has-text-centered"> Categoria</th>
-                            <th class="has-text-info has-text-centered">Destino</th>
-                            <th class="has-text-info has-text-centered">Status</th>
-                            <th class="has-text-info has-text-centered">Excluir</th>
-                        </tr> 
-                    </thead> 
-                    <tbody v-for="value in valueTable" :key="value.id">
-                        <tr>
-                            <td >{{ value.month }} / {{ value.year }}</td>
-                            <td >{{ value.description }}</td>
-                            <td ><p class="text-red">R$ {{ value.amount }}</p></td>
-                            <td >{{ value.category }}</td>
-                            <td >{{ value.destiny }}</td>
-                            <td >
-                                <span v-if="value.status === false">
-                                    Pendente
-                                </span>
-                                <span v-else-if="value.status === true" class="is-success">
-                                    Pago
-                                </span>
-                            </td>
-                            <td class="text-red"><i class="fa-solid fa-circle-xmark"></i></td>
-                        </tr> 
-                    </tbody> 
-                </table>
-            </div>  
-        </div>
+                    <div class="box has-background-black-bis">
+                        <h1 class="title is-5 text-orangered has-text-centered">
+                            Resumo de {{ titleTable }}
+                        </h1>
+                    </div>
+                    <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 800px;">
+
+                        <thead-table/>
+                        <tbody-table :info="valueTable"/>
+                    </table>
+                </div>  
+            </div>
 
       
 
@@ -233,19 +160,6 @@ export default Vue.extend({
             // controladores de navegação entre o painel mensal e anual
             activeTable: 'monthly',
 
-            // dados do formulario de criação de transações
-            month: new Date().getMonth() + 1,
-            year: new Date().getFullYear(),
-            type: 'expense' || 'income' || 'investment',
-            description: 'Nova transação',
-            amount: 99.99,
-            category: 'Essenciais',
-            destiny: 'Sicredi',
-            status: false,
-
-            // dados do formulario de criação de categoria
-            nameCategory: '',
-
             // parametros de busca
             selectedYear: new Date().getFullYear(),
             selectedMonth: new Date().getMonth() + 1,
@@ -283,7 +197,7 @@ export default Vue.extend({
     
     methods: {
         
-        // pega as informações do usuário - email e id pelo token
+        // pega as informações do usuário - email e id 
         async getUser() {
             try {
                 const token = localStorage.getItem('userToken');
@@ -293,14 +207,13 @@ export default Vue.extend({
                         'Authorization': `${token}`,
                     },
                 }); 
+
                 this.userEmail = response.data.data.email
                 this.userId = response.data.data.id
 
                 if(this.userEmail && this.userId) {
                    this.validatedUser = true 
                 }
-                
-                
             } catch (error:any) {
                 this.messageError = error.response.data.message 
                 setTimeout(() => {
@@ -308,6 +221,7 @@ export default Vue.extend({
                 }, 2000);
             }
         },
+
         // metodos dos controladores de navegação
         selectedTable(table: string) {
             this.activeTable = table
@@ -332,46 +246,6 @@ export default Vue.extend({
         },
         showFormCategory() {
             this.statusFormCategory = !this.statusFormCategory
-        },
-
-        // busca apenas o email e id do usuario
-        
-        async createdTransaction() {
-            try {
-                const token = localStorage.getItem('userToken');
-
-                const response = await axios.post('http://127.0.0.1:4000/transaction', 
-                
-                {
-                    month: this.month,
-                    year: this.year,
-                    type: this.type,
-                    description: this.description,
-                    amount: this.amount,
-                    category: this.category,
-                    destiny: this.destiny,
-                    status: this.status,
-                }, 
-                {
-                    headers: {
-                        'Authorization': `${token}`,
-                    },
-                });
-
-                this.messageSuccess = response.data.message 
-                setTimeout(() => {
-                    this.messageSuccess = ''
-                    this.statusFormTransaction = false
-                }, 1000)
-
-            } catch (error: any) {
-                this.messageError = error.response.data.message 
-                setTimeout(() => {
-                    this.messageError = '';
-                    this.statusFormTransaction = false
-                }, 2000);
-
-            }  
         },
 
         async searchTransactionsByMonth() {
@@ -433,36 +307,7 @@ export default Vue.extend({
                 }, 2000);
             }
         },
-        async createdCategory() {
-            try {
-                const token = localStorage.getItem('userToken');
-
-                const response = await axios.post(`http://127.0.0.1:4000/categories`,
-                {
-                    name: this.nameCategory
-                },
-
-                {
-                    headers: {
-                        'Authorization': `${token}`,
-                    }
-                })
-                this.messageSuccess = response.data.message
-                setTimeout(() => {
-                    this.messageSuccess = ''
-                    this.statusFormCategory = false
-                }, 2000)
-            } catch (error:any) {
-                const errorMessage = Array.isArray(error.response?.data?.message) ?
-                error.response?.data?.message[0]?.message :
-                    "Erro desconhecido";
-
-                this.messageError = errorMessage;
-                setTimeout(() => {
-                    this.messageError = '';
-                }, 2000);
-            }
-        }
+        
 
         
     }
