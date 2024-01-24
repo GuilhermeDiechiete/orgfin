@@ -5,6 +5,15 @@
     padding: 0;
 }
 /* colors black */
+.scroll-table {
+    
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+input::placeholder {
+    color: rgb(246, 119, 73);
+}
 
 body {
     background-color: var(--black3);
@@ -45,6 +54,9 @@ body {
 
 .text-blue {
     color: rgb(63, 63, 249);
+}
+.text-red {
+    color: rgb(235, 0, 0)
 }
 .text-white {
     color: white;

@@ -16,16 +16,16 @@
 
             <!-- MOSTRAR E OCULTAR FORMULARIO DE NOVA TRANSAÇÃO -->
             <button class="button is-fullwidth bg-orangered text-white my-4" @click="showFormTransaction()">
-                <i class="fa-solid fa-share-from-square fa-flip " style="--fa-animation-duration: 3s;"></i> Nova Transação
+                <i class="fa-solid fa-share-from-square fa-flip mr-3" style="--fa-animation-duration: 3s;"></i> Nova Transação
             </button>
 
            <!-- FORMULARIO DE NOVA TRANSAÇÃO-->
             <div v-if="statusFormTransaction">
-                <div>
+                <div class="box has-background-black-ter">
                     
                     <form action="" method="post" @submit.prevent="createdTransaction">
 
-                        <select v-model="month">
+                        <select v-model="month" class="input mb-2 has-background-dark text-white">
                             <option value="1">Janeiro</option>
                             <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
@@ -40,13 +40,13 @@
                             <option value="12">Dezembro</option>
                         </select>
 
-                        <input v-model="year" type="text"  placeholder="Ano da transação.">
-                        <input v-model="description" type="text"  placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
-                        <input v-model="amount" type="text" >
-                        <input v-model="category" type="text"  placeholder="Categoria: Comida - Salário - Renda Fixa">
-                        <input v-model="destiny" type="text" placeholder="Destino do valor: ">
+                        <input v-model="year" type="text" class="input mb-2 has-background-dark text-white" placeholder="Ano da transação.">
+                        <input v-model="description" type="text" class="input mb-2 has-background-dark text-white" placeholder="Descrição: Hamburguer final de semana, Salário do trabalho, Invest renda fixa">
+                        <input v-model="amount" type="text" class="input mb-2 has-background-dark text-white">
+                        <input v-model="category" type="text" class="input mb-2 has-background-dark text-white" placeholder="Categoria: Comida - Salário - Renda Fixa">
+                        <input v-model="destiny" type="text" class="input mb-2 has-background-dark text-white" placeholder="Destino do valor: ">
 
-                        <select v-model="type" >
+                        <select v-model="type" class="input mb-2 has-background-dark text-white">
                             <option value="expense">Selecione o tipo de transação</option>
                             <option value="expense">Despesa</option>
                             <option value="income">Renda</option>
@@ -73,7 +73,7 @@
                 <!-- CAMPOS DE BUSCAS PARA O CONTROLE MENSAL-->
                 <div class=" box has-background-black-ter mb-5 has-text-centered p-2">
 
-                    <button class="button bg-orangered text-white m-1"  @click="showFormCategory">+ Categoria</button>
+                    <button class="button bg-orangered text-white m-1"  @click="showFormCategory">Categorias</button>
 
                     <div class="select m-1">
                         <select v-model="selectedMonth" >
@@ -104,12 +104,14 @@
                 </div>
 
                 <!--FORMULARIO DE NOVA CATEGORIA -->
-                <div v-if="statusFormCategory" class="box">
+                <div v-if="statusFormCategory" class="box has-background-black-ter has-text-centered">
                     <form action="" method="post" @submit.prevent="createdCategory">
-                        <h1 class="title is-6">Criar nova categoria.</h1>
-                        <input v-model="nameCategory" type="text" class="input" placeholder="Digite o nome da categoria.">
-                        <button type="submit" class="button is-success m-2">Criar</button>
+                        <h1 class="title is-6 text-orangered">Criar nova categoria.</h1>
+                        <input v-model="nameCategory" type="text" class="input has-background-dark" placeholder="Digite o nome da categoria.">
+                        <button type="submit" class="button is-success mt-2 is-fullwidth">Criar</button>
                     </form>
+
+                    <button class="button is-fullwidth text-white bg-orangered mt-5">Visualizar Categorias</button>
                 </div>
 
 
@@ -121,155 +123,79 @@
                             <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration : 3s;"></i>
                             Despesas
                         </h1>
-                        <h2 class="title is-4 text-white has-text-centered is-vcentered">
-                            
-                            R$ {{ valueTotalExpenseAPI }}
+                        <h2 class="title is-4 has-text-centered is-vcentered">
+                            <span class="box p-3 m-2 has-background-black-bis text-white">R$ {{ valueTotalExpenseAPI }}</span>
                         </h2>
                     </div>
+
                     <div class=" box column is-vcentered has-background-black-ter m-3" @click="selectedTableType('incomes')">
                         <h1 class="title is-5 text-orangered">
                             <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;" ></i>
-                            Renda</h1>
+                            Renda
+                        </h1>
                         <h2 class="title is-4 text-white has-text-centered">
-                            
-                            R$ {{ valueTotalIncomesAPI }}
+                            <span class="box p-3 m-2 has-background-black-bis text-white">R$ {{ valueTotalIncomesAPI }}</span>
                         </h2>
                     </div>
-                        <div class=" box column is-vcentered has-background-black-ter m-3	" @click="selectedTableType('investments')">
+                    
+                    <div class=" box column is-vcentered has-background-black-ter m-3" @click="selectedTableType('investments')">
                         <h1 class="title is-5 text-orangered">
-                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;" ></i>
-                            Investimentos</h1>
+                            <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;"></i>
+                            Investimentos
+                        </h1>
                         <h2 class="title is-4 text-white has-text-centered">
-                       
-                                
-                                R$ {{ valueTotalInvestmentsAPI }}
-                         
-                          
-                            
-                            
+                            <span class="box p-3 m-2 has-background-black-bis text-white">R$ {{ valueTotalInvestmentsAPI }}</span>
                         </h2>  
                     </div>
                 </div>     
                 
                 
             <!-- TABELA DE DESPESAS-->
-            <div v-if="activeTableType === 'expenses'" class="box has-background-black-ter">
+            <div class="box has-background-black-ter">
 
                 <div class="box has-background-black-bis">
-                    <h1 class="title is-5 text-orangered">Resumo de Despesas</h1>
+                    <h1 class="title is-5 text-orangered has-text-centered">Resumo de {{ titleTable }}</h1>
                 </div>
             
                 <div class="table-container">
        
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth has-background-black-ter ">
+                <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 800px;">
                     <thead>
-                        <tr class="columns m-1">
-                            <th class="column">  <p class="text-orangered"><i class="fa-solid fa-calendar-days mr-3"></i>Data</p></th>
-                            <th class="column"> <p class="text-orangered"><i class="fa-solid fa-pen mr-3"></i> Descrição</p></th>
-                            <th class="column"><i class="fa-solid fa-brazilian-real-sign text-orangered"></i> Valor</th>
-                            <th class="column"><i class="fa-solid fa-boxes-stacked text-orangered"></i> Categoria</th>
-                            <th class="column"><i class="fa-solid fa-paper-plane text-orangered"></i> Destino</th>
-                            <th class="column"><i class="fa-solid fa-signal text-orangered"></i> Status</th>
+                        <tr>
+                            <th class="has-text-info has-text-centered">Data</th>
+                            <th class="has-text-info has-text-centered"> Descrição</th>
+                            <th class="has-text-info has-text-centered">Valor</th>
+                            <th class="has-text-info has-text-centered"> Categoria</th>
+                            <th class="has-text-info has-text-centered">Destino</th>
+                            <th class="has-text-info has-text-centered">Status</th>
+                            <th class="has-text-info has-text-centered">Excluir</th>
                         </tr> 
                     </thead> 
-                    <tbody v-for="expense in expensesAPI" :key="expense.id">
-                        <tr class="columns m-1">
-                            <td class="column">{{ expense.month }} / {{ expense.year }}</td>
-                            <td class="column">{{ expense.description }}</td>
-                            <td class="column"><p class="has-text-danger">{{ expense.amount }}</p></td>
-                            <td class="column">{{ expense.category }}</td>
-                            <td class="column">{{ expense.destiny }}</td>
-                            <td class="column is-danger">
-                                <span v-if="expense.status === false">
+                    <tbody v-for="value in valueTable" :key="value.id">
+                        <tr>
+                            <td >{{ value.month }} / {{ value.year }}</td>
+                            <td >{{ value.description }}</td>
+                            <td ><p class="text-red">R$ {{ value.amount }}</p></td>
+                            <td >{{ value.category }}</td>
+                            <td >{{ value.destiny }}</td>
+                            <td >
+                                <span v-if="value.status === false">
                                     Pendente
                                 </span>
-                                <span v-else-if="expense.status === true" class="is-success">
+                                <span v-else-if="value.status === true" class="is-success">
                                     Pago
                                 </span>
                             </td>
+                            <td class="text-red"><i class="fa-solid fa-circle-xmark"></i></td>
                         </tr> 
                     </tbody> 
                 </table>
             </div>  
         </div>
 
-        <div v-if="activeTableType === 'incomes'" class="box has-background-black-bis">
-            <div class="box has-background-black-bis">
-                <h1 class="title is-5 text-orangered">Resumo de Rendas</h1>
-            </div>
+      
 
-            <div class="table-container"><br>
-                
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                    <thead>
-                        <tr class="columns m-1">
-                            <th class="column">Data</th>
-                            <th class="column">Descrição</th>
-                            <th class="column">Valor</th>
-                            <th class="column">Categoria</th>
-                            <th class="column">Destino</th>
-                            <th class="column">Status</th>
-                        </tr> 
-                    </thead> 
-                    <tbody v-for="income in incomesAPI" :key="income.id">
-                        <tr class="columns m-1">
-                            <td class="column">{{ income.month }} / {{ income.year }}</td>
-                            <td class="column">{{ income.description }}</td>
-                            <td class="column">{{ income.amount }}</td>
-                            <td class="column">{{ income.category }}</td>
-                            <td class="column">{{ income.destiny }}</td>
-                            <td class="column is-danger">
-                                <span v-if="income.status === false">
-                                    Pendente
-                                </span>
-                                <span v-else-if="income.status === true" class="is-success">
-                                    Pago
-                                </span>
-                            </td>
-                        </tr> 
-                    </tbody> 
-                </table>
-            </div>  
-        </div>
-
-        <div v-if="activeTableType === 'investments'" class="box has-background-black-bis">
-            <div class="box has-background-black-bis">
-                    <h1 class="title is-5 text-orangered">Resumo dos Investimentos</h1>
-                </div>
-
-            <div class="table-container"><br>
-                
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                    <thead>
-                        <tr class="columns m-1">
-                            <th class="column">Data</th>
-                            <th class="column">Descrição</th>
-                            <th class="column">Valor</th>
-                            <th class="column">Categoria</th>
-                            <th class="column">Destino</th>
-                            <th class="column">Status</th>
-                        </tr> 
-                    </thead> 
-                    <tbody v-for="investment in investmentsAPI" :key="investment.id">
-                        <tr class="columns m-1">
-                            <td class="column">{{ investment.month }} / {{ investment.year }}</td>
-                            <td class="column">{{ investment.description }}</td>
-                            <td class="column">{{ investment.amount }}</td>
-                            <td class="column">{{ investment.category }}</td>
-                            <td class="column">{{ investment.destiny }}</td>
-                            <td class="column is-danger">
-                                <span v-if="investment.status === false">
-                                    Negativo
-                                </span>
-                                <span v-else-if="investment.status === true" class="is-success">
-                                    Positivo
-                                </span>
-                            </td>
-                        </tr> 
-                    </tbody> 
-                </table>
-            </div> 
-        </div>
+        
     </div>
 
 
@@ -298,7 +224,7 @@ export default Vue.extend({
 
     data() {
         return {
-            validatedUser: false, // no metodo getUser precisa vir o email e id do usuário
+            validatedUser: false, // no metodo getUser precisa vir o email e id do usuário para liberar a aplicação
 
             // status de visualização de formularios
             statusFormTransaction: false,
@@ -307,17 +233,14 @@ export default Vue.extend({
             // controladores de navegação entre o painel mensal e anual
             activeTable: 'monthly',
 
-            // controlador de navegação entre despesa, renda e investimentos
-            activeTableType: 'expenses',
-
             // dados do formulario de criação de transações
             month: new Date().getMonth() + 1,
             year: new Date().getFullYear(),
             type: 'expense' || 'income' || 'investment',
-            description: '',
+            description: 'Nova transação',
             amount: 99.99,
-            category: '',
-            destiny: '',
+            category: 'Essenciais',
+            destiny: 'Sicredi',
             status: false,
 
             // dados do formulario de criação de categoria
@@ -331,20 +254,22 @@ export default Vue.extend({
             messageSuccess: '',
             messageError: '',
 
-            // Informações das APIs
-            expensesAPI: {}, // despesas do mes e ano selecionado
-            incomesAPI: [], // rendas do mes e ano selecionado
-            investmentsAPI: [], // investimentos do mes e ano selecionado
+            
 
             // informações do usuário
             userEmail: '-----',
             userId: -1,
 
-
-            // soma dos valores de despesas, renda e investimentos, do mes e ano selecionado
-            valueTotalExpenseAPI: '',
-            valueTotalIncomesAPI: '',
-            valueTotalInvestmentsAPI: '',
+            
+            valueTable: {}, // armazena valores de expensesAPI, incomesAPI ou investmentsAPI
+            titleTable: '',
+            // APIS
+            expensesAPI: {}, // armazena todas as despesas de um mes selecionado
+            incomesAPI: [], // armazena todas as rendas de um mes selecionado
+            investmentsAPI: [], // armazena todos os investimentos de um mes selecionado
+            valueTotalExpenseAPI: '',  // armazena apenas o valor total das despesas do mes selecionado
+            valueTotalIncomesAPI: '', // armazena apenas o valor total das rendas do mes selecionado
+            valueTotalInvestmentsAPI: '', // armazena apenas o valor total de investimentos do mes selecionado
 
             
 
@@ -353,10 +278,12 @@ export default Vue.extend({
     },
     mounted() {
         this.getUser()
+        this.searchTransactionsByMonth()
     },
     
     methods: {
         
+        // pega as informações do usuário - email e id pelo token
         async getUser() {
             try {
                 const token = localStorage.getItem('userToken');
@@ -386,7 +313,17 @@ export default Vue.extend({
             this.activeTable = table
         },
         selectedTableType(type: string) {
-            this.activeTableType = type
+
+            if(type === 'investments'){
+                this.valueTable = this.investmentsAPI
+                this.titleTable = 'Investimentos'
+            } else if(type === 'incomes') {
+                this.valueTable = this.incomesAPI
+                this.titleTable = 'Rendas'
+            } else {
+                this.valueTable = this.expensesAPI
+                this.titleTable = 'Despesas'
+            }
         },
 
         // metodos do formulario de criação de transação
@@ -456,7 +393,7 @@ export default Vue.extend({
                 this.messageSuccess = response.data.message
                 this.statusFormTransaction = false
                 this.searchTotalTransactionsByMonth() // faz uma nova requisição do total dos valores
-
+                this.selectedTableType('expenses')
                 
                 setTimeout(() => {
                     this.messageSuccess = ''
