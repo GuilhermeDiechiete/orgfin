@@ -1,29 +1,21 @@
 <template>
     <div class="box has-background-black-ter">
-      <form @submit.prevent="createdTransaction">
-  
-        <select v-model="month" class="input mb-2 has-background-dark text-white">
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-        </select>
-  
-        <input v-model="year" type="text" class="input mb-2 has-background-dark text-white" placeholder="Ano da transação">
 
+      <message-error :message="messageError"/>
+      <message-success :message="messageSuccess"/>
+
+      <form @submit.prevent="createdTransaction">
+
+        <input v-model="date" type="date" class="input mb-2 has-background-dark text-white">
+  
         <input v-model="description" type="text" class="input mb-2 has-background-dark text-white" placeholder="Descrição">
 
         <input v-model="amount" type="text" class="input mb-2 has-background-dark text-white" placeholder="Valor">
 
-        <input v-model="category" type="text" class="input mb-2 has-background-dark text-white" placeholder="Categoria">
+
+        <select v-model="category" class="input mb-2 has-background-dark text-white">
+          <option v-for="item in categories" :key="item.id" :value="item.name">{{ item.name }}</option>
+        </select>
 
         <input v-model="destiny" type="text" class="input mb-2 has-background-dark text-white" placeholder="Destino do valor">
   
@@ -45,15 +37,22 @@
   export default {
     data() {
       return {
-        month: new Date().getMonth() + 1,
-        year: new Date().getFullYear(),
+        date: '',
         type: 'expense' || 'income' || 'investment',
         description: 'Nova transação',
         amount: 99.99,
         category: 'Essenciais',
         destiny: 'Sicredi',
         status: false,
+
+        categories: {},
+
+        messageSuccess: '',
+        messageError: '',
       };
+    },
+    mounted() {
+      this.getCategories()
     },
     methods: {
         async createdTransaction() {
@@ -63,8 +62,7 @@
                 const response = await axios.post('http://127.0.0.1:4000/transaction', 
                 
                 {
-                    month: this.month,
-                    year: this.year,
+                    date: this.date,
                     type: this.type,
                     description: this.description,
                     amount: this.amount,
@@ -78,21 +76,51 @@
                     },
                 });
 
-                this.messageSuccess = response.data.message 
+                this.messageSuccess = response.data.message
+
                 setTimeout(() => {
                     this.messageSuccess = ''
                     this.statusFormTransaction = false
                 }, 1000)
 
             } catch (error ) {
-                this.messageError = error.response.data.message 
+              const errorMessage = Array.isArray(error.response?.data?.message) ?
+                error.response?.data?.message[0]?.message :
+                    "Erro desconhecido";
+
+                this.messageError = errorMessage;
                 setTimeout(() => {
                     this.messageError = '';
-                    this.statusFormTransaction = false
                 }, 2000);
 
             }  
         },
+        async getCategories() {
+            try {
+                const token = localStorage.getItem('userToken');
+
+                const response = await axios.get(`http://127.0.0.1:4000/categories`,
+                {
+                    headers: {
+                        'Authorization': `${token}`,
+                    }
+                })
+                this.categories = response.data.data
+
+                setTimeout(() => {
+                    this.messageSuccess = ''
+                }, 2000)
+            } catch (error) {
+                const errorMessage = Array.isArray(error.response?.data?.message) ?
+                error.response?.data?.message[0]?.message :
+                    "Erro desconhecido";
+
+                this.messageError = errorMessage;
+                setTimeout(() => {
+                    this.messageError = '';
+                }, 2000);
+            }
+        }
     }
   };
   </script>

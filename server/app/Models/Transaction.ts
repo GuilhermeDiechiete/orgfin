@@ -6,12 +6,18 @@ export default class Transaction extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column ()
+  public day: number
+  
   @column()
   public month: number
 
   @column()
   public year: number
 
+  @column()
+  public date: string 
+  
   @column()
   public type: string
 

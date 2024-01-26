@@ -5,8 +5,7 @@ export default class TransactionValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    month: schema.number([rules.unsigned()]),
-    year: schema.number([rules.unsigned()]),
+    date: schema.string(),
     type: schema.string(),
     description: schema.string(),
     amount: schema.number(),
@@ -16,10 +15,7 @@ export default class TransactionValidator {
   })
 
   public messages: CustomMessages = {
-    'month.required': 'O mês é obrigatório.',
-    'month.unsigned': 'O mês deve ser um número inteiro positivo.',
-    'year.required': 'O ano é obrigatório.',
-    'year.unsigned': 'O ano deve ser um número inteiro positivo.',
+    'date.required': 'A data é obrigatória.',
     'type.required': 'O tipo é obrigatório.',
     'description.required': 'A descrição é obrigatória.',
     'amount.required': 'O valor é obrigatório.',

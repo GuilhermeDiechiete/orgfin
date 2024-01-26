@@ -5,7 +5,7 @@ Route.group(() => {
 
     Route.get('/', 'CategoriesController.index')
     Route.post('/', 'CategoriesController.store')
-    Route.delete('/', 'CategoriesController.destroy')
+    Route.delete('/:id', 'CategoriesController.destroy')
 
 })
 .middleware('auth')

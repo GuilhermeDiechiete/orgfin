@@ -5,8 +5,8 @@
 
             <user-info-box :email="userEmail"></user-info-box>
 
-            <MessageSuccess :message="messageSuccess"/>
-            <MessageError :message="messageError"/>
+            <message-success :message="messageSuccess"/>
+            <message-error :message="messageError"/>
 
             <!-- MOSTRAR E OCULTAR FORMULARIO DE NOVA TRANSAÇÃO -->
             <button class="button is-fullwidth bg-orangered text-white my-4" @click="showFormTransaction()">

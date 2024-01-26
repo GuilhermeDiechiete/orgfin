@@ -7,8 +7,10 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
+      table.integer('day').notNullable().unsigned()
       table.integer('month').notNullable().unsigned()
       table.integer('year').notNullable().unsigned()
+      table.date('date').notNullable()
       table.string('type').notNullable()
       table.string('description').notNullable()
       table.decimal('amount', 10, 2).notNullable()
