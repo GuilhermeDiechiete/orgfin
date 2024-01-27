@@ -2,9 +2,10 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
 
-  // em uso - login
-  Route.post('/', 'AuthUsersController.store')
+  // login - em uso
+  Route.post('/', 'AuthUsersController.store') 
 
-  // falta inplementar
+  // logout 
   Route.delete('/', 'AuthUsersController.destroy').middleware('auth')
+
 }).prefix('/auth')

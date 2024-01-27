@@ -6,32 +6,38 @@ export default class Transaction extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column ()
+  @column()
   public day: number
-  
+
   @column()
   public month: number
 
   @column()
-  public year: number
-
-  @column()
-  public date: string 
+  public date: Date
   
   @column()
-  public type: string
-
+  public year: number
+  
   @column()
   public description: string
+
+  @column()
+  public installment: number 
+
+  @column()
+  public max_installment: number 
 
   @column({ serializeAs: 'amount' })
   public amount: number
 
   @column()
-  public category: string
+  public type: string
 
   @column()
-  public destiny: string
+  public local: string
+
+  @column()
+  public category: string
 
   @column()
   public status: boolean

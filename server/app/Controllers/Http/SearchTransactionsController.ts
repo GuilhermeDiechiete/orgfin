@@ -8,26 +8,29 @@ export default class SearchTransactionsController {
       if (!user) {
         return response.status(401).json({ message: 'Sem permissão.' })
       }
-      const expenses = await user?.related('transactions').query()
-      .where('user_id', user.id)
-      .where('type', 'expense')
-      .where('month', params.month)
-      .where('year', params.year)
 
-      const incomes = await user?.related('transactions').query()
+      const month = params.month 
+      const year = params.year
+      console.log(month, year)
+
+      const outputs = await user?.related('transactions').query()
       .where('user_id', user.id)
-      .where('type', 'income')
-      .where('month', params.month)
-      .where('year', params.year)
+      .where('type', 'output')
+      .where('month', month).where('year', year)
+
+      const inputs = await user?.related('transactions').query()
+      .where('user_id', user.id)
+      .where('type', 'input')
+      .where('month', month).where('year', year)
 
       const investments = await user?.related('transactions').query()
       .where('user_id', user.id)
       .where('type', 'investment')
-      .where('month', params.month)
-      .where('year', params.year)
+      .where('month', month).where('year', year)
 
-      return response.status(200).json({expenses: expenses, incomes:incomes, investments:investments})
+      return response.status(200).json({ outputs, inputs, investments})
     } catch (error) {
+      console.log(error)
       return response.status(400).json({ message: 'Erro ao buscar transações' })
     }
   }
@@ -40,13 +43,13 @@ export default class SearchTransactionsController {
       const amountsExpense = await user?.related('transactions').query()
       .where('user_id', user.id)
       .where('month', params.month)
-      .where('type', 'expense')
+      .where('type', 'output')
       .select('amount')
 
       const amountsIncome = await user?.related('transactions').query()
       .where('user_id', user.id)
       .where('month', params.month)
-      .where('type', 'income')
+      .where('type', 'input')
       .select('amount')
 
       const amountsInvestment = await user?.related('transactions').query()

@@ -3,9 +3,9 @@ import TransactionValidator from 'App/Validators/TransactionValidator'
 import { DateTime } from 'luxon'
 
 export default class TransactionsController {
+
   // create transaction
   public async store({ request, auth, response }: HttpContextContract) {
-    
     try {
       const user = auth.user
       if (!user) {
@@ -13,21 +13,20 @@ export default class TransactionsController {
       }
       const data = await request.validate(TransactionValidator)
 
-      const formatDate = DateTime.fromISO(data.date)
-
-      const day = formatDate.day 
-      const month = formatDate.month 
-      const year = formatDate.year 
+      const date = DateTime.fromISO(data.date)
+      const day = date.day
+      const month = date.month 
+      const year = date.year 
 
       const fullData = { day, month, year, ...data }
-      
+
       const transaction = await user?.related('transactions').create(fullData)
-      return response
-        .status(201)
-        .json({ data: transaction, message: 'Transação criada com sucesso.' })
+
+      return response.status(201).json({ data: transaction, message: 'Transação criada com sucesso.' })
+      
     } catch (error) {
-      console.log('ERRO ( TransactionsController -> store', error.messages.errors)
-      return response.status(400).json({ message: error.messages.errors });
+      console.log('ERRO ( TransactionsController -> store', error)
+      return response.status(400).json({ message: error });
     }
     
   }

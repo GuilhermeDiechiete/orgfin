@@ -1,11 +1,13 @@
 <template>
     <tbody>
-        <tr v-for="value in info" :key="value.id">
-            <td>{{ value.day }}/{{ value.month }}/{{ value.year }}</td>
+        <tr v-for="value in transactions" :key="value.id">
+
+            <td>{{ value.day }}-{{ value.month }}-{{ value.year }}</td>
             <td>{{ value.description }}</td>
+            <td>{{ value.installment }} - {{ value.max_installment }}</td>
             <td><p class="text-red">R$ {{ value.amount }}</p></td>
             <td>{{ value.category }}</td>
-            <td>{{ value.destiny }}</td>
+            <td>{{ value.local }}</td>
             <td>
                 <span v-if="value.status === false">Pendente</span>
 
@@ -22,7 +24,7 @@
 <script>
 export default {
   props: {
-    info: {
+    transactions: {
       type: Array,
       default: () => []
     }

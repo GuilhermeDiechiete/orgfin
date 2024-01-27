@@ -7,16 +7,23 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.integer('day').notNullable().unsigned()
-      table.integer('month').notNullable().unsigned()
-      table.integer('year').notNullable().unsigned()
+      table.integer('day').notNullable()
+      table.integer('month').notNullable()
+      table.integer('year').notNullable()
       table.date('date').notNullable()
-      table.string('type').notNullable()
-      table.string('description').notNullable()
+      
+      table.string('description').notNullable().unique()
+      table.string('installment').notNullable().unsigned()
+      table.string('max_installment').notNullable().unsigned()
       table.decimal('amount', 10, 2).notNullable()
+
+      table.string('type').notNullable()
+      table.string('local', 50).notNullable()
+      
       table.string('category', 50).notNullable()
-      table.string('destiny', 50).notNullable()
+      
       table.boolean('status').notNullable().defaultTo(false)
+      
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

@@ -1,42 +1,45 @@
 <template>
     <div>
-        <MessageSuccess :message="messageSuccess"/>
-        <MessageError :message="messageError"/>
+        <message-success :message="messageSuccess"/>
+        <message-error :message="messageError"/>
+
+        <button class="button bg-orangered text-white mb-4" @click="showFormCategory">
+            <span v-if="statusFormCategory"> Categorias <i class="fa-solid fa-circle-xmark"></i></span>
+            <span v-else> Categorias </span>
+        </button>
+
+        <div v-if="statusFormCategory" class="box has-background-black-ter">
+
+            <h1 class="title is-6 text-orangered m-2">Criar nova categoria:</h1>
+
+            <form action="" method="post" @submit.prevent="createdCategory">
+                <input v-model="nameCategory" type="text" class="input has-background-dark text-white">
+                <button type="submit" class="button is-success mt-2 is-fullwidth">Criar</button>
+            </form>
+
+            <button class="button bg-blue mt-5 is-fullwidth text-white" @click="showCategories" >Ver Categorias</button>
+
         
-        <h1 class="title is-6 text-orangered">Criar nova categoria.</h1>
-
-        <form action="" method="post" @submit.prevent="createdCategory">
-            <input v-model="nameCategory" type="text" class="input has-background-dark text-white">
-            <button type="submit" class="button is-success mt-2 is-fullwidth">Criar</button>
-        </form>
-
-        <button class="button bg-orangered mt-4 is-fullwidth text-white" @click="showCategories" >Ver Categorias</button>
-
-        <div v-if="activeList" class="box mt-2 has-background-black-ter">
-
-            <div  class="table-container">
-                <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 800px;">
+            <div v-if="activeList" class="table-container box mt-2 has-background-black-ter">
+                <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 350px;">
                     <thead>
                         <tr>
-                            <th class="has-text-info has-text-centered">Codigo</th>
                             <th class="has-text-info has-text-centered">Nome</th>
                             <th class="has-text-info has-text-centered">Excluir</th>
                         </tr>
                     </thead>
                     <tbody v-for="category in categories" :key="category.id">
-                        <td>{{ category.id }}</td>
                         <td>{{ category.name }}</td>
                         <td class="text-red" @click="deleteCategory(category.id)" >
                             <i class="fa-solid fa-circle-xmark"></i>
                         </td>
                     </tbody>
-                   
-                </table>
                 
+                </table> 
             </div>
-            
         </div>
-
+        
+        
     </div>
     
 </template>
@@ -51,11 +54,16 @@ export default {
 
             activeList: false,
 
+            statusFormCategory: false,
             messageSuccess: '',
             messageError: '',
         }
     },
     methods: {
+        showFormCategory() {
+            this.statusFormCategory = !this.statusFormCategory
+        },
+
         async createdCategory() {
             try {
                 const token = localStorage.getItem('userToken');
@@ -71,6 +79,8 @@ export default {
                     }
                 })
                 this.nameCategory = ''
+                this.showCategories()
+
                 this.messageSuccess = response.data.message
                 setTimeout(() => {
                     this.messageSuccess = ''

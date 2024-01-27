@@ -4,7 +4,7 @@ Route.post('/', 'UsersController.store').prefix('user')
 
 Route.group(() => {
 
-  Route.get('/', 'UsersController.show')
+  Route.get('/', 'UsersController.show') // em uso
   Route.put('/', 'UsersController.update')
   Route.delete('/', 'UsersController.destroy')
   

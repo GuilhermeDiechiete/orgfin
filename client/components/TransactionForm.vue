@@ -1,32 +1,33 @@
 <template>
-    <div class="box has-background-black-ter">
+    <div class="box">
 
       <message-error :message="messageError"/>
       <message-success :message="messageSuccess"/>
 
       <form @submit.prevent="createdTransaction">
 
-        <input v-model="date" type="date" class="input mb-2 has-background-dark text-white">
-  
-        <input v-model="description" type="text" class="input mb-2 has-background-dark text-white" placeholder="Descrição">
+        <input v-model="date" type="date" class="input mb-2">
+        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição">
+        <input v-model="installment" type="number" class="input mb-2" placeholder="Parcela">
+        <input v-model="max_installment" type="number" class="input mb-2" placeholder="Quantidade de Parcelas">
+        <input v-model="amount" type="text" class="input mb-2" placeholder="Valor">
 
-        <input v-model="amount" type="text" class="input mb-2 has-background-dark text-white" placeholder="Valor">
+        <select v-model="type" class="input mb-2">
+          <option value="output">Selecione o tipo de transação</option>
+          <option value="output">Saida</option>
+          <option value="input">Entrada</option>
+          <option value="investment">Investimento</option>
+        </select>
 
+        <input v-model="local" type="text" class="input mb-2" placeholder="Local">
 
-        <select v-model="category" class="input mb-2 has-background-dark text-white">
+        <select v-model="category" class="input mb-2">
+          <option value="normal">Selecione uma Categoria</option>
           <option v-for="item in categories" :key="item.id" :value="item.name">{{ item.name }}</option>
         </select>
 
-        <input v-model="destiny" type="text" class="input mb-2 has-background-dark text-white" placeholder="Destino do valor">
-  
-        <select v-model="type" class="input mb-2 has-background-dark text-white">
-          <option value="expense">Selecione o tipo de transação</option>
-          <option value="expense">Despesa</option>
-          <option value="income">Renda</option>
-          <option value="investment">Investimento</option>
-        </select>
-  
         <button type="submit" class="button is-fullwidth is-success">Criar</button>
+
       </form>
     </div>
   </template>
@@ -38,13 +39,14 @@
     data() {
       return {
         date: '',
-        type: 'expense' || 'income' || 'investment',
-        description: 'Nova transação',
-        amount: 99.99,
-        category: 'Essenciais',
-        destiny: 'Sicredi',
+        description: '',
+        installment: '',
+        max_installment: '',
+        amount: '',
+        type: 'output' || 'input' || 'investment',
+        local: '',
+        category: '',
         status: false,
-
         categories: {},
 
         messageSuccess: '',
@@ -63,11 +65,13 @@
                 
                 {
                     date: this.date,
-                    type: this.type,
                     description: this.description,
+                    installment: this.installment,
+                    max_installment: this.max_installment,
                     amount: this.amount,
+                    type: this.type,
+                    local: this.local,
                     category: this.category,
-                    destiny: this.destiny,
                     status: this.status,
                 }, 
                 {
@@ -84,6 +88,7 @@
                 }, 1000)
 
             } catch (error ) {
+              console.log(error)
               const errorMessage = Array.isArray(error.response?.data?.message) ?
                 error.response?.data?.message[0]?.message :
                     "Erro desconhecido";
