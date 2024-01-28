@@ -4,8 +4,9 @@ import Route from '@ioc:Adonis/Core/Route'
   // em uso - painel de buscar por mes
 Route.group(() => {
 
-   Route.get('/:year/:month', 'SearchTransactionsController.searchTransactionsByMonth') 
-   Route.get('/total/:year/:month', 'SearchTransactionsController.searchTotalTransactions') 
+   Route.get('/:year/:month', 'SearchTransactionsController.getTransactionsByMonth') 
+   Route.get('/total/:year/:month', 'SearchTransactionsController.getTotalTransactionsByMonth') 
+   Route.get('/:year', 'SearchTransactionsController.getTotal')
 
 })
 .middleware('auth')
