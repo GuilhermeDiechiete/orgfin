@@ -1,6 +1,6 @@
 <template>
     <thead>
-        <tr>
+        <tr class="bg-black-nv2">
             <th class="has-text-info has-text-centered">Data</th>
             <th class="has-text-info has-text-centered"> Descrição</th>
             <th class="has-text-info has-text-centered"> Parcela</th>

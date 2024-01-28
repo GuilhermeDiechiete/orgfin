@@ -1,7 +1,10 @@
 <template>
-    <section class="container is-max-desktop p-5">
-        <div v-if="authorization">
-            <user-box :id="userId" :email="userEmail"/>
+    <section class="container is-max-desktop px-3 pt-5">
+        <div v-if="authorization" class="box bg-black-nv1">
+
+
+            <box-user :id="userId" :email="userEmail"/>
+
             <message-error :message="messageError"/>
 
             <div class="tabs is-toggle is-fullwidth my-4">
@@ -11,17 +14,17 @@
                 </ul>
             </div>
 
-            <category-box class="m-1"/>
+            <box-category/>
 
-            <box-transaction-by-month v-if="activeTable === 'monthly'" class=" box mb-5 has-text-centered p-2"/>
+            <box-created-form/>
+
+            <box-content-month v-if="activeTable === 'monthly'"/>
            
 
-            <div v-if="activeTable === 'yearly'" class="box has-text-centered is-vcentered">
-                
-            </div>  
+            <box-content-year v-if="activeTable === 'yearly'"/> 
         </div>
 
-        <div v-else class="box"><h1>Não foi possivel entrar no aplicativo, tente novamente mais tarde.</h1></div>
+        <div v-else><h1>Não foi possivel entrar no aplicativo, tente novamente mais tarde.</h1></div>
 
     </section>
 </template>
@@ -36,7 +39,7 @@ export default Vue.extend({
         return {
             authorization: false, // bloqueia a visualização do app caso o email ou id não venha no token
             activeTable: 'monthly', // controla entre o resumo mensal e anual
-
+            
             messageError: '',
 
             userEmail: '-----',
@@ -76,6 +79,7 @@ export default Vue.extend({
         selectedTable(table: string) {
             this.activeTable = table
         },
+        
     }
 })
 

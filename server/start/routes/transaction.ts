@@ -2,7 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
   Route.post('/', 'TransactionsController.store') // em uso
-  Route.delete('/', 'TransactionsController.destroy') // em uso
+  Route.delete('/:id', 'TransactionsController.destroy') // em uso
 })
-  .middleware('auth')
-  .prefix('transaction')
+.middleware('auth')
+.prefix('transaction')

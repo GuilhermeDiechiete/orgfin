@@ -1,38 +1,44 @@
 <template>
-    <div>
-        <message-success :message="messageSuccess"/>
-        <message-error :message="messageError"/>
+    <div class="has-text-justified">
+        
 
-        <button class="button bg-orangered text-white mb-4" @click="showFormCategory">
+        <button class="button bg-orangered text-white" @click="showFormCategory">
             <span v-if="statusFormCategory"> Categorias <i class="fa-solid fa-circle-xmark"></i></span>
             <span v-else> Categorias </span>
         </button>
 
-        <div v-if="statusFormCategory" class="box has-background-black-ter">
+        <div v-if="statusFormCategory" class="box bg-black-nv2">
 
-            <h1 class="title is-6 text-orangered m-2">Criar nova categoria:</h1>
+            <message-success :message="messageSuccess"/>
+            <message-error :message="messageError"/>
+
+
+            <h1 class="title is-6 text-orangered my-2">Criar nova categoria:</h1>
 
             <form action="" method="post" @submit.prevent="createdCategory">
-                <input v-model="nameCategory" type="text" class="input has-background-dark text-white">
+                <input v-model="nameCategory" type="text" class="input text-white bg-black-nv3">
                 <button type="submit" class="button is-success mt-2 is-fullwidth">Criar</button>
             </form>
 
             <button class="button bg-blue mt-5 is-fullwidth text-white" @click="showCategories" >Ver Categorias</button>
 
         
-            <div v-if="activeList" class="table-container box mt-2 has-background-black-ter">
-                <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 350px;">
+            <div v-if="activeList" class="table-container box mt-2 bg-black-nv1">
+                <table class="table is-bordered is-fullwidth has-text-centered has-text-info-light" style="min-width: 350px;">
                     <thead>
-                        <tr>
+                        <tr class="bg-black-nv1">
                             <th class="has-text-info has-text-centered">Nome</th>
                             <th class="has-text-info has-text-centered">Excluir</th>
                         </tr>
                     </thead>
                     <tbody v-for="category in categories" :key="category.id">
-                        <td>{{ category.name }}</td>
-                        <td class="text-red" @click="deleteCategory(category.id)" >
-                            <i class="fa-solid fa-circle-xmark"></i>
-                        </td>
+                        <tr class="bg-black-nv1">
+                           <td>{{ category.name }}</td>
+                            <td class="text-red" @click="deleteCategory(category.id)" >
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </td> 
+                        </tr>
+                        
                     </tbody>
                 
                 </table> 

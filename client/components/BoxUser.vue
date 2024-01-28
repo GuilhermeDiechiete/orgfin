@@ -1,6 +1,6 @@
 <template>
-    <div class="box p-2 has-background-black-ter">
-      <h1 class="text-white">
+    <div class="box p-2 bg-black-nv2 text-white">
+      <h1>
         {{ id }}
         <i class="fa-solid fa-user text-orangered mx-2"></i>
         {{ email }}

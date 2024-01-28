@@ -1,15 +1,9 @@
 <template>
-    <div class="box p-2 has-background-black-bis">
+    <div class="box bg-black-nv3">
 
-        <message-error :message="messageError"/>
-        <message-success :message="messageSuccess"/>
-
-        <button class="button is-fullwidth bg-orangered text-white my-4" @click="showFormTransaction()">Nova Transação</button>
-        <transaction-form v-if="statusFormTransaction"/>
-
-        <div class="box p-2 has-background-black-ter">
-            <div class="select m-1">
-                <select v-model="month" >
+        <div class="box p-2 has-text-centered bg-black-nv2">
+            <div class="select m-1 ">
+                <select v-model="month" class="">
                     <option value="1">Janeiro</option>
                     <option value="2">Fevereiro</option>
                     <option value="3">Março</option>
@@ -25,7 +19,7 @@
                 </select>
             </div>
 
-            <div class="select m-1">
+            <div class="select m-1 ">
                 <select v-model="year">
                     <option value="2024">2024</option>
                     <option value="2025">2025</option>
@@ -36,44 +30,51 @@
             <button class="button bg-orangered m-1" @click="searchTransactionsByMonth" >Buscar</button>
         </div>
 
+        <message-error :message="messageError"/>
+        <message-success :message="messageSuccess"/>
+
         <div class="columns is-desktop">
 
-            <div class="box column has-background-black-ter m-3 p-2" @click="selectedTableType('output')">
-                <h1 class="title is-5 text-orangered mb-2">
+            <div class="box column m-3 p-2 bg-black-nv2 has-text-centered" @click="selectedTableType('output')">
+                <h1 class="title is-5 text-orangered my-2">
                     <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration:3s;"></i>
                     Saídas
                 </h1>
                 <h2 class="title is-5 has-text-centered is-vcentered">
-                    <span class="box p-2 mx-5 has-background-black-bis text-white">R$ {{ valueTotalOutputsAPI }}</span>
+                    <span class="box p-2 mx-5 mb-4 bg-black-nv3 text-white">R$ {{ valueTotalOutputsAPI }}</span>
                 </h2>
             </div>
 
-            <div class=" box column is-vcentered has-background-black-ter m-3  p-2" @click="selectedTableType('input')">
-                <h1 class="title is-5 text-orangered mb-2">
+            <div class=" box column is-vcentered m-3 p-2 bg-black-nv2 has-text-centered" @click="selectedTableType('input')">
+                <h1 class="title is-5 text-orangered my-2">
                     <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;" ></i>
                     Entradas
                 </h1>
                 <h2 class="title is-5 text-white has-text-centered">
-                    <span class="box p-2 mx-5 has-background-black-bis text-white">R$ {{ valueTotalInputsAPI }}</span>
+                    <span class="box p-2 mx-5 mb-4 bg-black-nv3 text-white">R$ {{ valueTotalInputsAPI }}</span>
                 </h2>
             </div>
 
-            <div class=" box column is-vcentered has-background-black-ter m-3  p-2" @click="selectedTableType('investments')">
-                <h1 class="title is-5 text-orangered mb-2">
+            <div class=" box column is-vcentered m-3  p-2 bg-black-nv2 has-text-centered" @click="selectedTableType('investments')">
+                <h1 class="title is-5 text-orangered my-2">
                     <i class="fa-solid fa-money-check-dollar fa-flip text-orangered mr-2" style="--fa-animation-duration: 3s;"></i>
                     Investimentos
                 </h1>
                 <h2 class="title is-5 text-white has-text-centered">
-                    <span class="box p-2 mx-5 has-background-black-bis text-white">R$ {{ valueTotalInvestmentsAPI }}</span>
+                    <span class="box p-2 mx-5 mb-4 bg-black-nv3 text-white">R$ {{ valueTotalInvestmentsAPI }}</span>
                 </h2>  
             </div>
         </div>  
 
-        <div class="box has-background-black-ter">
+        <div class="box bg-black-nv2">
+            
                 <div class="table-container">
-                    <title-table-transaction/>
-                    <table class="table is-bordered is-fullwidth has-background-black-ter has-text-centered has-text-info-light" style="min-width: 900px;">
-                        <thead-table-transaction :title="titleTable"/>
+
+                    <h1 class=" mb-5 has-text-centered text-orangered"> {{ titleTable }} </h1>
+                    <table class="table is-bordered is-fullwidth has-text-centered" style="min-width: 850px;">
+                        
+                        
+                        <thead-table-transaction/>
                         <tbody-table-transaction :transactions="infoTransaction"/>
                     </table>
                 </div>  
@@ -90,8 +91,8 @@ export default Vue.extend({
         return {
             statusFormTransaction: false,
 
-            month: new Date().getFullYear(),
-            year: new Date().getMonth() + 1,
+            month: new Date().getMonth() + 1,
+            year: new Date().getFullYear(),
 
             // armazenamento de mensagens de sucesso e erro
             messageSuccess: '',
@@ -135,9 +136,7 @@ export default Vue.extend({
         },
 
         // metodos do formulario de criação de transação
-        showFormTransaction() {
-            this.statusFormTransaction = !this.statusFormTransaction
-        },
+        
 
         async searchTransactionsByMonth() {
             try {

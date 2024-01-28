@@ -10,65 +10,21 @@
     font-family: 'Comfortaa';
     src: url('../fonts/comfortaa/Comfortaa-Regular.ttf') format('woff');
     }
-/* colors black */
+
 .scroll-table {
     
     overflow-x: auto;
     white-space: nowrap;
 }
 
-input::placeholder {
-    color: rgb(246, 119, 73);
-}
-
 body {
-    background-color: var(--black3);
+    background-color: rgb(44, 44, 44);
     min-height: 100vh;
 }
-:root {
-    --black1: rgb(0, 0, 0);
-    --black2: rgb(17, 17, 17);
-    --black3: rgb(21, 21, 21);
-    --black4: rgb(32, 32, 32);
-}
-
 
 .is-active-orangered {
     background-color: orangered;
     color: white;
-
-}
-.black1 {
-    color: var(--black1);
-}
-.black2 {
-    color: var(--black2);
-}
-.black3 {
-    color: var(--black3);
-}
-.black4 {
-    color: var(--black4);
 }
 
 
-.bg-blue {
-    background-color: rgb(81, 81, 253);
-}
-.bg-orangered {
-    background-color: rgb(246, 94, 39);
-}
-
-.text-blue {
-    color: rgb(63, 63, 249);
-}
-.text-red {
-    color: rgb(235, 0, 0)
-}
-.text-white {
-    color: white;
-}
-.text-orangered {
-    color: rgb(246, 94, 39);
-    border: none;
-}

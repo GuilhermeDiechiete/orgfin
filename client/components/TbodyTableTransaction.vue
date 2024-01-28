@@ -1,6 +1,9 @@
 <template>
     <tbody>
-        <tr v-for="value in transactions" :key="value.id">
+        <message-success :message="messageSuccess"/>
+        <message-error :message="messageError"/>
+
+        <tr v-for="value in transactions" :key="value.id" class="bg-black-nv2">
 
             <td>{{ value.day }}-{{ value.month }}-{{ value.year }}</td>
             <td>{{ value.description }}</td>
@@ -22,31 +25,41 @@
   </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  props: {
-    transactions: {
-      type: Array,
-      default: () => []
-    }
-  },
+    props: {
+        transactions: {
+        type: Array,
+        default: () => []
+        }
+    },
+
+
+    data() {
+        return {
+          
+        }
+    },
+  
 
   methods: {
     async deleteTransaction(id) {
             try {
-                
                 const token = localStorage.getItem('userToken');
-
                 const response = await axios.delete(`http://127.0.0.1:4000/transaction/${id}`,
                 {
                     headers: {
                         'Authorization': `${token}`,
                     }
                 })
+                window.location.reload();
                 this.messageSuccess = response.data.message
 
                 setTimeout(() => {
                     this.messageSuccess = ''
                 }, 1000)
+
             } catch (error) {
                 const errorMessage = Array.isArray(error.response?.data?.message) ?
                 error.response?.data?.message[0]?.message :

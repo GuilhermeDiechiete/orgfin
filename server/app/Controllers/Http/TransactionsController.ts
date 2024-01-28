@@ -32,7 +32,9 @@ export default class TransactionsController {
   }
 
   public async destroy({ params, auth, response }: HttpContextContract) {
+
     try {
+      
       const user = auth.user
       if (!user) {
         return response.status(401).json({ message: 'Sem permissão.' })

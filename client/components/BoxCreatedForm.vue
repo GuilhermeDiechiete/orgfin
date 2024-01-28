@@ -1,27 +1,30 @@
 <template>
-    <div class="box">
+    <div>
 
-      <message-error :message="messageError"/>
-      <message-success :message="messageSuccess"/>
 
-      <form @submit.prevent="createdTransaction">
+      <button class="button is-fullwidth bg-orangered text-white my-4 p-5" @click="showFormTransaction()">Nova Transação</button>
 
-        <input v-model="date" type="date" class="input mb-2">
-        <input v-model="description" type="text" class="input mb-2" placeholder="Descrição">
-        <input v-model="installment" type="number" class="input mb-2" placeholder="Parcela">
-        <input v-model="max_installment" type="number" class="input mb-2" placeholder="Quantidade de Parcelas">
-        <input v-model="amount" type="text" class="input mb-2" placeholder="Valor">
+      <form  v-if="statusFormTransaction" class="box bg-black-nv2 mb-4" @submit.prevent="createdTransaction">
 
-        <select v-model="type" class="input mb-2">
+        <message-error :message="messageError"/>
+        <message-success :message="messageSuccess"/>
+
+        <input v-model="date" type="date" class="input mb-2 bg-black-nv3 text-white">
+        <input v-model="description" type="text" class="input mb-2 bg-black-nv3 text-white" placeholder="Descrição">
+        <input v-model="installment" type="number" class="input mb-2 bg-black-nv3 text-white" placeholder="Parcela">
+        <input v-model="max_installment" type="number" class="input mb-2 bg-black-nv3 text-white" placeholder="Quantidade de Parcelas">
+        <input v-model="amount" type="text" class="input mb-2 bg-black-nv3 text-white" placeholder="Valor">
+
+        <select v-model="type" class="input mb-2 bg-black-nv3 text-white">
           <option value="output">Selecione o tipo de transação</option>
           <option value="output">Saida</option>
           <option value="input">Entrada</option>
           <option value="investment">Investimento</option>
         </select>
 
-        <input v-model="local" type="text" class="input mb-2" placeholder="Local">
+        <input v-model="local" type="text" class="input mb-2 bg-black-nv3 text-white" placeholder="Local">
 
-        <select v-model="category" class="input mb-2">
+        <select v-model="category" class="input mb-2 bg-black-nv3 text-white">
           <option value="normal">Selecione uma Categoria</option>
           <option v-for="item in categories" :key="item.id" :value="item.name">{{ item.name }}</option>
         </select>
@@ -48,7 +51,7 @@
         category: '',
         status: false,
         categories: {},
-
+        statusFormTransaction: false,
         messageSuccess: '',
         messageError: '',
       };
@@ -57,6 +60,9 @@
       this.getCategories()
     },
     methods: {
+      showFormTransaction() {
+            this.statusFormTransaction = !this.statusFormTransaction
+        },
         async createdTransaction() {
             try {
                 const token = localStorage.getItem('userToken');

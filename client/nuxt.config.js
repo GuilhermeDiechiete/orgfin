@@ -18,6 +18,8 @@ export default {
   css: [
     'bulma/css/bulma.css',
     '@/assets/css/main.css',
+    '@/assets/css/bg-color.css',
+    '@/assets/css/text-color.css',
     '@fortawesome/fontawesome-free/css/all.css',
   ],
  
