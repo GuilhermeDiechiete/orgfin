@@ -16,9 +16,9 @@
         <input v-model="amount" type="text" class="input mb-2 bg-black-nv3 text-white" placeholder="Valor">
 
         <select v-model="type" class="input mb-2 bg-black-nv3 text-white">
-          <option value="output">Selecione o tipo de transação</option>
-          <option value="output">Saida</option>
-          <option value="input">Entrada</option>
+          <option value="expense">Selecione o tipo de transação</option>
+          <option value="expense">Despesa</option>
+          <option value="income">Renda</option>
           <option value="investment">Investimento</option>
         </select>
 
@@ -46,7 +46,7 @@
         installment: '',
         max_installment: '',
         amount: '',
-        type: 'output' || 'input' || 'investment',
+        type: 'expense' || 'income' || 'investment',
         local: '',
         category: '',
         status: false,
@@ -94,7 +94,6 @@
                 }, 1000)
 
             } catch (error ) {
-              console.log(error)
               const errorMessage = Array.isArray(error.response?.data?.message) ?
                 error.response?.data?.message[0]?.message :
                     "Erro desconhecido";

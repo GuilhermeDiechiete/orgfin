@@ -1,44 +1,54 @@
 <template>
     <div class="box">
         conteudo anual
+
+        <button @click="fetchData">Buscar</button>
     </div>
 </template>
 
 <script lang="ts">
 
 export default {
+    data() {
+        return {
+            year: 2024,
 
-    data: () => ({
-        
-        outputs: [],
-        token: localStorage.getItem('userToken') || undefined,
-        year: '',
-        messageError: ''
-    }),
+            expensesAPI: [],
+            incomesAPI: [],
+            investmentsAPI: [],
 
-    async fetch({ $axios }) {
+            messageError: '',
+            messageSuccess: ''
+        }
+    },
+    methods: {
+        async fetchData () {
+            try {
+                const token = localStorage.getItem('userToken');
 
-        try {
-            this.outputs = await $axios.$get(`http://127.0.0.1:4000/gettransactions/${this.year}`), {
+                const response = await $axios.$get(`http://127.0.0.1:4000/gettransactions/total/${this.year}/${this.month}`,
 
-                headers: {
-                    'Authorization': this.token,
-                }
-            }
+                {
+                    headers: {
+                        'Authorization': `${token}`,
+                    }
+                })
+                this.expensesAPI = response.data.totalExpenses
+                this.incomesAPI = response.data.totalIncomes
+                this.investmentsAPI = response.data.totalInvestments 
 
-
-
-        } catch (error: any) {
-            this.messageError = error.response.data.message 
+                this.messageSuccess = response.data.message
+                setTimeout(() => {
+                    this.messageSuccess = ''
+                }, 2000)
+                
+            } catch (error: any) {
+                this.messageError = error
                 setTimeout(() => {
                     this.messageError = '';
                 }, 2000);
-        }
-    },
-
-
-   
+            }
+        },
     }
 }
-
 </script>

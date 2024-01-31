@@ -38,7 +38,8 @@ export default {
 
     data() {
         return {
-          
+          messageError: '',
+          messageSuccess: ''
         }
     },
   
