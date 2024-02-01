@@ -1,0 +1,11 @@
+<template>
+  <tbody>
+    <tr>
+      <td>Janeiro</td>
+      <td>2.000</td>
+      <td>3.000</td>
+      <td>500,00</td>
+      <td>500,00</td>
+    </tr>
+  </tbody>
+</template>

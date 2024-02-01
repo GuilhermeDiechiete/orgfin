@@ -1,0 +1,11 @@
+<template>
+  <thead>
+    <tr>
+      <th>Mês</th>
+      <th>Despesas</th>      
+      <th>Rendas</th>
+      <th>Sobra</th>
+      <th>Investimentos</th>
+    </tr>
+  </thead>
+</template>

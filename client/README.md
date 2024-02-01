@@ -1,24 +1,29 @@
-# client
-
-## Sources of Dependencies
-
-#### Bulma [ Style ]- Source of styles used in the project.
-
-```
-https://bulma.io/documentation
-```
-
-#### FontAwesome [ Icons ] Source of icons used in the project.
-
-```
-https://fontawesome.com/search
-
-```
-## Commands
-
-npx create-nuxt-app <project-name> [ CRIAR PROJETO ]
 
 
 
+
+
+## Documentations
+
+Nuxt 3
+
+https://nuxt.com/docs/getting-started/introduction
+
+
+TailwindCss
+
+https://tailwindcss.com/docs/installation
+
+https://tailwindcss.com/docs/container
+
+
+
+
+npx nuxi@latest init <project-name>
+
+npm install --save-dev eslint @nuxt/eslint-config
+
+npm install -D tailwindcss
+npx tailwindcss init
 
 

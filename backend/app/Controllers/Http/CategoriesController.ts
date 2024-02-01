@@ -22,7 +22,10 @@ export default class CategoriesController {
       await user.related('categories').create({ name })
       return 'Categoria criada com sucesso.'
     } catch (error) {
-      return error
+      if(error?.messages?.errors[0]?.message) {
+        return error.messages.errors[0].message
+      } 
+      return 'Erro ao criar categoria.'
     }
     
 
