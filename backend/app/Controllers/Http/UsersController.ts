@@ -6,6 +6,7 @@ export default class UsersController {
 
   public async store({ request }: HttpContextContract) {
     try {
+      console.log(request)
       const { username, email, password } = await request.validate(StoreValidator)
       const user = await User.create({ username, email, password })
       await user.save()

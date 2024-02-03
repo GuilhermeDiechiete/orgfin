@@ -1,5 +1,6 @@
 <template>
   <div>
+    <BoxSearch />
     <div class="tabs is-toggle is-fullwidth">
       <ul>
         <li
@@ -39,17 +40,17 @@ export default {
   data() {
     return {
       active: 'monthly'
-    }
+    };
   },
   methods: {
     isActive(selectedTable: string) {
       if(selectedTable === 'yearly') {
-        this.active = 'yearly'
+        this.active = 'yearly';
       } else {
-        this.active = 'monthly'
+        this.active = 'monthly';
       }
 
     }
   }
-}
+};
 </script>

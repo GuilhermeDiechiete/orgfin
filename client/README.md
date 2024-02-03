@@ -26,4 +26,7 @@ npm install --save-dev eslint @nuxt/eslint-config
 npm install -D tailwindcss
 npx tailwindcss init
 
+npm i pinia @pinia/nuxt
+
+
 

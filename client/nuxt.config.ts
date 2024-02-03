@@ -3,14 +3,18 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-  
+    '@pinia/nuxt'
   ],
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
+
   components: [
     '~/components', 
-    '~/components/tables', 
-    '~/components/tables/headers', 
-    '~/components/tables/bodies', 
     '~/components/buttons', 
+    '~/components/form',  
+    '~/components/notifications',
+    '~/components/tables',
   ],
 
 
@@ -19,4 +23,4 @@ export default defineNuxtConfig({
 }
 
   
-)
+);
