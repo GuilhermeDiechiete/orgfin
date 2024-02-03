@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label> {{ label }}</label>
+    <label class="label"> {{ label }}</label>
     <input :type="type"
-           class="input mb-2">
+           class="input mb-3">
   </div>
 </template>
   

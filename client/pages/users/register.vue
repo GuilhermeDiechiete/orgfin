@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <h1 class="title is-3 has-text-centered">Registre-se</h1>
+    <FormTitle text="Registre-se" />
 
     <Message v-if="user.message" :text="user.message" />
 
@@ -9,7 +9,7 @@
       <FormInput v-model="userData.email" label="E-mail" />
       <FormInput v-model="userData.password" label="Senha" />
       <FormInput v-model="userData.confirmPassword" label="Confirmação de senha" />
-      <FormButton text="Enviar" @click="registerUser" />
+      <FormButton text="Enviar" @click="user.register(userData.value)" />
     </form>
     <div class="has-text-centered">
       <NuxtLink to="/auth/login">Já tem uma conta? Faça Login!</NuxtLink>
@@ -18,8 +18,7 @@
 </template>
 
 <script setup>
-
-const user = userStore();
+const user = useUserStore();
 
 const userData = ref({
   username: '',
@@ -28,7 +27,13 @@ const userData = ref({
   confirmPassword: '',
 });
 
-const registerUser = user.register(userData.value);
+
+
+
+
+
+
+
 
 
 

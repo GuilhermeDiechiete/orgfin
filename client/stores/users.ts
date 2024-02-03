@@ -4,13 +4,13 @@ const api = 'http://localhost:4000/user';
 
 
 
-export const userStore = defineStore('user', {
+export const useUserStore = defineStore('user', {
     
     state: () => ({
         username: '',
         email: '',
         password: '',
-        message: '',
+        message: ref(''),
 
     }),
 
@@ -30,12 +30,12 @@ export const userStore = defineStore('user', {
                 this.message = String(response);
                 setTimeout(() => {
                     this.message = '';
-                  }, 1000);
+                  }, 3000);
             } catch (error) {
                 this.message = String(error);
                 setTimeout(() => {
                     this.message = '';
-                  }, 1000);
+                  }, 3000);
             }
             
         }

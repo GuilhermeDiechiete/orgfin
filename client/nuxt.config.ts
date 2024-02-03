@@ -18,7 +18,10 @@ export default defineNuxtConfig({
   ],
 
 
-  css: ['bulma/css/bulma.css']
+  css: [
+    'bulma/css/bulma.css', 
+    '@/assets/css/bg-color.css',
+    '@/assets/css/text-color.css']
   
 }
 
