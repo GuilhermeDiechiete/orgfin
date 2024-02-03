@@ -9,7 +9,7 @@ export default class AuthController {
       const token = await auth.attempt(email, password, {
         expiresIn: '30 mins'
       })
-      return token
+      return { message: 'Login Efetuado com sucesso.', token }
 
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   modules: [
     '@pinia/nuxt'
@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     '~/components/form',  
     '~/components/notifications',
     '~/components/tables',
+    '~/components/tables/headers',
+    '~/components/tables/bodies',
   ],
 
 

@@ -12,7 +12,7 @@ export default class UsersController {
       await user.save()
       const userKey = 'secretKey' + username
       user.related('keys').create({ key: userKey })
-      return { user, message: 'Usuário criado com sucesso.'}
+      return 'Usuário criado com sucesso.'
 
     } catch (error) {
       
