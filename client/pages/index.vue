@@ -6,18 +6,23 @@
       <BoxNavegation />
       <BoxTransactions />
     </div>
-    <div v-else />
+
+    <div v-else>Faça login novamente!</div>
+    
   </section>
 </template>
 
-
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useUserStore } from '@/stores/users'; // Certifique-se de ajustar o caminho do seu store
 
-const { user, message, token, authorized, show } = useUserStore();
+const store = useUserStore();
+const { autorized } = storeToRefs(store);
 
-onMounted(async () => {
-  await show();
+onMounted(() => {
+   callOnce(store.show);
 });
+
+
+
+
 </script>

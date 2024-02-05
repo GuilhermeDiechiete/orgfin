@@ -4,7 +4,7 @@ const api = 'http://localhost:4000';
 
 interface AuthResponse {
     token: string;
-    id: number;
+    userId: string;
 }
 interface ShowResponse {
     id: number;
@@ -21,10 +21,10 @@ export const useUserStore = defineStore('user', {
                 username: '',
                 email: '', 
             },
-            
+            autorized: false,
             message: ref(''), 
             token: ref(''),
-            autorized: false,
+            
             };
     },
     
@@ -32,7 +32,7 @@ export const useUserStore = defineStore('user', {
         getMessage: (state) => state.message,
         getToken: (state) => state.token,
         getUser: (state) => state.user,
-        autorized: (state) => state.autorized,
+       
     },
     
     actions: {
@@ -70,7 +70,8 @@ export const useUserStore = defineStore('user', {
                     password: data.password,
                 }
             });
-                this.user.id = response.id;
+               
+                localStorage.setItem('userId', response.userId);
                 localStorage.setItem('token', response.token);
                 navigateTo('/');
 
@@ -86,31 +87,26 @@ export const useUserStore = defineStore('user', {
         async show() {
             try {
                 const userToken = localStorage.getItem('token');
+                const userId = localStorage.getItem('userId');
 
-                if (userToken) {
-                    const user: ShowResponse = await $fetch(`${api}/user/${this.user.id}`, {
+                if (userToken && userId) {
+                    const user: ShowResponse = await $fetch(`${api}/user/${userId}`, {
                         method: 'GET',
                         headers: {
                             Authorization: `${userToken}`
                         }
                     });
-        
-                    this.autorized = true;
                     this.user.id = user.id;
                     this.user.username = user.username;
                     this.user.email = user.email;
-
+                    this.autorized = true;
 
                 } else {
-                    console.log('Token não encontrado');
+                    navigateTo('/auth/login');
                 }
         
             } catch (error) {
-                console.log(error);
-                this.message = String(error);
-                setTimeout(() => {
-                    this.message = '';
-                  }, 1000);
+                navigateTo('/auth/login');
             }
         }
     

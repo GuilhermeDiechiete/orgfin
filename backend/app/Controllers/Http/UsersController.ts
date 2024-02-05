@@ -25,10 +25,10 @@ export default class UsersController {
     
   }
 
-  public async show({ auth, response }: HttpContextContract) {
+  public async show({ params, auth, response }: HttpContextContract) {
     try {
       const user = auth.user 
-      if(!user){
+      if(!user || user.id !== params.id){
         return response.status(401).json({ message: 'Não autorizado.'})
       }
       const infoUser = await User.findByOrFail('id', user.id)

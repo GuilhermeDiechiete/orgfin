@@ -14,7 +14,7 @@ export default class AuthController {
       if(!data) {
         return response.status(404).json('Usuário não identificado')
       }
-      return response.status(200).json({ data: data, token: `Bearer ${token.token}` })
+      return response.status(200).json({ userId: data.id, token: `Bearer ${token.token}` })
 
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {
