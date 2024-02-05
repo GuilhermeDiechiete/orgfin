@@ -2,14 +2,14 @@
   <div>
     <FormTitle text="Login" />
 
-    <Message v-if="authStore.message" :text="authStore.message" />
+    <Message v-if="userStore.message" :text="userStore.message" />
 
-    <form @submit.prevent="submitForm" action="" method="post">
+    <form action="" method="post" @submit.prevent="submitForm">
       <label for="" class="label">E-mail</label>
-      <input class="input" v-model="userData.email" type="text">
+      <input v-model="userData.email" class="input" type="text">
 
       <label for="" class="label">Senha</label>
-      <input class="input" v-model="userData.password" type="text">
+      <input v-model="userData.password" class="input" type="text">
 
       <FormButton type="submit" text="Entrar" />
     </form>
@@ -23,14 +23,14 @@ const userData = ref({
   password: '',
 });
 
-const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const submitForm = async () => {
   try {
-    await authStore.login(userData.value);
+    await userStore.login(userData.value);
 
   } catch (error) {
-    console.error('Erro durante o registro:', error);
+    console.error('Erro durante o login:', error);
   }
 };
 </script>
