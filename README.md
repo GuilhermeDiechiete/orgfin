@@ -1,5 +1,52 @@
 # OrgFin - Organização Financeira
 
+## Tecnologias Utilizadas no Backend
+
+Typescript: Linguagem de desenvolvimento
+
+```
+https://www.typescriptlang.org/
+```
+
+PostgreSQL: Banco de dados Relacional
+
+```
+https://www.postgresql.org/docs/
+```
+
+Adonis.js: Adonis.js é um framework web para Node.js, seguindo o padrão MVC. 
+
+```
+https://docs.adonisjs.com/guides/introduction
+```
+
+## Tecnologias Utilizadas no FrontEnd
+
+Typescript: Linguagem de desenvolvimento
+
+Nuxt3: O Nuxt 3 é um framework de desenvolvimento web baseado em Vue.js, projetado para simplificar a criação de aplicativos modernos e eficientes.
+
+```
+https://nuxt.com/docs/getting-started/introduction
+```
+
+Pinia: Pinia é uma biblioteca de loja para Vue, que permite compartilhar um estado entre componentes/páginas. 
+
+```
+https://pinia.vuejs.org/introduction.html
+```
+
+BulmaCSS: https://bulma.io/documentation/overview/start/
+
+```
+https://bulma.io/documentation/overview/start/
+```
+
+
+
+
+
+
 #### Desenvolvido por <strong>Guilherme Diechiete da Silva</strong>
 
 
