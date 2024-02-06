@@ -1,27 +1,15 @@
-
 <template>
   <div>
-    <FormButton text="Adicionar nova transação" @click="isActive()" />
-
-    <div v-if="active">
-      <FormTransaction />
-    </div>
+    <BtnNewTransaction @click="isActive" />
+    <FormTransaction v-if="active" />
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
-export default {
-  data() {
-    return {
-      active: false
-    };
-  },
-  methods: {
-    isActive() {
-      this.active = !this.active;
-    }
-  }
-};
+const active = ref(false)
 
+const isActive = () => {
+    active.value = !active.value
+}
 </script>

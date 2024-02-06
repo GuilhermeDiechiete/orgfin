@@ -8,6 +8,11 @@
       method="post"
     >  
       <InputForm
+        label="Nome de usuário:"
+        placeholder="Guilherme"
+        type="text"
+      />
+      <InputForm
         label="E-mail:"
         placeholder="email@gmail.com"
         type="email"
@@ -17,13 +22,13 @@
         placeholder="******"
         type="password"
       /> 
-
+  
       <BtnFullWidth text="Entrar" />
     </form>
 
     <div class="has-text-centered">
-      <NuxtLink to="/auth/register">
-        Não tem uma conta? Registre-se!
+      <NuxtLink to="/auth/login">
+        Já tem uma conta? Faça Login!
       </NuxtLink>
     </div>
   </div>

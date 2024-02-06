@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4 box">
-    <NuxtPage />
-  </div>
+  <NuxtLayout>
+    <NuxtPage class="container" />
+  </NuxtLayout>
 </template>
