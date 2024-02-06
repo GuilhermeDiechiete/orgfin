@@ -1,10 +1,14 @@
 # OrgFin - Organização Financeira
 
+## Desenvolvido por <strong>Guilherme Diechiete da Silva</strong>
+
 ### Configurações para testar o projeto
 
 Nos diretórios server e client , execute o comando para instalar as dependências:
 
-```npm install```
+```
+npm install
+```
 
 Após instalar todas as dependências, precisamos configurar o banco de dados na sua maquina, é necessario installar o PostgreSQL.
 
