@@ -1,8 +1,5 @@
 <template>
   <div>
-    <BtnNext
-      to="/"
-      text="voltar"
-    />
+    <BoxCategories />
   </div>
 </template>

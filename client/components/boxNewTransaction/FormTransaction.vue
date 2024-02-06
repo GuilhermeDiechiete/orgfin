@@ -1,6 +1,6 @@
 
 <template>
-  <form class="box">
+  <form class="box mb-4">
     <InputForm
       label="Data:"
       type="date"
@@ -45,5 +45,6 @@
       placeholder="Lancheria xxx, Banco xxx"
       type="text"
     />
+    <BtnFullWidth text="Criar" />
   </form>
 </template>

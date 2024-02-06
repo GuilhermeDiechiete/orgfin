@@ -1,9 +1,9 @@
 <template>
   <NuxtLink :to="to" class="button m-1 is-fullwidth">
-    {{ text }}
+    Voltar
   </NuxtLink>
 </template>
   
 <script setup lang="ts">
-defineProps(['text', 'to'])
+defineProps([ 'to'])
 </script>

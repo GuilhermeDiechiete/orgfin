@@ -1,8 +1,3 @@
 <template>
-  <div>
-    <BtnNext
-      to="/"
-      text="voltar"
-    />
-  </div>
+  <BoxAccounts />
 </template>

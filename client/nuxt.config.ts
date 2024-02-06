@@ -12,6 +12,8 @@ export default defineNuxtConfig({
     '~/components/boxUser',
     '~/components/boxNavegationPages',
     '~/components/boxTables',
-    '~/components/boxNewTransaction'
+    '~/components/boxNewTransaction',
+    '~/components/boxCategories',
+    '~/components/boxAccounts'
   ]
 })
