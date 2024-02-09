@@ -1,0 +1,14 @@
+<template>
+  <section>
+    <BtnNavPage
+      to="/categories"
+      text="Categorias"
+      iconame="bxs:category-alt"
+    />
+    <BtnNavPage
+      to="/accounts"
+      text="Contas"
+      iconame="material-symbols:account-balance"
+    />
+  </section>
+</template>

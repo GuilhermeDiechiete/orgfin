@@ -19,6 +19,9 @@ Pinia: https://pinia.vuejs.org/introduction.html
 
 BulmaCSS: https://bulma.io/documentation/overview/start/
 
+Nuxt-Icon: https://icones.js.org/collection/all?s=Finan
+
+Font-Awesome: https://fontawesome.com/search
 
 
 

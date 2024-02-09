@@ -1,4 +1,30 @@
 
 body {
     padding: 1em;
+    background-color: black;
+    min-height: 100vh;
+}
+
+.icon-color {
+    margin-right: 0.5em;
+    color: orangered;
+}
+
+.shelf {
+    background-color: rgb(29, 29, 29);
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-top: 0.4em;
+    display: flex;
+    flex-wrap: wrap;
+}
+.my-box {
+    flex: 1;
+}
+
+.display {
+    background-color: black;
+    margin: 0.2em;
+    border-radius: 0.5em;
+    padding-left: 1em;
 }

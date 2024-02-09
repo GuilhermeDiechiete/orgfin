@@ -1,8 +1,3 @@
 <template>
-  <section>
-    <BoxUser />
-    <BoxNavegationPages />
-    <BoxNewTransaction />
-    <BoxTables />
-  </section>
+  <Shelf />
 </template>

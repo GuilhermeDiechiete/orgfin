@@ -2,18 +2,26 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
+  modules: ['nuxt-icon'],
+
+  
+  
   css: [
     'bulma/css/bulma.css',
-    '~/assets/css/main.css'
+    '@fortawesome/fontawesome-free/css/all.css',
+    '~/assets/css/main.css',
+    '~/assets/css/bg-color.css',
+    '~/assets/css/text-color.css'
   ],
+
+  
+
+
   components: [
     '~/components',
-    '~/components/global',
-    '~/components/boxUser',
-    '~/components/boxNavegationPages',
-    '~/components/boxTables',
-    '~/components/boxNewTransaction',
-    '~/components/boxCategories',
-    '~/components/boxAccounts'
+    '~/components/fragments',
+    '~/components/items',
+    '~/components/boxes',
+    '~/components/shelves',
   ]
 })
