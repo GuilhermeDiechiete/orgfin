@@ -2,9 +2,15 @@
 .bg-dark {
     background-color: rgb(29, 29, 29);
 }
+.bg-dark2 {
+    background-color: rgb(25, 25, 25);
+}
 .bg-black {
     background-color: rgb(12, 12, 12);
 }
 .bg-orangered {
     background-color: orangered;
+}
+.bg-green {
+    background-color: rgb(63, 140, 63);
 }

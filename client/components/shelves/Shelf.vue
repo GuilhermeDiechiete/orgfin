@@ -1,6 +1,7 @@
 <template>
   <section>
     <div class="shelf">
+      <BoxOrgFin class="my-box" />
       <BoxUser class="my-box" />
       <BoxConfig class="my-box" /> 
     </div>
@@ -14,8 +15,8 @@
     <div class="shelf">
       <BoxDisplay class="my-box" />
     </div>
-    <div class="shelf">
-      <BoxTransaction class="my-box" />
+    <div>
+      <BoxTransaction />
     </div>
     
     <div class="shelf">

@@ -9,7 +9,7 @@ body {
 }
 
 .icon-color {
-    margin-right: 0.5em;
+ 
     color: orangered;
 }
 
@@ -57,4 +57,9 @@ body {
 
 .border-orange {
     border: 1px solid orangered;
+}
+
+.my-input {
+    width: 100%;
+    background-color: rgb(29, 29, 29);
 }

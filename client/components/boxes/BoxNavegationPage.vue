@@ -3,12 +3,18 @@
     <BtnNavPage
       to="/categories"
       text="Categorias"
-      iconame="bxs:category-alt"
+      icon="fa-solid fa-layer-group icon-color mr-3"
     />
     <BtnNavPage
       to="/accounts"
       text="Contas"
-      iconame="material-symbols:account-balance"
+      icon="fa-solid fa-building-columns icon-color mr-3"
+    />
+    <BtnNavPage 
+      to="/print"
+      text="Relatórios"
+      icon="fa-solid fa-print icon-color mr-3"
     />
   </section>
 </template>
+

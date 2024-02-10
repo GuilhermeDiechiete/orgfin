@@ -5,7 +5,7 @@
       <SelectOrder />
       <SelectMonth />
       <SelectYear />
-      <BtnNormal iconame="material-symbols-light:search" />
+      <BtnNormal icon="fa-solid fa-magnifying-glass icon-color fa-shake" />
     </div>
   </section>
 </template>

@@ -3,13 +3,10 @@
     class="button bg-dark text-white mx-1"
     :to="to"
   >
-    <Icon
-      class="text-orangered mr-2"
-      :name="iconame"
-    />{{ text }}
+    <i :class="icon"></i>{{ text }}
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-defineProps(['to','iconame', 'text'])
+defineProps(['to','icon', 'text'])
 </script>

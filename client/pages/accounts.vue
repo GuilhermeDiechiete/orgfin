@@ -1,3 +1,3 @@
 <template>
-  <BoxAccounts />
+  <ShelfAccounts />
 </template>

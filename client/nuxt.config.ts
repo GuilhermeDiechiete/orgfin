@@ -20,6 +20,7 @@ export default defineNuxtConfig({
   components: [
     '~/components',
     '~/components/fragments',
+    '~/components/fragments/icons',
     '~/components/items',
     '~/components/boxes',
     '~/components/shelves',
