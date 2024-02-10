@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="center">
     <BtnNavPage
       to="/categories"
       text="Categorias"

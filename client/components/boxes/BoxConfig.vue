@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="right">
     <NuxtLink to="/config/user">
       <Icon
         name="line-md:cog-filled-loop"

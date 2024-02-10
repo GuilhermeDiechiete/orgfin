@@ -4,14 +4,18 @@
       <BoxUser class="my-box" />
       <BoxConfig class="my-box" /> 
     </div>
+
+    
     <div class="shelf">
       <BoxNavegationPage class="my-box" /> 
     </div>
+
+    
     <div class="shelf">
       <BoxDisplay class="my-box" />
     </div>
     <div class="shelf">
-      <BoxTransaction />
+      <BoxTransaction class="my-box" />
     </div>
     
     <div class="shelf">

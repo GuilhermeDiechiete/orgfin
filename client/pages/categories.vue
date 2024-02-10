@@ -1,5 +1,5 @@
 <template>
   <div>
-    <BoxCategories />
+    <ShelfCategories />
   </div>
 </template>

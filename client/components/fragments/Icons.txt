@@ -1,0 +1,6 @@
+
+
+
+Icon User - <i class="fa-regular fa-user"></i>
+
+Icon delete - <i class="fa-regular fa-circle-xmark"></i>

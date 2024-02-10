@@ -3,11 +3,21 @@ body {
     padding: 1em;
     background-color: black;
     min-height: 100vh;
+    margin: 0;
+    border: 0;
+    
 }
 
 .icon-color {
     margin-right: 0.5em;
     color: orangered;
+}
+
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
 }
 
 .shelf {
@@ -17,6 +27,7 @@ body {
     margin-top: 0.4em;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 0.4em;
 }
 .my-box {
     flex: 1;
@@ -27,4 +38,23 @@ body {
     margin: 0.2em;
     border-radius: 0.5em;
     padding-left: 1em;
+}
+
+.fullwidth {
+    width: 100%;
+
+}
+
+.btn {
+    border: 0;
+    margin: 0;
+    border-radius: 0.4em;
+}
+
+.px4 {
+    padding: 0.4em 0 0.4em 0;
+}
+
+.border-orange {
+    border: 1px solid orangered;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="table-container">
-    <table class="table is-fullwidth is-bordered">
+    <table class="table is-fullwidth is-narrow">
       <thead>
         <tr class="bg-dark">
           <th>Data</th>
