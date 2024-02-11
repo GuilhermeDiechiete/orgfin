@@ -4,23 +4,22 @@ import { StoreValidator } from 'App/Validators/User'
 
 export default class UsersController {
 
-  public async store({ request }: HttpContextContract) {
+  public async store({ request , response }: HttpContextContract) {
     try {
-      console.log(request)
       const { username, email, password } = await request.validate(StoreValidator)
       const user = await User.create({ username, email, password })
       await user.save()
       const userKey = 'secretKey' + username
       user.related('keys').create({ key: userKey })
       return 'Usuário criado com sucesso.'
+      
 
     } catch (error) {
       
       if(error?.messages?.errors[0]?.message) {
-        return error.messages.errors[0].message
+        return response.status(400).json({ message: error.messages.errors[0].message })
       } 
-      return 'Erro ao criar usuário.'
-      
+      return response.status(400).json({ message: 'Erro ao criar usuário.' })
     }
     
   }

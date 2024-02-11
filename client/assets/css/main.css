@@ -24,10 +24,26 @@ body {
     background-color: rgb(29, 29, 29);
     border-radius: 0.5em;
     padding: 1em;
-    margin-top: 0.4em;
     display: flex;
     flex-wrap: wrap;
     margin-top: 0.4em;
+}
+
+.message-error {
+    background-color: rgb(244, 81, 81);
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-top: 0.4em;
+    color: whitesmoke;
+    text-align: center;
+}
+.message-success {
+    background-color: rgb(63, 200, 97);
+    border-radius: 0.5em;
+    padding: 1em;
+    margin-top: 0.4em;
+    color: whitesmoke;
+    text-align: center;
 }
 .my-box {
     flex: 1;
