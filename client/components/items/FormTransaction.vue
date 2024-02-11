@@ -2,7 +2,7 @@
   <form
     action=""
     method="post"
-    class="box bg-dark2 mt-4 mb-6"
+    class="box bg-dark2 mb-6"
   >
     <h1 class="title is-4 text-white"><IconPlus /> Nova Transação</h1>
     <FormLabel text="Data" />
