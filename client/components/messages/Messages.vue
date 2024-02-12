@@ -12,10 +12,17 @@
     >
       <h1>{{ userStore.messageSuccess }}</h1>
     </div>
+
+    <div
+      v-if="authStore.messageError"
+      class="message-error"
+    >
+      <h1>{{ authStore.messageError }}</h1>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 const userStore = useUserStore()
-
+const authStore = useAuthStore()
 </script>

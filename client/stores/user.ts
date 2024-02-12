@@ -1,16 +1,25 @@
 import { defineStore } from "pinia";
 
 const API = 'http://localhost:4000'
-console.log('api', API)
 
 export const useUserStore = defineStore('users', {
 
     state: () => {
         return {
+            token: ref(''),
+            user: {
+                id: ref(''),
+                username: ref(''),
+                email: ref(''),
+            },
+            authenticated: false,
+            // register
             username: ref(''),
             email: ref(''),
             password: ref(''),
             confirmPassword: ref(''),
+
+            // messages
             messageError: ref(''),
             messageSuccess: ref('')
         }
@@ -39,6 +48,26 @@ export const useUserStore = defineStore('users', {
                 setTimeout(() => {
                     this.messageError = ''
                 },2000)
+            }
+        },
+        async show() {
+            try {
+                const token = localStorage.getItem('token')
+                const id = localStorage.getItem('userId')
+                if(token) {
+                    this.user = await $fetch(`${API}/user/${id}`, {
+                        method: "GET",
+                        headers: {
+                            Authorization: token
+                        }
+                        
+                    })
+                }
+                if(this.user.email && this.user.id) {
+                    this.authenticated = true
+                }
+            } catch (error) {
+                console.log(error)
             }
         }
     }
