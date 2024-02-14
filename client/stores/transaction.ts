@@ -3,6 +3,18 @@ import { defineStore } from "pinia";
 
 const API = 'http://localhost:4000'
 
+interface transaction {
+    date: string, 
+    type: string,
+    description: string,
+    amount: number,
+    installment: number,
+    total_installment: number,
+    category: string,
+    account: string,
+    destiny: string,
+    status: boolean
+}
 
 export const useTransactionStore = defineStore('transactions', {
 

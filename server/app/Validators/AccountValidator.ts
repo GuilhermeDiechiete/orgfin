@@ -15,10 +15,10 @@ export default class AccountValidator {
   })
 
   public messages: CustomMessages = {
-    'name.required': 'Digite o nome da categoria',
+    'name.required': 'Digite o nome da conta',
     'name.maxLength': 'O nome deve ter no maximo 15 caracteres.',
     'name.minLength': 'O nome deve ter no minimo 2 caracteres.',
-
+    'amount.required': 'Digite o valor atual da conta.',
     'amount.unsigned': 'O valor não pode ser negativo.'
   }
 }

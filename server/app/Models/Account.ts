@@ -12,6 +12,9 @@ export default class Account extends BaseModel {
   @column()
   amount: number
 
+  @column() 
+  public userId: number 
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

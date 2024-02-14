@@ -18,7 +18,7 @@
     </div>
     
     <div class="my-box">
-      <div class="my-table-container">
+      <div class="my-table-container fullwidth">
         <table class="my-table">
           <thead>
             <tr>

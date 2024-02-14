@@ -1,45 +1,43 @@
-
 import { defineStore } from "pinia";
 
-const API = 'http://localhost:4000'
+const API = 'http://localhost:4000/account'
 
-
-export const useCategoryStore = defineStore('categories', {
+export const useAccountStore = defineStore('accounts', {
 
     state: () => {
         return {
+            id: ref(),
             name: ref(''),
-            categories: ref([]),
+            amount: ref(''),
+            accounts: ref([]),
             // messages
             messageError: ref(''),
             messageSuccess: ref('')
         }
     },
     actions: {
-        async register( name: string ) {
+        async create( name: string, amount: number ) {
             try {
                 if(typeof localStorage !== 'undefined'){
                     const token = localStorage.getItem('token')
                    if(token) {
-                   this.messageSuccess = await $fetch(`${API}/category`, {
+                   this.messageSuccess = await $fetch(`${API}`, {
                     method: 'POST',
                     headers: {
                         Authorization: token
                     },
                     body: {
-                        name,
+                        name, amount
                     }
                 }) 
                 } 
                 }
-                
-          
-                
-                console.log(this.messageSuccess)
                 setTimeout(() => {
                     this.messageSuccess = ''
                 },2000)
+
             } catch (error: any) {
+
                 console.log(error)
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
@@ -56,16 +54,36 @@ export const useCategoryStore = defineStore('categories', {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token')
                    if(token) {
-                    this.categories = await $fetch(`${API}/category`, {
+                    this.accounts = await $fetch(`${API}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
                         },
                     })
                 } 
+
                 }
+                console.log(this.accounts)
                 
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        async delete(id: number) {
+            try {
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token')
+                   if(token) {
+                    this.messageSuccess = await $fetch(`${API}/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            Authorization: token
+                        },
+                    })
+                } 
                 
+                }
             } catch (error) {
                 console.log(error)
             }

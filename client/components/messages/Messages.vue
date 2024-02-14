@@ -1,38 +1,30 @@
 <template>
   <section>
-    <div
-      v-if="userStore.messageError"
-      class="message-error"
-    >
+    <div v-if="userStore.messageError" class="message-error">
       <h1>{{ userStore.messageError }}</h1>
     </div>
-    <div
-      v-if="userStore.messageSuccess"
-      class="message-success"
-    >
+    <div v-if="userStore.messageSuccess" class="message-success">
       <h1>{{ userStore.messageSuccess }}</h1>
     </div>
 
-    <div
-      v-if="authStore.messageError"
-      class="message-error"
-    >
+    <div v-if="authStore.messageError" class="message-error">
       <h1>{{ authStore.messageError }}</h1>
     </div>
 
-
-    <div
-      v-if="categoryStore.messageError"
-      class="message-error"
-    >
+    <div v-if="categoryStore.messageError" class="message-error">
       <h1>{{ categoryStore.messageError }}</h1>
     </div>
-    <div
-      v-if="categoryStore.messageSuccess"
-      class="message-success"
-    >
+    <div v-if="categoryStore.messageSuccess" class="message-success">
       <h1>{{ categoryStore.messageSuccess }}</h1>
     </div>
+
+    <div v-if="accountStore.messageError" class="message-error">
+      <h1>{{ accountStore.messageError }}</h1>
+    </div>
+    <div v-if="accountStore.messageSuccess" class="message-success">
+      <h1>{{ accountStore.messageSuccess }}</h1>
+    </div>
+
   </section>
 </template>
 
@@ -40,4 +32,5 @@
 const userStore = useUserStore()
 const authStore = useAuthStore()
 const categoryStore = useCategoryStore()
+const accountStore = useAccountStore()
 </script>
