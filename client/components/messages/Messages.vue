@@ -25,6 +25,12 @@
       <h1>{{ accountStore.messageSuccess }}</h1>
     </div>
 
+    <div v-if="transactionStore.messageError" class="message-error">
+      <h1>{{ transactionStore.messageError }}</h1>
+    </div>
+    <div v-if="transactionStore.messageSuccess" class="message-success">
+      <h1>{{ transactionStore.messageSuccess }}</h1>
+    </div>
   </section>
 </template>
 
@@ -33,4 +39,5 @@ const userStore = useUserStore()
 const authStore = useAuthStore()
 const categoryStore = useCategoryStore()
 const accountStore = useAccountStore()
+const transactionStore = useTransactionStore()
 </script>

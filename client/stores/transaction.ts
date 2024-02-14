@@ -1,25 +1,16 @@
-import { loadNuxt } from "nuxt";
+
 import { defineStore } from "pinia";
 
-const API = 'http://localhost:4000'
-
-interface transaction {
-    date: string, 
-    type: string,
-    description: string,
-    amount: number,
-    installment: number,
-    total_installment: number,
-    category: string,
-    account: string,
-    destiny: string,
-    status: boolean
-}
+const API = 'http://localhost:4000/transaction'
+const API_SEARCH = 'http://localhost:4000/search'
 
 export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
+            expenses: ref([]),
+            incomes: ref([]),
+            investments: ref([]),
             transactions: ref([]),
             // messages
             messageError: ref(''),
@@ -27,28 +18,34 @@ export const useTransactionStore = defineStore('transactions', {
         }
     },
     actions: {
-        async create( data: any ) {
+        async create( transaction: any ) {
             try {
+                console.log(transaction)
                 if(typeof localStorage !== 'undefined'){
                     const token = localStorage.getItem('token')
                    if(token) {
-                   this.messageSuccess = await $fetch(`${API}/transaction`, {
+                   this.messageSuccess = await $fetch(`${API}`, {
                     method: 'POST',
                     headers: {
                         Authorization: token
                     },
                     body: {
-                        date: data.date,
-                        type: data.type,
+                        date: transaction.date,
+                        type: transaction.type,
+                        description: transaction.description,
+                        installment:transaction.installment,
+                        total_installments:transaction.total_installments,
+                        amount: transaction.amount,
+                        category: transaction.category,
+                        account: transaction.account,
+                        destiny: transaction.destiny,
+                        status: transaction.status
                         
                     }
                 }) 
                 } 
                 }
-                
-          
-                
-                console.log(this.messageSuccess)
+
                 setTimeout(() => {
                     this.messageSuccess = ''
                 },2000)
@@ -64,20 +61,27 @@ export const useTransactionStore = defineStore('transactions', {
                 },2000)
             }
         },
-        async index() {
+        async index(order:string, year:string, month:string) {
             try {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token')
-                   if(token) {
-                    this.categories = await $fetch(`${API}/category`, {
+                    if(token) {
+                    this.transactions = await $fetch(`${API_SEARCH}/${order}/${year}/${month}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
                         },
                     })
                 } 
+
+
+
                 }
-                
+                this.expenses = this.transactions.expenses
+                this.incomes = this.transactions.incomes
+                this.investments = this.transactions.investments
+
+                console.log(this.expenses, this.incomes, this.investments)
                 
             } catch (error) {
                 console.log(error)

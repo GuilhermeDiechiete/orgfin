@@ -21,11 +21,11 @@ export default class TransactionValidator {
     ]),
 
     installment: schema.number.optional([
-      rules.unsigned()
+
     ]),
 
     total_installments: schema.number.optional([
-      rules.unsigned()
+
     ]),
     category: schema.string.optional({ trim: true }),
 
@@ -51,8 +51,7 @@ export default class TransactionValidator {
     'amount.required': 'Adicione o valor da transação.',
     'amount.unsigned': 'O valor deve ser um número positivo.',
 
-    'installment.unsigned': 'O número de parcelas deve ser um número positivo.',
-    'total_installments.unsigned': 'O total de parcelas deve ser um número positivo.',
+    
 
     'account.required': 'Selecione a conta de saída.',
     'destiny.required': 'Adicione um destino para o valor.'

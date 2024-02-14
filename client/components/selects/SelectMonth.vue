@@ -1,16 +1,16 @@
 <template>
   <select class="my-select">
-    <option>Janeiro</option>
-    <option>Fevereiro</option>
-    <option>Março</option>
-    <option>Abril</option>
-    <option>Maio</option>
-    <option>Junho</option>
-    <option>Julho</option>
-    <option>Agosto</option>
-    <option>Setembro</option>
-    <option>Outubro</option>
-    <option>Novembro</option>
-    <option>Dezembro</option>
+    <option value="1">Janeiro</option>
+    <option value="2">Fevereiro</option>
+    <option value="3">Março</option>
+    <option value="4">Abril</option>
+    <option value="5">Maio</option>
+    <option value="6">Junho</option>
+    <option value="7">Julho</option>
+    <option value="8">Agosto</option>
+    <option value="9">Setembro</option>
+    <option value="10">Outubro</option>
+    <option value="11">Novembro</option>
+    <option value="12">Dezembro</option>
   </select>
 </template>

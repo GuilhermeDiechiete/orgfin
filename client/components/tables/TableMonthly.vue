@@ -16,46 +16,19 @@
           <th>Excluir</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>02-03-2024</td>
-          <td>Carro</td>
-          <td v-if="type === 'expenses'">
-            24 -48
-          </td>
-          <td>333,69</td>
-          <td>Essenciais</td>
-          <td>Sicredi</td>
-          <td>Sicredi</td>
-          <td>Pendente</td>
-          <td>X</td>
+      <tbody v-if="type === 'expenses'">
+        <tr v-for="expense in expenses" :key="expense.id">
+          <td>{{ expense.date }}</td>
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.installment }}</td>
+          <td>{{ expense.total_installments }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.account }}</td>
+          <td>{{ expense.destiny }}</td>
+          <td>{{ expense.status }}</td>
+          <td><button class="my-button-delete">Excluir</button></td>
         </tr>
-        <tr>
-          <td>02-03-2024</td>
-          <td>Carro</td>
-          <td v-if="type === 'expenses'">
-            24 -48
-          </td>
-          <td>333,69</td>
-          <td>Essenciais</td>
-          <td>Sicredi</td>
-          <td>Sicredi</td>
-          <td>Pendente</td>
-          <td>X</td>
-        </tr>
-        <tr>
-          <td>02-03-2024</td>
-          <td>Carro</td>
-          <td v-if="type === 'expenses'">
-            24 -48
-          </td>
-          <td>333,69</td>
-          <td>Essenciais</td>
-          <td>Sicredi</td>
-          <td>Sicredi</td>
-          <td>Pendente</td>
-          <td>X</td>
-        </tr>
+        
       </tbody>
     </table>
   </div>
@@ -64,4 +37,9 @@
 <script setup lang="ts">
 defineProps(['type'])
 
+const useTransaciton = useTransactionStore()
+
+const expenses = useTransaciton.expenses
+
+ 
 </script>

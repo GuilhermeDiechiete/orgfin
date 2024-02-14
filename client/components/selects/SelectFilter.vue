@@ -1,8 +1,9 @@
 <template>
-  <select class="my-select">
+  <select class="my-select" v-model="filter">
     <option value="date">Filtros</option>
-    <option>Data</option>
-    <option>Categoria</option>
-    <option>Destino</option>
+    <option value="date">Data</option>
+    <option value="category">Categoria</option>
+    <option value="destiny">Destino</option>
   </select>
 </template>
+

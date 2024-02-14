@@ -2,36 +2,73 @@
   <form action="" method="post" class="box bg-dark2 mb-6">
     <h1 class="my-title"><IconPlus /> Nova Transação</h1>
 
+    <Messages />
+
     <FormLabel text="Data" />
-    <input type="date" class="my-input">
+    <input v-model="transaction.date" type="date" class="my-input">
 
     <FormLabel text="Tipo de Transação:" />
-    <input type="text" class="my-input">
+    <select class="my-input" v-model="transaction.type">
+      <option value="expense">Despesa</option>
+      <option value="income">Renda</option>
+      <option value="investment">Investimento</option>
+    </select>
 
     <FormLabel text="Descrição:" />
-    <input type="text" class="my-input">
+    <input v-model="transaction.description" type="text" class="my-input">
 
     <FormLabel text="Numero da parcela atual." />
-    <input type="text" class="my-input">
+    <input v-model="transaction.installment" type="number" class="my-input">
 
     <FormLabel text="Numero total de parcelas." />
-    <input type="text" class="my-input">
+    <input v-model="transaction.total_installments" type="number" class="my-input">
 
     <FormLabel text="Valor" />
-    <input type="text" class="my-input">
+    <input v-model="transaction.amount" type="number" class="my-input">
 
     <FormLabel text="Categoria" />
-    <input type="text" class="my-input">
+    <select class="my-input" v-model="transaction.category">
+      <option v-for="category in categories" :key="category.id" :value="category.name">{{ category.name }}</option>
+    </select>
 
     <FormLabel text="Conta de saída" />
-    <input type="text" class="my-input">
+    <select class="my-input" v-model="transaction.account">
+      <option v-for="account in accounts" :key="account.id" :value="account.name">{{ account.name }}</option>
+    </select>
 
     <FormLabel text="Destino" />
-    <input type="text" class="my-input">
+    <input v-model="transaction.destiny" type="text" class="my-input">
 
-    <BtnFullWidthSuccess
-      text="Criar"
-      class="mt-5 bg-green"
-    />
+    <BtnFullWidthSuccess text="Criar" class="my-button-fullwidth-success" @click.prevent="addTransaction"/>
   </form>
 </template>
+
+<script setup lang="ts">
+  const useCategory = useCategoryStore()
+  await useCategory.index()
+  const categories = useCategory.categories
+
+  const useAccount = useAccountStore()
+  await useAccount.index()
+  const accounts = useAccount.accounts
+
+  const useTransaction = useTransactionStore()
+
+  const transaction = {
+    date: '',
+    type: '',
+    description: '',
+    installment: '',
+    total_installments: '',
+    amount: '',
+    category: '',
+    account: '',
+    destiny: '',
+    status: false
+  }
+
+  const addTransaction = async () => {
+  await useTransaction.create(transaction)
+}
+
+</script>

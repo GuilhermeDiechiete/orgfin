@@ -1,26 +1,17 @@
 <template>
   <div class="tabs is-toggle is-fullwidth">
     <ul>
-      <li
-        :class="{ 'bg-orangered': active === 'expenses' }"
-        @click="setActiveTab('expenses')"
-      >
+      <li :class="{ 'bg-orangered': active === 'expenses' }" @click="setActiveTab('expenses')">
         <a>
           <span class="text-white">Despesas</span>
         </a>
       </li>
-      <li
-        :class="{ 'bg-orangered': active === 'incomes' }"
-        @click="setActiveTab('incomes')"
-      >
+      <li :class="{ 'bg-orangered': active === 'incomes' }" @click="setActiveTab('incomes')">
         <a>
           <span class="text-white">Rendimentos</span>
         </a>
       </li>
-      <li
-        :class="{ 'bg-orangered': active === 'investments' }"
-        @click="setActiveTab('investments')"
-      >
+      <li :class="{ 'bg-orangered': active === 'investments' }" @click="setActiveTab('investments')">
         <a>
           <span class="text-white">Investimentos</span>
         </a>

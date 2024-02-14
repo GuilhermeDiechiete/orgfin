@@ -11,15 +11,14 @@ export default class TransactionsController {
       }
       const data = await request.validate(TransactionValidator)
       
-      const transaction = await user.related('transactions').create(data)
-      return transaction
+      await user.related('transactions').create(data)
+      return 'Transação criada com sucesso.'
 
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {
-        return error.messages.errors[0].message
+        return response.status(400).json({ message: error.messages.errors[0].message })
       } 
-      console.log('erro', error)
-      return 'Erro ao tentar criar transação.'
+      return response.status(400).json({ message: 'Erro ao criar transação.' })
     }
     
   }
