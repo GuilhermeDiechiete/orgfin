@@ -1,5 +1,5 @@
 <template>
-    <select class="input m-1 bg-dark text-white">
+    <select class="my-select">
       <option>2024</option>
       <option>2025</option>
       <option>2026</option>

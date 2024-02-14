@@ -8,7 +8,7 @@ export default class AuthController {
     try {
       const { email, password } = await request.validate(StoreValidator)
       const token = await auth.attempt(email, password, {
-        expiresIn: '30 mins'
+        expiresIn: '50 mins'
       })
       const data = await User.findByOrFail('email', email)
       if(!data) {

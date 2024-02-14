@@ -19,10 +19,25 @@
     >
       <h1>{{ authStore.messageError }}</h1>
     </div>
+
+
+    <div
+      v-if="categoryStore.messageError"
+      class="message-error"
+    >
+      <h1>{{ categoryStore.messageError }}</h1>
+    </div>
+    <div
+      v-if="categoryStore.messageSuccess"
+      class="message-success"
+    >
+      <h1>{{ categoryStore.messageSuccess }}</h1>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 const userStore = useUserStore()
 const authStore = useAuthStore()
+const categoryStore = useCategoryStore()
 </script>

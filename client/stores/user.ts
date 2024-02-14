@@ -52,20 +52,26 @@ export const useUserStore = defineStore('users', {
         },
         async show() {
             try {
-                const token = localStorage.getItem('token')
-                const id = localStorage.getItem('userId')
-                if(token) {
-                    this.user = await $fetch(`${API}/user/${id}`, {
-                        method: "GET",
-                        headers: {
-                            Authorization: token
-                        }
-                        
-                    })
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token')
+                    const id = localStorage.getItem('userId')
+
+                    if(token && id) {
+                        this.user = await $fetch(`${API}/user/${id}`, {
+                            method: "GET",
+                            headers: {
+                                Authorization: token
+                            }
+                            
+                        })
+                    }
+                    if(this.user.email && this.user.id) {
+                        this.authenticated = true
+                    }
+
                 }
-                if(this.user.email && this.user.id) {
-                    this.authenticated = true
-                }
+                
+                
             } catch (error) {
                 console.log(error)
             }

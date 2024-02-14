@@ -1,5 +1,5 @@
 <template>
-  <select class="input m-1 bg-dark text-white">
+  <select class="my-select">
     <option value="">Ordem</option>
     <option>Status Pendente</option>
     <option>Status Pago</option>

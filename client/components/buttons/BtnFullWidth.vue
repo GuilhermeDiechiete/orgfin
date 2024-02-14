@@ -1,5 +1,5 @@
 <template>
-  <button class="button is-fullwidth bg-dark text-white">
+  <button class="my-button-fullwidth">
     <Icon
       :name="iconame"
       class="icon-color mr-4"

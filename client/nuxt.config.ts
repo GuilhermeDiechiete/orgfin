@@ -10,8 +10,10 @@ export default defineNuxtConfig({
     'bulma/css/bulma.css',
     '@fortawesome/fontawesome-free/css/all.css',
     '~/assets/css/main.css',
+    '~/assets/css/buttons.css',
     '~/assets/css/bg-color.css',
-    '~/assets/css/text-color.css'
+    '~/assets/css/text-color.css',
+    '~/assets/css/table.css',
   ],
 
   
@@ -19,10 +21,13 @@ export default defineNuxtConfig({
 
   components: [
     '~/components',
-    '~/components/fragments',
-    '~/components/fragments/icons',
+    '~/components/selects',
+    '~/components/forms',
+    '~/components/buttons',
+    '~/components/tables',
     '~/components/items',
+    '~/components/icons',
     '~/components/boxes',
-    '~/components/shelves',
+    '~/components/templates',
   ]
 })

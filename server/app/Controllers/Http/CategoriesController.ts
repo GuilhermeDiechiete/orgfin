@@ -2,7 +2,22 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import CategoryValidator from 'App/Validators/CategoryValidator'
 
 export default class CategoriesController {
-  public async index({}: HttpContextContract) {}
+  public async index({ auth , response }: HttpContextContract) {
+    try {
+      const user = auth.user 
+      if(!user){
+        return response.status(401).json({ message: 'Não autorizado.'})
+      }
+      const categories = await user.related('categories').query()
+      .where('user_id', user.id)
+      return categories
+    } catch (error) {
+      if(error?.messages?.errors[0]?.message) {
+        return response.status(400).json({ message: error.messages.errors[0].message })
+      } 
+      return response.status(400).json({ message: 'Erro ao buscar categorias.' })
+    }
+  }
 
   public async store({ auth, request, response }: HttpContextContract) {
     try {
@@ -23,9 +38,9 @@ export default class CategoriesController {
       return 'Categoria criada com sucesso.'
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {
-        return error.messages.errors[0].message
+        return response.status(400).json({ message: error.messages.errors[0].message })
       } 
-      return 'Erro ao criar categoria.'
+      return response.status(400).json({ message: 'Erro ao criar categoria.' })
     }
     
 

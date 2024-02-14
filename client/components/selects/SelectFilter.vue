@@ -1,5 +1,5 @@
 <template>
-  <select class="input m-1 bg-dark text-white">
+  <select class="my-select">
     <option value="date">Filtros</option>
     <option>Data</option>
     <option>Categoria</option>

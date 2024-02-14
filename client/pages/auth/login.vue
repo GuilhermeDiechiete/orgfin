@@ -1,4 +1,4 @@
 <template>
-  <ShelfLogin />
+  <Login />
 </template>
 

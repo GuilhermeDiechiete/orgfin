@@ -1,0 +1,32 @@
+
+.my-table-container {
+    overflow-x: auto; /* Adiciona barra de rolagem horizontal */
+    min-width: 300px;/* Largura mínima do contêiner */
+    max-width: 100%; /* Evita que a tabela se estenda além do contêiner */
+}
+.my-table {
+    width: auto;
+    table-layout: fixed;
+    min-width: 100%;
+    overflow-x: auto;
+    
+}
+
+.my-table thead tr th {
+    border: 1px solid rgb(120, 119, 119);
+    color: rgb(242, 67, 3);
+    background-color: rgb(26, 26, 26);
+    padding: 0.5em;
+ 
+    min-width: 6em;
+}
+
+
+.my-table tbody tr td {
+    border: 1px solid rgb(121, 121, 121);
+    color: rgb(197, 197, 197);
+   
+    min-width: 6em;
+    padding: 1em;
+}
+

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button bg-dark text-white m-1"
+    class="my-button"
   >
     <i :class="icon" />
     {{ text }}

@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    class="button bg-dark text-white mx-1"
+    class="my-button-nav"
     :to="to"
   >
     <i :class="icon"></i>{{ text }}

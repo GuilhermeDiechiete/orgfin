@@ -8,6 +8,14 @@ body {
     
 }
 
+.my-title {
+    color: orangered;
+    font-size: 2em;
+    text-align: center;
+    font-weight: 700;
+
+}
+
 .icon-color {
  
     color: orangered;
@@ -20,7 +28,7 @@ body {
     text-align: center;
 }
 
-.shelf {
+.my-box {
     background-color: rgb(29, 29, 29);
     border-radius: 0.5em;
     padding: 1em;
@@ -45,7 +53,7 @@ body {
     color: whitesmoke;
     text-align: center;
 }
-.my-box {
+.my-item {
     flex: 1;
 }
 
@@ -78,4 +86,18 @@ body {
 .my-input {
     width: 100%;
     background-color: rgb(29, 29, 29);
+    color: whitesmoke;
+    border: 1px solid rgb(69, 68, 68);
+    padding: 0.5em;
+    border-radius: 0.2em;
+    font-size: 1em;
+}
+.my-select {
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    color: whitesmoke;
+    border: 1px solid rgb(110, 110, 110);
+    margin: 0.2em 0.4em 0.2em 0.4em;
+    padding: 1em 0.5em 1em 0.5em ;
+    border-radius: 0.2em;
 }

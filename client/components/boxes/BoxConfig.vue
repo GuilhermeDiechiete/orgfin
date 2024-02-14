@@ -1,6 +1,6 @@
 <template>
   <section class="right">
-    <NuxtLink to="/config/user">
+    <NuxtLink to="/">
       <Icon
         name="octicon:sign-out"
         class="icon-color"

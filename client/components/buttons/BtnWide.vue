@@ -1,5 +1,5 @@
 <template>
-  <button class="btn fullwidth bg-black text-white py-4 border-orange">
+  <button class="my-button-wide">
     <i :class="icon"></i>
     {{ text }}
   </button>

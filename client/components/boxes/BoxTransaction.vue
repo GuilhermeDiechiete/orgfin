@@ -1,9 +1,5 @@
 <template>
-  <BtnMain
-    icon="fa-solid fa-plus icon-color fa-beat"
-    class="my-2"
-    @click="activeForm"
-  />
+  <BtnWide class="my-button-wide" @click="activeForm" icon="fa-solid fa-plus icon-color fa-beat"/> 
   <FormTransaction v-if="active" />
 </template>
 

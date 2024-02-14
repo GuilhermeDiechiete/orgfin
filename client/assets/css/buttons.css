@@ -1,0 +1,45 @@
+.my-button {
+    padding: 1em 3em 1em 3em;
+    width: 100%;
+    margin: 0.2em 0.4em 0.2em 0.4em;
+    border-radius: 0.2em;
+    border: 1px solid rgb(249, 109, 1);
+    background-color: rgb(29, 29, 29);
+}
+
+.my-button-nav {
+    border: 1px solid rgb(114, 114, 114);
+    padding: 0.6em 2em;
+    border-radius: 0.2em;
+    margin: 0.3em;
+    color: rgb(215, 215, 215);
+}
+
+.my-button-fullwidth {
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    border: 1px solid orangered;
+    border-radius: 0.2em;
+    padding: 0.4em;
+}
+.my-button-wide {
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    border: 1px solid orangered;
+    border-radius: 0.2em;
+    padding: 0.5em;
+    font-size: 1.4em;
+    margin-top: 0.5em;
+}
+
+.my-button-success {
+    width: 100%;
+    background-color: rgb(0, 185, 65);
+    border-radius: 0.2em;
+    padding: 0.5em;
+    color: whitesmoke;
+    margin: 2em 0em 1em 0em;
+    border: none;
+    font-size: 1em;
+    font-weight: 700;
+}

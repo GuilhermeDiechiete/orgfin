@@ -1,8 +1,8 @@
 <template>
-  <div class="table-container">
-    <table class="table is-fullwidth is-narrow">
+  <div class="my-table-container">
+    <table class="my-table">
       <thead>
-        <tr class="bg-dark">
+        <tr>
           <th>Data</th>
           <th>Descrição</th>
           <th v-if="type === 'expenses'">
@@ -13,10 +13,11 @@
           <th>Conta de Saída</th>
           <th>Destino</th>
           <th>Status</th>
+          <th>Excluir</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="bg-dark text-white has-text-centered">
+        <tr>
           <td>02-03-2024</td>
           <td>Carro</td>
           <td v-if="type === 'expenses'">
@@ -27,8 +28,9 @@
           <td>Sicredi</td>
           <td>Sicredi</td>
           <td>Pendente</td>
+          <td>X</td>
         </tr>
-        <tr class="bg-dark text-white has-text-centered">
+        <tr>
           <td>02-03-2024</td>
           <td>Carro</td>
           <td v-if="type === 'expenses'">
@@ -39,8 +41,9 @@
           <td>Sicredi</td>
           <td>Sicredi</td>
           <td>Pendente</td>
+          <td>X</td>
         </tr>
-        <tr class="bg-dark text-white has-text-centered">
+        <tr>
           <td>02-03-2024</td>
           <td>Carro</td>
           <td v-if="type === 'expenses'">
@@ -51,6 +54,7 @@
           <td>Sicredi</td>
           <td>Sicredi</td>
           <td>Pendente</td>
+          <td>X</td>
         </tr>
       </tbody>
     </table>
