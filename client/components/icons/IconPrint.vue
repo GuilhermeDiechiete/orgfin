@@ -1,3 +1,3 @@
 <template>
-  <i class="fa-solid fa-print" />
+  <i class="fa-solid fa-print my-icon" />
 </template>

@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-arrow-left icon-color"></i>
+    <i class="fa-solid fa-arrow-left my-icon"></i>
 </template>

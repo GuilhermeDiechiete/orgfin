@@ -50,10 +50,10 @@ const storeAccount = useAccountStore()
 
 const name = ref('')
 const amount = ref()
-
+ 
 await storeAccount.index()
 
-const accounts = storeAccount.accounts
+const accounts = ref(storeAccount.accounts)
 
 const addAccount = async () => {
   await storeAccount.create(name.value, amount.value)
@@ -67,6 +67,8 @@ const deleteAccount = async (id:number) => {
   await storeAccount.index()
 }
 
-
+watch(() => storeAccount.accounts, (newAccounts) => {
+  accounts.value = newAccounts
+})
 
 </script>

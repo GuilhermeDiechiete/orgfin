@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-cart-shopping"></i>
+    <i class="fa-solid fa-cart-shopping my-icon"></i>
 </template>

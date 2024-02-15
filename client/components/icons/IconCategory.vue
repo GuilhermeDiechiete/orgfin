@@ -1,3 +1,3 @@
 <template>
-  <i class="fa-solid fa-layer-group" />
+  <i class="fa-solid fa-layer-group my-icon" />
 </template>

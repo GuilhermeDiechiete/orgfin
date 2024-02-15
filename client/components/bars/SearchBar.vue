@@ -1,10 +1,10 @@
 <template>
-    <div class="my-box">
-        <div class="columns fullwidth">
+    <div>
+        <div class="columns is-desktop">
         <SelectOrder />
         <SelectMonth />
         <SelectYear />
-        <BtnNormal icon="fa-solid fa-magnifying-glass icon-color fa-shake" @click.prevent="searchTransactions"/>
+        <BtnNormal icon="fa-solid fa-magnifying-glass my-icon fa-shake" @click.prevent="searchTransactions"/>
 
         </div>
         
@@ -13,10 +13,10 @@
 
 <script setup lang="ts">
 
-const useTransaciton = useTransactionStore()
+const useSearchTransaciton = useSearchTransactionStore()
 
 const searchTransactions = async () => {
-    await useTransaciton.index('asc', '2024', '2')
+    await useSearchTransaciton.getByMonth('asc', '2024', '3')
      
 }
 

@@ -8,10 +8,7 @@ export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
-            expenses: ref([]),
-            incomes: ref([]),
-            investments: ref([]),
-            transactions: ref([]),
+
             // messages
             messageError: ref(''),
             messageSuccess: ref('')
@@ -60,29 +57,6 @@ export const useTransactionStore = defineStore('transactions', {
                     this.messageError = ''
                 },2000)
             }
-        },
-        async index(order:string, year:string, month:string) {
-            try {
-                if(typeof localStorage !== 'undefined') {
-                    const token = localStorage.getItem('token')
-                    if(token) {
-                    this.transactions = await $fetch(`${API_SEARCH}/${order}/${year}/${month}`, {
-                        method: 'GET',
-                        headers: {
-                            Authorization: token
-                        },
-                    })
-                    } 
-                }
-                this.expenses = this.transactions.expenses
-                this.incomes = this.transactions.incomes
-                this.investments = this.transactions.investments
-
-                console.log(this.expenses, this.incomes, this.investments)
-                
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        
-}})
+        },      
+    }
+})

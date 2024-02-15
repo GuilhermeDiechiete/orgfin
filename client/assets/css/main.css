@@ -10,17 +10,28 @@ body {
 
 .my-title {
     color: orangered;
-    font-size: 2em;
-    text-align: center;
+    font-size: 1.5em;
+    text-align: left;
     font-weight: 700;
 
 }
 
-.icon-color {
- 
+.my-label {
+    color: rgb(161, 157, 157);
+    font-style: italic;
+}
+.my-icon {
+    margin-right: 0.5em;
     color: orangered;
 }
 
+.ml2 {
+    margin-right: 2em;
+}
+
+.my-columns {
+    display: flex;
+}
 .right {
     text-align: right;
 }
@@ -32,9 +43,10 @@ body {
     background-color: rgb(29, 29, 29);
     border-radius: 0.5em;
     padding: 1em;
-    display: flex;
-    flex-wrap: wrap;
     margin-top: 0.4em;
+}
+.my-column {
+    flex: 1;
 }
 
 .message-error {
@@ -53,9 +65,7 @@ body {
     color: whitesmoke;
     text-align: center;
 }
-.my-item {
-    flex: 1;
-}
+
 
 .display {
     background-color: black;
@@ -69,28 +79,17 @@ body {
 
 }
 
-.btn {
-    border: 0;
-    margin: 0;
-    border-radius: 0.4em;
-}
-
-.px4 {
-    padding: 0.4em 0 0.4em 0;
-}
-
-.border-orange {
-    border: 1px solid orangered;
-}
 
 .my-input {
     width: 100%;
     background-color: rgb(29, 29, 29);
     color: whitesmoke;
     border: 1px solid rgb(69, 68, 68);
-    padding: 0.5em;
+    padding: 0.3em 0 0.3em 0.5em;
     border-radius: 0.2em;
     font-size: 1em;
+    margin-top: 0.1em;
+    margin-bottom: 0.5em;
 }
 .my-select {
     width: 100%;

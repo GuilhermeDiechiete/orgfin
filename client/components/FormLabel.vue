@@ -1,5 +1,5 @@
 <template>
-    <label for="" class="label text-white mt-4">{{ text }}</label>
+    <label for="" class="my-label">{{ text }}</label>
 </template>
 
 <script setup lang="ts">

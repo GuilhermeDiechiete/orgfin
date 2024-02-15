@@ -1,30 +1,33 @@
 <template>
   <div>
     <section v-if="userStore.authenticated">
-      <div class="my-box">
-        <BoxOrgFin class="my-item"/>
-        <BoxUser class="my-item" />
-        <BoxConfig class="my-item" /> 
-      </div>
+
+      <BoxLogout /> 
 
       <div class="my-box">
-        <BoxNavegationPage class="my-item" /> 
+        <BoxOrgFin />
       </div>
-
-      <div class="my-box">
-        <BoxDisplay class="my-item" />
-      </div>
+      
       <div>
-        <BoxTransaction />
+        <BoxTransaction/>
       </div>
 
       <div class="my-box">
-        <SearchBar class="my-item" />
+        <BoxNavegationPage /> 
       </div>
 
       <div class="my-box">
-        <BoxTables class="my-item" />
+        <BoxDisplay />
       </div>
+      
+      <div class="my-box">
+        <SearchBar class="my-column" />
+      </div>
+
+      <div class="my-box">
+        <BoxTables class="my-column" />
+      </div>
+
     </section>
     <div v-else>
       <h1>Faça Login</h1>

@@ -10,7 +10,7 @@
           <th>Categoria</th>
           <th>Conta de Saída</th>
           <th>Destino</th>
-          <th>Status</th>
+          <th v-if="type === 'expenses'">Status</th>
           <th>Excluir</th>
         </tr>
       </thead>
@@ -19,12 +19,15 @@
           <td>{{ expense.date }}</td>
           <td>{{ expense.description }}</td>
           <td>{{ expense.installment }} - {{ expense.total_installments }}</td>
-          <td>{{ expense.amount }}</td>
+          <td>R$ {{ expense.amount }}</td>
           <td>{{ expense.category }}</td>
           <td>{{ expense.account }}</td>
           <td>{{ expense.destiny }}</td>
-          <td>{{ expense.status }}</td>
-          <td><button class="my-button-delete">Excluir</button></td>
+          <td> 
+            <span v-if="expense.status === false"><button class="my-btn-danger">Pendente</button></span>
+            <span v-if="expense.status === true"> <button class="my-btn-success">Pago</button></span>
+          </td>
+          <td><button class="my-button-delete">X</button></td>
         </tr>
       </tbody>
       <tbody v-if="type === 'incomes'">
@@ -36,8 +39,8 @@
           <td>{{ income.category }}</td>
           <td>{{ income.account }}</td>
           <td>{{ income.destiny }}</td>
-          <td>{{ income.status }}</td>
-          <td><button class="my-button-delete">Excluir</button></td>
+          
+          <td><button class="my-button-delete">X</button></td>
         </tr>
       </tbody>
       <tbody v-if="type === 'investments'">
@@ -49,8 +52,8 @@
           <td>{{ investment.category }}</td>
           <td>{{ investment.account }}</td>
           <td>{{ investment.destiny }}</td>
-          <td>{{ investment.status }}</td>
-          <td><button class="my-button-delete">Excluir</button></td>
+         
+          <td><button class="my-button-delete">X</button></td>
         </tr>
       </tbody>
     </table>
@@ -60,19 +63,19 @@
 <script setup lang="ts">
 defineProps(['type'])
 
-const useTransaction = useTransactionStore()
+const useSearchTransaction = useSearchTransactionStore()
 
-const expenses = ref(useTransaction.expenses)
-const incomes = ref(useTransaction.incomes)
-const investments = ref(useTransaction.investments)
+const expenses = ref(useSearchTransaction.expenses)
+const incomes = ref(useSearchTransaction.incomes)
+const investments = ref(useSearchTransaction.investments)
 
-watch(() => useTransaction.expenses, (newExpenses) => {
+watch(() => useSearchTransaction.expenses, (newExpenses) => {
   expenses.value = newExpenses
 })
-watch(() => useTransaction.incomes, (newIncomes) => {
+watch(() => useSearchTransaction.incomes, (newIncomes) => {
   incomes.value = newIncomes
 })
-watch(() => useTransaction.investments, (newInvestments) => {
+watch(() => useSearchTransaction.investments, (newInvestments) => {
   investments.value = newInvestments
 })
 

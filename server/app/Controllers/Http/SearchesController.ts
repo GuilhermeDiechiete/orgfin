@@ -91,11 +91,12 @@ export default class SearchesController {
 
       const totalByMonthExpenses: number = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0)
       const totalByMonthIncomes: number = incomes.reduce((acc, income) => acc + Number(income.amount), 0)
-      const totalByMonthInvestmets: number = investments.reduce((acc, investment) => acc + Number(investment.amount), 0)
+      const totalByMonthInvestments: number = investments.reduce((acc, investment) => acc + Number(investment.amount), 0)
 
+      const surplus =  totalByMonthIncomes - (totalByMonthExpenses + totalByMonthInvestments)
 
       return response.status(200).json({
-        expenses, incomes, investments, totalByMonthExpenses, totalByMonthIncomes, totalByMonthInvestmets
+        expenses, incomes, investments, totalByMonthExpenses, totalByMonthIncomes, totalByMonthInvestments, surplus
       })
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {

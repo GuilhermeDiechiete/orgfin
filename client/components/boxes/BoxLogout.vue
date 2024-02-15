@@ -1,10 +1,7 @@
 <template>
   <section class="right">
     <NuxtLink to="/">
-      <Icon
-        name="octicon:sign-out"
-        class="icon-color"
-      />
+      <IconLogout />
     </NuxtLink>
   </section>
 </template>

@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-champagne-glasses"></i>
+    <i class="fa-solid fa-champagne-glasses my-icon"></i>
 </template>

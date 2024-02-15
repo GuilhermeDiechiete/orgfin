@@ -22,11 +22,11 @@ export default defineNuxtConfig({
   components: [
     '~/components',
     '~/components/bars',
+    '~/components/displays',
     '~/components/selects',
     '~/components/forms',
     '~/components/buttons',
     '~/components/tables',
-    '~/components/items',
     '~/components/icons',
     '~/components/boxes',
     '~/components/templates',

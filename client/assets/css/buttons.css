@@ -26,10 +26,10 @@
     width: 100%;
     background-color: rgb(29, 29, 29);
     border: 1px solid orangered;
-    border-radius: 0.2em;
-    padding: 0.5em;
+    border-radius: 0.4em;
+    padding: 0.6em;
     font-size: 1.4em;
-    margin-top: 0.5em;
+    margin-top: 0.4em;
 }
 
 .my-button-success {
@@ -48,5 +48,21 @@
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
-    border-radius: 1em;
+    border-radius: 0.5em;
+}
+
+.my-btn-danger {
+    background-color: rgb(218, 86, 86);
+    border: 0;
+    color: whitesmoke;
+    padding: 0.2em 1em 0.2em 1em;
+    border-radius: 0.4em;
+}
+
+.my-btn-success {
+    background-color: rgb(61, 190, 93);
+    border: 0;
+    color: whitesmoke;
+    padding: 0.2em 1em 0.2em 1em;
+    border-radius: 0.4em;
 }
