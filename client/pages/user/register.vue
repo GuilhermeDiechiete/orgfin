@@ -1,5 +1,5 @@
 <template>
     <section>
-       <ShelfUserRegister />
+       <Register />
     </section>
 </template>

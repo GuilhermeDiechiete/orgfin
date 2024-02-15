@@ -17,10 +17,11 @@
       <div>
         <BoxTransaction />
       </div>
-    
+
       <div class="my-box">
-        <BoxSearch class="my-item" />
+        <SearchBar class="my-item" />
       </div>
+
       <div class="my-box">
         <BoxTables class="my-item" />
       </div>

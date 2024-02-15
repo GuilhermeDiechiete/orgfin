@@ -3,7 +3,7 @@
     <h1 class="my-title">Login</h1>
 
     <Messages />
-    <form action="" method="post">
+    <form action="" method="post" class="my-box">
       
       <FormLabel text="E-mail:" />
       <input v-model="email" type="email" class="my-input">

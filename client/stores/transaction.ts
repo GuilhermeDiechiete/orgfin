@@ -72,10 +72,7 @@ export const useTransactionStore = defineStore('transactions', {
                             Authorization: token
                         },
                     })
-                } 
-
-
-
+                    } 
                 }
                 this.expenses = this.transactions.expenses
                 this.incomes = this.transactions.incomes

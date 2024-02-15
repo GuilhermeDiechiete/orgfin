@@ -21,6 +21,7 @@ export default defineNuxtConfig({
 
   components: [
     '~/components',
+    '~/components/bars',
     '~/components/selects',
     '~/components/forms',
     '~/components/buttons',
