@@ -6,12 +6,13 @@
    
     <div class="my-box">
       <h1 class="my-title"><IconCategory />Contas</h1>
+      <p>Use o formulário abaixo para adicionar suas contas bancárias juntamente com o valor atual em cada uma delas.</p>
     </div>
     
     <div class="my-box">
       <form action="" method="post" class="fullwidth">
 
-        <FormLabel text="Nome da instituição ou local de aplicação:"/>
+        <FormLabel text="Nome da conta:"/>
         <input v-model="name" type="text" class="my-input">
 
         <FormLabel text="Valor atual em conta:"/>

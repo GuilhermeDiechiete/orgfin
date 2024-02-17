@@ -1,7 +1,7 @@
 
 import { defineStore } from "pinia";
 
-const API = 'http://localhost:4000'
+const API = 'http://localhost:4000/category'
 
 
 export const useCategoryStore = defineStore('categories', {
@@ -21,7 +21,7 @@ export const useCategoryStore = defineStore('categories', {
                 if(typeof localStorage !== 'undefined'){
                     const token = localStorage.getItem('token')
                    if(token) {
-                   this.messageSuccess = await $fetch(`${API}/category`, {
+                   this.messageSuccess = await $fetch(`${API}`, {
                     method: 'POST',
                     headers: {
                         Authorization: token
@@ -56,7 +56,7 @@ export const useCategoryStore = defineStore('categories', {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token')
                    if(token) {
-                    this.categories = await $fetch(`${API}/category`, {
+                    this.categories = await $fetch(`${API}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
@@ -66,6 +66,24 @@ export const useCategoryStore = defineStore('categories', {
                 }
                 
                 
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async delete(id: number) {
+            try {
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token')
+                   if(token) {
+                    this.messageSuccess = await $fetch(`${API}/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            Authorization: token
+                        },
+                    })
+                } 
+                
+                }
             } catch (error) {
                 console.log(error)
             }

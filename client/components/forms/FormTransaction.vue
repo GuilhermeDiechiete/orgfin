@@ -4,39 +4,39 @@
 
     <Messages />
 
-    <FormLabel text="Data" />
+    <FormLabel text="Data:*" />
     <input v-model="transaction.date" type="date" class="my-input">
 
-    <FormLabel text="Tipo de Transação:" />
+    <FormLabel text="Selecione o tipo de transação:*" />
     <select class="my-input" v-model="transaction.type">
       <option value="expense">Despesa</option>
       <option value="income">Renda</option>
       <option value="investment">Investimento</option>
     </select>
 
-    <FormLabel text="Descrição:" />
+    <FormLabel text="Descrição:*" />
     <input v-model="transaction.description" type="text" class="my-input">
 
-    <FormLabel text="Numero da parcela atual." />
+    <FormLabel text="Adicione o número da parcela atual:" />
     <input v-model="transaction.installment" type="number" class="my-input">
 
-    <FormLabel text="Numero total de parcelas." />
+    <FormLabel text="Adicione o número total de parcelas:" />
     <input v-model="transaction.total_installments" type="number" class="my-input">
 
-    <FormLabel text="Valor" />
+    <FormLabel text="Valor: R$ *" />
     <input v-model="transaction.amount" type="number" class="my-input">
 
-    <FormLabel text="Categoria" />
+    <FormLabel text="Selecione uma categoria:" />
     <select class="my-input" v-model="transaction.category">
       <option v-for="category in categories" :key="category.id" :value="category.name">{{ category.name }}</option>
     </select>
 
-    <FormLabel text="Conta de saída" />
+    <FormLabel text="Selecione uma conta de saída:" />
     <select class="my-input" v-model="transaction.account">
       <option v-for="account in accounts" :key="account.id" :value="account.name">{{ account.name }}</option>
     </select>
 
-    <FormLabel text="Destino" />
+    <FormLabel text="Descreva o destino do valor:" />
     <input v-model="transaction.destiny" type="text" class="my-input">
 
     <BtnFullWidthSuccess text="Criar" class="my-button-fullwidth-success" @click.prevent="addTransaction"/>
@@ -44,14 +44,18 @@
 </template>
 
 <script setup lang="ts">
+
+// Select category
   const useCategory = useCategoryStore()
   await useCategory.index()
   const categories = useCategory.categories
 
+  // Select accounts
   const useAccount = useAccountStore()
   await useAccount.index()
   const accounts = useAccount.accounts
 
+  
   const useTransaction = useTransactionStore()
 
   const transaction = {

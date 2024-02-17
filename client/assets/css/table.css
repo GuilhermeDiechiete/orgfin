@@ -13,13 +13,12 @@
 }
 
 .my-table thead tr th {
-    text-align: center;
+    text-align: left;
     border: 1px solid rgb(83, 83, 83);
     color: rgb(242, 67, 3);
     background-color: rgb(26, 26, 26);
-    padding-left: 0.4em;
- 
-    min-width: 6em;
+    padding-left: 0.5em;
+    font-size: 0.8em;
 }
 .my-table tbody tr {
     border: 1px solid rgb(83, 83, 83);
@@ -28,8 +27,24 @@
 .my-table tbody tr td {
     
     color: rgb(197, 197, 197);
-    text-align: center;
-    min-width: 6em;
-    padding: 0.4em 0 0.4em 1em;
+    text-align: left;
+    padding: 0.4em 0 0.4em 0.5em;
+    font-size: 0.8em;
+}
+.w2 {
+    min-width: 2em;
+}
+
+.w5 {
+    min-width: 5em;
+}
+.w8 {
+    min-width: 8em;
+}
+.w10 {
+    min-width: 10em;
+}
+.w2 {
+    min-width: 2em;
 }
 

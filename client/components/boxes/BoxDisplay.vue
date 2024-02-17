@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 
-const total = useSearchTransactionStore()
+const total = useTransactionStore()
 
 const totalExpenses = ref(total.totalByMonthExpenses)
 const totalIncomes = ref(total.totalByMonthIncomes)

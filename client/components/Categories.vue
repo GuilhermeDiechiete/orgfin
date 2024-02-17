@@ -6,6 +6,7 @@
 
     <div class="my-box">
       <h1 class="my-title"> <IconCategory /> Categorias </h1>
+      <p>Use o formulário abaixo para adicionar uma nova categoria.</p>
     </div>
     
     <div class="my-box">
@@ -13,7 +14,8 @@
         <FormLabel text="Nome da categoria:"/>
         <input v-model="name" type="text" class="my-input">
 
-        <BtnFullWidthSuccess text="Criar" @click.prevent="addCategory" />
+        <BtnFullWidthSuccess text="Criar"  @click.prevent="addCategory"/>
+   
       </form>
     </div>
     
@@ -29,7 +31,7 @@
           <tbody>
             <tr v-for="category in categories" key="category.id">
               <td>{{ category.name }}</td>
-              <td> Excluir </td>
+              <td> <button class="my-button-delete" @click="deleteCategory(category.id)">X</button></td>
             </tr>
           </tbody>
         </table>
@@ -40,13 +42,14 @@
 
 <script setup lang="ts">
 
-const name = ref('')
+
 
 const storeCategory = useCategoryStore()
+const name = ref('')
 
 await storeCategory.index()
 
-const categories = storeCategory.categories
+const categories = ref(storeCategory.categories)
 
 const addCategory = async () => {
   await storeCategory.register(name.value)
@@ -54,6 +57,12 @@ const addCategory = async () => {
   await storeCategory.index() // Atualiza a lista de categorias
 }
 
-console.log(categories)
+const deleteCategory = async(id:number) => {
+  await storeCategory.delete(id)
+  await storeCategory.index()
+}
+watch(() => storeCategory.categories, (newCategories) => {
+  categories.value = newCategories
+})
 
 </script>

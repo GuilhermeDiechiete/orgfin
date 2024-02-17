@@ -1,11 +1,15 @@
 <template>
   <div>
     <section v-if="userStore.authenticated">
-
       <BoxLogout /> 
 
       <div class="my-box">
-        <BoxOrgFin />
+        <div class="columns">
+         
+        <BoxOrgFin  class="column"/>
+        </div>
+        
+
       </div>
       
       <div>

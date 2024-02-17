@@ -6,6 +6,16 @@ Route.group(() => {
     Route.post('/', 'TransactionsController.store')
     Route.delete('/:id', 'TransactionsController.destroy')
 
+    Route.group(() => {
+
+        Route.group(() => {
+
+            Route.get('/', 'TransactionsController.getByYear')
+            Route.get('/:month', 'TransactionsController.getByMonth')
+
+        }).prefix('/:year')
+
+    }).prefix('/:order')
 
 }).prefix('transaction')
 .middleware('auth')

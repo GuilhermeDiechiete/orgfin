@@ -8,7 +8,7 @@
           <th>Parcelas</th>
           <th>Valor</th>
           <th>Categoria</th>
-          <th>Conta de Saída</th>
+          <th>Saída</th>
           <th>Destino</th>
           <th v-if="type === 'expenses'">Status</th>
           <th>Excluir</th>
@@ -16,18 +16,18 @@
       </thead>
       <tbody v-if="type === 'expenses'">
         <tr v-for="expense in expenses" :key="expense.id">
-          <td>{{ expense.date }}</td>
-          <td>{{ expense.description }}</td>
+          <td class="w8">{{ expense.date }}</td>
+          <td class="w10">{{ expense.description }}</td>
           <td>{{ expense.installment }} - {{ expense.total_installments }}</td>
-          <td>R$ {{ expense.amount }}</td>
-          <td>{{ expense.category }}</td>
-          <td>{{ expense.account }}</td>
-          <td>{{ expense.destiny }}</td>
+          <td class="w8">R$ {{ expense.amount }}</td>
+          <td class="w10">{{ expense.category }}</td>
+          <td class="w8">{{ expense.account }}</td>
+          <td class="w8">{{ expense.destiny }}</td>
           <td> 
-            <span v-if="expense.status === false"><button class="my-btn-danger">Pendente</button></span>
-            <span v-if="expense.status === true"> <button class="my-btn-success">Pago</button></span>
+            <span v-if="expense.status === false"><button class="my-button-danger">Pendente</button></span>
+            <span v-if="expense.status === true"> <button class="my-button-success">Pago</button></span>
           </td>
-          <td><button class="my-button-delete">X</button></td>
+          <td class="w5"><button @click="deleteTransaction(expense.id)" class="my-button-delete">X</button></td>
         </tr>
       </tbody>
       <tbody v-if="type === 'incomes'">
@@ -40,7 +40,7 @@
           <td>{{ income.account }}</td>
           <td>{{ income.destiny }}</td>
           
-          <td><button class="my-button-delete">X</button></td>
+          <td><button @click="deleteTransaction(income.id)" class="my-button-delete">X</button></td>
         </tr>
       </tbody>
       <tbody v-if="type === 'investments'">
@@ -53,7 +53,7 @@
           <td>{{ investment.account }}</td>
           <td>{{ investment.destiny }}</td>
          
-          <td><button class="my-button-delete">X</button></td>
+          <td><button @click="deleteTransaction(investment.id)" class="my-button-delete">X</button></td>
         </tr>
       </tbody>
     </table>
@@ -63,24 +63,42 @@
 <script setup lang="ts">
 defineProps(['type'])
 
-const useSearchTransaction = useSearchTransactionStore()
+const useTransaction = useTransactionStore()
 
-const expenses = ref(useSearchTransaction.expenses)
-const incomes = ref(useSearchTransaction.incomes)
-const investments = ref(useSearchTransaction.investments)
+const expenses = ref(useTransaction.expenses)
+const incomes = ref(useTransaction.incomes)
+const investments = ref(useTransaction.investments)
 
-watch(() => useSearchTransaction.expenses, (newExpenses) => {
+const deleteTransaction = async(id:number) => {
+  await storeTransaction.delete(id)
+  await useTransaction.getByMonth('asc', '2024', '3')
+}
+
+watch(() => useTransaction.expenses, (newExpenses) => {
   expenses.value = newExpenses
 })
-watch(() => useSearchTransaction.incomes, (newIncomes) => {
+watch(() => useTransaction.incomes, (newIncomes) => {
   incomes.value = newIncomes
 })
-watch(() => useSearchTransaction.investments, (newInvestments) => {
+watch(() => useTransaction.investments, (newInvestments) => {
   investments.value = newInvestments
 })
 
 
+const storeTransaction = useTransactionStore()
 
 
- 
+</script>
+
+<script setup lang="ts">
+
+
+
+
+
+
+
+
+
+
 </script>

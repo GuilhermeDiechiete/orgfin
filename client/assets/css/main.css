@@ -15,7 +15,10 @@ body {
     font-weight: 700;
 
 }
-
+.my-container {
+    margin: auto;
+    max-width: 98%;
+}
 .my-label {
     color: rgb(161, 157, 157);
     font-style: italic;
@@ -99,4 +102,12 @@ body {
     margin: 0.2em 0.4em 0.2em 0.4em;
     padding: 1em 0.5em 1em 0.5em ;
     border-radius: 0.2em;
+}
+
+.display-amount {
+    color: rgb(97, 96, 96);
+    font-style: italic;
+    font-size: 1.2em;
+    font-weight: bolder;
+    padding: 0.4em 0 0.4em 1.5em;
 }

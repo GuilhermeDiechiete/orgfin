@@ -1,10 +1,11 @@
 <template>
     <div>
         <div class="columns is-desktop">
-        <SelectOrder />
-        <SelectMonth />
-        <SelectYear />
-        <BtnNormal icon="fa-solid fa-magnifying-glass my-icon fa-shake" @click.prevent="searchTransactions"/>
+        <SelectFilter class="column is-1"/>
+        <SelectOrder class="column is-1" />
+        <SelectMonth class="column is-1" />
+        <SelectYear class="column is-1" />
+        <BtnNormal class="column" icon="fa-solid fa-magnifying-glass my-icon fa-shake" @click.prevent="getTransactions"/>
 
         </div>
         
@@ -13,10 +14,10 @@
 
 <script setup lang="ts">
 
-const useSearchTransaciton = useSearchTransactionStore()
+const useTransaciton = useTransactionStore()
 
-const searchTransactions = async () => {
-    await useSearchTransaciton.getByMonth('asc', '2024', '3')
+const getTransactions = async () => {
+    await useTransaciton.getByMonth('asc', '2024', '3')
      
 }
 
