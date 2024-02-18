@@ -1,11 +1,22 @@
 <template>
-  <select class="my-select">
-    <option value="date">Ordem</option>
-    <option value="date">Data</option>
-    <option>Status Pendente</option>
+  <select class="my-select" v-model="order">
+    <option value="asc">Ordem</option>
+    <option value="asc">Data</option>
+    <option value="pending">Status Pendente</option>
     <option>Status Pago</option>
     
     <option>Maior Valor</option>
     <option>Menor Valor</option>
   </select>
 </template>
+
+<script setup lang="ts">
+
+const useTransaciton = useTransactionStore()
+
+const order = ref('1')
+
+watch(() => order.value, (newOrder) => {
+  useTransaciton.order = newOrder
+})
+</script>

@@ -1,5 +1,5 @@
 <template>
-  <select class="my-select">
+  <select class="my-select" v-model="month">
     <option value="1">Janeiro</option>
     <option value="2">Fevereiro</option>
     <option value="3">Março</option>
@@ -14,3 +14,14 @@
     <option value="12">Dezembro</option>
   </select>
 </template>
+
+<script setup lang="ts">
+
+const useTransaciton = useTransactionStore()
+
+const month = ref('1')
+
+watch(() => month.value, (newMonth) => {
+  useTransaciton.month = newMonth
+})
+</script>

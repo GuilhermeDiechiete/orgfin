@@ -7,6 +7,11 @@ export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
+            filter: ref(''),
+            order: ref(''),
+            month: ref(''),
+            year: ref(''),
+
             expenses: ref([]),
             incomes: ref([]),
             investments: ref([]),
@@ -21,6 +26,7 @@ export const useTransactionStore = defineStore('transactions', {
             messageSuccess: ref('')
         }
     },
+    
     actions: {
         async create( transaction: any ) {
             try {
@@ -65,12 +71,12 @@ export const useTransactionStore = defineStore('transactions', {
                 },2000)
             }
         }, 
-        async getByMonth(order:string, year:string, month:string) {
+        async getByMonth() {
             try {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token')
                     if(token) {
-                    this.transactions = await $fetch(`${API}/${order}/${year}/${month}`, {
+                    this.transactions = await $fetch(`${API}/${this.order}/${this.year}/${this.month}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
@@ -87,6 +93,7 @@ export const useTransactionStore = defineStore('transactions', {
                 this.totalByMonthInvestments = this.transactions.totalByMonthInvestments
                 this.surplus = this.transactions.surplus
 
+                console.log(this.filter, this.order, this.month, this.year)
             } catch (error) {
                 console.log(error)
             }
