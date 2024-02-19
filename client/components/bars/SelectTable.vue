@@ -17,12 +17,14 @@
     
   <script setup lang="ts">
   const emits = defineEmits(['tabChanged'])
-    
+  const useTransaction = useTransactionStore()
+
     const active = ref('monthly');
     
     const setActiveTab = (tab: string) => {
       active.value = tab;
       emits('tabChanged', tab)
+      useTransaction.tableSelected = tab
     }
   
   

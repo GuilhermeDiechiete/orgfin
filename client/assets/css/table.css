@@ -21,14 +21,15 @@
     font-size: 0.8em;
 }
 .my-table tbody tr {
-    border: 1px solid rgb(83, 83, 83);
+    border: 1px solid rgb(85, 84, 84);
+    color: rgb(150, 147, 147);
 }
 
 .my-table tbody tr td {
     
-    color: rgb(197, 197, 197);
+    
     text-align: left;
-    padding: 0.4em 0 0.4em 0.5em;
+    padding: 0.4em 0 0.4em 1em;
     font-size: 0.8em;
 }
 .w2 {
@@ -48,3 +49,23 @@
     min-width: 2em;
 }
 
+.td-total-red {
+    color: red;
+    font-size: 1.2em;
+    background-color: black;
+}
+.td-total-green {
+    color: green;
+    font-size: 1.2em;
+    background-color: black;
+}
+.td-total-yellow {
+    color: yellow;
+    font-size: 1.2em;
+    background-color: black;
+}
+.td-total-null {
+   
+    font-size: 1.2em;
+    background-color: black;
+}

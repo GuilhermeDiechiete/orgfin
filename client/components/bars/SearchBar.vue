@@ -10,11 +10,22 @@
 
 <script setup lang="ts">
 
-const useTransaciton = useTransactionStore()
+const useTransaction = useTransactionStore()
+
+const active = ref('')
+
+watch(() => useTransaction.tableSelected, (newSelected) => {
+  active.value = newSelected
+ 
+})
 
 const getTransactions = async () => {
-    await useTransaciton.getByMonth()
-     
+    if(active.value === 'annual') {
+        await useTransaction.getByYear() 
+    } else {
+        await useTransaction.getByMonth() 
+        await useTransaction.getByYear() 
+    }   
 }
 
 </script>

@@ -11,6 +11,8 @@ export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
+            tableSelected: ref('monthly'), 
+            
             filter: ref(''),
             order: ref('asc'),
             month: ref(currentMonth),
@@ -25,6 +27,15 @@ export const useTransactionStore = defineStore('transactions', {
             totalByMonthIncomes: ref(''),
             totalByMonthInvestments: ref(''),
             surplus: ref(''),
+
+            // getByYear
+            totalExpenses: ref([]), 
+            totalIncomes: ref([]), 
+            totalInvestments: ref([]),
+            
+            totalAnnualExpenses: ref(''), 
+            totalAnnualIncomes: ref(''), 
+            totalAnnualInvestments: ref(''),
             // messages
             messageError: ref(''),
             messageSuccess: ref('')
@@ -98,6 +109,32 @@ export const useTransactionStore = defineStore('transactions', {
                 this.surplus = this.transactions.surplus
 
                 console.log(this.filter, this.order, this.month, this.year)
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async getByYear() {
+            try {
+                console.log('oi')
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token')
+                    if(token) {
+                    this.transactions = await $fetch(`${API}/${this.order}/${this.year}`, {
+                        method: 'GET',
+                        headers: {
+                            Authorization: token
+                        },
+                    })
+                    } 
+                }
+                
+                this.totalExpenses = this.transactions.totalExpenses, 
+                this.totalIncomes = this.transactions.totalIncomes,
+                this.totalInvestments = this.transactions.totalInvestments,
+                this.totalAnnualExpenses = this.transactions.totalAnnualExpenses,
+                this.totalAnnualIncomes = this.transactions.totalAnnualIncomes,
+                this.totalAnnualInvestments = this.transactions.totalAnnualInvestments
+                console.log(this.totalExpenses, this.totalIncomes, this.totalInvestments, this.totalAnnualExpenses)
             } catch (error) {
                 console.log(error)
             }
