@@ -12,7 +12,10 @@
 
 const useTransaciton = useTransactionStore()
 
-const year = ref('1')
+const currentDate = new Date()
+const currentYear = currentDate.getFullYear()
+
+const year = ref(currentYear)
 
 watch(() => year.value, (newYear) => {
   useTransaciton.year = newYear

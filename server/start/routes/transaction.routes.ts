@@ -5,7 +5,8 @@ Route.group(() => {
 
     Route.post('/', 'TransactionsController.store')
     Route.delete('/:id', 'TransactionsController.destroy')
-
+    Route.put('/:id', 'TransactionsController.changeStatus')
+    
     Route.group(() => {
 
         Route.group(() => {

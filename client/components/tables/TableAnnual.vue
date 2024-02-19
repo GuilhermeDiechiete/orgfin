@@ -1,13 +1,16 @@
 <template>
-  <div class="table-container">
-    <table class="table">
-      <tr>
+  <div class="my-table-container">
+    <table class="my-table">
+      <thead>
+        <tr>
         <th>Mês</th>
         <th>Despesas</th>
         <th>Rendimentos</th>
         <th>Investimentos</th>
         <th>Sobra</th>
       </tr>
+      </thead>
+      
     </table>
   </div>
 </template>

@@ -23,11 +23,11 @@
           <td class="w10">{{ expense.category }}</td>
           <td class="w8">{{ expense.account }}</td>
           <td class="w8">{{ expense.destiny }}</td>
-          <td> 
-            <span v-if="expense.status === false"><button class="my-button-danger">Pendente</button></span>
-            <span v-if="expense.status === true"> <button class="my-button-success">Pago</button></span>
+          <td class="has-text-centered"> 
+            <span @click="changeStatus(expense.id)" v-if="expense.status === false"><button class="my-button-danger">Pendente</button></span>
+            <span @click="changeStatus(expense.id)" v-if="expense.status === true"> <button class="my-button-success">Pago</button></span>
           </td>
-          <td class="w5"><button @click="deleteTransaction(expense.id)" class="my-button-delete">X</button></td>
+          <td class="w5 has-text-centered"><button @click="deleteTransaction(expense.id)" class="my-button-delete">X</button></td>
         </tr>
       </tbody>
       <tbody v-if="type === 'incomes'">
@@ -71,7 +71,12 @@ const investments = ref(useTransaction.investments)
 
 const deleteTransaction = async(id:number) => {
   await storeTransaction.delete(id)
-  await useTransaction.getByMonth('asc', '2024', '3')
+  await useTransaction.getByMonth()
+}
+
+const changeStatus = async(id:number) => {
+  await storeTransaction.changeStatus(id)
+  await useTransaction.getByMonth()
 }
 
 watch(() => useTransaction.expenses, (newExpenses) => {

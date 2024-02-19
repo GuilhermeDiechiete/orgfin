@@ -19,7 +19,10 @@
 
 const useTransaciton = useTransactionStore()
 
-const month = ref('1')
+const currentDate = new Date()
+const currentMonth = currentDate.getMonth() + 1
+
+const month = ref(currentMonth)
 
 watch(() => month.value, (newMonth) => {
   useTransaciton.month = newMonth

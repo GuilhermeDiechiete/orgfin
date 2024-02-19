@@ -3,14 +3,18 @@ import { defineStore } from "pinia";
 
 const API = 'http://localhost:4000/transaction'
 
+const currentDate = new Date()
+const currentMonth = currentDate.getMonth() + 1
+const currentYear = currentDate.getFullYear()
+
 export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
             filter: ref(''),
-            order: ref(''),
-            month: ref(''),
-            year: ref(''),
+            order: ref('asc'),
+            month: ref(currentMonth),
+            year: ref(currentYear),
 
             expenses: ref([]),
             incomes: ref([]),
@@ -116,6 +120,26 @@ export const useTransactionStore = defineStore('transactions', {
                 console.log('deleteado')
             } catch (error) {
                 console.log(error)
+            }
+        },
+        async changeStatus(id: number) {
+            try {
+                console.log(id)
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token')
+                   if(token) {
+                    this.messageSuccess = await $fetch(`${API}/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: token
+                        },
+                    })
+                } 
+                
+                }
+                console.log('status atualizado')
+            } catch (error) {
+                
             }
         }
     }

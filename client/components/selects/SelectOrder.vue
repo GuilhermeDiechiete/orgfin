@@ -14,7 +14,7 @@
 
 const useTransaciton = useTransactionStore()
 
-const order = ref('1')
+const order = ref('asc')
 
 watch(() => order.value, (newOrder) => {
   useTransaciton.order = newOrder
