@@ -3,7 +3,7 @@
     width: 100%;
     margin: 0.2em 0.4em 0.2em 0.4em;
     border-radius: 0.2em;
-    border: 1px solid rgb(249, 109, 1);
+    border: 1px solid rgb(186, 82, 3);
     background-color: rgb(29, 29, 29);
 }
 
@@ -18,14 +18,14 @@
 .my-btn-fullwidth {
     width: 100%;
     background-color: rgb(29, 29, 29);
-    border: 1px solid orangered;
+    border: 1px solid rgb(201, 55, 2);
     border-radius: 0.2em;
     padding: 0.4em;
 }
 .my-btn-wide {
     width: 100%;
     background-color: rgb(29, 29, 29);
-    border: 1px solid orangered;
+    border: 1px solid rgb(192, 53, 3);
     border-radius: 0.4em;
     padding: 0.6em;
     font-size: 1.4em;
@@ -48,7 +48,7 @@
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
-    border-radius: 0.5em;
+    border-radius: 0.2em;
     width: 50%;
 }
 
@@ -58,7 +58,7 @@
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
-    border-radius: 0.4em;
+    border-radius: 0.2em;
     width: 80%;
 }
 
@@ -67,6 +67,6 @@
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
-    border-radius: 0.4em;
+    border-radius: 0.2em;
     width: 80%;
 }
