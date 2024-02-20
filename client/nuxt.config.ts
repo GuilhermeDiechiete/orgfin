@@ -21,15 +21,24 @@ export default defineNuxtConfig({
 
   components: [
     '~/components',
-    '~/components/sidebar',
-    '~/components/bars',
+    '~/components/templates',
+
+    '~/components/boxes',
+    '~/components/boxes/TIndex',
+    '~/components/boxes/TAccounts',
+    '~/components/boxes/TCategories',
+    '~/components/boxes/TLogin',
+    '~/components/boxes/TRegister',
+
+
+    '~/components/tables',
+    '~/components/tables/bars',
+
     '~/components/displays',
     '~/components/selects',
     '~/components/forms',
     '~/components/buttons',
-    '~/components/tables',
     '~/components/icons',
-    '~/components/boxes',
-    '~/components/templates',
+    
   ]
-})
+});

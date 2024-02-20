@@ -1,4 +1,4 @@
-.my-button {
+.my-btn {
     padding: 1em 3em 1em 3em;
     width: 100%;
     margin: 0.2em 0.4em 0.2em 0.4em;
@@ -7,7 +7,7 @@
     background-color: rgb(29, 29, 29);
 }
 
-.my-button-nav {
+.my-btn-nav {
     border: 1px solid rgb(114, 114, 114);
     padding: 0.2em 2em;
     border-radius: 0.2em;
@@ -15,14 +15,14 @@
     color: rgb(215, 215, 215);
 }
 
-.my-button-fullwidth {
+.my-btn-fullwidth {
     width: 100%;
     background-color: rgb(29, 29, 29);
     border: 1px solid orangered;
     border-radius: 0.2em;
     padding: 0.4em;
 }
-.my-button-wide {
+.my-btn-wide {
     width: 100%;
     background-color: rgb(29, 29, 29);
     border: 1px solid orangered;
@@ -32,7 +32,7 @@
     margin-top: 0.4em;
 }
 
-.my-button-fullwidth-success {
+.my-btn-fullwidth-success {
     width: 100%;
     background-color: rgb(0, 185, 65);
     border-radius: 0.2em;
@@ -43,27 +43,30 @@
     font-size: 1em;
     font-weight: 700;
 }
-.my-button-delete {
-    background-color: rgb(171, 1, 1);
+.my-btn-delete {
+    background-color: rgb(190, 50, 50);
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
     border-radius: 0.5em;
+    width: 50%;
 }
 
 
-.my-button-danger {
+.my-btn-danger {
     background-color: rgb(218, 86, 86);
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
     border-radius: 0.4em;
+    width: 80%;
 }
 
-.my-button-success {
+.my-btn-success {
     background-color: rgb(61, 190, 93);
     border: 0;
     color: whitesmoke;
     padding: 0.2em 1em 0.2em 1em;
     border-radius: 0.4em;
+    width: 80%;
 }

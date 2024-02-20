@@ -1,12 +1,11 @@
 <template>
   <NuxtLink
-    class="my-button-nav"
-    :to="to"
-  >
-    <i :class="icon"></i>{{ text }}
+    class="my-btn-nav"
+    :to="to">
+    <i :class="icon" />{{ text }}
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-defineProps(['to','icon', 'text'])
+defineProps(['to','icon', 'text']);
 </script>

@@ -1,9 +1,11 @@
 <template>
-  <button class="my-btn-fullwidth-success">
-    {{ text }}
-  </button>
+  <label
+    for=""
+    class="my-label"
+  >{{ text }}</label>
 </template>
 
 <script setup lang="ts">
 defineProps(['text']);
+
 </script>

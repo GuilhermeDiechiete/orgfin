@@ -1,5 +1,5 @@
 <template>
-    <section>
-       <Register />
-    </section>
+  <section>
+    <TRegister />
+  </section>
 </template>

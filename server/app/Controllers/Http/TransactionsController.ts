@@ -3,6 +3,7 @@ import TransactionValidator from 'App/Validators/TransactionValidator'
 
 export default class TransactionsController {
 
+  // criar nova transação
   public async store({ request , auth, response }: HttpContextContract) {
     try {
       const user = auth.user 

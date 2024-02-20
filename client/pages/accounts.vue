@@ -1,3 +1,3 @@
 <template>
-  <Accounts />
+  <TAccounts />
 </template>

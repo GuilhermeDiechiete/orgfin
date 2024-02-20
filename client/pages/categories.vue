@@ -1,5 +1,5 @@
 <template>
   <div>
-    <Categories />
+    <TCategories />
   </div>
 </template>

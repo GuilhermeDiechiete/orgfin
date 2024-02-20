@@ -1,13 +1,12 @@
 <template>
-  <button class="my-button-fullwidth">
+  <button class="my-btn-fullwidth">
     <Icon
       :name="iconame"
-      class="icon-color mr-4"
-    />
+      class="icon-color mr-4" />
     {{ text }}
   </button>
 </template>
 
 <script setup lang="ts">
-defineProps(['text','iconame'])
+defineProps(['text','iconame']);
 </script>

@@ -1,3 +1,3 @@
 <template>
-  <Home />
+  <TIndex />
 </template>

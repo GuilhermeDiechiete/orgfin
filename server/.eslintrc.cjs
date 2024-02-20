@@ -11,5 +11,5 @@ module.exports = {
         'multiline': 'never'
       }], // Para evitar quebras de linha antes do fechamento da tag
     }
-  };
+  }
   

@@ -1,12 +1,11 @@
 <template>
   <button
-    class="my-button"
-  >
+    class="my-btn">
     <i :class="icon" />
     {{ text }}
   </button>
 </template>
   
   <script setup lang="ts">
-  defineProps(['icon', 'text'])
+  defineProps(['icon', 'text']);
   </script>
