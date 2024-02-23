@@ -1,6 +1,5 @@
 <template>
-    <section>
-        <BtnNext to="/" />
-        Perfil do usuario
-    </section>
+  <section>
+    <TProfile />
+  </section>
 </template>

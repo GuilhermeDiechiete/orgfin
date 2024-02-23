@@ -121,6 +121,7 @@
 
   const addTransaction = async () => {
   await useTransaction.create(transaction);
+  await useTransaction.getByMonth();
 };
 
 </script>

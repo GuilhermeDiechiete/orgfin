@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     '~/components/boxes/TLogin',
     '~/components/boxes/TRegister',
 
+    '~/components/utils',
 
     '~/components/tables',
     '~/components/tables/bars',

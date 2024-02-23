@@ -1,14 +1,21 @@
 <template>
   <section class="my-box">
     <div class="columns is-desktop">
-      <SelectFilter class="column is-1" />
-      <SelectOrder class="column is-1" />
-      <SelectMonth class="column is-1" />
-      <SelectYear class="column is-1" />
-      <BtnNormal
-        class="column"
-        icon="fa-solid fa-magnifying-glass my-icon fa-shake"
-        @click.prevent="getTransactions" />
+      <div class="column">
+        <SelectFilter />
+      </div>
+
+      <div class="column">
+        <SelectMonthYear />
+      </div>
+
+      <div class="column">
+        <SelectOrder />
+        <BtnNormal
+          class="column"
+          icon="fa-solid fa-magnifying-glass my-icon fa-shake"
+          @click.prevent="getTransactions" />
+      </div>
     </div>
   </section>
 </template>
