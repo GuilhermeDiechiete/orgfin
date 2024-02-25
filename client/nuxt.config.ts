@@ -21,6 +21,7 @@ export default defineNuxtConfig({
 
   components: [
     '~/components',
+    '~/components/global',
     '~/components/templates',
 
     '~/components/boxes',
@@ -35,7 +36,6 @@ export default defineNuxtConfig({
     '~/components/tables',
     '~/components/tables/bars',
 
-    '~/components/displays',
     '~/components/selects',
     '~/components/forms',
     '~/components/buttons',

@@ -1,22 +1,22 @@
 <template>
-  <section class="my-box">
+  <section class="m-2 mt-5">
     <div class="columns">
-      <ItemDisplay
+      <Display
         class="column"
         icon="fa-solid fa-cart-shopping mr-3 my-icon fa-flip"
         title="Despesas"
         :amount="totalExpenses" />
-      <ItemDisplay
+      <Display
         class="column"
         icon="fa-solid fa-sack-dollar mr-3 my-icon fa-flip"
         title="Rendimentos"
         :amount="totalIncomes" />
-      <ItemDisplay
+      <Display
         class="column"
         icon="fa-solid fa-arrow-up-right-dots mr-3 my-icon fa-flip"
         title="Investimentos"
         :amount="totalInvestments" />
-      <ItemDisplay
+      <Display
         class="column"
         icon="fa-solid fa-champagne-glasses mr-3 my-icon fa-flip"
         title="Sobra"

@@ -1,12 +1,12 @@
 <template>
   <div>
     <section v-if="auth">
-      <BoxLogout /> 
       <BoxOrgFin />
       <BoxTransaction />
-      <BoxNavegationPage /> 
+       
       <Messages />
       <BoxDisplay />
+      <BoxNavegationPage />
       <BoxSearchTransaction />
       <BoxTables />
     </section>

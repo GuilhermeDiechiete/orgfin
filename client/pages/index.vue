@@ -1,3 +1,3 @@
 <template>
-  <TIndex />
+  <IndexPage />
 </template>

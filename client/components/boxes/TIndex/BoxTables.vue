@@ -1,5 +1,5 @@
 <template>
-  <section class="my-box">
+  <section>
     <TableSelector @tab-changed="getTableSelected" />
 
     <TableAnnualTransactions v-if="table === 'annual'" />
