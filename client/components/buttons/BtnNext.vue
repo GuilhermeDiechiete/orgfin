@@ -1,11 +1,11 @@
 <template>
-    <NuxtLink :to="to" class="button is-fullwidth bg-dark text-white">
+  <section class="my-btn-next">
+    <NuxtLink :to="to">
       <IconArrowLeft />
-      <span>{{ text }}</span>
-      
     </NuxtLink>
-  </template>
+  </section>
+</template>
   
   <script setup lang="ts">
-  defineProps(['text','iconame','to'])
+  defineProps(['to']);
   </script>

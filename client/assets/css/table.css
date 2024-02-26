@@ -9,44 +9,23 @@
     table-layout: fixed;
     min-width: 100%;
     overflow-x: auto;
-    border: 1px solid rgb(83, 83, 83);
 }
+
 
 .my-table thead tr th {
     text-align: left;
-    border: 1px solid rgb(83, 83, 83);
     color: rgb(193, 54, 4);
     background-color: rgb(26, 26, 26);
-    padding: 0.5em 0.5em 0.5em 1em;
+    padding: 0.5em;
     font-size: 0.8em;
-}
-.my-table tbody tr {
-    border: 1px solid rgb(85, 84, 84);
-    color: rgb(150, 147, 147);
+    min-width: 10em;
 }
 
 .my-table tbody tr td {
-    
-    
     text-align: left;
-    padding: 0.4em 0 0.4em 1em;
+    padding: 0.4em 0 0.4em 0.5em;
     font-size: 0.8em;
-}
-.w2 {
-    min-width: 2em;
-}
-
-.w5 {
-    min-width: 5em;
-}
-.w8 {
-    min-width: 8em;
-}
-.w10 {
-    min-width: 10em;
-}
-.w2 {
-    min-width: 2em;
+    color: rgb(145, 143, 143);
 }
 
 .td-total-red {
@@ -61,11 +40,19 @@
 }
 .td-total-yellow {
     color: yellow;
-    font-size: 1.2em;
+    font-size: 1.5em;
     background-color: black;
 }
 .td-total-null {
-   
-    font-size: 1.2em;
     background-color: black;
+}
+
+/* linhas pares */
+tr:nth-child(even) {
+    background-color: #1e1e1e;
+}
+
+/* linhas impares */
+tr:nth-child(odd) {
+    background-color: #262525;
 }

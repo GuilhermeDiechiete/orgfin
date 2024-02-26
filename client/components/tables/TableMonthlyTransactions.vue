@@ -63,7 +63,7 @@
           <td>{{ income.date }}</td>
           <td>{{ income.description }}</td>
           <td>{{ income.installment }} - {{ income.total_installments }}</td>
-          <td>{{ income.amount }}</td>
+          <td>R$ {{ income.amount }}</td>
           <td>{{ income.category }}</td>
           <td>{{ income.account }}</td>
           <td>{{ income.destiny }}</td>
@@ -84,7 +84,7 @@
           <td>{{ investment.date }}</td>
           <td>{{ investment.description }}</td>
           <td>{{ investment.installment }} - {{ investment.total_installments }}</td>
-          <td>{{ investment.amount }}</td>
+          <td>R$ {{ investment.amount }}</td>
           <td>{{ investment.category }}</td>
           <td>{{ investment.account }}</td>
           <td>{{ investment.destiny }}</td>

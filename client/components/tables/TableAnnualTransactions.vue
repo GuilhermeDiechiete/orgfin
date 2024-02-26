@@ -26,13 +26,13 @@
         <tr>
           <td class="td-total-null" />
           <td class="td-total-red">
-            {{ totalAnnualExpenses }}
+            R$ {{ totalAnnualExpenses }}
           </td>
           <td class="td-total-green">
-            {{ totalAnnualIncomes }}
+            R$ {{ totalAnnualIncomes }}
           </td>
           <td class="td-total-yellow">
-            {{ totalAnnualInvestments }}
+            R$ {{ totalAnnualInvestments }}
           </td>
           <td class="td-total-yellow" />
         </tr>
