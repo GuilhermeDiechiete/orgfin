@@ -8,12 +8,14 @@ export default class CategoryValidator {
     name: schema.string({ trim: true}, [
       rules.maxLength(15),
       rules.minLength(2)
-    ])
+    ]),
+    type: schema.string({ trim: true})
   })
 
   public messages: CustomMessages = {
     'name.required': 'Digite o nome da categoria',
     'name.maxLength': 'O nome deve ter no maximo 15 caracteres.',
-    'name.minLength': 'O nome deve ter no minimo 2 caracteres.'
+    'name.minLength': 'O nome deve ter no minimo 2 caracteres.',
+    'type.required': 'Selecione um tipo de transação.'
   }
 }

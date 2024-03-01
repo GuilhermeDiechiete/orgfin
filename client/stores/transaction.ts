@@ -1,32 +1,39 @@
 
 import { defineStore } from "pinia";
 
-const API = 'http://localhost:4000/transaction'
+const API = 'http://localhost:4000/transaction';
 
-const currentDate = new Date()
-const currentMonth = currentDate.getMonth() + 1
-const currentYear = currentDate.getFullYear()
+const currentDate = new Date();
+
+interface TransactionData {
+    expenses: never[]; // Defina o tipo correto para os seus dados de despesas
+    incomes: never[]; // Defina o tipo correto para os seus dados de receitas
+    investments: never[]; // Defina o tipo correto para os seus dados de investimentos
+    totalByMonthExpenses: number; // Defina o tipo correto para o total de despesas do mês
+    totalByMonthIncomes: number; // Defina o tipo correto para o total de receitas do mês
+    totalByMonthInvestments: number; // Defina o tipo correto para o total de investimentos do mês
+    surplus: number; // Defina o tipo correto para o saldo do mês
+}
 
 export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
-            tableSelected: ref('monthly'), 
+            tableSelected: ref('expense'), 
             
-            filter: ref(''),
-            order: ref('asc'),
-            month: ref(currentMonth),
-            year: ref(currentYear),
+            day: ref(currentDate.getDay()),
+            month: ref(currentDate.getMonth() + 1),
+            year: ref(currentDate.getFullYear()),
 
             expenses: ref([]),
             incomes: ref([]),
             investments: ref([]),
             transactions: ref([]),
 
-            totalByMonthExpenses: ref(''),
-            totalByMonthIncomes: ref(''),
-            totalByMonthInvestments: ref(''),
-            surplus: ref(''),
+            totalByMonthExpenses: ref(0),
+            totalByMonthIncomes: ref(0),
+            totalByMonthInvestments: ref(0),
+            surplus: ref(0),
 
             // getByYear
             totalExpenses: ref([]), 
@@ -39,15 +46,14 @@ export const useTransactionStore = defineStore('transactions', {
             // messages
             messageError: ref(''),
             messageSuccess: ref('')
-        }
+        };
     },
     
     actions: {
-        async create( transaction: any ) {
+        async create ( transaction: any ) {
             try {
-                console.log(transaction)
-                if(typeof localStorage !== 'undefined'){
-                    const token = localStorage.getItem('token')
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token');
                    if(token) {
                    this.messageSuccess = await $fetch(`${API}`, {
                     method: 'POST',
@@ -67,64 +73,72 @@ export const useTransactionStore = defineStore('transactions', {
                         status: transaction.status
                         
                     }
-                }) 
+                }); 
+                console.log(transaction)
                 } 
                 }
 
                 setTimeout(() => {
-                    this.messageSuccess = ''
-                },2000)
+                    this.messageSuccess = '';
+                },2000);
             } catch (error: any) {
-                console.log(error)
+                console.log(error);
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
                 } else {
                     this.messageError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
-                },2000)
+                    this.messageError = '';
+                },2000);
             }
         }, 
-        async getByMonth() {
+        async getByMonth () {
             try {
                 if(typeof localStorage !== 'undefined') {
-                    const token = localStorage.getItem('token')
+                    const token = localStorage.getItem('token');
                     if(token) {
-                    this.transactions = await $fetch(`${API}/${this.order}/${this.year}/${this.month}`, {
+                    const response = await $fetch<TransactionData>(`${API}/${this.month}/${this.year}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
                         },
-                    })
+                    });
+
+                this.expenses = response.expenses;
+                this.incomes = response.incomes;
+                this.investments = response.investments;
+
+                this.totalByMonthExpenses = response.totalByMonthExpenses;
+                this.totalByMonthIncomes = response.totalByMonthIncomes;
+                this.totalByMonthInvestments = response.totalByMonthInvestments;
+                this.surplus = response.surplus;
+
+                console.log(this.month, this.year)
+                console.log(response)
                     } 
                 }
-                this.expenses = this.transactions.expenses
-                this.incomes = this.transactions.incomes
-                this.investments = this.transactions.investments
+              
+                console.log('mostrando despesas', this.expenses)
 
-                this.totalByMonthExpenses = this.transactions.totalByMonthExpenses
-                this.totalByMonthIncomes = this.transactions.totalByMonthIncomes
-                this.totalByMonthInvestments = this.transactions.totalByMonthInvestments
-                this.surplus = this.transactions.surplus
-
-                console.log(this.filter, this.order, this.month, this.year)
+                
+               
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         },
-        async getByYear() {
+        async getByYear () {
             try {
-                console.log('oi')
+                console.log('oi');
                 if(typeof localStorage !== 'undefined') {
-                    const token = localStorage.getItem('token')
+                    const token = localStorage.getItem('token');
                     if(token) {
-                    this.transactions = await $fetch(`${API}/${this.order}/${this.year}`, {
+                    this.transactions = await $fetch(`${API}/${this.year}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
                         },
-                    })
+                    });
                     } 
                 }
                 
@@ -133,51 +147,51 @@ export const useTransactionStore = defineStore('transactions', {
                 this.totalInvestments = this.transactions.totalInvestments,
                 this.totalAnnualExpenses = this.transactions.totalAnnualExpenses,
                 this.totalAnnualIncomes = this.transactions.totalAnnualIncomes,
-                this.totalAnnualInvestments = this.transactions.totalAnnualInvestments
-                console.log(this.totalExpenses, this.totalIncomes, this.totalInvestments, this.totalAnnualExpenses)
+                this.totalAnnualInvestments = this.transactions.totalAnnualInvestments;
+                console.log(this.totalExpenses, this.totalIncomes, this.totalInvestments, this.totalAnnualExpenses);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         },
         
-        async delete(id: number) {
+        async delete (id: number) {
             try {
                 if(typeof localStorage !== 'undefined') {
-                    const token = localStorage.getItem('token')
+                    const token = localStorage.getItem('token');
                    if(token) {
                     this.messageSuccess = await $fetch(`${API}/${id}`, {
                         method: 'DELETE',
                         headers: {
                             Authorization: token
                         },
-                    })
+                    });
                 } 
                 
                 }
-                console.log('deleteado')
+                console.log('deleteado');
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         },
-        async changeStatus(id: number) {
+        async changeStatus (id: number) {
             try {
-                console.log(id)
+                console.log(id);
                 if(typeof localStorage !== 'undefined') {
-                    const token = localStorage.getItem('token')
+                    const token = localStorage.getItem('token');
                    if(token) {
                     this.messageSuccess = await $fetch(`${API}/${id}`, {
                         method: 'PUT',
                         headers: {
                             Authorization: token
                         },
-                    })
+                    });
                 } 
                 
                 }
-                console.log('status atualizado')
+                console.log('status atualizado');
             } catch (error) {
-                
+                console.log(error);
             }
         }
     }
-})
+});

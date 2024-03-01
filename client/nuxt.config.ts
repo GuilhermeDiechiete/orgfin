@@ -1,45 +1,62 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import type { NuxtPage } from 'nuxt/schema'
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
-  modules: ['nuxt-icon', '@pinia/nuxt'],
-
-  
-  
   css: [
-    'bulma/css/bulma.css',
-    '@fortawesome/fontawesome-free/css/all.css',
-    '~/assets/css/main.css',
-    '~/assets/css/buttons.css',
-    '~/assets/css/bg-color.css',
-    '~/assets/css/text-color.css',
-    '~/assets/css/table.css',
+    '@/assets/css/main.css'
   ],
+  
+
+  build: {
+    transpile: ['vuetify'],
+  },
 
   
 
+  // hooks: {
+  //   'pages:extend' (pages) {
+  //     function setMiddleware (pages: NuxtPage[]) {
+  //       for (const page of pages) {
+  //         if (/* some condition */ true) {
+  //           page.meta ||= {}
+  //           // Note that this will override any middleware set in `definePageMeta` in the page
+  //           page.meta.middleware = ['auth']
+  //         }
+  //         if (page.children) {
+  //           setMiddleware(page.children)
+  //         }
+  //       }
+  //     }
+  //     setMiddleware(pages)
+  //   }
+  // },
+
+  modules: [
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+    '@pinia/nuxt',
+    // outros módulos
+  ],
+  
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
+
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
 
   components: [
-    '~/components',
-    '~/components/global',
-    '~/components/templates',
-
-    '~/components/boxes',
-    '~/components/boxes/TIndex',
-    '~/components/boxes/TAccounts',
-    '~/components/boxes/TCategories',
-    '~/components/boxes/TLogin',
-    '~/components/boxes/TRegister',
-
-    '~/components/utils',
-
-    '~/components/tables',
-    '~/components/tables/bars',
-
-    '~/components/selects',
-    '~/components/forms',
-    '~/components/buttons',
-    '~/components/icons',
-    
+    '~/components'
   ]
-});
+})

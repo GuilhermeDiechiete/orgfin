@@ -95,19 +95,17 @@ export default class TransactionsController {
         return response.status(401).json({ message: 'Não autorizado.'})
       }
       const expenses = await user.related('transactions').query()
-      .whereRaw('EXTRACT(YEAR FROM date) = ?', [params.year])
-      .whereRaw('EXTRACT(MONTH FROM date) = ?', [params.month])
+      .whereRaw('EXTRACT(YEAR FROM date) = ? AND EXTRACT(MONTH FROM date) = ?', [params.year, params.month])
       .where('type', 'expense')
 
       const incomes = await user.related('transactions').query()
-      .whereRaw('EXTRACT(YEAR FROM date) = ?', [params.year])
-      .whereRaw('EXTRACT(MONTH FROM date) = ?', [params.month])
+      .whereRaw('EXTRACT(YEAR FROM date) = ? AND EXTRACT(MONTH FROM date) = ?', [params.year, params.month])
       .where('type', 'income')
 
       const investments = await user.related('transactions').query()
-      .whereRaw('EXTRACT(YEAR FROM date) = ?', [params.year])
-      .whereRaw('EXTRACT(MONTH FROM date) = ?', [params.month])
+      .whereRaw('EXTRACT(YEAR FROM date) = ? AND EXTRACT(MONTH FROM date) = ?', [params.year, params.month])
       .where('type', 'investment')
+
 
       const totalByMonthExpenses: number = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0)
       const totalByMonthIncomes: number = incomes.reduce((acc, income) => acc + Number(income.amount), 0)
@@ -115,14 +113,18 @@ export default class TransactionsController {
 
       const surplus =  totalByMonthIncomes - (totalByMonthExpenses + totalByMonthInvestments)
 
+      console.log(expenses)
       return response.status(200).json({
         expenses, incomes, investments, totalByMonthExpenses, totalByMonthIncomes, totalByMonthInvestments, surplus
+        
       })
+      
     } catch (error) {
+      console.log(error)
       if(error?.messages?.errors[0]?.message) {
         return error.messages.errors[0].message
       } 
-      return 'Erro ao vuscar transações.'
+      return 'Erro ao buscar transações.'
     }
   }
 

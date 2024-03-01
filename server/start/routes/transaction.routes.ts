@@ -7,16 +7,12 @@ Route.group(() => {
     Route.delete('/:id', 'TransactionsController.destroy')
     Route.put('/:id', 'TransactionsController.changeStatus')
     
-    Route.group(() => {
+    
+    Route.get('/:month/:year', 'TransactionsController.getByMonth')
+    Route.get('/:year', 'TransactionsController.getByYear')
+       
 
-        Route.group(() => {
-
-            Route.get('/', 'TransactionsController.getByYear')
-            Route.get('/:month', 'TransactionsController.getByMonth')
-
-        }).prefix('/:year')
-
-    }).prefix('/:order')
+    
 
 }).prefix('transaction')
 .middleware('auth')

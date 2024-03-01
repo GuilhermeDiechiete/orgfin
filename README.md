@@ -1,135 +1,26 @@
-# OrgFin - Organização Financeira
+# OrgFin
 
-## Tecnologias Utilizadas no Backend
+## Descrição do Projeto
 
-Typescript: https://www.typescriptlang.org/
+Este projeto é um aplicativo de finanças desenvolvido com Vuetify, Nuxt.js 3 e Adonis.js. Ele oferece funcionalidades para gerenciar despesas, rendimentos, investimentos, categorias e contas financeiras.
 
-PostgreSQL: https://www.postgresql.org/docs/
+## Funcionalidades
 
-Adonis.js: https://docs.adonisjs.com/guides/introduction
+- **Tabela de Finanças**: Visualize uma tabela de transações financeiras na página inicial.
+- **Adicionar Transações**: Adicione novas despesas, rendimentos e investimentos à sua tabela financeira.
+- **Gerenciamento de Categorias**: Crie e gerencie categorias para suas transações financeiras.
+- **Gerenciamento de Contas**: Adicione e gerencie contas financeiras para suas transações.
+- **Interface de Usuário Responsiva**: O aplicativo é construído com Vuetify, garantindo uma experiência de usuário consistente em dispositivos desktop e móveis.
 
+## Tecnologias Utilizadas
 
-## Tecnologias Utilizadas no FrontEnd
-
-Typescript: https://www.typescriptlang.org/
-
-Nuxt3: https://nuxt.com/docs/getting-started/introduction
-
-Pinia: https://pinia.vuejs.org/introduction.html
-
-BulmaCSS: https://bulma.io/documentation/overview/start/
-
-Nuxt-Icon: https://icones.js.org/collection/all?s=Finan
-
-Font-Awesome: https://fontawesome.com/search
-
-
+- **TypeScript**: Superset JavaScript com tipagem estática para aumentar a robustez e escalabilidade do código.
+- **Vuetify**: Framework de UI baseado em Material Design para Vue.js.
+- **Nuxt.js 3**: Framework Vue.js para construção de aplicativos web.
+- **Vue.js**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Pinia**: Estado centralizado para Vue.js.
+- **Adonis.js**: Framework Node.js para construção de aplicativos web escaláveis e seguros.
+- **PostgreSQL**: Banco de dados relacional utilizado para armazenar os dados financeiros.
+- **Font-Awesome**: Biblioteca de icones. https://fontawesome.com/search
 
 #### Desenvolvido por <strong>Guilherme Diechiete da Silva</strong>
-
-
-## ROTAS BACKEND
-
-POST        /user ──────────────────────────── UsersController.store [ criar usuário ]
-
-GET|HEAD    /user/:id ──────────────────────── UsersController.show [ buscar usuário ]
-
-PUT         /user/:id ──────────────────────── UsersController.update [ atualizar usuário ]
-
-DELETE      /user/:id ──────────────────────── UsersController.destroy [ deletar usuário ]
-
-##
-
-POST        /auth ──────────────────────────── AuthController.store [ login ]
-
-DELETE      /auth ──────────────────────────── AuthController.destroy [ logout ]
-
-##
-
-GET|HEAD    /category ──────────────────────── CategoriesController.index [ buscar lista de categorias ]
-
-POST        /category ──────────────────────── CategoriesController.store [ criar categoria ]
-
-DELETE      /category/:id ──────────────────── CategoriesController.destroy [ deletar categoria ]
-
-##
-
-POST        /transaction ───────────────────── TransactionsController.store [ criar transação ]
-
-DELETE      /transaction/:id ───────────────── TransactionsController.destroy [ excluir transação ]
-
-##
-
-GET|HEAD    /search/:order/:year ───────────── SearchesController.getByYear [ buscar transações por ano ]
-
-GET|HEAD    /search/:order/:year/:month ────── SearchesController.getByMonth [ buscar transações por mês ]
-
-GET|HEAD    / ──────────────────────────────── Closure [ index ]
-
-
-## ROTAS FRONTEND
-
-## Configurações para testar o projeto
-
-Nos diretórios [ server ] e [ client ] , execute o comando "npm install" para instalar as dependências:
-
-```
-npm install
-```
-
-Após instalar todas as dependências, precisamos configurar o banco de dados na sua maquina, é necessario ter instalado o PostgreSQL, se quiser testar outros bancos, apenas deve ajustas as configurações do DB no arquivo de configuração.
-
-Abra o banco de dados PostgreSQL e crie um banco de dados com o nome de sua preferência, depois vá até o arquivo ".env" no diretório server do projeto e ajuste as informações.
-
-```
-PG_HOST=localhost
-PG_PORT=5432
-PG_USER=  <nome-de-usuario-no-banco-de-dados>
-PG_PASSWORD=1  <senha-do-usuario>
-PG_DB_NAME=  <nome-do-banco-criado>
-
-```
-
-Após ajustar as informações, é necessário fazer criar as migrações(tabelas) no banco de dados, mas é simples, no terminal, execute:
-
-```
-node ace migration:run
-```
-
-execute o comando para iniciar o backend do projeto, execute: 
-
-```
-npm run dev
-```
-
-
-Agora por fim, com o terminal aberto no diretório [ client ], execute o comando "npm run dev" para iniciar o frontend:
-
-```
-npm run dev
-```
-
-Agora abra o navegador no endereço: 
-
-```
-http://localhost:3000/
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Desenvolvedores do projeto: Guilherme Diechiete da Silva
-

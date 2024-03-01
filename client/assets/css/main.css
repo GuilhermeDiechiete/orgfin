@@ -1,143 +1,62 @@
 
-body {
+.my-container {
     padding: 1em;
-    background-color: black;
-    min-height: 100vh;
-    margin: 0;
-    border: 0;
+}
+
+.box-display {
+    display: flex;
+    flex-wrap: wrap;
     
 }
-
-.my-title {
-    color: orangered;
-    font-size: 1.2em;
-    text-align: left;
-    font-weight: 700;
-
-}
-.my-container {
-    margin: auto;
-    max-width: 98%;
-}
-.my-label {
-    color: rgb(161, 157, 157);
-    font-style: italic;
-}
-.my-icon {
-    margin-right: 0.5em;
-    color: orangered;
-}
-
-.ml2 {
-    margin-right: 2em;
-}
-
-.my-columns {
-    display: flex;
-}
-.right {
-    text-align: right;
-}
-.center {
-    text-align: center;
-}
-
-.my-box {
-    background-color: rgb(29, 29, 29);
-    border-radius: 0.5em;
-    padding: 1em;
-    margin-top: 0.4em;
-}
-.my-column {
+.display {
     flex: 1;
+    text-align: left;
+    color: white;
+    background-color: rgb(41, 40, 40);
+    padding: 1em 2em;
+    margin: 1em;
+    border-radius: 0.2em;
+   
+}
+.display h1 {
+    font-size: 1.2em;
+    padding-top: 0.8em;
+}
+.display h2 {
+    font-size: 1em;
+    color: rgb(139, 138, 138);
+}
+
+.btn-add-transaction {
+    background-color: rgb(185, 50, 1);
+}
+
+.my-box-form {
+    width: 100%;
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 0.4em;
+    background-color: rgb(38, 37, 37);
 }
 
 .message-error {
-    background-color: rgb(244, 81, 81);
+    width: 100%;
+    background-color: rgb(246, 108, 108);
     border-radius: 0.5em;
-    padding: 1em;
-    margin-top: 0.4em;
-    color: whitesmoke;
+    font-size: 1em;
+    padding: 1em 0;
+    vertical-align: 50%;
+    margin: 2em 0;
     text-align: center;
 }
 .message-success {
-    background-color: rgb(63, 200, 97);
-    border-radius: 0.5em;
-    padding: 1em;
-    margin-top: 0.4em;
-    color: whitesmoke;
-    text-align: center;
-}
-
-
-.display {
-    background-color: rgb(42, 41, 41);
-    margin: 0.5em;
-    border-radius: 0.5em;
-    padding-left: 1em;
-}
-
-.fullwidth {
     width: 100%;
-
-}
-
-
-.my-input {
-    width: 100%;
-    background-color: rgb(33, 33, 33);
-    color: whitesmoke;
-    border: none;
-    padding: 0.5em;
-    border-radius: 0.2em;
+    background-color: rgb(69, 144, 71);
+    border-radius: 0.5em;
     font-size: 1em;
-    margin-top: 0.1em;
-    margin-bottom: 0.6em;
-}
-.my-select {
-    width: 100%;
-    background-color: rgb(47, 47, 47);
-    color: whitesmoke;
-    margin: 0.2em 0.4em 0.2em 0.4em;
-    border: none;
-    padding: 1em 0.5em 1em 0.5em ;
-    border-radius: 0.2em;
-}
-
-.display-amount {
-    color: rgb(97, 96, 96);
-    font-style: italic;
-    font-size: 1.2em;
-    font-weight: bolder;
-    padding: 0.4em 0 0.4em 1.5em;
-}
-
-.my-tabs {
-    display: flex;
-    width: 100%;
-    margin: 0.5em 0;
-    background-color: rgb(47, 46, 46);
-    border-radius: 0.4em;
-}
-
-.my-tabs div{
-    width: 100%;
-    padding: 0.3em;
+    padding: 1em 0;
+    vertical-align: 50%;
+    margin: 2em 0;
     text-align: center;
-    border-radius: 0.4em;
 }
 
-.my-header {
-    display: flex;
-    width: 100%;
-    justify-content: left;
-    padding: 0 1em 0 1em;
-}
-.my-header h1{
-    padding-right: 2em;
-}
-
-.my-navbar {
-    display: flex;
-    margin: 0.5em 0;
-}

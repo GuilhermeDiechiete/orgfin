@@ -1,9 +1,0 @@
-<template>
-  <button class="my-btn-fullwidth-success">
-    {{ text }}
-  </button>
-</template>
-
-<script setup lang="ts">
-defineProps(['text']);
-</script>

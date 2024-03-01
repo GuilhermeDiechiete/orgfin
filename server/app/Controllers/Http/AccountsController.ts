@@ -15,7 +15,7 @@ export default class AccountsController {
       if(error?.messages?.errors[0]?.message) {
         return response.status(400).json({ message: error.messages.errors[0].message })
       } 
-      return response.status(400).json({ message: 'Erro ao buscar categorias.' })
+      return response.status(400).json({ message: 'Erro ao buscar contas.' })
     }
   }
 
@@ -27,6 +27,7 @@ export default class AccountsController {
       }
       const { name, amount } = await request.validate(AccountValidator)
 
+      console.log(name, amount)
       const exists = await user.related('accounts').query().where('name', name).first()
       if(exists){
         return response.status(400).json({ message: 'Está conta já existe.'})

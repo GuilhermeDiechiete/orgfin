@@ -1,5 +1,4 @@
 <template>
-  <section>
-    <TRegister />
-  </section>
+    <Messages />
+    <FormCreateUser />
 </template>

@@ -25,7 +25,7 @@ export default class CategoriesController {
       if(!user){
         return response.status(401).json({ message: 'Não autorizado.'})
       }
-      const { name } = await request.validate(CategoryValidator)
+      const { name, type } = await request.validate(CategoryValidator)
 
       const exists = await user.related('categories').query()
       .where('name', name)
@@ -34,9 +34,10 @@ export default class CategoriesController {
       if(exists) {
         return response.status(400).json({ message: 'Está Categoria já existe.'})
       }
-      await user.related('categories').create({ name })
+      await user.related('categories').create({ name, type })
       return 'Categoria criada com sucesso.'
     } catch (error) {
+      console.log(error)
       if(error?.messages?.errors[0]?.message) {
         return response.status(400).json({ message: error.messages.errors[0].message })
       } 

@@ -3,6 +3,10 @@ import { defineStore } from "pinia";
 
 const API = 'http://localhost:4000/category'
 
+interface Category {
+    id: number;
+    name: number;
+}
 
 export const useCategoryStore = defineStore('categories', {
 
@@ -16,8 +20,9 @@ export const useCategoryStore = defineStore('categories', {
         }
     },
     actions: {
-        async register( name: string ) {
+        async register( name: string, type: string ) {
             try {
+                console.log(type)
                 if(typeof localStorage !== 'undefined'){
                     const token = localStorage.getItem('token')
                    if(token) {
@@ -27,7 +32,7 @@ export const useCategoryStore = defineStore('categories', {
                         Authorization: token
                     },
                     body: {
-                        name,
+                        name, type
                     }
                 }) 
                 } 
