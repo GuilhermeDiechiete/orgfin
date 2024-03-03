@@ -4,7 +4,7 @@
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import colors from 'vuetify/util/colors'
-
+import '@mdi/font/css/materialdesignicons.css'
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
@@ -20,9 +20,7 @@ export default defineNuxtPlugin((app) => {
           },
         },
       },
-      icons: {
-        defaultSet: 'mdi', // This is already the default value - only for display purposes
-      },
+      
   })
   app.vueApp.use(vuetify)
 })

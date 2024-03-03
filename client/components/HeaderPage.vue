@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto my-2" width="100%" prepend-icon="mdi-home">
+    <v-card class="mx-auto my-2" width="100%">
   
       <template v-slot:title>
         <i class="my-icon" :class="icon"></i>{{ title }}
@@ -11,13 +11,7 @@
     </v-card>
   </template>
   
-  <script>
-  export default {
-    props: {
-      icon: String,
-      title: String,
-      description: String
-    }
-  }
+  <script setup lang="ts">
+  defineProps(['icon', 'title', 'description'])
   </script>
   

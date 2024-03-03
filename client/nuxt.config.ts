@@ -1,5 +1,4 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import type { NuxtPage } from 'nuxt/schema'
 
 export default defineNuxtConfig({
   devtools: { enabled: false },

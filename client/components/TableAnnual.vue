@@ -2,7 +2,7 @@
     <v-card>
       <v-data-table>
         <thead>
-          <tr class="text-orange-darken-4">
+          <tr class="text-deep-orange-darken-3">
             <th>MÊS</th>
             <th>DESPESAS</th>
             <th>RENDIMENTOS</th>

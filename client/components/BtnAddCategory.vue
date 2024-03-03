@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-      <v-btn block class="mb-2" size="x-large" text="ADICIONAR CATEGORIA" @click="sheet = !sheet" />
+      <v-btn block class="mb-2 bg-deep-orange-darken-3" size="x-large" text="ADICIONAR CATEGORIA" @click="sheet = !sheet" />
   
       <v-bottom-sheet v-model="sheet">
         <v-card class="text-center" height="60%">

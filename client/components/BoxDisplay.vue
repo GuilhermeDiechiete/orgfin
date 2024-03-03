@@ -29,9 +29,6 @@ const store = useTransactionStore()
 onMounted( async () => {
   await store.getByMonth()
 })
-
-
-
 const selected = ( selected: string ) => {
   store.tableSelected = selected
 }
@@ -39,21 +36,4 @@ const totalExpenses = ref(store.totalByMonthExpenses)
 const totalIncomes = ref(store.totalByMonthIncomes)
 const totalInvestments = ref(store.totalAnnualInvestments)
 </script>
-  
-  <style>
-  .my-box {
-    margin-bottom: 1em;
-  }
-  .flex-item {
-    background-color: #242424;
-    padding: 20px;
-    border-radius: 0.4em;
-    text-align: left;
-    width: 100%;
-  }
-  h1 {
-    padding-top: 0.5em;
-    font-size: 1.5em;
-  }
-  </style>
   

@@ -1,19 +1,9 @@
-
 import { defineStore } from "pinia";
+import { Transaction } from "~/interfaces/interfaces"
 
 const API = 'http://localhost:4000/transaction';
 
 const currentDate = new Date();
-
-interface TransactionData {
-    expenses: never[]; // Defina o tipo correto para os seus dados de despesas
-    incomes: never[]; // Defina o tipo correto para os seus dados de receitas
-    investments: never[]; // Defina o tipo correto para os seus dados de investimentos
-    totalByMonthExpenses: number; // Defina o tipo correto para o total de despesas do mês
-    totalByMonthIncomes: number; // Defina o tipo correto para o total de receitas do mês
-    totalByMonthInvestments: number; // Defina o tipo correto para o total de investimentos do mês
-    surplus: number; // Defina o tipo correto para o saldo do mês
-}
 
 export const useTransactionStore = defineStore('transactions', {
 
@@ -50,7 +40,7 @@ export const useTransactionStore = defineStore('transactions', {
     },
     
     actions: {
-        async create ( transaction: any ) {
+        async create ( transaction: Transaction ) {
             try {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
@@ -98,7 +88,7 @@ export const useTransactionStore = defineStore('transactions', {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                     if(token) {
-                    const response = await $fetch<TransactionData>(`${API}/${this.month}/${this.year}`, {
+                    const response = await $fetch<Transaction>(`${API}/${this.month}/${this.year}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token

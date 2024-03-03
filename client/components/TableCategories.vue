@@ -5,7 +5,7 @@
       <v-text-field v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined" hide-details single-line />
     </template>
 
-    <v-data-table :headers="headers" :items="categories" :search="search">
+    <v-data-table :headers="headers" :items="categories" :search="search" >
 
       <template v-slot:item="{ item }">
         <tr>
@@ -27,17 +27,19 @@
 </template>
 
 <script setup lang="ts">
+import type { Category } from '~/interfaces/transactions.interface';
+
 
 const search = ref('') // campo de busca
 
 const store = useCategoryStore(); // importação do store de categoria
 await store.index() // buscando todas as categorias
 
-const categories = ref(store.categories) // categorias
+let categories: Category[] = store.categories // categorias
 
 // monitora mudanças em categories
 watch(() => store.categories, (newCategories) => {
-  categories.value = newCategories;
+  categories = newCategories;
 })
 
 const deleteCategory = async (id:number) => {
@@ -54,7 +56,7 @@ const headers = [
     key: 'name',
   },
   { title: 'TIPO DE TRANSAÇÃO', key: 'type' },
-  { title: 'OPÇÕES' },
+  { title: 'OPÇÕES', key: 'options'},
 ];
 
 </script>

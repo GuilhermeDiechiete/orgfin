@@ -65,3 +65,18 @@
     color: rgb(200, 55, 2);
   }
 
+  .my-box {
+    margin-bottom: 1em;
+  }
+  .flex-item {
+    background-color: #242424;
+    padding: 20px;
+    border-radius: 0.4em;
+    text-align: left;
+    width: 100%;
+  }
+
+  .my-link {
+    text-decoration: none;
+    color: white;
+  }
