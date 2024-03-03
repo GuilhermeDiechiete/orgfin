@@ -1,7 +1,7 @@
 <template>
     <NuxtLayout :name="layout">
         <section class="my-container">
-            <HeaderPage title="Contas Bancárias" description="Adicione os valores em conta para manter o controle sobre elas."/>
+            <HeaderPage icon="fa-solid fa-building-columns" title="Contas Bancárias" description="Adicione os valores em conta para manter o controle sobre elas."/>
             <BtnAddAccount />
             <TableAccounts />
         </section>

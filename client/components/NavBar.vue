@@ -16,7 +16,7 @@
             
             <v-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary" :to="item.to">
               <template v-slot:prepend>
-                <v-icon :icon="item.icon"></v-icon>
+                <i class="my-icon" :class="item.icon"></i>
               </template>
   
               <v-list-item-title v-text="item.text" />
@@ -37,12 +37,12 @@ const username = ref(store.user.username)
 const email = ref(store.user.email)
 
 const items = [
-      { text: 'Iniciar', icon: 'mdi-home', to:'/'},
-      { text: 'Categorias', icon: 'mdi-widgets', to:'/categories'},
-      { text: 'Contas', icon: 'mdi-star', to:'/accounts'},
-      { text: 'Relatório Anual', icon: 'mdi-folder', to:'/'},
+      { text: 'Iniciar', icon: 'fa-solid fa-house', to:'/'},
+      { text: 'Categorias', icon: 'fa-solid fa-layer-group', to:'/categories'},
+      { text: 'Contas', icon: 'fa-solid fa-building-columns', to:'/accounts'},
+      { text: 'Relatório Anual', icon: 'fa-solid fa-file', to:'/annual-report'},
     ]
-
 </script>
+
 
 

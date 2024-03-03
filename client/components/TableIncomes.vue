@@ -1,5 +1,5 @@
 <template>
-  <v-card flat title="Despesas">
+  <v-card flat title="Rendimentos">
 
     <template v-slot:text>
       <v-text-field v-model="search" label="Search" prepend-inner-icon="mdi-magnify" single-line variant="outlined" hide-details>

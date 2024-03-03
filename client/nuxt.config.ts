@@ -5,33 +5,17 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   css: [
-    '@/assets/css/main.css'
+    '@/assets/css/main.css',
+    '@fortawesome/fontawesome-free/css/all.css',
   ],
-  
 
   build: {
     transpile: ['vuetify'],
   },
 
   
-
-  // hooks: {
-  //   'pages:extend' (pages) {
-  //     function setMiddleware (pages: NuxtPage[]) {
-  //       for (const page of pages) {
-  //         if (/* some condition */ true) {
-  //           page.meta ||= {}
-  //           // Note that this will override any middleware set in `definePageMeta` in the page
-  //           page.meta.middleware = ['auth']
-  //         }
-  //         if (page.children) {
-  //           setMiddleware(page.children)
-  //         }
-  //       }
-  //     }
-  //     setMiddleware(pages)
-  //   }
-  // },
+ 
+  
 
   modules: [
     (_options, nuxt) => {
@@ -43,6 +27,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     // outros módulos
   ],
+
+  
   
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],

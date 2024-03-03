@@ -1,7 +1,7 @@
 <template>
     <NuxtLayout :name="layout">
         <section class="my-container">
-            <HeaderPage title="Categorias" description="Adicione suas categorias para fazer buscas futuras."/>
+            <HeaderPage icon="fa-solid fa-layer-group" title="Categorias" description="Adicione suas categorias para fazer buscas futuras."/>
             <BtnAddCategory />
             <TableCategories />
         </section>
