@@ -16,6 +16,7 @@ export default class TransactionsController {
       return 'Transação criada com sucesso.'
 
     } catch (error) {
+      console.log(error)
       if(error?.messages?.errors[0]?.message) {
         return response.status(400).json({ message: error.messages.errors[0].message })
       } 
@@ -75,10 +76,15 @@ export default class TransactionsController {
       const totalAnnualIncomes: number = totalIncomes.reduce((acc, { total }) => acc + total, 0);
       const totalAnnualInvestments: number = totalInvestments.reduce((acc, { total }) => acc + total, 0);
 
-      return response.status(200).json({
-        totalExpenses, totalIncomes, totalInvestments,
-        totalAnnualExpenses, totalAnnualIncomes, totalAnnualInvestments
-      })
+      const data = {
+        totalExpenses, 
+        totalIncomes, 
+        totalInvestments,
+        totalAnnualExpenses, 
+        totalAnnualIncomes, 
+        totalAnnualInvestments
+      }
+      return data
   
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {
@@ -110,17 +116,13 @@ export default class TransactionsController {
       const totalByMonthExpenses: number = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0)
       const totalByMonthIncomes: number = incomes.reduce((acc, income) => acc + Number(income.amount), 0)
       const totalByMonthInvestments: number = investments.reduce((acc, investment) => acc + Number(investment.amount), 0)
-
       const surplus =  totalByMonthIncomes - (totalByMonthExpenses + totalByMonthInvestments)
 
-      console.log(expenses)
-      return response.status(200).json({
+      const data = {
         expenses, incomes, investments, totalByMonthExpenses, totalByMonthIncomes, totalByMonthInvestments, surplus
-        
-      })
-      
+      }
+      return data
     } catch (error) {
-      console.log(error)
       if(error?.messages?.errors[0]?.message) {
         return error.messages.errors[0].message
       } 

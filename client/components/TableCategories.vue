@@ -27,19 +27,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Category } from '~/interfaces/transactions.interface';
-
 
 const search = ref('') // campo de busca
 
 const store = useCategoryStore(); // importação do store de categoria
 await store.index() // buscando todas as categorias
 
-let categories: Category[] = store.categories // categorias
+let categories = ref(store.categories) // categorias
 
 // monitora mudanças em categories
 watch(() => store.categories, (newCategories) => {
-  categories = newCategories;
+  categories.value = newCategories;
 })
 
 const deleteCategory = async (id:number) => {

@@ -1,7 +1,7 @@
 
 
 export interface Transaction {
-    date: Date,
+    date: string,
     type: string,
     description: string,
     amount: number,
@@ -12,6 +12,28 @@ export interface Transaction {
     destiny: string,
     status: boolean
 
+}
+
+// API getByMonth
+export interface TransactionByMonth {
+    expenses: never[],
+    incomes: never[],
+    investments: never[],
+    surplus: number
+    totalByMonthExpenses: number,
+    totalByMonthIncomes: number,
+    totalByMonthInvestments: number
+    
+}
+
+// API getByYear
+export interface TransactionByYear {
+    totalExpenses: never[], 
+    totalIncomes: never[],
+    totalInvestments: never[],
+    totalAnnualExpenses: number,
+    totalAnnualIncomes: number,
+    totalAnnualInvestments: number
 }
 
 export interface Category {

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Transaction } from "~/interfaces/interfaces"
+import type { Transaction, TransactionByMonth, TransactionByYear } from "~/interfaces/interfaces"
 
 const API = 'http://localhost:4000/transaction';
 
@@ -18,7 +18,6 @@ export const useTransactionStore = defineStore('transactions', {
             expenses: ref([]),
             incomes: ref([]),
             investments: ref([]),
-            transactions: ref([]),
 
             totalByMonthExpenses: ref(0),
             totalByMonthIncomes: ref(0),
@@ -30,9 +29,9 @@ export const useTransactionStore = defineStore('transactions', {
             totalIncomes: ref([]), 
             totalInvestments: ref([]),
             
-            totalAnnualExpenses: ref(''), 
-            totalAnnualIncomes: ref(''), 
-            totalAnnualInvestments: ref(''),
+            totalAnnualExpenses: ref(0), 
+            totalAnnualIncomes: ref(0), 
+            totalAnnualInvestments: ref(0),
             // messages
             messageError: ref(''),
             messageSuccess: ref('')
@@ -40,7 +39,7 @@ export const useTransactionStore = defineStore('transactions', {
     },
     
     actions: {
-        async create ( transaction: Transaction ) {
+        async create ( transaction: any ) {
             try {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
@@ -83,29 +82,29 @@ export const useTransactionStore = defineStore('transactions', {
                 },2000);
             }
         }, 
+        // PEGAR INFORMAÇÕES PARA A TABELA DE CONTROLE MENSAL
         async getByMonth () {
             try {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                     if(token) {
-                    const response = await $fetch<Transaction>(`${API}/${this.month}/${this.year}`, {
+                    const data: TransactionByMonth = await $fetch<TransactionByMonth>(`${API}/${this.month}/${this.year}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
                         },
                     });
+                this.expenses = data.expenses;
+                this.incomes = data.incomes;
+                this.investments = data.investments;
 
-                this.expenses = response.expenses;
-                this.incomes = response.incomes;
-                this.investments = response.investments;
-
-                this.totalByMonthExpenses = response.totalByMonthExpenses;
-                this.totalByMonthIncomes = response.totalByMonthIncomes;
-                this.totalByMonthInvestments = response.totalByMonthInvestments;
-                this.surplus = response.surplus;
+                this.totalByMonthExpenses = data.totalByMonthExpenses;
+                this.totalByMonthIncomes = data.totalByMonthIncomes;
+                this.totalByMonthInvestments = data.totalByMonthInvestments;
+                this.surplus = data.surplus;
 
                 console.log(this.month, this.year)
-                console.log(response)
+                console.log(data)
                     } 
                 }
               
@@ -117,28 +116,27 @@ export const useTransactionStore = defineStore('transactions', {
                 console.log(error);
             }
         },
+
+        // PEGAR INFORMAÇÕES PARA A TABELA DE CONTROLE ANUAL
         async getByYear () {
             try {
-                console.log('oi');
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                     if(token) {
-                    this.transactions = await $fetch(`${API}/${this.year}`, {
+                    const data: TransactionByYear = await $fetch<TransactionByYear>(`${API}/${this.year}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
                         },
                     });
+                    this.totalExpenses = data.totalExpenses, 
+                    this.totalIncomes = data.totalIncomes,
+                    this.totalInvestments = data.totalInvestments,
+                    this.totalAnnualExpenses = data.totalAnnualExpenses,
+                    this.totalAnnualIncomes = data.totalAnnualIncomes,
+                    this.totalAnnualInvestments = data.totalAnnualInvestments;
                     } 
                 }
-                
-                this.totalExpenses = this.transactions.totalExpenses, 
-                this.totalIncomes = this.transactions.totalIncomes,
-                this.totalInvestments = this.transactions.totalInvestments,
-                this.totalAnnualExpenses = this.transactions.totalAnnualExpenses,
-                this.totalAnnualIncomes = this.transactions.totalAnnualIncomes,
-                this.totalAnnualInvestments = this.transactions.totalAnnualInvestments;
-                console.log(this.totalExpenses, this.totalIncomes, this.totalInvestments, this.totalAnnualExpenses);
             } catch (error) {
                 console.log(error);
             }

@@ -61,10 +61,7 @@ export const useAccountStore = defineStore('accounts', {
                         },
                     })
                 } 
-
                 }
-                console.log(this.accounts)
-                
             } catch (error) {
                 console.log(error)
             }
