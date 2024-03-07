@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import type { AccountCreate } from "~/interfaces/interfaces";
 
 const API = 'http://localhost:4000/account'
 
@@ -6,17 +7,15 @@ export const useAccountStore = defineStore('accounts', {
 
     state: () => {
         return {
-            id: ref(),
-            name: ref(''),
-            amount: ref(''),
             accounts: ref([]),
+            
             // messages
             messageError: ref(''),
             messageSuccess: ref('')
         }
     },
     actions: {
-        async create( name: string, amount: number ) {
+        async create( account: AccountCreate ) {
             try {
                 if(typeof localStorage !== 'undefined'){
                     const token = localStorage.getItem('token')
@@ -27,7 +26,8 @@ export const useAccountStore = defineStore('accounts', {
                         Authorization: token
                     },
                     body: {
-                        name, amount
+                        name: account.name,
+                        amount: account.amount
                     }
                 }) 
                 } 
@@ -37,8 +37,6 @@ export const useAccountStore = defineStore('accounts', {
                 },2000)
 
             } catch (error: any) {
-
-                console.log(error)
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
                 } else {

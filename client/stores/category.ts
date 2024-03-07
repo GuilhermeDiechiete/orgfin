@@ -1,18 +1,13 @@
 
 import { defineStore } from "pinia";
+import type { CategoryCreate } from '~/interfaces/interfaces'
 
 const API = 'http://localhost:4000/category'
-
-interface Category {
-    id: number;
-    name: number;
-}
 
 export const useCategoryStore = defineStore('categories', {
 
     state: () => {
         return {
-            name: ref(''),
             categories: ref([]),
             // messages
             messageError: ref(''),
@@ -20,9 +15,8 @@ export const useCategoryStore = defineStore('categories', {
         }
     },
     actions: {
-        async register( name: string, type: string ) {
+        async create( category: CategoryCreate ) {
             try {
-                console.log(type)
                 if(typeof localStorage !== 'undefined'){
                     const token = localStorage.getItem('token')
                    if(token) {
@@ -32,20 +26,15 @@ export const useCategoryStore = defineStore('categories', {
                         Authorization: token
                     },
                     body: {
-                        name, type
+                        name: category.name,
+                        type: category.type
                     }
                 }) 
-                } 
-                }
-                
-          
-                
-                console.log(this.messageSuccess)
+                }}
                 setTimeout(() => {
                     this.messageSuccess = ''
                 },2000)
             } catch (error: any) {
-                console.log(error)
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
                 } else {
@@ -69,8 +58,6 @@ export const useCategoryStore = defineStore('categories', {
                     })
                 } 
                 }
-                
-                
             } catch (error) {
                 console.log(error)
             }
@@ -87,7 +74,6 @@ export const useCategoryStore = defineStore('categories', {
                         },
                     })
                 } 
-                
                 }
             } catch (error) {
                 console.log(error)

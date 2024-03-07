@@ -3,8 +3,8 @@
 
       <h3 class="mb-6">Adicionar Categoria</h3>
       <Messages />
-      <v-text-field v-model="name" label="Name" variant="outlined" />
-      <v-radio-group inline v-model="type">
+      <v-text-field v-model="category.name" label="Name" variant="outlined" />
+      <v-radio-group inline v-model="category.type">
         <v-radio label="Despesa" value="expense"></v-radio>
         <v-radio label="Renda" value="income"></v-radio>
         <v-radio label="Investimento" value="investment"></v-radio>
@@ -17,14 +17,18 @@
 
 const store = useCategoryStore()
 
-const name = ref('')
-const type = ref('')
+const category = ref({
+  name:'',
+  type:''
+})
 
 const create = async () => {
-  await store.register( name.value, type.value);
-  name.value = ''
-  type.value = ''
-  await store.index()
-};
+  await store.create( category.value )
 
+  category.value = {
+    name: '',
+    type: ''
+  }
+  await store.index()
+}
 </script>

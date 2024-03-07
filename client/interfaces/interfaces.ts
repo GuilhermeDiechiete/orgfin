@@ -56,3 +56,22 @@ export interface UserRegister {
     password: string,
     confirmPassword: string
 }
+
+// CATEGORY INTERFACES
+export interface CategoryCreate {
+    name: string,
+    type: string
+}
+
+export interface Categories {
+    id: number,
+    name: string,
+    type: string,
+    user_id: number
+}
+
+// ACCOUNTS INTERFACES
+export interface AccountCreate {
+    name: string,
+    amount: number
+}

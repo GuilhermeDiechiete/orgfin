@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
       
-      table.date('date').notNullable()
+      table.date('date').notNullable() // YYYY-MM-DD
       table.string('type').notNullable()
       table.string('description').notNullable()
       table.decimal('amount',8,2).notNullable()
