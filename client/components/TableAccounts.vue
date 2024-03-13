@@ -10,10 +10,10 @@
       <template v-slot:item="{ item }">
         <tr>
           <td>{{ item.name }}</td>
-          <td>{{ item.amount }}</td>
+          <td>R$ {{ item.amount }}</td>
           <td>
             <v-btn color="primary" @click.prevent="deleteAccount(item.id)">
-              Button
+              excluir
             </v-btn>
           </td>
         </tr>

@@ -66,9 +66,11 @@ export const useUserStore = defineStore('users', {
                             
                         });
                     }
-                    if(this.user.email && this.user.id) {
-                        this.authenticated = true;
+                    if(this.user.id && this.user.email) {
+                        this.authenticated = true 
+                        
                     }
+                    
 
                 }
                 

@@ -5,7 +5,7 @@
       <Messages />
       <v-text-field v-model="account.name" label="Nome" variant="outlined" />
       <v-text-field v-model="account.amount" label="Valor em conta" variant="outlined" />
-      <v-btn @click.prevent="create"> Criar </v-btn>
+      <v-btn block @click.prevent="create" class="bg-orange-darken-4"> Criar </v-btn>
     </form>
   </template>
 

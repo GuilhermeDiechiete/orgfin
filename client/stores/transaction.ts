@@ -103,8 +103,6 @@ export const useTransactionStore = defineStore('transactions', {
                 this.totalByMonthInvestments = data.totalByMonthInvestments;
                 this.surplus = data.surplus;
 
-                console.log(this.month, this.year)
-                console.log(data)
                     } 
                 }
               

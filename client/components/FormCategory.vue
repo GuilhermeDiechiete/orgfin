@@ -3,13 +3,15 @@
 
       <h3 class="mb-6">Adicionar Categoria</h3>
       <Messages />
-      <v-text-field v-model="category.name" label="Name" variant="outlined" />
       <v-radio-group inline v-model="category.type">
         <v-radio label="Despesa" value="expense"></v-radio>
         <v-radio label="Renda" value="income"></v-radio>
         <v-radio label="Investimento" value="investment"></v-radio>
       </v-radio-group>
-      <v-btn @click.prevent="create"> Criar </v-btn>
+
+      <v-text-field v-model="category.name" label="Name" variant="outlined" />
+      
+      <v-btn block @click.prevent="create" class="bg-orange-darken-4"> Criar </v-btn>
     </form>
   </template>
 

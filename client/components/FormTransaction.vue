@@ -16,7 +16,7 @@
     <v-select v-model="transaction.category" :items="categories" item-title="name" label="Categorias" />
     <v-select v-model="transaction.account" :items="accounts" item-title="name" label="Conta de Saída/Entrada" />
     <v-text-field v-model="transaction.destiny" label="Destino" variant="underlined" />
-    <v-btn block @click.prevent="addTransaction">adicionar</v-btn>
+    <v-btn block @click.prevent="addTransaction" class="bg-orange-darken-4">adicionar</v-btn>
   </form>
 </template>
   

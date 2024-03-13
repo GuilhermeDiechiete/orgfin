@@ -16,8 +16,11 @@
             <td>{{ item.amount }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.destiny }}</td>
-            <td>{{ item.status }}</td>
-            <td> <v-btn color="primary" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
+            <td @click="alterStatus(item.id)">
+              <v-btn block small color="primary" v-if="item.status === false">Pendente</v-btn>
+              <v-btn block small color="green darken-1" v-if="item.status === true">Pago</v-btn>
+            </td>
+            <td> <v-btn block small color="primary" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
           </tr>
         </template>
       </v-data-table>
@@ -52,6 +55,10 @@ const headers = [
 
 const deleteTransaction = async (id:number) => {
   await store.delete(id)
+  await store.getByMonth()
+}
+const alterStatus = async (id:number) => {
+  await store.changeStatus(id)
   await store.getByMonth()
 }
 

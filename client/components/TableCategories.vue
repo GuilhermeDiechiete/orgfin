@@ -17,7 +17,7 @@
           </td>
           <td>
             <v-btn color="primary" @click.prevent="deleteCategory(item.id)">
-              Button
+              excluir
             </v-btn>
           </td>
         </tr>
