@@ -1,75 +1,39 @@
-# Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Descrição dos Diretórios: CLIENT
 
-## Setup
+.nuxt : Configurações do framework Nuxt, não ouve alterações
 
-Make sure to install the dependencies:
+assets
+    /css
+        main.css : configurações minimas de estilos para o projeto
 
-```bash
-# npm
-npm install
+components : Estão todos os componentes utilizados na construção das paginas.
 
-# pnpm
-pnpm install
+interfaces
+    /interfaces.ts : estão centralizadas as interfaces de objetos utilizados no projeto, como objeto de usuário, category, transaction e account.
 
-# yarn
-yarn install
+layouts
+    /default.vue : Contém apenas a parte do menu lateral.
 
-# bun
-bun install
-```
+node_modules: arquivos de dependencias.
 
-## Development Server
+pages
+    auth
+        /login.vue : Pagina de login do usuário
+    user
+        /register.vue : Pagina de registro do usuário
+    
+    accounts.vue : Pagina para adicionar contas bancárias.
+    annual-report.vue : Pagina que exibe a planilha anual do usuário
+    categories.vue : Pagina para adicionar categorias, para despesas, rendas e investimentos.
+    index.vue : Pagina principal, contém a exibição das tabelas do usuário.
 
-Start the development server on `http://localhost:3000`:
+plugins 
+    /vuetify.ts : configurações de estilo
 
-```bash
-# npm
-npm run dev
+public
 
-# pnpm
-pnpm run dev
+server
 
-# yarn
-yarn dev
+stores : armazenada toda a regra de negocio com o banco de dados, todas as requisições para o servidor estão nesse diretório.
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
