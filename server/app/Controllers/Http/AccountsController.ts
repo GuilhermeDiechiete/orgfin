@@ -27,15 +27,14 @@ export default class AccountsController {
       }
       const { name, amount } = await request.validate(AccountValidator)
 
-      console.log(name, amount)
       const exists = await user.related('accounts').query().where('name', name).first()
       if(exists){
         return response.status(400).json({ message: 'Está conta já existe.'})
       }
       await user.related('accounts').create({ name, amount })
       return `Conta ${name} criada com sucesso.`
+      
     } catch (error) {
-      console.log(error)
       if(error?.messages?.errors[0]?.message) {
         return response.status(400).json({ message: error.messages.errors[0].message })
       } 
@@ -47,11 +46,11 @@ export default class AccountsController {
   public async destroy({ params, auth, response }: HttpContextContract) {
     try {
       const user = auth.user 
+
       if(!user){
         return response.status(401).json({ message: 'Não autorizado.'})
       }
       const account = await user.related('accounts').query().where('id', params.id).first()
-
       await account?.delete()
       
     } catch (error) {

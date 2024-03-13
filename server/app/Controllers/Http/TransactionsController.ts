@@ -16,7 +16,6 @@ export default class TransactionsController {
       return 'Transação criada com sucesso.'
 
     } catch (error) {
-      console.log(error)
       if(error?.messages?.errors[0]?.message) {
         return response.status(400).json({ message: error.messages.errors[0].message })
       } 
@@ -160,8 +159,6 @@ export default class TransactionsController {
         transaction.status = !transaction.status;
         await transaction.save(); // Salvar a transação atualizada
       }
-       
-
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {
         return error.messages.errors[0].message

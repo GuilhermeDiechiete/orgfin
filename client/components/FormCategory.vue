@@ -32,5 +32,7 @@ const create = async () => {
     type: ''
   }
   await store.index()
+
+
 }
 </script>

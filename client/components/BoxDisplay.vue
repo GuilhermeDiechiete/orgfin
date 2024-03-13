@@ -36,9 +36,27 @@ await store.getByMonth()
 const selected = ( selected: string ) => {
   store.tableSelected = selected
 }
+
 const totalExpenses = ref(store.totalByMonthExpenses)
 const totalIncomes = ref(store.totalByMonthIncomes)
 const totalInvestments = ref(store.totalByMonthInvestments)
 const surplus = ref(store.surplus)
+
+
+watch(() => store.totalByMonthExpenses, (newExpenses) => {
+  totalExpenses.value = newExpenses;
+})
+watch(() => store.totalByMonthIncomes, (newIncomes) => {
+  totalIncomes.value = newIncomes;
+})
+watch(() => store.totalByMonthInvestments, (newInvestments) => {
+  totalInvestments.value = newInvestments;
+})
+watch(() => store.surplus, (newSurplus) => {
+  surplus.value = newSurplus;
+})
+
+
+
 </script>
   

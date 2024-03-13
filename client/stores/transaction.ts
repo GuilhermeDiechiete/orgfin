@@ -105,11 +105,6 @@ export const useTransactionStore = defineStore('transactions', {
 
                     } 
                 }
-              
-                console.log('mostrando despesas', this.expenses)
-
-                
-               
             } catch (error) {
                 console.log(error);
             }
@@ -154,7 +149,6 @@ export const useTransactionStore = defineStore('transactions', {
                 } 
                 
                 }
-                console.log('deleteado');
             } catch (error) {
                 console.log(error);
             }
@@ -174,7 +168,6 @@ export const useTransactionStore = defineStore('transactions', {
                 } 
                 
                 }
-                console.log('status atualizado');
             } catch (error) {
                 console.log(error);
             }

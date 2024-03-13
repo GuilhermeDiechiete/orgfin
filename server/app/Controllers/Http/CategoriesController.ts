@@ -36,6 +36,7 @@ export default class CategoriesController {
       }
       await user.related('categories').create({ name, type })
       return 'Categoria criada com sucesso.'
+      
     } catch (error) {
       console.log(error)
       if(error?.messages?.errors[0]?.message) {
