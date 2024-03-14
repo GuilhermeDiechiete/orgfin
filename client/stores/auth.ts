@@ -31,19 +31,18 @@ export const useAuthStore = defineStore('auth', {
                     localStorage.setItem('userId', this.user.userId); 
                     navigateTo('/');
                 }
-                
 
             } catch (error: any) {
-                console.log(error)
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
                 } else {
                     this.messageError = 'Erro ao processar a solicitação.';
                 }
+                setTimeout(() => {
+                    this.messageError = ''
+                }, 1500 )
             }
-            setTimeout(() => {
-                this.messageError = '';
-            },2000);
+
         }
     }
 });

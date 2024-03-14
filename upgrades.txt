@@ -1,0 +1,4 @@
+
+01 - fechar formulario apos adicionar uma transação(ok) - categoria - conta
+02. formatar o numero do input do valor automatico
+03. tirar o destino do formulario de transação como obrigatório

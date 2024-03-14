@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Transaction, TransactionByMonth, TransactionByYear } from "~/interfaces/interfaces"
+import type { TransactionByMonth, TransactionByYear } from "~/interfaces/interfaces"
 
 const API = 'http://localhost:4000/transaction';
 
@@ -14,6 +14,7 @@ export const useTransactionStore = defineStore('transactions', {
             day: ref(currentDate.getDay()),
             month: ref(currentDate.getMonth() + 1),
             year: ref(currentDate.getFullYear()),
+            yearTableAnnual: ref(currentDate.getFullYear()),
 
             expenses: ref([]),
             incomes: ref([]),
@@ -34,7 +35,7 @@ export const useTransactionStore = defineStore('transactions', {
             totalAnnualInvestments: ref(0),
             // messages
             messageError: ref(''),
-            messageSuccess: ref('')
+            messageSuccess: ref(''),
         };
     },
     
@@ -62,24 +63,22 @@ export const useTransactionStore = defineStore('transactions', {
                         status: transaction.status
                         
                     }
-                }); 
-                console.log(transaction)
+                })
+                setTimeout(() => {
+                    this.messageSuccess = ''
+                }, 1500 )
                 } 
                 }
-
-                setTimeout(() => {
-                    this.messageSuccess = '';
-                },2000);
             } catch (error: any) {
-                console.log(error);
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
                 } else {
                     this.messageError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = '';
-                },2000);
+                    this.messageError = ''
+                }, 1500 )
+                
             }
         }, 
         // PEGAR INFORMAÇÕES PARA A TABELA DE CONTROLE MENSAL
@@ -105,8 +104,15 @@ export const useTransactionStore = defineStore('transactions', {
 
                     } 
                 }
-            } catch (error) {
-                console.log(error);
+            } catch (error:any) {
+                if (error.response._data.message) {
+                    this.messageError = error.response._data.message;
+                } else {
+                    this.messageError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.messageError = ''
+                }, 1500 )
             }
         },
 
@@ -116,7 +122,7 @@ export const useTransactionStore = defineStore('transactions', {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                     if(token) {
-                    const data: TransactionByYear = await $fetch<TransactionByYear>(`${API}/${this.year}`, {
+                    const data: TransactionByYear = await $fetch<TransactionByYear>(`${API}/${this.yearTableAnnual}`, {
                         method: 'GET',
                         headers: {
                             Authorization: token
@@ -130,8 +136,15 @@ export const useTransactionStore = defineStore('transactions', {
                     this.totalAnnualInvestments = data.totalAnnualInvestments;
                     } 
                 }
-            } catch (error) {
-                console.log(error);
+            } catch (error:any) {
+                if (error.response._data.message) {
+                    this.messageError = error.response._data.message;
+                } else {
+                    this.messageError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.messageError = ''
+                }, 1500 )
             }
         },
         
@@ -140,26 +153,31 @@ export const useTransactionStore = defineStore('transactions', {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                    if(token) {
-                    this.messageSuccess = await $fetch(`${API}/${id}`, {
+                    await $fetch(`${API}/${id}`, {
                         method: 'DELETE',
                         headers: {
                             Authorization: token
                         },
                     });
                 } 
-                
                 }
-            } catch (error) {
-                console.log(error);
+            } catch (error:any) {
+                if (error.response._data.message) {
+                    this.messageError = error.response._data.message;
+                } else {
+                    this.messageError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.messageError = ''
+                }, 1500 )
             }
         },
         async changeStatus (id: number) {
             try {
-                console.log(id);
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                    if(token) {
-                    this.messageSuccess = await $fetch(`${API}/${id}`, {
+                    await $fetch(`${API}/${id}`, {
                         method: 'PUT',
                         headers: {
                             Authorization: token
@@ -168,8 +186,15 @@ export const useTransactionStore = defineStore('transactions', {
                 } 
                 
                 }
-            } catch (error) {
-                console.log(error);
+            } catch (error:any) {
+                if (error.response._data.message) {
+                    this.messageError = error.response._data.message;
+                } else {
+                    this.messageError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.messageError = ''
+                }, 1500 )
             }
         }
     }

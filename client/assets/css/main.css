@@ -41,10 +41,10 @@
 
 .message-error {
     width: 100%;
-    background-color: rgb(246, 108, 108);
+    background-color: rgb(241, 85, 85);
     border-radius: 0.5em;
     font-size: 1em;
-    padding: 1em 0;
+    padding: 0.5em 0;
     vertical-align: 50%;
     margin: 2em 0;
     text-align: center;
@@ -54,7 +54,7 @@
     background-color: rgb(69, 144, 71);
     border-radius: 0.5em;
     font-size: 1em;
-    padding: 1em 0;
+    padding: 0.5em 0;
     vertical-align: 50%;
     margin: 2em 0;
     text-align: center;
@@ -79,4 +79,16 @@
   .my-link {
     text-decoration: none;
     color: white;
+  }
+
+
+  .box-select {
+    display: flex;
+    margin: 1em 0;
+  }
+  .my-select {
+    background-color: rgb(34, 34, 34);
+    width: 100%;
+    padding: 0.5em 0 0.5em 1em;
+    border-radius: 0.2em;
   }

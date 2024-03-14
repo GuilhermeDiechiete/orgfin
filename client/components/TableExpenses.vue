@@ -38,10 +38,10 @@ const expenses = ref(store.expenses)
 
 const headers = [
         {
-          align: 'start',
-          key: 'date',
-          sortable: false,
           title: 'DATA',
+          align: 'start', key: 'date',
+       
+          
         },
         { title: 'DESCRIÇÃO', key: 'description' },
         { title: 'PARCELAS', key: 'installment'},

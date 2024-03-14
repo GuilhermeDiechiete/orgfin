@@ -1,8 +1,8 @@
 <template>
     <NuxtLayout :name="layout">
         <section class="my-container">
-            <BtnAddTransaction /> <!-- botao para mostrar o formulario de nova transações-->
-            <SelectMonthYear />
+            <FormTransaction /> <!-- Botão e formulário responsavel pelo formulário -->
+            <SelectMonthYear /> <!-- caixa seletora do mês e ano -->
             <BoxDisplay /> <!-- responsavel por mostrar o valor total e selecionar a tabela -->
             
             <Messages /> <!-- componente responsavel por mostrar mensagens de erro e sucesso -->

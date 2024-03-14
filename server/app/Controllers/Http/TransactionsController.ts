@@ -31,14 +31,9 @@ export default class TransactionsController {
       }
       const year = params.year 
 
-      interface MonthlyTotal {
-        month: number,
-        total: number
-      }
-
-      const totalExpenses: MonthlyTotal[] = []
-      const totalIncomes: MonthlyTotal[] = []
-      const totalInvestments: MonthlyTotal[] = []
+      const totalExpenses: number[] = []
+      const totalIncomes: number[] = []
+      const totalInvestments: number[] = []
 
       for(let month = 1; month <= 12; month++) {
         const expenses = await user.related('transactions').query()
@@ -60,20 +55,15 @@ export default class TransactionsController {
         const totalByMonthIncomes: number = incomes.reduce((acc, income) => acc + Number(income.amount), 0)
         const totalByMonthInvestmets: number = investments.reduce((acc, investment) => acc + Number(investment.amount), 0)
 
-        totalExpenses.push({ 
-          month, total: totalByMonthExpenses || 0
-        })
-        totalIncomes.push({
-          month, total: totalByMonthIncomes || 0
-        })
-        totalInvestments.push({
-          month, total: totalByMonthInvestmets || 0
-        })
+        totalExpenses.push( totalByMonthExpenses || 0 )
+        totalIncomes.push( totalByMonthIncomes || 0 )
+        totalInvestments.push( totalByMonthInvestmets || 0 )
       }
 
-      const totalAnnualExpenses: number = totalExpenses.reduce((acc, { total }) => acc + total, 0);
-      const totalAnnualIncomes: number = totalIncomes.reduce((acc, { total }) => acc + total, 0);
-      const totalAnnualInvestments: number = totalInvestments.reduce((acc, { total }) => acc + total, 0);
+      const totalAnnualExpenses: number = totalExpenses.reduce((acc, total) => acc + total, 0);
+      const totalAnnualIncomes: number = totalIncomes.reduce((acc, total) => acc + total, 0);
+      const totalAnnualInvestments: number = totalInvestments.reduce((acc, total) => acc + total, 0);
+
 
       const data = {
         totalExpenses, 

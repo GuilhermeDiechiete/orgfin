@@ -34,8 +34,8 @@
 
 const store = useTransactionStore()
 
-watch(() => store.month, () => {
-  store.getByMonth()
+watch(() => store.month, async () => {
+  await store.getByMonth()
 })
 </script>
 
