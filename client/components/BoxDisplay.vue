@@ -4,16 +4,17 @@
 const store = useTransactionStore() // acessando store de transações
 await store.getByMonth() // executando a API para buscar os valores
 
-// função que monitora o valor, UTILIZADO PARA RENDERIZAR AS TABELAS
-const selected = ( selected: string ) => {
-  store.tableSelected = selected
-}
 
+// função que monitora o valor, UTILIZADO PARA RENDERIZAR AS TABELAS
+const selected = ( option: string ) => {
+  store.tableSelected = option
+}
 // valores da API
 const totalExpenses = ref(store.totalByMonthExpenses)
 const totalIncomes = ref(store.totalByMonthIncomes)
 const totalInvestments = ref(store.totalByMonthInvestments)
 const surplus = ref(store.surplus)
+const displaySelected = ref(store.tableSelected)
 
 // MONITORAMENTO DE MUDANÇAS NOS VALORES
 watch(() => store.totalByMonthExpenses, (newExpenses) => {
@@ -28,31 +29,34 @@ watch(() => store.totalByMonthInvestments, (newInvestments) => {
 watch(() => store.surplus, (newSurplus) => {
   surplus.value = newSurplus;
 })
+watch(() => store.tableSelected, (newSelected) => {
+  displaySelected.value = newSelected;
+})
 </script>
 
 <template>
   <section class="my-box">
     <v-row justify="center">
       <v-col cols="12" sm="3">
-        <div class="flex-item" @click="selected('expense')">
+        <div @click="selected('expense')" :class="{ 'active': displaySelected === 'expense', 'inactive': displaySelected !== 'expense' }">
           <p><i class="fa-solid fa-cart-shopping fa-flip my-icon " style="--fa-animation-duration: 3s;"></i> Despesas</p>
           <h1>R$ {{ totalExpenses }}</h1>
         </div>
       </v-col>
       <v-col cols="12" sm="3">
-        <div class="flex-item" @click="selected('income')">
+        <div @click="selected('income')" :class="{ 'active': displaySelected === 'income', 'inactive': displaySelected !== 'income' }">
           <p> <i class="fa-solid fa-money-check-dollar fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> Rendimentos</p>
           <h1>R$ {{ totalIncomes }}</h1>
         </div>
       </v-col>
       <v-col cols="12" sm="3">
-        <div class="flex-item" @click="selected('investment')">
+        <div @click="selected('investment')" :class="{ 'active': displaySelected === 'investment', 'inactive': displaySelected !== 'investment' }">
           <p> <i class="fa-solid fa-arrow-up-right-dots fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> Investimentos</p>
           <h1>R$ {{ totalInvestments }}</h1>
         </div>
       </v-col>
       <v-col cols="12" sm="3">
-        <div class="flex-item">
+        <div class="inactive">
           <p> <i class="fa-solid fa-arrow-up-right-dots fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> Sobra</p>
           <h1>R$ {{ surplus }}</h1>
         </div>
@@ -62,4 +66,3 @@ watch(() => store.surplus, (newSurplus) => {
 </template>
 
 
-  

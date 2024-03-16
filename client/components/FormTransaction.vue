@@ -38,17 +38,8 @@ const transaction = ref({
 
 // METODO RESPONSAVEL POR ENVIAR DADOS PARA API
 const addTransaction = async () => {
-  const created = await store.create(transaction.value) // Tentativa de envio
-  await store.getByMonth() // Faz uma busca atualizada dos valores
-  
-  // fechar o formulário
-  if(created) {
-    setTimeout(() => {
-      sheet.value = false
-    },1500)
-  }
-  
-  
+  await store.create(transaction.value) // Tentativa de envio
+  await store.getByMonth() // Faz uma busca atualizada dos valores 
 }
 </script>
 

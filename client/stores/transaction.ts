@@ -69,6 +69,7 @@ export const useTransactionStore = defineStore('transactions', {
                 }, 1500 )
                 } 
                 }
+                return true
             } catch (error: any) {
                 if (error.response._data.message) {
                     this.messageError = error.response._data.message;
@@ -78,7 +79,7 @@ export const useTransactionStore = defineStore('transactions', {
                 setTimeout(() => {
                     this.messageError = ''
                 }, 1500 )
-                
+                return false
             }
         }, 
         // PEGAR INFORMAÇÕES PARA A TABELA DE CONTROLE MENSAL

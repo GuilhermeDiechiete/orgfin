@@ -13,7 +13,7 @@
           <td>{{ item.date }}</td>
           <td>{{ item.description }}</td>
           <td>{{ item.installment }} - {{ item.total_installments }}</td>
-          <td>{{ item.amount }}</td>
+          <td>R$ {{ item.amount }}</td>
           <td>{{ item.category }}</td>
           <td>{{ item.destiny }}</td>
           <td>{{ item.status }}</td>
