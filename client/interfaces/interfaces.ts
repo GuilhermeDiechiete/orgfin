@@ -1,6 +1,7 @@
 
-
+// usado para a tabela de expenses, incomes e investments
 export interface Transaction {
+    id: number,
     date: string,
     type: string,
     description: string,
@@ -36,6 +37,7 @@ export interface TransactionByYear {
     totalAnnualInvestments: number
 }
 
+// Usado para receber os dados na tabela de categorias
 export interface Category {
     id: number,
     name: string,

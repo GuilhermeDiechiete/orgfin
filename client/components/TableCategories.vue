@@ -33,7 +33,7 @@ const search = ref('') // campo de busca
 const store = useCategoryStore(); // importação do store de categoria
 await store.index() // buscando todas as categorias
 
-const categories: Categories = ref(store.categories) // categorias
+const categories = ref<Categories[]>(store.categories) // categorias
 
 // monitora mudanças em categories
 watch(() => store.categories, (newCategories) => {

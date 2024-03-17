@@ -23,13 +23,14 @@
 </template>
 
 <script setup lang="ts">
+import type { Account } from '~/interfaces/interfaces';
 
 const search = ref('') // campo de busca
 
 const store = useAccountStore(); // importação do store de categoria
 await store.index() // buscando todas as contas
 
-const accounts = ref(store.accounts) // contas
+const accounts = ref<Account[]>(store.accounts);
 
 // monitora mudanças em categories
 watch(() => store.accounts, (newAccounts) => {

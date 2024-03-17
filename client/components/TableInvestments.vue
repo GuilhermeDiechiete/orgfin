@@ -26,12 +26,14 @@
 </template>
 
 <script setup lang="ts">
+import type { Transaction } from '~/interfaces/interfaces';
+
 
 const search = ref('')
 const store = useTransactionStore()
 await store.getByMonth()
 
-const investments = ref(store.investments)
+const investments = ref<Transaction[]>(store.investments);
 
 const headers = [
         {
