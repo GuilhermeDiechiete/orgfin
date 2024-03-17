@@ -14,8 +14,8 @@ const login = () => {
 
 <template>
   <form class="my-box-form">
-    <v-text-field v-model="email" label="E-mail" variant="outlined" />
-    <v-text-field v-model="password" label="Senha" variant="outlined" @keyup.enter="login"/>
+    <v-text-field v-model="email" label="E-mail" variant="outlined" type="email"/>
+    <v-text-field v-model="password" label="Senha" variant="outlined" @keyup.enter="login" type="password"/>
     <v-btn class="bg-deep-orange-darken-3" block @click.prevent="login"> Entrar </v-btn>
   </form>
 </template>
