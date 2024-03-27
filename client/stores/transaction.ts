@@ -23,6 +23,7 @@ export const useTransactionStore = defineStore('transactions', {
             totalByMonthExpenses: ref(0),
             totalByMonthIncomes: ref(0),
             totalByMonthInvestments: ref(0),
+            totalByMonthExpensesFalse: ref(0),
             surplus: ref(0),
 
             // getByYear
@@ -101,8 +102,10 @@ export const useTransactionStore = defineStore('transactions', {
                 this.totalByMonthExpenses = data.totalByMonthExpenses;
                 this.totalByMonthIncomes = data.totalByMonthIncomes;
                 this.totalByMonthInvestments = data.totalByMonthInvestments;
-                this.surplus = data.surplus;
 
+                this.totalByMonthExpensesFalse = data.totalByMonthExpensesFalse;
+
+                this.surplus = data.surplus;
                     } 
                 }
             } catch (error:any) {

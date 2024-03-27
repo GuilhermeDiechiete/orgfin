@@ -101,14 +101,21 @@ export default class TransactionsController {
       .whereRaw('EXTRACT(YEAR FROM date) = ? AND EXTRACT(MONTH FROM date) = ?', [params.year, params.month])
       .where('type', 'investment')
 
+      const expensesFalse = await user.related('transactions').query()
+      .whereRaw('EXTRACT(YEAR FROM date) = ? AND EXTRACT(MONTH FROM date) = ?', [params.year, params.month])
+      .where('type', 'expense')
+      .where('status', false)
+
 
       const totalByMonthExpenses: number = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0)
       const totalByMonthIncomes: number = incomes.reduce((acc, income) => acc + Number(income.amount), 0)
       const totalByMonthInvestments: number = investments.reduce((acc, investment) => acc + Number(investment.amount), 0)
-      const surplus =  totalByMonthIncomes - (totalByMonthExpenses + totalByMonthInvestments)
 
+      const totalByMonthExpensesFalse: number = expensesFalse.reduce((acc, expense) => acc + Number(expense.amount), 0)
+
+      const surplus =  totalByMonthIncomes - (totalByMonthExpenses + totalByMonthInvestments)
       const data = {
-        expenses, incomes, investments, totalByMonthExpenses, totalByMonthIncomes, totalByMonthInvestments, surplus
+        expenses, incomes, investments, totalByMonthExpenses, totalByMonthIncomes, totalByMonthInvestments, totalByMonthExpensesFalse, surplus
       }
       return data
     } catch (error) {
@@ -117,7 +124,7 @@ export default class TransactionsController {
       } 
       return 'Erro ao buscar transações.'
     }
-  }
+  } 
 
   public async destroy({ params, auth, response }: HttpContextContract) {
     try {

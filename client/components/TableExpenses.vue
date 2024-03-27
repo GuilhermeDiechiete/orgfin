@@ -23,6 +23,7 @@
             <td> <v-btn block small color="primary" density="comfortable" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
           </tr>
         </template>
+        
       </v-data-table>
 
     </v-card>
@@ -36,7 +37,7 @@ const search = ref('')
 const store = useTransactionStore()
 await store.getByMonth()
 
-
+const totalExpensesFalse = ref(store.totalByMonthExpensesFalse)
 const expenses = ref<Transaction[]>(store.expenses);
 const headers = [
         {
@@ -47,7 +48,7 @@ const headers = [
         },
         { title: 'DESCRIÇÃO', key: 'description' },
         { title: 'PARCELAS', key: 'installment'},
-        { title: 'VALOR R$', key: 'amount'},
+        { title: 'R$', key: 'amount'},
         { title: 'CATEGORIA', key: 'category'},
         { title: 'DESTINO', key: 'destiny'},
         { title: 'SITUAÇÃO', key: 'status'},
@@ -67,4 +68,8 @@ const alterStatus = async (id:number) => {
 watch(() => store.expenses, (newExpenses) => {
   expenses.value = newExpenses;
 })
+watch(() => store.totalByMonthExpensesFalse, (newExpenses) => {
+  totalExpensesFalse.value = newExpenses;
+})
 </script>
+

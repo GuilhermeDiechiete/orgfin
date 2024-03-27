@@ -24,7 +24,7 @@ export interface TransactionByMonth {
     totalByMonthExpenses: number,
     totalByMonthIncomes: number,
     totalByMonthInvestments: number
-    
+    totalByMonthExpensesFalse: number
 }
 
 // API getByYear
