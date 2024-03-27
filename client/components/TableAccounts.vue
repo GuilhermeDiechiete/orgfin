@@ -5,14 +5,14 @@
       <v-text-field v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined" hide-details single-line />
     </template>
 
-    <v-data-table :headers="headers" :items="accounts" :search="search">
+    <v-data-table :headers="headers" :items="accounts" :search="search" density="compact">
 
       <template v-slot:item="{ item }">
         <tr>
           <td>{{ item.name }}</td>
           <td>R$ {{ item.amount }}</td>
           <td>
-            <v-btn color="primary" @click.prevent="deleteAccount(item.id)">
+            <v-btn color="primary" density="comfortable" @click.prevent="deleteAccount(item.id)">
               excluir
             </v-btn>
           </td>

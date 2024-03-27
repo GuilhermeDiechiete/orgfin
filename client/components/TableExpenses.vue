@@ -6,7 +6,7 @@
         </v-text-field>
       </template>
   
-      <v-data-table :headers="headers" :items="expenses" :search="search">
+      <v-data-table :headers="headers" :items="expenses" :search="search" density="compact">
 
         <template v-slot:item="{ item }">
           <tr>
@@ -17,10 +17,10 @@
             <td>{{ item.category }}</td>
             <td>{{ item.destiny }}</td>
             <td @click="alterStatus(item.id)">
-              <v-btn block small color="primary" v-if="item.status === false">Pendente</v-btn>
-              <v-btn block small color="green darken-1" v-if="item.status === true">Pago</v-btn>
+              <v-btn block small color="primary" density="comfortable" v-if="item.status === false">Pendente</v-btn>
+              <v-btn block small color="green darken-1" density="comfortable" v-if="item.status === true">Pago</v-btn>
             </td>
-            <td> <v-btn block small color="primary" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
+            <td> <v-btn block small color="primary" density="comfortable" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
           </tr>
         </template>
       </v-data-table>

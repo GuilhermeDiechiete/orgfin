@@ -6,7 +6,7 @@
       </v-text-field>
     </template>
 
-    <v-data-table :headers="headers" :items="incomes" :search="search">
+    <v-data-table :headers="headers" :items="incomes" :search="search" density="compact">
 
       <template v-slot:item="{ item }">
         <tr>
@@ -17,7 +17,7 @@
           <td>{{ item.category }}</td>
           <td>{{ item.destiny }}</td>
           <td>{{ item.status }}</td>
-          <td> <v-btn color="primary" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
+          <td> <v-btn color="primary" density="comfortable" @click.prevent="deleteTransaction(item.id)">Excluir</v-btn></td>
         </tr>
       </template>
     </v-data-table>

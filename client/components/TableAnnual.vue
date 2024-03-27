@@ -25,7 +25,7 @@ const months = [
 
 <template>
   <v-card>
-    <v-data-table>
+    <v-data-table density="compact">
       <thead>
         <tr class="text-deep-orange-darken-3">
           <th>MÊS</th>
