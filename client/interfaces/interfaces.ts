@@ -77,3 +77,10 @@ export interface AccountCreate {
     name: string,
     amount: number
 }
+
+
+export interface Users {
+    id: number,
+    username: string,
+    email: string,
+}

@@ -5,6 +5,7 @@ import './auth.routes'
 import './category.routes'
 import './transaction.routes'
 import './account.routes'
+import './admin.routes'
 
 Route.get('/', async () => {
   return { hello: 'world' }

@@ -1,7 +1,7 @@
 <!-- BOTÃO + FORMULÁRIO DE NOVA TRANSAÇÃO -->
 
 <script setup lang="ts">
-
+const sheet = ref(false) 
 import type { Category, Account } from '~/interfaces/interfaces'
 
 // STORES
@@ -14,7 +14,7 @@ const categories: Category[] = storeCategory.categories
 const accounts: Account[] = storeAccount.accounts
 
 // VALOR RESPONSAVEL POR ABRIR E FECHAR FORMULÁRIO
-const sheet = ref(false) 
+
 
 // CONDIÇÃO PARA BUSCAR INFORMAÇÕES PARA O FORMULÁRIO
 if(sheet) {
