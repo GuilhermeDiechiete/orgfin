@@ -14,24 +14,51 @@
             <td>{{ item.email }}</td>
             <td>Usuário Padrão</td>
             <td>
-              <v-btn color="primary" density="comfortable" @click.prevent="deleteUser(item.id)">
+              <v-btn block color="yellow mr-2" density="comfortable" @click="confirm = !confirm">
+                an
+              </v-btn>
+            </td>
+            <td>
+              
+              <v-btn block color="primary" density="comfortable" @click.prevent="deleteUser(item.id)">
                 excluir
               </v-btn>
             </td>
           </tr>
         </template>
       </v-data-table>
+
+      <div class="text-center">
+    
+  
+    <v-bottom-sheet v-model="confirm">
+      <v-card class="text-center" height="50%">
+        <v-card-text>
+          <v-btn variant="text" @click="confirm = !confirm">
+            fechar
+          </v-btn>
+
+          <p class="mt-4 text-red">*** VOCÊ ESTÁ ALTERANDO A PERMISSÃO DO USUÁRIO, VOCÊ CONFIRMA? ***</p>
+          <v-btn class="my-4" color="yellow mr-2" density="comfortable" @click="confirm = !confirm">
+                alterar permissão
+              </v-btn>
+        </v-card-text>
+      </v-card>
+    </v-bottom-sheet>
+  </div>
     </v-card>
   </template>
   
   <script setup lang="ts">
+  const confirm = ref(false)
+
   import type { Users } from '~/interfaces/interfaces';
   const search = ref('') // campo de busca
   
-  const store = useAdminStore(); // importação do store de categoria
-  await store.index() // buscando todas as categorias
+  const store = useAdminStore(); // importação do store de administrador
+  await store.index() // buscando todas os usuarios
   
-  const users = ref<Users[]>(store.users) // categorias
+  const users = ref<Users[]>(store.users) // usuarios
   
   // monitora mudanças em categories
   watch(() => store.users, (newUsers) => {
@@ -46,14 +73,15 @@
   // renderização 
   const headers = [
     {
-      title: 'Código',
+      title: 'CÓDIGO',
       align: 'start',
       sortable: false,
       key: 'id',
     },
-    { title: 'Nome de Usuário', key: 'username' },
-    { title: 'E-mail', key: 'email'},
-    { title: 'Nível de Acesso', key: 'role'},
+    { title: 'NOME DE USUÁRIO', key: 'username' },
+    { title: 'E-MAIL', key: 'email'},
+    { title: 'NÍVEL DE ACESSO', key: 'role'},
+    { title: 'ALTERAR NÍVEL', key: 'role'},
     { title: 'Excluir', key: ''},
   ];
   
