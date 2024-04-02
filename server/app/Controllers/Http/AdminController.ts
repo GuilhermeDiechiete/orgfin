@@ -3,6 +3,7 @@ import { User } from 'App/Models'
 
 export default class AdminController {
 
+  // busca todos os usuários do sistema
   public async index({ auth, response }: HttpContextContract) {
     try {
       const user = auth.user 
@@ -20,6 +21,7 @@ export default class AdminController {
     }
   }
 
+  // deleta o usuário
   public async destroy({ params, auth, response }: HttpContextContract) {
     try {
       const user = auth.user 
@@ -38,23 +40,25 @@ export default class AdminController {
     }
   }
 
-  public async changeStatus({ params, auth, response }: HttpContextContract) {
+  // atualiza o papel do usuário [ admin / normal ]
+  public async changeRole({ params, auth, response }: HttpContextContract) {
     try {
       const user = auth.user 
       if(!user){
         return response.status(401).json({ message: 'Não autorizado.'})
       }
-      const transaction = await user.related('transactions').query().where('id', params.id).first()
-
-      if(transaction && transaction.status !== undefined) {
-        transaction.status = !transaction.status;
-        await transaction.save(); // Salvar a transação atualizada
+      const u = await User.findByOrFail('id', params.id)
+      
+      if(u && u.role !== undefined) {
+        u.role = !u.role;
+        await u.save(); // Salvar a transação atualizada
       }
+      console.log('atualizei papel')
     } catch (error) {
       if(error?.messages?.errors[0]?.message) {
         return error.messages.errors[0].message
       } 
-      return 'Erro ao atualizar status da transação.'
+      return 'Erro ao atualizar papel do usuário.'
     }
   }
 }

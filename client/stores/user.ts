@@ -85,6 +85,6 @@ export const useUserStore = defineStore('users', {
                     this.messageError = '';
                 },2000);
             }
-        }
+        },
     }
 });

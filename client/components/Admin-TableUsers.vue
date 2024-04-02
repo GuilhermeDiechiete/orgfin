@@ -12,7 +12,10 @@
             <td>{{ item.id }}</td>
             <td>{{ item.username }}</td>
             <td>{{ item.email }}</td>
-            <td>Usuário Padrão</td>
+            <td>
+              <span v-if="item.role">Admin</span>
+              <span v-if="!item.role">Normal</span>
+            </td>
             <td>
               <v-btn block color="yellow mr-2" density="comfortable" @click="confirm = !confirm">
                 an
@@ -25,26 +28,25 @@
               </v-btn>
             </td>
           </tr>
+
+          <v-bottom-sheet v-model="confirm">
+            <v-card class="text-center" height="50%">
+              <v-card-text>
+                <v-btn variant="text" @click="confirm = !confirm">
+                  fechar
+                </v-btn>
+
+                <p class="mt-4 text-red">*** VOCÊ ESTÁ ALTERANDO A PERMISSÃO DO USUÁRIO, VOCÊ CONFIRMA? ***</p>
+                <v-btn class="my-4" color="yellow mr-2" density="comfortable" @click.prevent="changeRole(item.id)">
+                      alterar permissão
+                    </v-btn>
+              </v-card-text>
+            </v-card>
+          </v-bottom-sheet>
         </template>
       </v-data-table>
 
       <div class="text-center">
-    
-  
-    <v-bottom-sheet v-model="confirm">
-      <v-card class="text-center" height="50%">
-        <v-card-text>
-          <v-btn variant="text" @click="confirm = !confirm">
-            fechar
-          </v-btn>
-
-          <p class="mt-4 text-red">*** VOCÊ ESTÁ ALTERANDO A PERMISSÃO DO USUÁRIO, VOCÊ CONFIRMA? ***</p>
-          <v-btn class="my-4" color="yellow mr-2" density="comfortable" @click="confirm = !confirm">
-                alterar permissão
-              </v-btn>
-        </v-card-text>
-      </v-card>
-    </v-bottom-sheet>
   </div>
     </v-card>
   </template>
@@ -69,6 +71,10 @@
     await store.delete(id); 
     await store.index();
   };
+  const changeRole = async (id:number) => {
+    await store.changeRole(id)
+    await store.index()
+  }
   
   // renderização 
   const headers = [

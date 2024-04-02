@@ -64,6 +64,32 @@ export const useAdminStore = defineStore('admin', {
             } catch (error) {
                 console.log(error)
             }
+        },
+        // atualiza o papel do usuario
+        async changeRole (id: number) {
+            try {
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token');
+                   if(token) {
+                    await $fetch(`${API}/admin/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: token
+                        },
+                    });
+                } 
+                console.log('atualizei')
+                }
+            } catch (error:any) {
+                if (error.response._data.message) {
+                    this.messageError = error.response._data.message;
+                } else {
+                    this.messageError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.messageError = ''
+                }, 1500 )
+            }
         }
     }
 });
