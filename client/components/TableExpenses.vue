@@ -25,6 +25,7 @@
         </template>
         
       </v-data-table>
+      <p>Valor Pendente: R$ {{ totalExpensesFalse }}</p>
 
     </v-card>
   </template>
@@ -67,6 +68,9 @@ const alterStatus = async (id:number) => {
 
 watch(() => store.expenses, (newExpenses) => {
   expenses.value = newExpenses;
+})
+watch(() => store.totalByMonthExpensesFalse, (newExpenses) => {
+  totalExpensesFalse.value = newExpenses;
 })
 watch(() => store.totalByMonthExpensesFalse, (newExpenses) => {
   totalExpensesFalse.value = newExpenses;
