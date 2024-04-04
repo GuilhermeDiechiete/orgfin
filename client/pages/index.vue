@@ -16,7 +16,5 @@
 
 <script setup lang="ts">
 const layout = 'default'
-import { authenticated } from '~/middleware/auth'
-authenticated()
 
 </script>

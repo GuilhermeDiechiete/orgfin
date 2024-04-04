@@ -9,3 +9,11 @@
   </v-container>
 </template>
 
+<script setup>
+
+definePageMeta({
+  middleware: 'midd-admin'
+})
+
+</script>
+
