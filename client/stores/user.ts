@@ -68,7 +68,6 @@ export const useUserStore = defineStore('users', {
                     }
                     if(this.user.id && this.user.email) {
                         this.authenticated = true 
-                        
                     }
                     
 
