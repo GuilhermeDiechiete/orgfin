@@ -46,26 +46,32 @@ watch(() => store.tableSelected, (newSelected) => {
         <div @click="selected('expense')" :class="{ 'active': display === 'expense', 'inactive': display !== 'expense' }">
           <p><i class="fa-solid fa-cart-shopping fa-flip my-icon " style="--fa-animation-duration: 3s;"></i> DESPESAS</p>
           <h1 class="text-h5">R$ {{ totalExpenses }}</h1>
-          <span>
+          <div class="text-right">
             <p v-if="display == 'expense'"><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
             <p v-if="display != 'expense'"><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
-          </span>
+          </div>
         </div>
       </v-col>
       <v-col cols="12" sm="3">
         <div @click="selected('income')" :class="{ 'active': display === 'income', 'inactive': display !== 'income' }">
           <p> <i class="fa-solid fa-money-check-dollar fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> RENDIMENTOS</p>
           <h1 class="text-h5">R$ {{ totalIncomes }}</h1>
-          <p v-if="display == 'income'" class="text-left"><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
-          <p v-if="display != 'income'" class="text-left"><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
+          <div class="text-right">
+            <p v-if="display == 'income'"><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
+            <p v-if="display != 'income'"><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
+          </div>
+          
         </div>
       </v-col>
       <v-col cols="12" sm="3">
         <div @click="selected('investment')" :class="{ 'active': display === 'investment', 'inactive': display !== 'investment' }">
           <p> <i class="fa-solid fa-arrow-up-right-dots fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> INVESTIMENTOS</p>
           <h1 class="text-h5">R$ {{ totalInvestments }}</h1>
-          <p v-if="display == 'investment'" class=""><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
-          <p v-if="display != 'investment'" class=""><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
+          <div class="text-right">
+            <p v-if="display == 'investment'" class=""><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
+            <p v-if="display != 'investment'" class=""><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
+          </div>
+          
         </div>
       </v-col>
       <v-col cols="12" sm="3">

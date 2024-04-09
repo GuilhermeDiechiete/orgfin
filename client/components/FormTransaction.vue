@@ -1,48 +1,3 @@
-<!-- BOTÃO + FORMULÁRIO DE NOVA TRANSAÇÃO -->
-
-<script setup lang="ts">
-const sheet = ref(false) 
-import type { Category, Account } from '~/interfaces/interfaces'
-
-// STORES
-const store = useTransactionStore() 
-const storeCategory = useCategoryStore() 
-const storeAccount = useAccountStore() 
-
-// LISTAS PARA INPUTS DO FORMULÁRIO
-const categories: Category[] = storeCategory.categories
-const accounts: Account[] = storeAccount.accounts
-
-// VALOR RESPONSAVEL POR ABRIR E FECHAR FORMULÁRIO
-
-
-// CONDIÇÃO PARA BUSCAR INFORMAÇÕES PARA O FORMULÁRIO
-if(sheet) {
-  await storeCategory.index()
-  await storeAccount.index()
-}
-
-// INPUTS DO FORMULÁRIO
-const transaction = ref({
-  date: '', 
-  type: 'expense', 
-  description: '', 
-  amount: 0, 
-  installment: 1,
-  total_installments: 1,
-  category: '',
-  account: '',
-  destiny: '',
-  status: false
-})
-
-// METODO RESPONSAVEL POR ENVIAR DADOS PARA API
-const addTransaction = async () => {
-  await store.create(transaction.value) // Tentativa de envio
-  await store.getByMonth() // Faz uma busca atualizada dos valores 
-}
-</script>
-
 <template>
   <div class="text-center">
     <v-btn block size="x-large" text="ADICIONAR TRANSAÇÃO" @click="sheet = !sheet" class="btn-add-transaction bg-orange-darken-4"/>
@@ -78,6 +33,56 @@ const addTransaction = async () => {
     </v-bottom-sheet>
   </div>
 </template>
+
+
+
+
+<!-- BOTÃO + FORMULÁRIO DE NOVA TRANSAÇÃO -->
+
+<script setup lang="ts">
+const sheet = ref(false)
+import type { Category, Account } from '~/interfaces/interfaces'
+
+// STORES
+const store = useTransactionStore() 
+const storeCategory = useCategoryStore() 
+const storeAccount = useAccountStore() 
+
+// LISTAS PARA INPUTS DO FORMULÁRIO
+const categories: Category[] = storeCategory.categories
+const accounts: Account[] = storeAccount.accounts
+
+// VALOR RESPONSAVEL POR ABRIR E FECHAR FORMULÁRIO
+
+// CONDIÇÃO PARA BUSCAR INFORMAÇÕES PARA O FORMULÁRIO
+watch(() => sheet, async () => {
+  if(sheet) {
+    await storeCategory.index()
+    await storeAccount.index()
+  }
+})
+
+// INPUTS DO FORMULÁRIO
+const transaction = ref({
+  date: '', 
+  type: 'expense', 
+  description: '', 
+  amount: 0, 
+  installment: 1,
+  total_installments: 1,
+  category: '',
+  account: '',
+  destiny: '',
+  status: false
+})
+
+// METODO RESPONSAVEL POR ENVIAR DADOS PARA API
+const addTransaction = async () => {
+  await store.create(transaction.value) // Tentativa de envio
+  await store.getByMonth() // Faz uma busca atualizada dos valores 
+}
+</script>
+
 
 
 

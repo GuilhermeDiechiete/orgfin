@@ -8,24 +8,7 @@
     flex-wrap: wrap;
     
 }
-.display {
-    flex: 1;
-    text-align: left;
-    color: white;
-    background-color: rgb(41, 40, 40);
-    padding: 1em 2em;
-    margin: 1em;
-    border-radius: 0.2em;
-   
-}
-.display h1 {
-    font-size: 1.2em;
-    padding-top: 0.8em;
-}
-.display h2 {
-    font-size: 1em;
-    color: rgb(139, 138, 138);
-}
+
 .selected {
   background-color: orangered;
   color: black;
@@ -73,17 +56,15 @@
   }
   .inactive {
     background-color: #242424;
-    padding: 20px;
+    padding: 15px 30px 15px 20px;
     border-radius: 0.4em;
-    text-align: left;
     width: 100%;
   }
 
   .active {
     background-color: orangered;
-    padding: 20px;
+    padding: 15px 30px 15px 20px;
     border-radius: 0.4em;
-    text-align: left;
     width: 100%;
   }
   .inactive p i {

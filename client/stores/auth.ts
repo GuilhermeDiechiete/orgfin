@@ -12,6 +12,11 @@ export const useAuthStore = defineStore('auth', {
                 token: ref(''),
                 userId: ref(''),
             },
+            auth: {
+                id: ref(''),
+                email: ref(''),
+            },
+            authenticated: ref(false),
             messageError: ref(''),
 
         };
@@ -43,6 +48,41 @@ export const useAuthStore = defineStore('auth', {
                 }, 1500 )
             }
 
-        }
+        },
+        async authUser () {
+            try {
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token');
+                    const id = localStorage.getItem('userId');
+
+                    if(token && id) {
+                        this.auth= await $fetch(`${API}/user/${id}`, {
+                            method: "GET",
+                            headers: {
+                                Authorization: token
+                            }
+                            
+                        });
+                    }
+                    if(this.auth.id && this.auth.email) {
+                        this.authenticated = true 
+                    }
+                    
+
+                }
+                
+                
+            } catch (error: any) {
+                if (error.response._data.message) {
+                    this.messageError = error.response._data.message;
+                } else {
+                    this.messageError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.messageError = '';
+                },2000);
+            }
+        },
     }
-});
+    }
+);

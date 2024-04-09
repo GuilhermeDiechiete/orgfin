@@ -42,7 +42,7 @@ watch(() => store.month, async () => {
 <style scoped>
 .box-select {
   display: flex;
-  margin: 1em 0;
+  margin: 0.8em 0;
 }
 .my-select {
   background-color: rgb(34, 34, 34);
