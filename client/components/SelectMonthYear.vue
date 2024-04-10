@@ -14,7 +14,7 @@
       <option value="11">Novembro</option>
       <option value="12">Dezembro</option>
     </select>
-    <select class="my-select ml-4" v-model="store.year">
+    <select class="my-select ml-6" v-model="store.year">
       <option value="2024">2024</option>
       <option value="2025">2025</option>
       <option value="2026">2026</option>
@@ -39,17 +39,4 @@ watch(() => store.month, async () => {
 })
 </script>
 
-<style scoped>
-.box-select {
-  display: flex;
-  margin: 0.8em 0;
-}
-.my-select {
-  background-color: rgb(34, 34, 34);
-  width: 100%;
-  padding: 0.5em 0 0.5em 1em;
-  border-radius: 0.2em;
-}
 
-
-</style>

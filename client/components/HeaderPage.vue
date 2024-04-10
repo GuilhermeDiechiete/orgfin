@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <v-card class="mx-auto my-2" width="100%">
+  <v-card class="mx-auto mb-2" width="100%">
     <template v-slot:title>
       <i class="my-icon" :class="icon"></i>{{ title }}
     </template>
