@@ -1,12 +1,26 @@
-<!-- FORMULARIO PARA ADICIONAR NOVAS CATEGORIAS -->
+<!-- Formulário para criar Categorias -->
+<template>
+  <form class="my-box-form">
+    <h3 class="ml-2 mb-2 text-left">NOVA CATEGORIA</h3>
+    <Messages />
+    <v-radio-group inline v-model="category.type">
+      <v-radio label="Despesa" value="expense"/>
+      <v-radio label="Renda" value="income"/>
+      <v-radio label="Investimento" value="investment"/>
+    </v-radio-group>
+    <v-text-field v-model="category.name" label="Name" variant="outlined" />
+    <v-btn block @click.prevent="create" class="bg-orange-darken-4"> Criar </v-btn>
+  </form>
+</template>
 
 <script setup lang="ts">
 const store = useCategoryStore() // acessando store de categorias
 
 // campos do formulário
 const category = ref({
-  name:'',
-  type:''
+  type:'expense',
+  name:''
+  
 })
 
 // enviando dados para API
@@ -23,17 +37,5 @@ const create = async () => {
 }
 </script>
 
-<template>
-  <form class="my-box-form">
-    <h3 class="mb-6">Adicionar Categoria</h3>
-    <Messages />
-    <v-radio-group inline v-model="category.type">
-      <v-radio label="Despesa" value="expense"></v-radio>
-      <v-radio label="Renda" value="income"></v-radio>
-      <v-radio label="Investimento" value="investment"></v-radio>
-    </v-radio-group>
-    <v-text-field v-model="category.name" label="Name" variant="outlined" />
-    <v-btn block @click.prevent="create" class="bg-orange-darken-4"> Criar </v-btn>
-  </form>
-</template>
+
 

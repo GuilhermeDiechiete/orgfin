@@ -5,12 +5,12 @@
     <v-bottom-sheet v-model="sheet">
       <v-card class="text-center" height="50%">
         <v-card-text>
-          <v-btn variant="text" @click="sheet = !sheet">
+          <v-btn variant="text" @click="sheet = false">
             fechar
           </v-btn>
   
           <form class="my-box-form">
-            <h3 class="mb-6">Adicionar Transação</h3>
+            <h3 class="mb-6">NOVA TRANSAÇÃO</h3>
             <Messages />
             <v-radio-group inline v-model="transaction.type">
               <v-radio label="Despesa" value="expense"></v-radio>
@@ -47,7 +47,13 @@ import type { Category, Account } from '~/interfaces/interfaces'
 const store = useTransactionStore() 
 const storeCategory = useCategoryStore() 
 const storeAccount = useAccountStore() 
+const storeGlobal = useGlobalStore()
 
+const date = storeGlobal.dataISO
+
+
+await storeCategory.index()
+await storeAccount.index()
 // LISTAS PARA INPUTS DO FORMULÁRIO
 const categories: Category[] = storeCategory.categories
 const accounts: Account[] = storeAccount.accounts
@@ -55,16 +61,11 @@ const accounts: Account[] = storeAccount.accounts
 // VALOR RESPONSAVEL POR ABRIR E FECHAR FORMULÁRIO
 
 // CONDIÇÃO PARA BUSCAR INFORMAÇÕES PARA O FORMULÁRIO
-watch(() => sheet, async () => {
-  if(sheet) {
-    await storeCategory.index()
-    await storeAccount.index()
-  }
-})
+
 
 // INPUTS DO FORMULÁRIO
 const transaction = ref({
-  date: '', 
+  date: date, 
   type: 'expense', 
   description: '', 
   amount: 0, 
@@ -75,6 +76,8 @@ const transaction = ref({
   destiny: '',
   status: false
 })
+
+// CHAMAR CATEGORIAS E CONTAS QUANDO ABRIR O FORMULARIO
 
 // METODO RESPONSAVEL POR ENVIAR DADOS PARA API
 const addTransaction = async () => {
