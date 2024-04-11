@@ -30,8 +30,9 @@ const create = async () => {
 
   // limpa os campos
   category.value = {
-    name: '',
-    type: ''
+    type: 'expense',
+    name: ''
+    
   }
   await store.index() // nova busca para atualizar o valor na tabela
 }
