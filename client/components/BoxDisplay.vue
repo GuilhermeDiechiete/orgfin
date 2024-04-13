@@ -39,45 +39,10 @@ const selected = ( option: string ) => {
 <template>
   <section class="my-box">
     <v-row justify="center">
-      <v-col cols="12" sm="3">
-        <div @click="selected('expense')" :class="{ 'active': display === 'expense', 'inactive': display !== 'expense' }">
-          <p><i class="fa-solid fa-cart-shopping fa-flip my-icon " style="--fa-animation-duration: 3s;"></i> DESPESAS</p>
-          <h1 class="text-h5">R$ {{ totalExpenses }}</h1>
-          <div class="text-right">
-            <p v-if="display == 'expense'"><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
-            <p v-if="display != 'expense'"><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
-          </div>
-        </div>
-      </v-col>
-      <v-col cols="12" sm="3">
-        <div @click="selected('income')" :class="{ 'active': display === 'income', 'inactive': display !== 'income' }">
-          <p> <i class="fa-solid fa-money-check-dollar fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> RENDIMENTOS</p>
-          <h1 class="text-h5">R$ {{ totalIncomes }}</h1>
-          <div class="text-right">
-            <p v-if="display == 'income'"><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
-            <p v-if="display != 'income'"><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
-          </div>
-          
-        </div>
-      </v-col>
-      <v-col cols="12" sm="3">
-        <div @click="selected('investment')" :class="{ 'active': display === 'investment', 'inactive': display !== 'investment' }">
-          <p> <i class="fa-solid fa-arrow-up-right-dots fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> INVESTIMENTOS</p>
-          <h1 class="text-h5">R$ {{ totalInvestments }}</h1>
-          <div class="text-right">
-            <p v-if="display == 'investment'" class=""><i class="fa-solid fa-circle-chevron-up fa-beat-fade"></i></p>
-            <p v-if="display != 'investment'" class=""><i class="fa-solid fa-circle-chevron-down fa-beat-fade"></i></p>
-          </div>
-          
-        </div>
-      </v-col>
-      <v-col cols="12" sm="3">
-        <div class="inactive">
-          <p> <i class="fa-solid fa-arrow-up-right-dots fa-flip my-icon" style="--fa-animation-duration: 3s;"></i> SOBRA</p>
-          <h1 class="text-h5">R$ {{ surplus }}</h1>
-          <p>-</p>
-        </div>
-      </v-col>
+      <Display @click="selected('expense')" :option="display === 'expense'" title="DESPESAS" :value="totalExpenses" icon="fa-solid fa-cart-shopping fa-flip my-icon"/>
+      <Display @click="selected('income')" :option="display === 'income'" title="RENDIMENTOS" :value="totalIncomes" icon="fa-solid fa-money-check-dollar fa-flip my-icon"/>
+      <Display @click="selected('investment')" :option="display === 'investment'" title="INVESTIMENTOS" :value="totalInvestments" icon="fa-solid fa-arrow-up-right-dots fa-flip my-icon"/>
+      <Display @click="selected('surplus')" :option="display === ''" title="SOBRAS" :value="surplus" icon="fa-solid fa-arrow-up-right-dots fa-flip my-icon"/>
     </v-row>
   </section>
 </template>

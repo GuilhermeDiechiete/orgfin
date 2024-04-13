@@ -13,5 +13,4 @@ const selected = ref(G.tableSelected)
 watch(() => G.tableSelected, (newSelected) => {
   selected.value = newSelected;
 })
-
 </script>
