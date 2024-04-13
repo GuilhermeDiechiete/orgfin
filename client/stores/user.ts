@@ -6,18 +6,15 @@ export const useUserStore = defineStore('users', {
 
     state: () => {
         return {
-            token: ref(''),
-            authenticated: false,
-            registerUser: false,
-            user: {
+            user: { // Armazena dados do usuário autenticado no metodo show
                 id: ref(''),
                 username: ref(''),
                 email: ref(''),
             },
             
             // messages
-            messageError: ref(''),
-            messageSuccess: ref('')
+            msgError: ref(''),
+            msgSuccess: ref('')
         };
     },
     actions: {
@@ -25,7 +22,7 @@ export const useUserStore = defineStore('users', {
         // registrar o usuário no sistema
         async register ( user: UserRegister ) {
             try {
-                this.messageSuccess = await $fetch(`${API}/user`, {
+                this.msgSuccess = await $fetch(`${API}/user`, {
                     method: 'POST',
                     body: {
                         username: user.username,
@@ -35,17 +32,17 @@ export const useUserStore = defineStore('users', {
                     }
                 });
                 setTimeout(() => {
-                    this.messageSuccess = ''
+                    this.msgSuccess = ''
                 },2000);
                 return true
             } catch (error: any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.'
+                    this.msgError = 'Erro ao processar a solicitação.'
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 },2000)
             }
         },
@@ -54,8 +51,8 @@ export const useUserStore = defineStore('users', {
         async show () {
             try {
                 if(typeof localStorage !== 'undefined') {
-                    const token = localStorage.getItem('token');
-                    const id = localStorage.getItem('userId');
+                    const token = localStorage.getItem('token') || ''
+                    const id = localStorage.getItem('userId') || -1
 
                     if(token && id) {
                         this.user = await $fetch(`${API}/user/${id}`, {
@@ -66,22 +63,17 @@ export const useUserStore = defineStore('users', {
                             
                         });
                     }
-                    if(this.user.id && this.user.email) {
-                        this.authenticated = true 
-                    }
-                    
-
                 }
                 
                 
             } catch (error: any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = '';
+                    this.msgError = '';
                 },2000);
             }
         },

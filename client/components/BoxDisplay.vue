@@ -1,17 +1,10 @@
 <!-- DISPLAYS - mostra uma visão geral para o usuário-->
 
 <script setup lang="ts">
+const store = useTransactionStore() // stores de transações
+const G = useGlobalStore() // stores de valores globais
 
-const store = useTransactionStore() // acessando store de transações
-
-// executando a API para buscar os valores ( os params 'month' e 'year' são passados diretamente para o store de transações )
-await store.getByMonth() 
-
-// FUNÇÃO PRINCIPAL DE INTERAÇÃO COM O USUÁRIO
-// O metodo 'selected' monitora o display selecionado ( as tabelas são renderizadas de acordo com o display selecionado )
-const selected = ( option: string ) => {
-  store.tableSelected = option
-}
+await store.getByMonth() // buscando transações do mês atual
 
 // valores salvos no storeTransactions ( são disponibilizados com a busca na API getByMonth )
 const totalExpenses = ref(store.totalByMonthExpenses.toFixed(2))
@@ -19,7 +12,7 @@ const totalIncomes = ref(store.totalByMonthIncomes.toFixed(2))
 const totalInvestments = ref(store.totalByMonthInvestments.toFixed(2))
 const surplus = ref(store.surplus.toFixed(2))
 
-const display = ref(store.tableSelected)
+const display = ref(G.tableSelected)
 
 // MONITORAMENTO DE MUDANÇAS NOS VALORES
 watch(() => store.totalByMonthExpenses, (newExpenses) => {
@@ -34,9 +27,13 @@ watch(() => store.totalByMonthInvestments, (newInvestments) => {
 watch(() => store.surplus, (newSurplus) => {
   surplus.value = String(newSurplus);
 })
-watch(() => store.tableSelected, (newSelected) => {
+watch(() => G.tableSelected, (newSelected) => {
   display.value = newSelected;
 })
+
+const selected = ( option: string ) => {
+  G.tableSelected = option
+}
 </script>
 
 <template>

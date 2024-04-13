@@ -22,7 +22,8 @@ export interface TransactionByMonth {
     surplus: number
     totalByMonthExpenses: number,
     totalByMonthIncomes: number,
-    totalByMonthInvestments: number
+    totalByMonthInvestments: number,
+    totalByMonthExpensesFalse: number
     
 }
 

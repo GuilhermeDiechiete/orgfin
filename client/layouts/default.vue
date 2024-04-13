@@ -6,7 +6,7 @@
   
       <v-app-bar>
         <v-app-bar-nav-icon @click="drawer = !drawer">
-          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-bars my-icon"></i>
         </v-app-bar-nav-icon>
         <v-app-bar-title>OrgFin</v-app-bar-title>
       </v-app-bar>

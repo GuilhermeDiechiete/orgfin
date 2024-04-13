@@ -7,9 +7,11 @@
 </template>
 
 <script setup lang="ts">
-const store = useTransactionStore()
-const selected = ref(store.tableSelected)
-watch(() => store.tableSelected, (newSelected) => {
+const G = useGlobalStore()
+const selected = ref(G.tableSelected)
+
+watch(() => G.tableSelected, (newSelected) => {
   selected.value = newSelected;
 })
+
 </script>

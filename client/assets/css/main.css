@@ -8,6 +8,9 @@
     flex-wrap: wrap;
     
 }
+.text-orangered {
+  color: orangered;
+}
 
 .selected {
   background-color: orangered;
@@ -48,7 +51,7 @@
 
 .my-icon {
     margin-right: 0.5em;
-    
+    color: orangered;
   }
 
   .my-box {

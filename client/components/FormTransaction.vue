@@ -47,9 +47,9 @@ import type { Category, Account } from '~/interfaces/interfaces'
 const store = useTransactionStore() 
 const storeCategory = useCategoryStore() 
 const storeAccount = useAccountStore() 
-const storeGlobal = useGlobalStore()
+const global = useGlobalStore()
 
-const date = storeGlobal.dataISO
+const date = global.dataISO
 
 
 await storeCategory.index()

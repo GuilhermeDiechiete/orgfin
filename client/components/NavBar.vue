@@ -41,6 +41,7 @@ const items = [
       { text: 'Categorias', icon: 'fa-solid fa-layer-group', to:'/categories'},
       { text: 'Contas', icon: 'fa-solid fa-building-columns', to:'/accounts'},
       { text: 'Relatório Anual', icon: 'fa-solid fa-file', to:'/annual-report'},
+      { text: 'Configurações', icon: 'fa-solid fa-file', to:'/annual-report'},
     ]
 </script>
 

@@ -1,8 +1,9 @@
+<!-- PAGINA -->
 <template>
     <NuxtLayout :name="layout">
         <section class="my-container">
             <HeaderPage icon="fa-solid fa-layer-group" title="Transações" description="Transações realizadas do mês, clique nos displays para alterar entre, Desperas, Rendimentos e Investimentos."/>
-            <FormTransaction /> <!-- Botão e formulário responsavel pelo formulário -->
+            <FormTransaction /> <!-- Botão para adicionar transações -->
             <SelectMonthYear /> <!-- caixa seletora do mês e ano -->
             <BoxDisplay /> <!-- responsavel por mostrar o valor total e selecionar a tabela -->
             

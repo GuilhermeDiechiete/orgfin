@@ -5,12 +5,13 @@ const API = 'http://localhost:4000/transaction';
 
 const currentDate = new Date();
 
+
+
 export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
         return {
-            tableSelected: ref('expense'), 
-            
+            tableSelected: ref('expense'),
             day: ref(currentDate.getDay()),
             month: ref(currentDate.getMonth() + 1),
             year: ref(currentDate.getFullYear()),
