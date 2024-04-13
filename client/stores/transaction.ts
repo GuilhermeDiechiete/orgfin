@@ -5,8 +5,6 @@ const API = 'http://localhost:4000/transaction';
 
 const currentDate = new Date();
 
-
-
 export const useTransactionStore = defineStore('transactions', {
 
     state: () => {
@@ -40,6 +38,7 @@ export const useTransactionStore = defineStore('transactions', {
             messageSuccess: ref(''),
         };
     },
+    
     
     actions: {
         async create ( transaction: any ) {

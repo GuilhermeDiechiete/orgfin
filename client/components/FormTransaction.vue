@@ -1,3 +1,4 @@
+<!-- BOTÃO para acessar formulario + FORMULÁRIO DE NOVA TRANSAÇÃO -->
 <template>
   <div class="text-center">
     <v-btn block size="x-large" text="ADICIONAR TRANSAÇÃO" @click="sheet = !sheet" class="btn-add-transaction bg-orange-darken-4"/>
@@ -34,28 +35,25 @@
   </div>
 </template>
 
-
-
-
-<!-- BOTÃO + FORMULÁRIO DE NOVA TRANSAÇÃO -->
-
 <script setup lang="ts">
-const sheet = ref(false)
-import type { Category, Account } from '~/interfaces/interfaces'
+const sheet = ref(false) // valor para abrir e fechar formulario
+
+import type { Categories, Account } from '~/interfaces/interfaces' 
 
 // STORES
-const store = useTransactionStore() 
-const storeCategory = useCategoryStore() 
-const storeAccount = useAccountStore() 
-const global = useGlobalStore()
+const store = useTransactionStore() // acessar metodo de criação de transação
+const storeCategory = useCategoryStore() // acessar lista de categorias para o usuário selecionar no form
+const storeAccount = useAccountStore() // acessar lista de contas para o usuário selecionar no form
+const global = useGlobalStore() // acessar data atualizada
 
-const date = global.dataISO
-
-
+// buscando categorias e contas atualizado
 await storeCategory.index()
 await storeAccount.index()
+
+const date = global.dataISO // data atual
+
 // LISTAS PARA INPUTS DO FORMULÁRIO
-const categories: Category[] = storeCategory.categories
+const categories: Categories[] = storeCategory.categories
 const accounts: Account[] = storeAccount.accounts
 
 // VALOR RESPONSAVEL POR ABRIR E FECHAR FORMULÁRIO
@@ -77,12 +75,10 @@ const transaction = ref({
   status: false
 })
 
-// CHAMAR CATEGORIAS E CONTAS QUANDO ABRIR O FORMULARIO
-
-// METODO RESPONSAVEL POR ENVIAR DADOS PARA API
+// ENVIAR DADOS PARA CRIAR TRANSAÇÃO
 const addTransaction = async () => {
-  await store.create(transaction.value) // Tentativa de envio
-  await store.getByMonth() // Faz uma busca atualizada dos valores 
+  await store.create(transaction.value) // Tentativa de criação
+  await store.getByMonth() // Faz uma busca atualizada dos valores após criação
 }
 </script>
 
