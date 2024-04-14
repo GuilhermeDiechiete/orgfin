@@ -13,7 +13,7 @@
             <td>{{ item.date }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.installment }} - {{ item.total_installments }}</td>
-            <td>R$ <span class="text-red">{{ item.amount }}</span></td>
+            <td>R$ {{ item.amount }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.destiny }}</td>
             <td @click="alterStatus(item.id)">

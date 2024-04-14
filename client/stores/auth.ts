@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
                 email: ref(''),
             },
             authenticated: ref(false),
-            messageError: ref(''),
+            msgError: ref(''),
 
         };
     },
@@ -39,12 +39,12 @@ export const useAuthStore = defineStore('auth', {
 
             } catch (error: any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 }, 1500 )
             }
 
@@ -74,12 +74,12 @@ export const useAuthStore = defineStore('auth', {
                 
             } catch (error: any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = '';
+                    this.msgError = '';
                 },2000);
             }
         },

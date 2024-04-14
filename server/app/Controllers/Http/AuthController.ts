@@ -20,7 +20,7 @@ export default class AuthController {
       if(error?.messages?.errors[0]?.message) {
         return response.status(400).json({ message: error.messages.errors[0].message })
       } 
-      return response.status(400).json({ message: 'Erro ao criar usuário.' })
+      return response.status(400).json({ message: 'Credenciais Invalidas.' })
     }
     
   }

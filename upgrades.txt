@@ -2,3 +2,5 @@
 01 - fechar formulario apos adicionar uma transação(ok) - categoria - conta
 02. formatar o numero do input do valor automatico
 03. tirar o destino do formulario de transação como obrigatório
+04. Separar as categorias pelo tipo, categoria de despesas, de rendas e investimentos
+05. Fazer logica para calcular o valor em contas, adicionou renda no banco x, calcular na tabela de contas

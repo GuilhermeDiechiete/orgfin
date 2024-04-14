@@ -34,8 +34,8 @@ export const useTransactionStore = defineStore('transactions', {
             totalAnnualIncomes: ref(0), 
             totalAnnualInvestments: ref(0),
             // messages
-            messageError: ref(''),
-            messageSuccess: ref(''),
+            msgError: ref(''),
+            msgSuccess: ref(''),
         };
     },
     
@@ -46,7 +46,7 @@ export const useTransactionStore = defineStore('transactions', {
                 if(typeof localStorage !== 'undefined') {
                     const token = localStorage.getItem('token');
                    if(token) {
-                   this.messageSuccess = await $fetch(`${API}`, {
+                   this.msgSuccess = await $fetch(`${API}`, {
                     method: 'POST',
                     headers: {
                         Authorization: token
@@ -66,19 +66,19 @@ export const useTransactionStore = defineStore('transactions', {
                     }
                 })
                 setTimeout(() => {
-                    this.messageSuccess = ''
+                    this.msgSuccess = ''
                 }, 1500 )
                 } 
                 }
                 return true
             } catch (error: any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 }, 1500 )
                 return false
             }
@@ -110,12 +110,12 @@ export const useTransactionStore = defineStore('transactions', {
                 }
             } catch (error:any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 }, 1500 )
             }
         },
@@ -142,12 +142,12 @@ export const useTransactionStore = defineStore('transactions', {
                 }
             } catch (error:any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 }, 1500 )
             }
         },
@@ -167,12 +167,12 @@ export const useTransactionStore = defineStore('transactions', {
                 }
             } catch (error:any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 }, 1500 )
             }
         },
@@ -192,12 +192,12 @@ export const useTransactionStore = defineStore('transactions', {
                 }
             } catch (error:any) {
                 if (error.response._data.message) {
-                    this.messageError = error.response._data.message;
+                    this.msgError = error.response._data.message;
                 } else {
-                    this.messageError = 'Erro ao processar a solicitação.';
+                    this.msgError = 'Erro ao processar a solicitação.';
                 }
                 setTimeout(() => {
-                    this.messageError = ''
+                    this.msgError = ''
                 }, 1500 )
             }
         }
