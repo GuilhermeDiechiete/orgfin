@@ -1,6 +1,6 @@
 <!-- BOTÃO para acessar formulario  -->
 <template>
-    <div class="text-center">
+    <div>
       <v-btn block size="x-large" text="ADICIONAR TRANSAÇÃO" @click="sheet = !sheet" class="btn-add-transaction bg-orange-darken-4"/>
     
       <v-bottom-sheet v-model="sheet">

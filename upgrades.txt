@@ -4,3 +4,9 @@
 03. tirar o destino do formulario de transação como obrigatório
 04. Separar as categorias pelo tipo, categoria de despesas, de rendas e investimentos
 05. Fazer logica para calcular o valor em contas, adicionou renda no banco x, calcular na tabela de contas
+05.1 Formatar a data nas tabelas...
+BIG UPDATE
+
+06. Adicionar Pagina de Tarefas
+07. Logica para buscar tarefas do dia
+08. Mostrar um aviso na pagina inicial que existem tarefas a serem feitas

@@ -1,9 +1,4 @@
 <!-- LINK PARA USAR NOS RODAPÉS DAS PAGINAS -->
-
-<script setup lang="ts">
-defineProps(['to', 'text'])
-</script>
-
 <template>
     <v-card>
         <v-container class="text-center">
@@ -11,4 +6,10 @@ defineProps(['to', 'text'])
         </v-container>
     </v-card>
 </template>
+
+<script setup lang="ts">
+defineProps(['to', 'text'])
+</script>
+
+
 
