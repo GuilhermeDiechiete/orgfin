@@ -31,7 +31,7 @@ export default class TransactionValidator {
 
     account: schema.string({ trim: true }),
 
-    destiny: schema.string({ trim: true }),
+    destiny: schema.string.optional({ trim: true }),
 
     status: schema.boolean.optional()
 
@@ -54,6 +54,6 @@ export default class TransactionValidator {
     
 
     'account.required': 'Selecione a conta de saída.',
-    'destiny.required': 'Adicione um destino para o valor.'
+   
   }
 }

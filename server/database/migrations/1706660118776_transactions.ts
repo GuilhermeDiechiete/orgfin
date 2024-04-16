@@ -13,9 +13,9 @@ export default class extends BaseSchema {
       table.decimal('amount',8,2).notNullable()
       table.integer('installment').unsigned()
       table.integer('total_installments').unsigned()
-      table.string('category').defaultTo('normal')
+      table.string('category').defaultTo('indefinida')
       table.string('account').notNullable()
-      table.string('destiny').notNullable()
+      table.string('destiny')
       table.boolean('status').defaultTo(false)
 
       table.integer('user_id').unsigned().references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')

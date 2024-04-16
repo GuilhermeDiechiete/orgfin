@@ -10,7 +10,7 @@
 
         <template v-slot:item="{ item }">
           <tr>
-            <td>{{ item.date }}</td>
+            <td>{{ getDayFromDate(item.date) }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.installment }} - {{ item.total_installments }}</td>
             <td>R$ {{ item.amount }}</td>
@@ -33,16 +33,17 @@
 <script setup lang="ts">
 import type { Transaction } from '~/interfaces/interfaces';
 
-
 const search = ref('')
 const store = useTransactionStore()
+const G = useGlobalStore()
+
 await store.getByMonth()
 
 const totalExpensesFalse = ref(store.totalByMonthExpensesFalse)
 const expenses = ref<Transaction[]>(store.expenses);
 const headers = [
         {
-          title: 'DATA',
+          title: 'VENC. DIA',
           align: 'start', key: 'date',
        
           
@@ -65,6 +66,10 @@ const alterStatus = async (id:number) => {
   await store.changeStatus(id)
   await store.getByMonth()
 }
+
+const getDayFromDate = (date: string) => {
+  return new Date(date).getDate(); // Retorna apenas o dia da data
+};
 
 watch(() => store.expenses, (newExpenses) => {
   expenses.value = newExpenses;

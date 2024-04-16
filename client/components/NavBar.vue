@@ -2,13 +2,15 @@
     <v-card class="mx-auto" style="width:256px">
       <v-layout>
         <v-navigation-drawer permanent absolute>
-          <v-list>
+         
+            <v-list>
             <v-list-item :title="username" :subtitle="email">
               <template v-slot:append>
                 <v-btn size="small" variant="text" icon="mdi-menu-down" />
               </template>
             </v-list-item>
           </v-list>
+        
   
           <v-divider />
   
@@ -38,10 +40,11 @@ const email = ref(store.user.email)
 
 const items = [
       { text: 'Iniciar', icon: 'fa-solid fa-house', to:'/'},
+      { text: 'TAREFAS', icon: 'fa-solid fa-layer-group', to:'/tasks'},
       { text: 'Categorias', icon: 'fa-solid fa-layer-group', to:'/categories'},
       { text: 'Contas', icon: 'fa-solid fa-building-columns', to:'/accounts'},
       { text: 'Relatório Anual', icon: 'fa-solid fa-file', to:'/annual-report'},
-      { text: 'Configurações', icon: 'fa-solid fa-file', to:'/annual-report'},
+      { text: 'Configurações', icon: 'fa-solid fa-file', to:'/user/profile'},
     ]
 </script>
 

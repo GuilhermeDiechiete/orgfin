@@ -10,7 +10,7 @@
 
       <template v-slot:item="{ item }">
         <tr>
-          <td>{{ item.date }}</td>
+          <td>{{ getDayFromDate(item.date) }}</td>
           <td>{{ item.description }}</td>
           <td>{{ item.installment }} - {{ item.total_installments }}</td>
           <td>R$ {{ item.amount }}</td>
@@ -40,11 +40,11 @@ const headers = [
           align: 'start',
           key: 'date',
           sortable: false,
-          title: 'DATA',
+          title: 'Dia',
         },
         { title: 'Descrição', key: 'description' },
         { title: 'Parcelas', key: 'installment'},
-        { title: 'Valor R$', key: 'amount'},
+        { title: 'R$', key: 'amount'},
         { title: 'Categoria', key: 'category'},
         { title: 'Destino', key: 'destiny'},
         { title: 'Situação', key: 'status'},
@@ -56,6 +56,10 @@ const deleteTransaction = async (id:number) => {
   await store.delete(id)
   await store.getByMonth()
 }
+
+const getDayFromDate = (date: string) => {
+  return new Date(date).getDate(); // Retorna apenas o dia da data
+};
 
 watch(() => store.incomes, (newIncomes) => {
   incomes.value = newIncomes;

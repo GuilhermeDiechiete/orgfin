@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+
+
 const layout = 'default'
 const storeUser = useUserStore()
 await storeUser.show()

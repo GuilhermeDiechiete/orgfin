@@ -12,13 +12,11 @@ export const useGlobalStore = defineStore('global', {
       dataISO: ref(`${y}-${m.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`),
 
       
-    }
-
-  
-
+    } 
+  },
+  actions: {
     
-      
-    }
+  }
   }
   
 );
