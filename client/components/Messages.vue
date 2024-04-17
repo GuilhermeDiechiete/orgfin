@@ -13,7 +13,8 @@ const stores = [
   useAuthStore(),
   useCategoryStore(),
   useAccountStore(),
-  useTransactionStore()
+  useTransactionStore(),
+  useTasksStore()
 ]
 
 </script>

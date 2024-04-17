@@ -37,14 +37,6 @@ export interface TransactionByYear {
     totalAnnualInvestments: number
 }
 
-// Usado para receber os dados na tabela de categorias
-export interface Category {
-    id: number,
-    name: string,
-    type: string,
-    user_id: number
-}
-
 export interface Account {
     id: number,
     name: string,
@@ -63,6 +55,20 @@ export interface UserRegister {
 export interface CategoryCreate {
     name: string,
     type: string
+}
+
+// TASKS INTERFACES
+export interface TaskCreate {
+    date: string,
+    status: boolean,
+    name: string,
+    description: string
+}
+export interface Tasks {
+    date: string,
+    status: boolean,
+    name: string,
+    description: string
 }
 
 export interface Categories {

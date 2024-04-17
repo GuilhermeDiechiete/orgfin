@@ -26,7 +26,7 @@ export default class TasksValidator {
     'date.required': 'Selecione a data.',
     'date.date': 'O campo data deve ser uma data válida.',
 
-    'name.required': 'Digite o nome da categoria',
+    'name.required': 'Digite o nome da tarefa',
     'name.maxLength': 'O nome deve ter no maximo 15 caracteres.',
     'name.minLength': 'O nome deve ter no minimo 2 caracteres.',
 
