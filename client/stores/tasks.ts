@@ -80,6 +80,31 @@ export const useTasksStore = defineStore('tasks', {
             } catch (error) {
                 console.log(error)
             }
+        },
+        async changeStatus (id: number) {
+            try {
+                if(typeof localStorage !== 'undefined') {
+                    const token = localStorage.getItem('token');
+                   if(token) {
+                    await $fetch(`${API}/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: token
+                        },
+                    });
+                } 
+                
+                }
+            } catch (error:any) {
+                if (error.response._data.message) {
+                    this.msgError = error.response._data.message;
+                } else {
+                    this.msgError = 'Erro ao processar a solicitação.';
+                }
+                setTimeout(() => {
+                    this.msgError = ''
+                }, 1500 )
+            }
         }
         
 }})

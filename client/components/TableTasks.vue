@@ -1,9 +1,17 @@
 <template>
-    <section v-for="task in tasks">
-        <v-card class="mb-1" :title="task.date">
-                <v-checkbox :label="task.name"></v-checkbox>
-        </v-card>
-    </section>
+  <v-card class="mx-auto my-4" elevation="16" max-width="96%" v-for="task in tasks">
+    <v-card-item>
+      <v-card-title>
+        <v-checkbox :label="task.name" @click.prevent="alterStatus(task.id)"></v-checkbox>
+      </v-card-title>
+
+      <v-card-subtitle>
+        - {{ task.description }}
+      </v-card-subtitle>
+    </v-card-item>
+    <v-btn block color="primary" density="comfortable" @click.prevent="deleteTasks(task.id)">excluir</v-btn>
+    
+  </v-card>
 </template>
 
 <script setup lang="ts">
@@ -17,4 +25,13 @@ const tasks = ref<Tasks[]>(store.tasks) // categorias
 watch(() => store.tasks, (newTasks) => {
   tasks.value = newTasks;
 })
+
+const deleteTasks = async (id:number) => {
+  await store.delete(id); 
+  await store.index();
+};
+const alterStatus = async (id:number) => {
+  await store.changeStatus(id)
+  await store.index()
+}
 </script>

@@ -65,6 +65,7 @@ export interface TaskCreate {
     description: string
 }
 export interface Tasks {
+    id: number,
     date: string,
     status: boolean,
     name: string,
