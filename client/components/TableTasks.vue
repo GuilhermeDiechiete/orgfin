@@ -1,16 +1,8 @@
 <template>
-  <v-card class="mx-auto my-4" elevation="16" max-width="96%" v-for="task in tasks">
-    <v-card-item>
-      <v-card-title>
-        <v-checkbox :label="task.name" @click.prevent="alterStatus(task.id)"></v-checkbox>
-      </v-card-title>
-
-      <v-card-subtitle>
-        - {{ task.description }}
-      </v-card-subtitle>
-    </v-card-item>
-    <v-btn block color="primary" density="comfortable" @click.prevent="deleteTasks(task.id)">excluir</v-btn>
-    
+  <v-card v-for="task in tasks">
+    <h1 class="text-left pl-4">{{ task.name }} - {{ task.date }}</h1>
+    <v-checkbox @click="alterStatus(task.id)"></v-checkbox>
+    <v-btn block color="primary" @click="deleteTasks(task.id)">excluir</v-btn>
   </v-card>
 </template>
 
